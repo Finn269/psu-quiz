@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSU Quiz Builder — คลังข้อสอบส่วนตัว</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<style>
+  :root{
+    --ink:#1c2b30;
+    --paper:#f6f3ea;
+    --paper2:#ffffff;
+    --line:#d8d0bd;
+    --teal:#1f5f5b;
+    --teal-dark:#123a37;
+    --clay:#b5563f;
+    --good:#2f6b3a;
+    --bad:#a3312a;
+    --muted:#7a7264;
+    font-family: "IBM Plex Sans Thai", "Sarabun", "Noto Sans Thai", system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    min-height:100vh;
+  }
+  .topbar{
+    background:var(--teal-dark);
+    color:#f6f3ea;
+    padding:18px 24px;
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    flex-wrap:wrap;
+    border-bottom:4px solid var(--clay);
+  }
+  .topbar h1{
+    font-size:1.25rem;
+    margin:0;
+    letter-spacing:.02em;
+    font-weight:700;
+  }
+  .topbar .tag{
+    font-size:.78rem;
+    color:#c9d9d6;
+    font-family:"JetBrains Mono", "SFMono-Regular", monospace;
+    letter-spacing:.05em;
+  }
+  .tabs{
+    display:flex;
+    gap:2px;
+    background:var(--teal-dark);
+    padding:0 24px;
+    flex-wrap:wrap;
+  }
+  .tabs button{
+    background:transparent;
+    border:none;
+    color:#cfe0dd;
+    padding:10px 16px;
+    font-size:.92rem;
+    cursor:pointer;
+    border-radius:6px 6px 0 0;
+    font-family:inherit;
+  }
+  .tabs button.active{
+    background:var(--paper);
+    color:var(--teal-dark);
+    font-weight:700;
+  }
+  main{
+    max-width:960px;
+    margin:0 auto;
+    padding:28px 20px 80px;
+  }
+  .panel{
+    background:var(--paper2);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:22px;
+    margin-bottom:18px;
+  }
+  h2{
+    margin-top:0;
+    font-size:1.05rem;
+    color:var(--teal-dark);
+    border-bottom:2px solid var(--line);
+    padding-bottom:8px;
+  }
+  label{font-size:.85rem; color:var(--muted); display:block; margin-bottom:4px;}
+  input[type=text], textarea, select{
+    width:100%;
+    font-family:inherit;
+    font-size:.95rem;
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:8px 10px;
+    background:#fff;
+    color:var(--ink);
+  }
+  textarea{resize:vertical;}
+  button.btn{
+    background:var(--teal);
+    color:#fff;
+    border:none;
+    padding:9px 16px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:.9rem;
+    font-family:inherit;
+    font-weight:600;
+  }
+  button.btn:hover{background:var(--teal-dark);}
+  button.btn.secondary{
+    background:transparent;
+    color:var(--teal-dark);
+    border:1px solid var(--teal);
+  }
+  button.btn.danger{background:var(--bad);}
+  button.btn.clay{background:var(--clay);}
+  button.btn:disabled{opacity:.4; cursor:not-allowed;}
+  .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+  .exam-card{
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:12px 14px;
+    margin-bottom:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    background:#fffdf8;
+  }
+  .exam-card .meta{font-size:.8rem; color:var(--muted);}
+  .exam-card .name{font-weight:700; color:var(--teal-dark);}
+  .qcard{
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:14px;
+    margin-bottom:12px;
+    background:#fffdf8;
+  }
+  .qcard .qnum{
+    font-family:"JetBrains Mono", monospace;
+    color:var(--clay);
+    font-weight:700;
+    font-size:.85rem;
+    margin-bottom:6px;
+  }
+  .choice-edit{display:flex; gap:6px; align-items:center; margin-bottom:6px;}
+  .choice-edit span{width:18px; font-weight:700; color:var(--teal-dark);}
+  .quiz-progress{
+    font-family:"JetBrains Mono", monospace;
+    font-size:.85rem;
+    color:var(--muted);
+    margin-bottom:10px;
+  }
+  .quiz-q{
+    font-size:1.02rem;
+    line-height:1.6;
+    white-space:pre-wrap;
+    margin-bottom:16px;
+  }
+  .choice-btn{
+    display:block;
+    width:100%;
+    text-align:left;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:10px 14px;
+    margin-bottom:8px;
+    cursor:pointer;
+    font-size:.95rem;
+    font-family:inherit;
+    color:var(--ink);
+    line-height:1.5;
+    white-space:pre-wrap;
+  }
+  .choice-btn:hover{border-color:var(--teal);}
+  .choice-btn.selected{
+    background:#e4efee;
+    border-color:var(--teal);
+    font-weight:600;
+  }
+  .choice-btn.correct{border-color:var(--good); background:#e7f2e8;}
+  .choice-btn.incorrect{border-color:var(--bad); background:#fbe9e7;}
+  .nav-row{display:flex; justify-content:space-between; margin-top:18px; gap:8px;}
+  .score-hero{
+    text-align:center;
+    padding:30px 10px;
+  }
+  .score-hero .num{
+    font-size:3.2rem;
+    font-weight:800;
+    color:var(--teal-dark);
+    font-family:"JetBrains Mono", monospace;
+  }
+  .score-hero .sub{color:var(--muted); font-size:.95rem;}
+  .review-row{
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:12px 14px;
+    margin-bottom:10px;
+  }
+  .review-row.wrong{border-left:5px solid var(--bad);}
+  .review-row.right{border-left:5px solid var(--good);}
+  .badge{
+    display:inline-block;
+    font-size:.72rem;
+    padding:2px 8px;
+    border-radius:20px;
+    font-family:"JetBrains Mono", monospace;
+    margin-left:6px;
+  }
+  .badge.ok{background:#e7f2e8; color:var(--good);}
+  .badge.no{background:#fbe9e7; color:var(--bad);}
+  .badge.pending{background:#f1ecd8; color:var(--muted);}
+  .empty{color:var(--muted); font-size:.9rem; padding:20px 0; text-align:center;}
+  .small{font-size:.8rem; color:var(--muted);}
+  .file-drop{
+    border:2px dashed var(--line);
+    border-radius:8px;
+    padding:24px;
+    text-align:center;
+    color:var(--muted);
+  }
+  .flex-between{display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;}
+  hr.sep{border:none; border-top:1px solid var(--line); margin:16px 0;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>PSU Quiz Builder</h1>
+  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API</span>
+</div>
+
+<div class="tabs" id="tabs"></div>
+
+<main id="main"></main>
+
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+/* ---------------- state ---------------- */
+const STORAGE_KEY = "psu_quiz_exams_v1";
+let state = {
+  exams: [],          // [{id,name,questions:[{id,number,stem,choices:{A..E},correct,explanation}]}]
+  activeTab: "import",
+  currentExamId: null, // for editor / quiz
+  rawText: "",
+  parsedPreview: [],
+  quiz: {
+    examId: null,
+    order: [],          // array of question ids
+    idx: 0,
+    answers: {}         // qid -> letter
+  },
+  lastResult: null
+};
+
+function save(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state.exams));
+}
+function load(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw) state.exams = JSON.parse(raw);
+  }catch(e){ state.exams = []; }
+}
+function uid(){ return Math.random().toString(36).slice(2,10); }
+
+/* ---------------- PDF -> text ---------------- */
+async function extractPdfText(file){
+  const buf = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({data: buf}).promise;
+  let full = "";
+  for(let p=1;p<=pdf.numPages;p++){
+    const page = await pdf.getPage(p);
+    const content = await page.getTextContent();
+    let lastY = null, line = "";
+    for(const item of content.items){
+      if(lastY !== null && Math.abs(item.transform[5]-lastY) > 2){
+        full += line + "\n";
+        line = "";
+      }
+      line += item.str;
+      lastY = item.transform[5];
+    }
+    full += line + "\n\n";
+  }
+  return full;
+}
+
+/* ---------------- parser: text -> questions ---------------- */
+function parseQuestions(text){
+  // split on lines that start with "12." / "12)" (question number at line start)
+  const lines = text.split("\n");
+  const blocks = [];
+  let current = null;
+  const qStart = /^\s*(\d{1,3})[\.\)]\s*(.*)$/;
+  for(const raw of lines){
+    const m = raw.match(qStart);
+    if(m && parseInt(m[1],10) < 300){
+      if(current) blocks.push(current);
+      current = {number: m[1], lines:[m[2]]};
+    } else if(current){
+      current.lines.push(raw);
+    }
+  }
+  if(current) blocks.push(current);
+
+  const choiceRe = /^\s*([A-E])[\.\)]\s*(.*)$/;
+  const questions = [];
+  for(const b of blocks){
+    const stemLines = [];
+    const choices = {A:"",B:"",C:"",D:"",E:""};
+    let inChoices = false;
+    for(const ln of b.lines){
+      const cm = ln.match(choiceRe);
+      if(cm){
+        inChoices = true;
+        choices[cm[1]] = (choices[cm[1]] ? choices[cm[1]]+" " : "") + cm[2].trim();
+      } else if(inChoices){
+        // continuation of last choice (wrapped line) — append to last non-empty choice
+        const letters = ["A","B","C","D","E"];
+        for(let i=letters.length-1;i>=0;i--){
+          if(choices[letters[i]]){ choices[letters[i]] += " " + ln.trim(); break; }
+        }
+      } else {
+        stemLines.push(ln);
+      }
+    }
+    const stem = stemLines.join("\n").trim();
+    if(!stem) continue;
+    questions.push({
+      id: uid(),
+      number: b.number,
+      stem,
+      choices,
+      correct: null,
+      explanation: ""
+    });
+  }
+  return questions;
+}
+
+/* ---------------- flexible answer-key parser ---------------- */
+let pendingKeyImport = null;
+
+function parseAnswerKeyFlexible(text){
+  const lines = text.split("\n");
+  const blocks = [];
+  let current = null;
+  // matches: "1.", "1)", "1:", "ข้อ 1", "ข้อที่ 1", "## ข้อ 1", "**1.**" etc at line start
+  const numRe = /^\s*#{0,4}\s*\**\s*(?:ข้อ(?:ที่)?\s*)?(\d{1,3})\s*[\.\):\：]?\s*\**\s*(.*)$/;
+  for(const raw of lines){
+    const m = raw.match(numRe);
+    const n = m ? parseInt(m[1],10) : NaN;
+    if(m && n>0 && n<300){
+      if(current) blocks.push(current);
+      current = {number:m[1], lines:[m[2]]};
+    } else if(current){
+      current.lines.push(raw);
+    }
+  }
+  if(current) blocks.push(current);
+
+  const explicitAnsRe = /(?:ตอบ|เฉลย|answer|ans|correct\s*answer)\s*[:\-]?\s*\**\(?([A-E])\)?\**/i;
+  const bareLetterRe = /^\**\(?([A-E])\)?\**\s*[:\.\-]?\s*$/;
+  const leadLetterRe = /^\**\(?([A-E])\)?\**[\s\.\:\-]/;
+  const explPrefixRe = /^\s*\**(เหตุผล|คำอธิบาย|explanation|rationale)\s*[:\-]\s*\**/i;
+
+  return blocks.map(b=>{
+    const full = b.lines.slice();
+    let letter = null, ansLineIndex = -1;
+
+    for(let i=0;i<full.length;i++){
+      const m = full[i].match(explicitAnsRe);
+      if(m){ letter = m[1].toUpperCase(); ansLineIndex = i; break; }
+    }
+    if(!letter){
+      for(let i=0;i<full.length;i++){
+        const trimmed = full[i].trim();
+        if(!trimmed) continue;
+        const m = trimmed.match(bareLetterRe) || trimmed.match(leadLetterRe);
+        if(m){ letter = m[1].toUpperCase(); ansLineIndex = i; }
+        break;
+      }
+    }
+
+    let explLines = full.slice();
+    if(ansLineIndex>=0){
+      let ln = explLines[ansLineIndex];
+      ln = ln.replace(explicitAnsRe,"").replace(bareLetterRe,"").replace(leadLetterRe,"").trim();
+      explLines[ansLineIndex] = ln;
+    }
+    let explanation = explLines.join("\n").trim();
+    explanation = explanation.replace(explPrefixRe,"").trim();
+    explanation = explanation.replace(/\n{3,}/g,"\n\n");
+
+    return {number: b.number, letter, explanation};
+  });
+}
+
+/* ---------------- render root ---------------- */
+const TABS = [
+  {id:"import", label:"① นำเข้า PDF"},
+  {id:"manage", label:"② คลังข้อสอบ"},
+  {id:"edit",   label:"③ แก้ไข/เฉลย"},
+  {id:"quiz",   label:"④ ทำข้อสอบ"},
+  {id:"result", label:"⑤ ผลคะแนน"},
+];
+
+function renderTabs(){
+  const el = document.getElementById("tabs");
+  el.innerHTML = "";
+  TABS.forEach(t=>{
+    const b = document.createElement("button");
+    b.textContent = t.label;
+    b.className = state.activeTab===t.id ? "active" : "";
+    b.onclick = ()=>{ state.activeTab = t.id; render(); };
+    el.appendChild(b);
+  });
+}
+
+function render(){
+  renderTabs();
+  const main = document.getElementById("main");
+  main.innerHTML = "";
+  if(state.activeTab==="import") main.appendChild(renderImport());
+  if(state.activeTab==="manage") main.appendChild(renderManage());
+  if(state.activeTab==="edit") main.appendChild(renderEdit());
+  if(state.activeTab==="quiz") main.appendChild(renderQuiz());
+  if(state.activeTab==="result") main.appendChild(renderResult());
+}
+
+/* ---------------- TAB 1: import ---------------- */
+function renderImport(){
+  const wrap = document.createElement("div");
+
+  const p1 = document.createElement("div");
+  p1.className = "panel";
+  p1.innerHTML = `
+    <h2>1. อัปโหลดไฟล์ PDF ข้อสอบ</h2>
+    <p class="small">เลือกไฟล์ PDF ได้ทีละไฟล์ ระบบจะดึงข้อความออกมาให้ในกล่องด้านล่าง — ตรวจสอบ/แก้คำผิดจาก OCR ได้ก่อนแยกข้อ</p>
+    <input type="file" id="pdfFile" accept="application/pdf" />
+    <div id="pdfStatus" class="small" style="margin-top:8px;"></div>
+  `;
+  wrap.appendChild(p1);
+
+  const p2 = document.createElement("div");
+  p2.className = "panel";
+  p2.innerHTML = `
+    <h2>2. ข้อความดิบ (แก้ไขได้ก่อนแยกข้อ)</h2>
+    <textarea id="rawTextBox" rows="12" placeholder="วางข้อความข้อสอบที่นี่ หรืออัปโหลด PDF ด้านบน">${escapeHtml(state.rawText)}</textarea>
+    <div class="row" style="margin-top:10px;">
+      <button class="btn" id="parseBtn">แยกข้อสอบอัตโนมัติ</button>
+      <span class="small">รูปแบบที่รองรับ: ข้อขึ้นต้นด้วยเลข "1." ตัวเลือกขึ้นต้นด้วย "A." ถึง "E."</span>
+    </div>
+  `;
+  wrap.appendChild(p2);
+
+  const p3 = document.createElement("div");
+  p3.className = "panel";
+  p3.innerHTML = `<h2>3. ตัวอย่างที่แยกได้</h2><div id="previewBox"></div>`;
+  wrap.appendChild(p3);
+
+  const p4 = document.createElement("div");
+  p4.className = "panel";
+  p4.innerHTML = `
+    <h2>4. บันทึกเป็นชุดข้อสอบ</h2>
+    <label>ชื่อชุดข้อสอบ</label>
+    <input type="text" id="examNameInput" placeholder="เช่น Respiratory MED 44" />
+    <div class="row" style="margin-top:10px;">
+      <button class="btn clay" id="saveExamBtn" disabled>บันทึกชุดข้อสอบนี้</button>
+    </div>
+  `;
+  wrap.appendChild(p4);
+
+  setTimeout(()=>{
+    document.getElementById("pdfFile").addEventListener("change", async (e)=>{
+      const f = e.target.files[0];
+      if(!f) return;
+      const statusEl = document.getElementById("pdfStatus");
+      statusEl.textContent = "กำลังอ่านไฟล์...";
+      try{
+        const text = await extractPdfText(f);
+        state.rawText = text;
+        document.getElementById("rawTextBox").value = text;
+        statusEl.textContent = "อ่านไฟล์สำเร็จ: " + f.name;
+        if(!document.getElementById("examNameInput").value){
+          document.getElementById("examNameInput").value = f.name.replace(/\.pdf$/i,"");
+        }
+      }catch(err){
+        statusEl.textContent = "อ่านไฟล์ไม่สำเร็จ: " + err.message;
+      }
+    });
+
+    document.getElementById("parseBtn").addEventListener("click", ()=>{
+      state.rawText = document.getElementById("rawTextBox").value;
+      state.parsedPreview = parseQuestions(state.rawText);
+      renderPreview();
+      document.getElementById("saveExamBtn").disabled = state.parsedPreview.length===0;
+    });
+
+    document.getElementById("saveExamBtn").addEventListener("click", ()=>{
+      const name = document.getElementById("examNameInput").value.trim() || ("ชุดข้อสอบ " + (state.exams.length+1));
+      const exam = {id: uid(), name, questions: state.parsedPreview};
+      state.exams.push(exam);
+      save();
+      state.rawText = "";
+      state.parsedPreview = [];
+      state.activeTab = "manage";
+      render();
+    });
+
+    renderPreview();
+  },0);
+
+  function renderPreview(){
+    const box = document.getElementById("previewBox");
+    if(!box) return;
+    if(state.parsedPreview.length===0){
+      box.innerHTML = `<div class="empty">ยังไม่ได้แยกข้อ — กด "แยกข้อสอบอัตโนมัติ" ด้านบน</div>`;
+      return;
+    }
+    box.innerHTML = `<p class="small">พบทั้งหมด ${state.parsedPreview.length} ข้อ — ไปแก้ไขราย­ละเอียด/ใส่เฉลยได้ที่แท็บ "แก้ไข/เฉลย" หลังบันทึก</p>`;
+    state.parsedPreview.slice(0,3).forEach(q=>{
+      const d = document.createElement("div");
+      d.className = "qcard";
+      d.innerHTML = `<div class="qnum">ข้อ ${q.number}</div><div>${escapeHtml(q.stem).slice(0,300)}</div>`;
+      box.appendChild(d);
+    });
+    if(state.parsedPreview.length>3){
+      const more = document.createElement("div");
+      more.className="small";
+      more.textContent = `...และอีก ${state.parsedPreview.length-3} ข้อ`;
+      box.appendChild(more);
+    }
+  }
+
+  return wrap;
+}
+
+/* ---------------- TAB 2: manage ---------------- */
+function renderManage(){
+  const wrap = document.createElement("div");
+  const panel = document.createElement("div");
+  panel.className = "panel";
+  panel.innerHTML = `<h2>คลังข้อสอบที่บันทึกไว้ (${state.exams.length} ชุด)</h2>`;
+
+  if(state.exams.length===0){
+    panel.innerHTML += `<div class="empty">ยังไม่มีชุดข้อสอบ — ไปที่แท็บ "① นำเข้า PDF" ก่อน</div>`;
+  }else{
+    state.exams.forEach(ex=>{
+      const answered = ex.questions.filter(q=>q.correct).length;
+      const card = document.createElement("div");
+      card.className = "exam-card";
+      card.innerHTML = `
+        <div>
+          <div class="name">${escapeHtml(ex.name)}</div>
+          <div class="meta">${ex.questions.length} ข้อ · ใส่เฉลยแล้ว ${answered}/${ex.questions.length}</div>
+        </div>
+        <div class="row">
+          <button class="btn secondary" data-act="edit">แก้ไข/เฉลย</button>
+          <button class="btn" data-act="quiz">เริ่มทำข้อสอบ</button>
+          <button class="btn danger" data-act="del">ลบ</button>
+        </div>
+      `;
+      card.querySelector('[data-act="edit"]').onclick = ()=>{
+        state.currentExamId = ex.id; state.activeTab="edit"; render();
+      };
+      card.querySelector('[data-act="quiz"]').onclick = ()=>{
+        startQuiz(ex.id);
+      };
+      card.querySelector('[data-act="del"]').onclick = ()=>{
+        if(confirm(`ลบชุดข้อสอบ "${ex.name}" ?`)){
+          state.exams = state.exams.filter(e=>e.id!==ex.id);
+          save(); render();
+        }
+      };
+      panel.appendChild(card);
+    });
+  }
+  wrap.appendChild(panel);
+
+  const io = document.createElement("div");
+  io.className = "panel";
+  io.innerHTML = `
+    <h2>สำรองข้อมูล</h2>
+    <div class="row">
+      <button class="btn secondary" id="exportBtn">ส่งออกเป็นไฟล์ JSON</button>
+      <label class="btn secondary" style="cursor:pointer;">
+        นำเข้าไฟล์ JSON
+        <input type="file" id="importFile" accept="application/json" style="display:none;">
+      </label>
+    </div>
+    <p class="small">ข้อมูลทั้งหมดเก็บอยู่ในเบราว์เซอร์นี้เท่านั้น (localStorage) แนะนำให้ export เก็บไว้เผื่อเปลี่ยนเครื่องหรือล้างเบราว์เซอร์</p>
+  `;
+  wrap.appendChild(io);
+  setTimeout(()=>{
+    document.getElementById("exportBtn").onclick = ()=>{
+      const blob = new Blob([JSON.stringify(state.exams,null,2)], {type:"application/json"});
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "psu_quiz_backup.json";
+      a.click();
+    };
+    document.getElementById("importFile").onchange = async (e)=>{
+      const f = e.target.files[0];
+      if(!f) return;
+      const text = await f.text();
+      try{
+        const data = JSON.parse(text);
+        if(Array.isArray(data)){
+          state.exams = state.exams.concat(data);
+          save(); render();
+        }
+      }catch(err){ alert("ไฟล์ไม่ถูกต้อง"); }
+    };
+  },0);
+
+  return wrap;
+}
+
+/* ---------------- TAB 3: edit ---------------- */
+function renderEdit(){
+  const wrap = document.createElement("div");
+  const exam = state.exams.find(e=>e.id===state.currentExamId);
+  if(!exam){
+    wrap.innerHTML = `<div class="panel"><div class="empty">เลือกชุดข้อสอบจากแท็บ "② คลังข้อสอบ" ก่อน</div></div>`;
+    return wrap;
+  }
+  const head = document.createElement("div");
+  head.className = "panel";
+  head.innerHTML = `
+    <div class="flex-between">
+      <h2 style="border:none; margin:0;">${escapeHtml(exam.name)}</h2>
+      <button class="btn" id="addQBtn">+ เพิ่มข้อใหม่</button>
+    </div>
+    <p class="small">แก้คำถาม/ตัวเลือก และเลือก "คำตอบที่ถูก" ของแต่ละข้อ ใส่เหตุผล (rationale) เพิ่มได้ ระบบบันทึกอัตโนมัติทุกครั้งที่แก้</p>
+  `;
+  wrap.appendChild(head);
+
+  const keyPanel = document.createElement("div");
+  keyPanel.className = "panel";
+  keyPanel.innerHTML = `
+    <h2>วางเฉลยจาก Claude (หรือรูปแบบอื่น)</h2>
+    <p class="small">
+      ก็อปเฉลยที่ Claude สร้างให้ (ไม่ว่าจะเป็น "1. B" หรือ "ข้อ 1 ตอบ: B เหตุผล: ..." หรือหัวข้อ
+      markdown แบบ "## ข้อ 1" ตามด้วยบรรทัด "คำตอบ: B") มาวางในกล่องด้านล่าง ระบบจะจับคู่กับเลขข้อในชุดนี้ให้อัตโนมัติ —
+      กด "ตรวจสอบ" ดูตัวอย่างก่อน แล้วค่อย "นำเข้าเฉลยทั้งหมด"
+    </p>
+    <textarea id="keyPasteBox" rows="8" placeholder="วางเฉลยที่นี่..."></textarea>
+    <div class="row" style="margin-top:8px;">
+      <button class="btn secondary" id="previewKeyBtn">ตรวจสอบ</button>
+      <button class="btn clay" id="applyKeyBtn" disabled>นำเข้าเฉลยทั้งหมด</button>
+      <label class="small" style="display:flex; align-items:center; gap:6px; margin:0;">
+        <input type="checkbox" id="overwriteChk" checked style="width:auto;"> เขียนทับเฉลย/เหตุผลเดิมถ้ามีอยู่แล้ว
+      </label>
+    </div>
+    <div id="keyPreview"></div>
+  `;
+  wrap.appendChild(keyPanel);
+
+  exam.questions.forEach((q, idx)=>{
+    const card = document.createElement("div");
+    card.className = "qcard";
+    let choicesHtml = "";
+    ["A","B","C","D","E"].forEach(letter=>{
+      choicesHtml += `
+        <div class="choice-edit">
+          <span>${letter}</span>
+          <input type="text" data-letter="${letter}" data-field="choice" value="${escapeAttr(q.choices[letter]||"")}">
+        </div>`;
+    });
+    card.innerHTML = `
+      <div class="flex-between">
+        <div class="qnum">ข้อ ${escapeHtml(q.number)}</div>
+        <button class="btn danger" data-act="delQ" style="padding:4px 10px; font-size:.78rem;">ลบข้อนี้</button>
+      </div>
+      <label>โจทย์</label>
+      <textarea rows="3" data-field="stem">${escapeHtml(q.stem)}</textarea>
+      <label style="margin-top:8px;">ตัวเลือก</label>
+      ${choicesHtml}
+      <div class="row" style="margin-top:8px;">
+        <div style="flex:1; min-width:160px;">
+          <label>คำตอบที่ถูก</label>
+          <select data-field="correct">
+            <option value="">— ยังไม่ระบุ —</option>
+            ${["A","B","C","D","E"].map(l=>`<option value="${l}" ${q.correct===l?"selected":""}>${l}</option>`).join("")}
+          </select>
+        </div>
+        <div style="flex:2; min-width:220px;">
+          <label>เหตุผล / คำอธิบาย (ไม่บังคับ)</label>
+          <input type="text" data-field="explanation" value="${escapeAttr(q.explanation||"")}">
+        </div>
+      </div>
+    `;
+    card.querySelector('[data-field="stem"]').addEventListener("input", (e)=>{
+      q.stem = e.target.value; save();
+    });
+    card.querySelectorAll('[data-field="choice"]').forEach(inp=>{
+      inp.addEventListener("input", (e)=>{
+        q.choices[e.target.dataset.letter] = e.target.value; save();
+      });
+    });
+    card.querySelector('[data-field="correct"]').addEventListener("change", (e)=>{
+      q.correct = e.target.value || null; save();
+    });
+    card.querySelector('[data-field="explanation"]').addEventListener("input", (e)=>{
+      q.explanation = e.target.value; save();
+    });
+    card.querySelector('[data-act="delQ"]').addEventListener("click", ()=>{
+      exam.questions = exam.questions.filter(qq=>qq.id!==q.id);
+      save(); render();
+    });
+    wrap.appendChild(card);
+  });
+
+  setTimeout(()=>{
+    document.getElementById("addQBtn").onclick = ()=>{
+      exam.questions.push({
+        id: uid(),
+        number: String(exam.questions.length+1),
+        stem: "",
+        choices:{A:"",B:"",C:"",D:"",E:""},
+        correct: null,
+        explanation: ""
+      });
+      save(); render();
+    };
+
+    document.getElementById("previewKeyBtn").onclick = ()=>{
+      const text = document.getElementById("keyPasteBox").value;
+      const parsed = parseAnswerKeyFlexible(text);
+      const matches = parsed.map(p=>{
+        const q = exam.questions.find(qq=>String(qq.number).trim()===String(p.number).trim());
+        return {...p, q};
+      });
+      pendingKeyImport = matches;
+      const matchedCount = matches.filter(m=>m.q && m.letter).length;
+      const noLetterCount = matches.filter(m=>m.q && !m.letter).length;
+      const noMatchCount = matches.filter(m=>!m.q).length;
+      const box = document.getElementById("keyPreview");
+      let html = `<hr class="sep"><p class="small">
+        พบ ${parsed.length} รายการ — จับคู่และอ่านคำตอบได้ ${matchedCount} ข้อ
+        ${noLetterCount ? ` · เจอเลขข้อแต่อ่านคำตอบไม่ได้ ${noLetterCount} ข้อ` : ""}
+        ${noMatchCount ? ` · ไม่พบเลขข้อนี้ในชุดข้อสอบ ${noMatchCount} รายการ` : ""}
+      </p>`;
+      matches.slice(0,8).forEach(m=>{
+        const status = !m.q ? `<span class="badge no">ไม่พบข้อ ${escapeHtml(m.number)}</span>`
+          : !m.letter ? `<span class="badge pending">อ่านคำตอบไม่ได้</span>`
+          : `<span class="badge ok">ข้อ ${escapeHtml(m.number)} → ${m.letter}</span>`;
+        html += `<div class="review-row ${m.q && m.letter ? 'right':'wrong'}">
+          <div class="flex-between"><div class="qnum">${status}</div></div>
+          ${m.explanation ? `<div class="small" style="margin-top:4px;">${escapeHtml(m.explanation).slice(0,200)}</div>` : ""}
+        </div>`;
+      });
+      if(matches.length>8){
+        html += `<div class="small">...และอีก ${matches.length-8} รายการ</div>`;
+      }
+      box.innerHTML = html;
+      document.getElementById("applyKeyBtn").disabled = matchedCount===0;
+    };
+
+    document.getElementById("applyKeyBtn").onclick = ()=>{
+      if(!pendingKeyImport) return;
+      const overwrite = document.getElementById("overwriteChk").checked;
+      let applied = 0;
+      pendingKeyImport.forEach(m=>{
+        if(!m.q || !m.letter) return;
+        if(!overwrite && m.q.correct) return;
+        m.q.correct = m.letter;
+        if(m.explanation && (overwrite || !m.q.explanation)){
+          m.q.explanation = m.explanation;
+        }
+        applied++;
+      });
+      save();
+      pendingKeyImport = null;
+      alert(`นำเข้าเฉลยแล้ว ${applied} ข้อ`);
+      render();
+    };
+  },0);
+
+  return wrap;
+}
+
+/* ---------------- TAB 4: quiz ---------------- */
+function startQuiz(examId){
+  const exam = state.exams.find(e=>e.id===examId);
+  if(!exam || exam.questions.length===0) return;
+  state.quiz = {
+    examId,
+    order: exam.questions.map(q=>q.id),
+    idx: 0,
+    answers: {}
+  };
+  state.lastResult = null;
+  state.activeTab = "quiz";
+  render();
+}
+
+function renderQuiz(){
+  const wrap = document.createElement("div");
+  const exam = state.exams.find(e=>e.id===state.quiz.examId);
+  if(!exam){
+    const pick = document.createElement("div");
+    pick.className = "panel";
+    pick.innerHTML = `<h2>เลือกชุดข้อสอบที่จะทำ</h2>`;
+    if(state.exams.length===0){
+      pick.innerHTML += `<div class="empty">ยังไม่มีชุดข้อสอบ</div>`;
+    }
+    state.exams.forEach(ex=>{
+      const row = document.createElement("div");
+      row.className = "exam-card";
+      row.innerHTML = `<div class="name">${escapeHtml(ex.name)}</div>`;
+      const b = document.createElement("button");
+      b.className = "btn"; b.textContent = "เริ่มทำ";
+      b.onclick = ()=>startQuiz(ex.id);
+      row.appendChild(b);
+      pick.appendChild(row);
+    });
+    wrap.appendChild(pick);
+    return wrap;
+  }
+
+  const q = exam.questions.find(qq=>qq.id===state.quiz.order[state.quiz.idx]);
+  const total = state.quiz.order.length;
+  const panel = document.createElement("div");
+  panel.className = "panel";
+  panel.innerHTML = `
+    <div class="quiz-progress">${escapeHtml(exam.name)} — ข้อ ${state.quiz.idx+1} / ${total}</div>
+    <div class="quiz-q">${escapeHtml(q.number)}. ${escapeHtml(q.stem)}</div>
+    <div id="choicesArea"></div>
+    <div class="nav-row">
+      <button class="btn secondary" id="prevBtn" ${state.quiz.idx===0?"disabled":""}>← ข้อก่อนหน้า</button>
+      ${state.quiz.idx < total-1
+        ? `<button class="btn" id="nextBtn">ข้อถัดไป →</button>`
+        : `<button class="btn clay" id="submitBtn">ส่งคำตอบ / ดูคะแนน</button>`}
+    </div>
+  `;
+  wrap.appendChild(panel);
+
+  const choicesArea = panel.querySelector("#choicesArea");
+  ["A","B","C","D","E"].forEach(letter=>{
+    if(!q.choices[letter]) return;
+    const b = document.createElement("button");
+    b.className = "choice-btn" + (state.quiz.answers[q.id]===letter ? " selected" : "");
+    b.textContent = letter + ". " + q.choices[letter];
+    b.onclick = ()=>{
+      state.quiz.answers[q.id] = letter;
+      render();
+    };
+    choicesArea.appendChild(b);
+  });
+
+  setTimeout(()=>{
+    const prevBtn = document.getElementById("prevBtn");
+    if(prevBtn) prevBtn.onclick = ()=>{ state.quiz.idx--; render(); };
+    const nextBtn = document.getElementById("nextBtn");
+    if(nextBtn) nextBtn.onclick = ()=>{ state.quiz.idx++; render(); };
+    const submitBtn = document.getElementById("submitBtn");
+    if(submitBtn) submitBtn.onclick = ()=>{ finishQuiz(); };
+  },0);
+
+  return wrap;
+}
+
+function finishQuiz(){
+  const exam = state.exams.find(e=>e.id===state.quiz.examId);
+  const answered = state.quiz.order.map(id=>exam.questions.find(q=>q.id===id));
+  const withKey = answered.filter(q=>q.correct);
+  let correctCount = 0;
+  const rows = answered.map(q=>{
+    const userAns = state.quiz.answers[q.id] || null;
+    const isCorrect = q.correct && userAns === q.correct;
+    if(isCorrect) correctCount++;
+    return {q, userAns, isCorrect};
+  });
+  state.lastResult = {
+    examName: exam.name,
+    total: answered.length,
+    keyed: withKey.length,
+    correctCount,
+    rows
+  };
+  state.activeTab = "result";
+  render();
+}
+
+/* ---------------- TAB 5: result ---------------- */
+function renderResult(){
+  const wrap = document.createElement("div");
+  const r = state.lastResult;
+  if(!r){
+    wrap.innerHTML = `<div class="panel"><div class="empty">ยังไม่มีผลคะแนน — ไปทำข้อสอบที่แท็บ "④ ทำข้อสอบ" ก่อน</div></div>`;
+    return wrap;
+  }
+  const hero = document.createElement("div");
+  hero.className = "panel score-hero";
+  const pct = r.keyed>0 ? Math.round((r.correctCount/r.keyed)*100) : 0;
+  hero.innerHTML = `
+    <div class="small">${escapeHtml(r.examName)}</div>
+    <div class="num">${r.correctCount} / ${r.keyed}</div>
+    <div class="sub">ตอบถูก ${r.correctCount} จาก ${r.keyed} ข้อที่มีเฉลย (${pct}%)${r.total>r.keyed ? ` · อีก ${r.total-r.keyed} ข้อยังไม่ได้ใส่เฉลยไว้ ระบบไม่นับคะแนน` : ""}</div>
+  `;
+  wrap.appendChild(hero);
+
+  const list = document.createElement("div");
+  list.className = "panel";
+  list.innerHTML = `<h2>เฉลยรายข้อ</h2>`;
+  r.rows.forEach(({q,userAns,isCorrect})=>{
+    const row = document.createElement("div");
+    let cls = "review-row ";
+    let badge = `<span class="badge pending">ไม่มีเฉลย</span>`;
+    if(q.correct){
+      cls += isCorrect ? "right" : "wrong";
+      badge = isCorrect ? `<span class="badge ok">ถูก</span>` : `<span class="badge no">ผิด</span>`;
+    }
+    row.className = cls;
+    row.innerHTML = `
+      <div class="flex-between">
+        <div class="qnum">ข้อ ${escapeHtml(q.number)}</div>
+        ${badge}
+      </div>
+      <div style="margin:6px 0; white-space:pre-wrap;">${escapeHtml(q.stem)}</div>
+      <div class="small">คำตอบของคุณ: <b>${userAns || "— ไม่ได้ตอบ —"}</b>${q.correct ? ` &nbsp;·&nbsp; เฉลย: <b>${q.correct}</b>` : ""}</div>
+      ${q.explanation ? `<div class="small" style="margin-top:4px;">เหตุผล: ${escapeHtml(q.explanation)}</div>` : ""}
+    `;
+    list.appendChild(row);
+  });
+  wrap.appendChild(list);
+
+  const again = document.createElement("div");
+  again.className = "panel";
+  again.innerHTML = `<button class="btn" id="retryBtn">ทำชุดนี้อีกครั้ง</button>`;
+  wrap.appendChild(again);
+  setTimeout(()=>{
+    document.getElementById("retryBtn").onclick = ()=>{
+      const examId = state.exams.find(e=>e.name===r.examName)?.id;
+      if(examId) startQuiz(examId);
+    };
+  },0);
+
+  return wrap;
+}
+
+/* ---------------- helpers ---------------- */
+function escapeHtml(s){
+  return String(s||"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function escapeAttr(s){ return escapeHtml(s); }
+
+/* ---------------- boot ---------------- */
+load();
+render();
+</script>
+</body>
+</html>
