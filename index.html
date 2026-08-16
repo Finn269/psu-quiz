@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PSU Quiz Builder — คลังข้อสอบส่วนตัว</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
   :root{
@@ -110,7 +113,7 @@
 
 <div class="topbar">
   <h1>PSU Quiz Builder</h1>
-  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API</span>
+  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-08-16.4</span>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -334,6 +337,46 @@ async function exportJSON(data, filename){
   a.href = URL.createObjectURL(blob);
   a.download = filename;
   a.click();
+}
+
+/* ---------------- GitHub-repo sync (pull data.json hosted alongside index.html) ---------------- */
+async function fetchRemoteData(){
+  const url = "./data.json?t=" + Date.now(); // cache-bust so we always get the latest committed file
+  const res = await fetch(url, {cache:"no-store"});
+  if(!res.ok){
+    throw new Error(`ไม่พบไฟล์ data.json ใน repo (HTTP ${res.status}) — อัปโหลด data.json ไว้ตำแหน่งเดียวกับ index.html หรือยัง?`);
+  }
+  const data = await res.json();
+  if(!Array.isArray(data)) throw new Error("รูปแบบไฟล์ data.json ไม่ถูกต้อง");
+  return data;
+}
+
+function mergeProjectsFromRemote(remoteProjects, mode){
+  if(mode === "replace"){
+    state.projects = remoteProjects;
+  } else {
+    remoteProjects.forEach(rp=>{
+      const idx = state.projects.findIndex(p=>p.id===rp.id);
+      if(idx>=0) state.projects[idx] = rp;
+      else state.projects.push(rp);
+    });
+  }
+  save();
+  render();
+}
+
+async function autoSyncIfEmpty(){
+  if(state.projects.length > 0) return; // only auto-pull on a fresh/empty device, never overwrite existing data silently
+  try{
+    const remote = await fetchRemoteData();
+    if(remote.length > 0){
+      state.projects = remote;
+      save();
+      render();
+    }
+  }catch(e){
+    // no data.json published yet, or fetch failed — silently ignore, this is just a convenience auto-pull
+  }
 }
 
 /* ---------------- image attach (per question) ---------------- */
@@ -628,19 +671,37 @@ function renderProjects(){
     }
     wrap.appendChild(panel);
 
-    // global backup panel (only shown at project-list level)
+    // GitHub sync panel
+    const sync = document.createElement("div");
+    sync.className = "panel";
+    sync.innerHTML = `
+      <h2>🔄 ซิงก์ข้ามเครื่องผ่าน GitHub</h2>
+      <p class="small">
+        วิธีใช้: กด "ส่งออก data.json" บนเครื่องที่มีข้อมูลล่าสุด → อัปโหลดไฟล์ <code>data.json</code> นั้นเข้า repo เดียวกับ
+        <code>index.html</code> บน GitHub (วางไว้ตำแหน่งเดียวกัน) → แล้วมาเครื่องอื่น กดปุ่ม "ดึงข้อมูลจาก GitHub"
+        ด้านล่าง ระบบจะโหลด <code>data.json</code> ล่าสุดจาก repo มารวมเข้ากับข้อมูลในเครื่องนี้ให้อัตโนมัติ
+      </p>
+      <div class="row">
+        <button class="btn clay" id="exportAllBtn">📤 ส่งออก data.json</button>
+        <button class="btn" id="syncPullBtn">📥 ดึงข้อมูลจาก GitHub</button>
+      </div>
+      <div id="syncStatus" class="small" style="margin-top:8px;"></div>
+    `;
+    wrap.appendChild(sync);
+
+    // manual backup / restore (separate from the GitHub-sync file)
     const io = document.createElement("div");
     io.className = "panel";
     io.innerHTML = `
-      <h2>สำรองข้อมูลทั้งหมด</h2>
+      <h2>สำรองข้อมูลด้วยตัวเอง</h2>
       <div class="row">
-        <button class="btn secondary" id="exportAllBtn">ส่งออกทุกโปรเจกต์ (JSON)</button>
+        <button class="btn secondary" id="exportBackupBtn">ส่งออกไฟล์สำรอง (ตั้งชื่อเอง)</button>
         <label class="btn secondary" style="cursor:pointer;">
           นำเข้าไฟล์ JSON
           <input type="file" id="importFile" accept="application/json" style="display:none;">
         </label>
       </div>
-      <p class="small">กด "ส่งออก" แล้วเลือกตำแหน่งที่จะเซฟไฟล์ได้เอง (บน iOS จะเด้งหน้าต่างแชร์ให้เลือก "บันทึกลงใน Files" แล้วเลือกโฟลเดอร์) ข้อมูลทั้งหมดเก็บอยู่ในเบราว์เซอร์นี้เท่านั้น แนะนำ export เก็บไว้เผื่อเปลี่ยนเครื่องหรือ Safari ล้างข้อมูล</p>
+      <p class="small">กด "ส่งออก" แล้วเลือกตำแหน่งที่จะเซฟไฟล์ได้เอง (บน iOS จะเด้งหน้าต่างแชร์ให้เลือก "บันทึกลงใน Files" แล้วเลือกโฟลเดอร์) ข้อมูลทั้งหมดเก็บอยู่ในเบราว์เซอร์นี้เท่านั้น</p>
     `;
     wrap.appendChild(io);
 
@@ -656,7 +717,30 @@ function renderProjects(){
         }
       };
       document.getElementById("exportAllBtn").onclick = ()=>{
-        exportJSON(state.projects, "psu_quiz_all_projects.json");
+        exportJSON(state.projects, "data.json");
+      };
+      document.getElementById("exportBackupBtn").onclick = ()=>{
+        exportJSON(state.projects, "psu_quiz_backup_" + Date.now() + ".json");
+      };
+      document.getElementById("syncPullBtn").onclick = async ()=>{
+        const statusEl = document.getElementById("syncStatus");
+        statusEl.textContent = "กำลังดึงข้อมูลจาก GitHub...";
+        try{
+          const remote = await fetchRemoteData();
+          const mergeIt = confirm(
+            `เจอ data.json บน GitHub (${remote.length} โปรเจกต์)\n\n` +
+            `กด OK เพื่อ "รวม" เข้ากับข้อมูลในเครื่องนี้ (โปรเจกต์ id ซ้ำจะถูกอัปเดตทับด้วยเวอร์ชันจาก GitHub)\n` +
+            `กด Cancel เพื่อยกเลิก`
+          );
+          if(mergeIt){
+            mergeProjectsFromRemote(remote, "merge");
+            statusEl.textContent = "ซิงก์สำเร็จ ✅";
+          } else {
+            statusEl.textContent = "ยกเลิกการซิงก์";
+          }
+        }catch(err){
+          statusEl.textContent = "ดึงข้อมูลไม่สำเร็จ: " + err.message;
+        }
       };
       document.getElementById("importFile").onchange = async (e)=>{
         const f = e.target.files[0];
@@ -712,6 +796,8 @@ function renderProjects(){
       const hist = ex.history || {exam:[], practice:[]};
       const lastExam = hist.exam && hist.exam[0];
       const lastPractice = hist.practice && hist.practice[0];
+      const hasFullExam = ex.lastFull && ex.lastFull.exam;
+      const hasFullPractice = ex.lastFull && ex.lastFull.practice;
       const card = document.createElement("div");
       card.className = "card";
       card.innerHTML = `
@@ -719,8 +805,14 @@ function renderProjects(){
           <div class="name">${escapeHtml(ex.name)}</div>
           <div class="meta">${ex.questions.length} ข้อ · ใส่เฉลยแล้ว ${answered}/${ex.questions.length}</div>
           <div class="meta">
-            📝 สอบจริงล่าสุด: ${lastExam ? `${lastExam.correctCount}/${lastExam.keyed}` : "ยังไม่เคยทำ"}
-            &nbsp;·&nbsp; ⚡ ฝึกล่าสุด: ${lastPractice ? `${lastPractice.correctCount}/${lastPractice.keyed}` : "ยังไม่เคยทำ"}
+            📝 สอบจริงล่าสุด:
+            ${lastExam
+              ? (hasFullExam ? `<button class="small" data-act="viewExam" style="background:none; border:none; color:var(--teal); text-decoration:underline; cursor:pointer; padding:0; font-family:inherit;">${lastExam.correctCount}/${lastExam.keyed} (ดูอีกครั้ง)</button>` : `${lastExam.correctCount}/${lastExam.keyed}`)
+              : "ยังไม่เคยทำ"}
+            &nbsp;·&nbsp; ⚡ ฝึกล่าสุด:
+            ${lastPractice
+              ? (hasFullPractice ? `<button class="small" data-act="viewPractice" style="background:none; border:none; color:var(--teal); text-decoration:underline; cursor:pointer; padding:0; font-family:inherit;">${lastPractice.correctCount}/${lastPractice.keyed} (ดูอีกครั้ง)</button>` : `${lastPractice.correctCount}/${lastPractice.keyed}`)
+              : "ยังไม่เคยทำ"}
           </div>
         </div>
         <div class="row" style="align-items:center;">
@@ -750,6 +842,10 @@ function renderProjects(){
           save(); render();
         }
       };
+      const viewExamBtn = card.querySelector('[data-act="viewExam"]');
+      if(viewExamBtn) viewExamBtn.onclick = ()=> viewLastResult(ex.id, "exam");
+      const viewPracticeBtn = card.querySelector('[data-act="viewPractice"]');
+      if(viewPracticeBtn) viewPracticeBtn.onclick = ()=> viewLastResult(ex.id, "practice");
       panel.appendChild(card);
     });
   }
@@ -994,6 +1090,30 @@ function startFlaggedReview(examId, ids){
   render();
 }
 
+function viewLastResult(examId, mode){
+  const found = findExam(examId);
+  if(!found) return;
+  const lf = found.exam.lastFull && found.exam.lastFull[mode];
+  if(!lf) return;
+  const rows = lf.rows
+    .map(r=>{
+      const q = found.exam.questions.find(qq=>qq.id===r.qId);
+      if(!q) return null;
+      const isCorrect = !!(q.correct && r.userAns === q.correct);
+      return {q, userAns: r.userAns, isCorrect};
+    })
+    .filter(Boolean);
+  const keyed = rows.filter(r=>r.q.correct).length;
+  const correctCount = rows.filter(r=>r.isCorrect).length;
+  state.lastResult = {
+    examId, examName: found.exam.name, mode,
+    isReview: true, flaggedIds: [],
+    total: rows.length, keyed, correctCount, rows
+  };
+  state.activeTab = "result";
+  render();
+}
+
 function startNextRound(){
   const ids = Array.from(new Set(state.quiz.wrongIds));
   state.quiz.round += 1;
@@ -1234,6 +1354,13 @@ function finishQuiz(){
     exam.history[state.quiz.mode] = exam.history[state.quiz.mode] || [];
     exam.history[state.quiz.mode].unshift({date: Date.now(), correctCount, keyed, total});
     exam.history[state.quiz.mode] = exam.history[state.quiz.mode].slice(0,20);
+
+    // persist full per-question snapshot so this exact result can be reopened later ("ดูอีกครั้ง")
+    exam.lastFull = exam.lastFull || {};
+    exam.lastFull[state.quiz.mode] = {
+      date: Date.now(),
+      rows: rows.map(r=>({qId: r.q.id, userAns: r.userAns}))
+    };
     save();
   }
 
@@ -1342,6 +1469,7 @@ function escapeAttr(s){ return escapeHtml(s); }
 /* ---------------- boot ---------------- */
 load();
 render();
+autoSyncIfEmpty();
 </script>
 </body>
 </html>
