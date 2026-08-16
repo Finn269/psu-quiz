@@ -113,7 +113,7 @@
 
 <div class="topbar">
   <h1>EXAM Quiz Builder</h1>
-  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-08-17.3</span>
+  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-08-17.4</span>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -1188,6 +1188,28 @@ function startFlaggedReview(examId, ids){
   render();
 }
 
+function startWrongReview(examId, ids){
+  const found = findExam(examId);
+  if(!found || !ids || ids.length===0) return;
+  state.quiz = {
+    examId, mode: "practice",
+    order: ids.slice(),
+    originalOrder: ids.slice(),
+    idx: 0,
+    answers: {},
+    revealed: false,
+    shuffle: false,
+    round: 1,
+    wrongIds: [],
+    firstAttempt: {},
+    flagged: [],
+    isReview: true
+  };
+  state.lastResult = null;
+  state.activeTab = "quiz";
+  render();
+}
+
 function viewLastResult(examId, mode){
   const found = findExam(examId);
   if(!found) return;
@@ -1513,6 +1535,9 @@ function renderResult(){
   const list = document.createElement("div");
   list.className = "panel";
   list.innerHTML = `<h2>เฉลยรายข้อ</h2>`;
+  const wrongQuestionIds = r.rows
+    .filter(({q,userAns,isCorrect})=>q.correct && userAns && !isCorrect)
+    .map(({q})=>q.id);
   r.rows.forEach(({q,userAns,isCorrect})=>{
     const row = document.createElement("div");
     let cls = "review-row ";
@@ -1525,7 +1550,7 @@ function renderResult(){
     row.innerHTML = `
       <div class="flex-between">
         <div class="qnum">ข้อ ${escapeHtml(q.number)}</div>
-        ${badge}
+        <div>${badge}${wrongQuestionIds.includes(q.id) ? `<label class="small" style="margin:0 0 0 8px; display:inline-flex; align-items:center; gap:4px;"><input type="checkbox" data-wrong-review="${q.id}" checked style="width:auto;"> เลือกทำซ้ำ</label>` : ""}</div>
       </div>
       ${q.image ? `<img src="${q.image}" style="max-width:100%; max-height:220px; border:1px solid var(--line); border-radius:6px; margin:6px 0; display:block;">` : ""}
       <div style="margin:6px 0; white-space:pre-wrap;">${escapeHtml(q.stem)}</div>
@@ -1543,6 +1568,7 @@ function renderResult(){
     ${hasFlagged ? `<p class="small">คุณทำเครื่องหมาย "ไม่ชัวร์" ไว้ ${r.flaggedIds.length} ข้อระหว่างทำ</p>` : ""}
     <div class="row">
       ${hasFlagged ? `<button class="btn danger" id="flaggedReviewBtn">🔴 ทำข้อที่ติ๊กไว้ใหม่ (${r.flaggedIds.length} ข้อ)</button>` : ""}
+      ${wrongQuestionIds.length ? `<button class="btn clay" id="wrongReviewBtn">🔁 ทำข้อที่เลือกซ้ำ (${wrongQuestionIds.length} ข้อ)</button>` : ""}
       <button class="btn" id="retryExamBtn">📝 ทำชุดนี้อีกครั้ง (สอบจริง)</button>
       <button class="btn clay" id="retryPracticeBtn">⚡ ทำชุดนี้อีกครั้ง (ฝึก)</button>
     </div>
@@ -1553,6 +1579,12 @@ function renderResult(){
     document.getElementById("retryPracticeBtn").onclick = ()=> startQuiz(r.examId, "practice");
     const flaggedBtn = document.getElementById("flaggedReviewBtn");
     if(flaggedBtn) flaggedBtn.onclick = ()=> startFlaggedReview(r.examId, r.flaggedIds);
+    const wrongBtn = document.getElementById("wrongReviewBtn");
+    if(wrongBtn) wrongBtn.onclick = ()=>{
+      const ids = [...document.querySelectorAll("[data-wrong-review]:checked")].map(el=>el.dataset.wrongReview);
+      if(!ids.length){ alert("เลือกข้อที่ต้องการทำซ้ำอย่างน้อย 1 ข้อ"); return; }
+      startWrongReview(r.examId, ids);
+    };
   },0);
 
   return wrap;
