@@ -113,7 +113,7 @@
 
 <div class="topbar">
   <h1>EXAM Quiz Builder</h1>
-  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-08-17.4</span>
+  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-08-17.6</span>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -132,7 +132,7 @@ let state = {
   activeTab: "import",
   currentProjectId: null,  // when set, Projects tab shows exams inside this project
   currentExamId: null,     // for editor tab
-  editReviewOnly: false,   // show only parser-flagged questions in the editor
+  editReviewOnly: false,   // show only parser/answer-key flagged questions in the editor
   rawText: "",
   parsedPreview: [],
   quiz: { examId:null, mode:"exam", order:[], idx:0, answers:{}, revealed:false },
@@ -140,6 +140,14 @@ let state = {
 };
 
 function uid(){ return Math.random().toString(36).slice(2,10); }
+
+const ALL_CHOICES_CORRECT = "__ALL__";
+function isAnswerCorrect(q, answer){
+  return !!q.correct && !!answer && (q.correct===ALL_CHOICES_CORRECT || q.correct===answer);
+}
+function correctAnswerLabel(q){
+  return q.correct===ALL_CHOICES_CORRECT ? "ทุกตัวเลือกถูก" : q.correct;
+}
 
 function save(){
   localStorage.setItem(PROJECTS_KEY, JSON.stringify(state.projects));
@@ -956,7 +964,7 @@ function renderEdit(){
         <button class="btn" id="addQBtn">+ เพิ่มข้อใหม่</button>
       </div>
     </div>
-    <p class="small">แก้คำถาม/ตัวเลือก และเลือก "คำตอบที่ถูก" ของแต่ละข้อ ใส่เหตุผล (rationale) เพิ่มได้ ระบบบันทึกอัตโนมัติทุกครั้งที่แก้ · ${state.editReviewOnly ? `กำลังแสดง ${exam.questions.filter(q=>(q.issues||[]).length).length} ข้อที่ต้องตรวจ` : `ทั้งหมด ${exam.questions.length} ข้อ`}</p>
+    <p class="small">แก้คำถาม/ตัวเลือก และเลือก "คำตอบที่ถูก" ของแต่ละข้อ ใส่เหตุผล (rationale) เพิ่มได้ ระบบบันทึกอัตโนมัติทุกครั้งที่แก้ · ${state.editReviewOnly ? `กำลังแสดง ${exam.questions.filter(q=>(q.issues||[]).length || q.answerKeyIssue).length} ข้อที่ต้องตรวจ` : `ทั้งหมด ${exam.questions.length} ข้อ`}</p>
   `;
   wrap.appendChild(head);
 
@@ -982,7 +990,7 @@ function renderEdit(){
   wrap.appendChild(keyPanel);
 
   const questionsToShow = state.editReviewOnly
-    ? exam.questions.filter(q=>(q.issues||[]).length)
+    ? exam.questions.filter(q=>(q.issues||[]).length || q.answerKeyIssue)
     : exam.questions;
   if(questionsToShow.length===0){
     const empty = document.createElement("div");
@@ -1007,7 +1015,7 @@ function renderEdit(){
         <div class="qnum">ข้อจริง ${escapeHtml(q.sourceNumber||q.number)} · ลำดับในชุด ${exam.questions.indexOf(q)+1}</div>
         <button class="btn danger" data-act="delQ" style="padding:4px 10px; font-size:.78rem;">ลบข้อนี้</button>
       </div>
-      ${(q.issues||[]).length ? `<div class="small" style="color:var(--clay); margin-bottom:8px;">⚠️ ต้องตรวจ: ${escapeHtml(q.issues.join(" · "))}</div>` : ""}
+      ${(q.issues||[]).length || q.answerKeyIssue ? `<div class="small" style="color:var(--clay); margin-bottom:8px;">⚠️ ต้องตรวจ: ${escapeHtml([...(q.issues||[]), ...(q.answerKeyIssue ? [q.answerKeyIssue] : [])].join(" · "))}</div>` : ""}
       <label>โจทย์</label>
       <textarea rows="3" data-field="stem">${escapeHtml(q.stem)}</textarea>
 
@@ -1022,6 +1030,7 @@ function renderEdit(){
           <select data-field="correct">
             <option value="">— ยังไม่ระบุ —</option>
             ${["A","B","C","D","E"].map(l=>`<option value="${l}" ${q.correct===l?"selected":""}>${l}</option>`).join("")}
+            <option value="${ALL_CHOICES_CORRECT}" ${q.correct===ALL_CHOICES_CORRECT?"selected":""}>ทุกตัวเลือกถูก</option>
           </select>
         </div>
         <div style="flex:2; min-width:220px;">
@@ -1074,6 +1083,12 @@ function renderEdit(){
         const q = exam.questions.find(qq=>String(qq.number).trim()===String(p.number).trim());
         return {...p, q};
       });
+      // Keep answer-key problems on the question so the editor filter can find them.
+      exam.questions.forEach(q=>delete q.answerKeyIssue);
+      matches.filter(m=>m.q && !m.letter).forEach(m=>{
+        m.q.answerKeyIssue = "อ่านคำตอบจากเฉลยไม่ได้";
+      });
+      save();
       pendingKeyImport = matches;
       const matchedCount = matches.filter(m=>m.q && m.letter).length;
       const noLetterCount = matches.filter(m=>m.q && !m.letter).length;
@@ -1094,7 +1109,7 @@ function renderEdit(){
         missingQuestions.forEach(m=>{
           html += `<div class="small" style="margin-top:6px;"><span class="badge no">ข้อ ${escapeHtml(m.number)}</span> ไม่พบเลขข้อนี้ในชุดข้อสอบ</div>`;
         });
-        html += `</div>`;
+        html += `<label class="small" style="display:flex; align-items:center; gap:6px; margin-top:10px;"><input type="checkbox" id="answerIssueFilterChk" style="width:auto;"> ⚠️ เปิดดูเฉพาะข้อที่มีปัญหาในหน้าแก้ไข</label></div>`;
       }
       matches.filter(m=>m.q && m.letter).slice(0,8).forEach(m=>{
         html += `<div class="review-row right">
@@ -1106,6 +1121,13 @@ function renderEdit(){
         html += `<div class="small">...และเฉลยที่อ่านได้อีก ${matchedCount-8} ข้อ</div>`;
       }
       box.innerHTML = html;
+      const answerIssueFilter = document.getElementById("answerIssueFilterChk");
+      if(answerIssueFilter) answerIssueFilter.onchange = (e)=>{
+        if(!e.target.checked) return;
+        state.editReviewOnly = true;
+        state.activeTab = "edit";
+        render();
+      };
       document.getElementById("applyKeyBtn").disabled = matchedCount===0;
     };
 
@@ -1219,7 +1241,7 @@ function viewLastResult(examId, mode){
     .map(r=>{
       const q = found.exam.questions.find(qq=>qq.id===r.qId);
       if(!q) return null;
-      const isCorrect = !!(q.correct && r.userAns === q.correct);
+      const isCorrect = isAnswerCorrect(q, r.userAns);
       return {q, userAns: r.userAns, isCorrect};
     })
     .filter(Boolean);
@@ -1330,7 +1352,7 @@ function renderQuiz(){
     let cls = "choice-btn";
     if(!revealed && userAns===letter) cls += " selected";
     if(revealed){
-      if(q.correct && letter===q.correct) cls += " correct";
+      if(q.correct && (q.correct===ALL_CHOICES_CORRECT || letter===q.correct)) cls += " correct";
       else if(letter===userAns) cls += " incorrect";
     }
     b.className = cls;
@@ -1342,9 +1364,9 @@ function renderQuiz(){
         state.quiz.answers[q.id] = letter;
         state.quiz.revealed = true;
         if(!(q.id in state.quiz.firstAttempt)){
-          state.quiz.firstAttempt[q.id] = {answer: letter, correct: q.correct ? (letter===q.correct) : null};
+          state.quiz.firstAttempt[q.id] = {answer: letter, correct: q.correct ? isAnswerCorrect(q, letter) : null};
         }
-        if(q.correct && letter !== q.correct){
+        if(q.correct && !isAnswerCorrect(q, letter)){
           state.quiz.wrongIds.push(q.id);
         }
         render();
@@ -1358,13 +1380,13 @@ function renderQuiz(){
 
   if(revealed){
     const revealArea = panel.querySelector("#revealArea");
-    const isCorrect = q.correct && userAns === q.correct;
+    const isCorrect = isAnswerCorrect(q, userAns);
     const box = document.createElement("div");
     box.className = "reveal-box " + (q.correct ? (isCorrect ? "ok" : "no") : "");
     if(!q.correct){
       box.innerHTML = `<b>ยังไม่ได้ใส่เฉลยข้อนี้ไว้</b> — ไปเพิ่มเฉลยได้ที่แท็บ "③ แก้ไข/เฉลย"`;
     } else {
-      box.innerHTML = `<b>${isCorrect ? "✅ ถูกต้อง" : "❌ ยังไม่ถูก — จะเจอข้อนี้อีกครั้งในรอบทบทวน"}</b> — เฉลย: <b>${q.correct}</b>
+      box.innerHTML = `<b>${isCorrect ? "✅ ถูกต้อง" : "❌ ยังไม่ถูก — จะเจอข้อนี้อีกครั้งในรอบทบทวน"}</b> — เฉลย: <b>${correctAnswerLabel(q)}</b>
         ${q.explanation ? `<div class="small" style="margin-top:6px; white-space:pre-wrap;">${escapeHtml(q.explanation)}</div>` : ""}`;
     }
     revealArea.appendChild(box);
@@ -1461,7 +1483,7 @@ function finishQuiz(){
     rows = state.quiz.order.map(id=>{
       const q = exam.questions.find(qq=>qq.id===id);
       const userAns = state.quiz.answers[q.id] || null;
-      const isCorrect = q.correct && userAns === q.correct;
+      const isCorrect = isAnswerCorrect(q, userAns);
       return {q, userAns, isCorrect};
     });
   }
@@ -1554,7 +1576,7 @@ function renderResult(){
       </div>
       ${q.image ? `<img src="${q.image}" style="max-width:100%; max-height:220px; border:1px solid var(--line); border-radius:6px; margin:6px 0; display:block;">` : ""}
       <div style="margin:6px 0; white-space:pre-wrap;">${escapeHtml(q.stem)}</div>
-      <div class="small">คำตอบของคุณ: <b>${userAns || "— ไม่ได้ตอบ —"}</b>${q.correct ? ` &nbsp;·&nbsp; เฉลย: <b>${q.correct}</b>` : ""}</div>
+      <div class="small">คำตอบของคุณ: <b>${userAns || "— ไม่ได้ตอบ —"}</b>${q.correct ? ` &nbsp;·&nbsp; เฉลย: <b>${correctAnswerLabel(q)}</b>` : ""}</div>
       ${q.explanation ? `<div class="small" style="margin-top:4px;">เหตุผล: ${escapeHtml(q.explanation)}</div>` : ""}
     `;
     list.appendChild(row);
