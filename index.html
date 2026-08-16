@@ -113,7 +113,7 @@
 
 <div class="topbar">
   <h1>EXAM Quiz Builder</h1>
-  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-08-17.2</span>
+  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-08-17.3</span>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -1078,23 +1078,32 @@ function renderEdit(){
       const matchedCount = matches.filter(m=>m.q && m.letter).length;
       const noLetterCount = matches.filter(m=>m.q && !m.letter).length;
       const noMatchCount = matches.filter(m=>!m.q).length;
+      const unreadable = matches.filter(m=>m.q && !m.letter);
+      const missingQuestions = matches.filter(m=>!m.q);
       const box = document.getElementById("keyPreview");
       let html = `<hr class="sep"><p class="small">
         พบ ${parsed.length} รายการ — จับคู่และอ่านคำตอบได้ ${matchedCount} ข้อ
         ${noLetterCount ? ` · เจอเลขข้อแต่อ่านคำตอบไม่ได้ ${noLetterCount} ข้อ` : ""}
         ${noMatchCount ? ` · ไม่พบเลขข้อนี้ในชุดข้อสอบ ${noMatchCount} รายการ` : ""}
       </p>`;
-      matches.slice(0,8).forEach(m=>{
-        const status = !m.q ? `<span class="badge no">ไม่พบข้อ ${escapeHtml(m.number)}</span>`
-          : !m.letter ? `<span class="badge pending">อ่านคำตอบไม่ได้</span>`
-          : `<span class="badge ok">ข้อ ${escapeHtml(m.number)} → ${m.letter}</span>`;
-        html += `<div class="review-row ${m.q && m.letter ? 'right':'wrong'}">
-          <div class="flex-between"><div class="qnum">${status}</div></div>
+      if(unreadable.length || missingQuestions.length){
+        html += `<div class="review-row wrong"><b>⚠️ รายการที่ยังนำเข้าไม่ได้</b>`;
+        unreadable.forEach(m=>{
+          html += `<div class="small" style="margin-top:6px;"><span class="badge pending">ข้อ ${escapeHtml(m.number)}</span> พบเลขข้อแล้ว แต่ไม่พบคำตอบ A–E — ${escapeHtml(m.explanation || "ตรวจข้อความเฉลยต้นฉบับ")}</div>`;
+        });
+        missingQuestions.forEach(m=>{
+          html += `<div class="small" style="margin-top:6px;"><span class="badge no">ข้อ ${escapeHtml(m.number)}</span> ไม่พบเลขข้อนี้ในชุดข้อสอบ</div>`;
+        });
+        html += `</div>`;
+      }
+      matches.filter(m=>m.q && m.letter).slice(0,8).forEach(m=>{
+        html += `<div class="review-row right">
+          <div class="flex-between"><div class="qnum"><span class="badge ok">ข้อ ${escapeHtml(m.number)} → ${m.letter}</span></div></div>
           ${m.explanation ? `<div class="small" style="margin-top:4px;">${escapeHtml(m.explanation).slice(0,200)}</div>` : ""}
         </div>`;
       });
-      if(matches.length>8){
-        html += `<div class="small">...และอีก ${matches.length-8} รายการ</div>`;
+      if(matchedCount>8){
+        html += `<div class="small">...และเฉลยที่อ่านได้อีก ${matchedCount-8} ข้อ</div>`;
       }
       box.innerHTML = html;
       document.getElementById("applyKeyBtn").disabled = matchedCount===0;
