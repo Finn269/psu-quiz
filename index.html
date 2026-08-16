@@ -113,7 +113,7 @@
 
 <div class="topbar">
   <h1>EXAM Quiz Builder</h1>
-  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-08-17.1</span>
+  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-08-17.2</span>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -132,6 +132,7 @@ let state = {
   activeTab: "import",
   currentProjectId: null,  // when set, Projects tab shows exams inside this project
   currentExamId: null,     // for editor tab
+  editReviewOnly: false,   // show only parser-flagged questions in the editor
   rawText: "",
   parsedPreview: [],
   quiz: { examId:null, mode:"exam", order:[], idx:0, answers:{}, revealed:false },
@@ -836,7 +837,7 @@ function renderProjects(){
   if((project.exams||[]).length===0){
     panel.innerHTML += `<div class="empty">โปรเจกต์นี้ยังไม่มีชุดข้อสอบ — ไปที่แท็บ "① นำเข้า PDF" แล้วเลือกโปรเจกต์นี้เป็นปลายทาง</div>`;
   } else {
-    project.exams.forEach(ex=>{
+    project.exams.forEach((ex, examIndex)=>{
       const answered = ex.questions.filter(q=>q.correct).length;
       const hist = ex.history || {exam:[], practice:[]};
       const lastExam = hist.exam && hist.exam[0];
@@ -864,6 +865,9 @@ function renderProjects(){
           <label class="small" style="display:flex; align-items:center; gap:4px; margin:0;">
             <input type="checkbox" id="shuf-${ex.id}" style="width:auto;"> สุ่มข้อ
           </label>
+          <button class="btn ghost" data-act="rename" title="แก้ชื่อชุดข้อสอบ">✏️ ชื่อ</button>
+          <button class="btn ghost" data-act="moveUp" ${examIndex===0 ? "disabled" : ""} title="เลื่อนขึ้น">↑</button>
+          <button class="btn ghost" data-act="moveDown" ${examIndex===project.exams.length-1 ? "disabled" : ""} title="เลื่อนลง">↓</button>
           <button class="btn ghost" data-act="edit">แก้ไข/เฉลย</button>
           <button class="btn" data-act="examMode">📝 โหมดสอบจริง</button>
           <button class="btn clay" data-act="practiceMode">⚡ โหมดฝึก</button>
@@ -872,6 +876,23 @@ function renderProjects(){
       `;
       card.querySelector('[data-act="edit"]').onclick = ()=>{
         state.currentExamId = ex.id; state.activeTab="edit"; render();
+      };
+      card.querySelector('[data-act="rename"]').onclick = ()=>{
+        const name = prompt("ชื่อชุดข้อสอบใหม่", ex.name);
+        if(name===null) return;
+        const trimmed = name.trim();
+        if(!trimmed){ alert("กรุณาใส่ชื่อชุดข้อสอบ"); return; }
+        ex.name = trimmed; save(); render();
+      };
+      card.querySelector('[data-act="moveUp"]').onclick = ()=>{
+        if(examIndex===0) return;
+        [project.exams[examIndex-1], project.exams[examIndex]] = [project.exams[examIndex], project.exams[examIndex-1]];
+        save(); render();
+      };
+      card.querySelector('[data-act="moveDown"]').onclick = ()=>{
+        if(examIndex>=project.exams.length-1) return;
+        [project.exams[examIndex], project.exams[examIndex+1]] = [project.exams[examIndex+1], project.exams[examIndex]];
+        save(); render();
       };
       card.querySelector('[data-act="examMode"]').onclick = ()=>{
         const shuffle = card.querySelector(`#shuf-${ex.id}`).checked;
@@ -927,9 +948,15 @@ function renderEdit(){
   head.innerHTML = `
     <div class="flex-between">
       <h2 style="border:none; margin:0;">${escapeHtml(exam.name)}</h2>
-      <button class="btn" id="addQBtn">+ เพิ่มข้อใหม่</button>
+      <div class="row">
+        <label class="small" style="display:flex; align-items:center; gap:6px; margin:0;">
+          <input type="checkbox" id="reviewOnlyChk" style="width:auto;" ${state.editReviewOnly ? "checked" : ""}>
+          ⚠️ แสดงเฉพาะข้อที่ต้องตรวจ
+        </label>
+        <button class="btn" id="addQBtn">+ เพิ่มข้อใหม่</button>
+      </div>
     </div>
-    <p class="small">แก้คำถาม/ตัวเลือก และเลือก "คำตอบที่ถูก" ของแต่ละข้อ ใส่เหตุผล (rationale) เพิ่มได้ ระบบบันทึกอัตโนมัติทุกครั้งที่แก้</p>
+    <p class="small">แก้คำถาม/ตัวเลือก และเลือก "คำตอบที่ถูก" ของแต่ละข้อ ใส่เหตุผล (rationale) เพิ่มได้ ระบบบันทึกอัตโนมัติทุกครั้งที่แก้ · ${state.editReviewOnly ? `กำลังแสดง ${exam.questions.filter(q=>(q.issues||[]).length).length} ข้อที่ต้องตรวจ` : `ทั้งหมด ${exam.questions.length} ข้อ`}</p>
   `;
   wrap.appendChild(head);
 
@@ -954,7 +981,17 @@ function renderEdit(){
   `;
   wrap.appendChild(keyPanel);
 
-  exam.questions.forEach((q)=>{
+  const questionsToShow = state.editReviewOnly
+    ? exam.questions.filter(q=>(q.issues||[]).length)
+    : exam.questions;
+  if(questionsToShow.length===0){
+    const empty = document.createElement("div");
+    empty.className = "panel";
+    empty.innerHTML = `<div class="empty">ไม่มีข้อที่ถูกทำเครื่องหมายว่าต้องตรวจ</div>`;
+    wrap.appendChild(empty);
+  }
+
+  questionsToShow.forEach((q)=>{
     const card = document.createElement("div");
     card.className = "qcard";
     let choicesHtml = "";
@@ -1016,6 +1053,10 @@ function renderEdit(){
   });
 
   setTimeout(()=>{
+    document.getElementById("reviewOnlyChk").onchange = (e)=>{
+      state.editReviewOnly = e.target.checked;
+      render();
+    };
     document.getElementById("addQBtn").onclick = ()=>{
       const highest = Math.max(0, ...exam.questions.map(q=>parseInt(q.number,10)||0));
       const number = String(highest+1);
