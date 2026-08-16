@@ -113,7 +113,7 @@
 
 <div class="topbar">
   <h1>EXAM Quiz Builder</h1>
-  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-08-16.5</span>
+  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-08-17.1</span>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -176,22 +176,43 @@ function findExam(examId){
 async function extractPdfText(file){
   const buf = await file.arrayBuffer();
   const pdf = await pdfjsLib.getDocument({data: buf}).promise;
-  let full = "";
+  const pages = [];
+
+  // Repeated text at the very top/bottom of pages is normally a header or footer,
+  // not part of a question. Remember it before joining pages together.
   for(let p=1;p<=pdf.numPages;p++){
     const page = await pdf.getPage(p);
     const content = await page.getTextContent();
-    let lastY = null, line = "";
+    const rows = [];
     for(const item of content.items){
-      if(lastY !== null && Math.abs(item.transform[5]-lastY) > 2){
-        full += line + "\n";
-        line = "";
-      }
-      line += item.str;
-      lastY = item.transform[5];
+      const y = item.transform[5];
+      let row = rows.find(r=>Math.abs(r.y-y) <= 2);
+      if(!row){ row = {y, items:[]}; rows.push(row); }
+      row.items.push({x:item.transform[4], text:item.str});
     }
-    full += line + "\n\n";
+    rows.sort((a,b)=>b.y-a.y).forEach(r=>r.items.sort((a,b)=>a.x-b.x));
+    pages.push({
+      height: page.getViewport({scale:1}).height,
+      rows: rows.map(r=>({y:r.y, text:r.items.map(i=>i.text).join("").trim()})).filter(r=>r.text)
+    });
   }
-  return full;
+
+  const repeatedMargins = new Map();
+  pages.forEach((page,pageIndex)=>{
+    page.rows.forEach(row=>{
+      const inMargin = row.y > page.height*.84 || row.y < page.height*.16;
+      if(!inMargin) return;
+      const key = row.text.replace(/\s+/g," ").trim().toLowerCase();
+      if(!key) return;
+      if(!repeatedMargins.has(key)) repeatedMargins.set(key, new Set());
+      repeatedMargins.get(key).add(pageIndex);
+    });
+  });
+  const noise = new Set([...repeatedMargins].filter(([,seen])=>seen.size>=2).map(([key])=>key));
+  return pages.flatMap(page=>page.rows
+    .filter(row=>!noise.has(row.text.replace(/\s+/g," ").trim().toLowerCase()))
+    .map(row=>row.text)
+  ).join("\n");
 }
 
 /* ---------------- parser: text -> questions ---------------- */
@@ -201,12 +222,12 @@ function parseQuestions(text){
   const lines = text.replace(/\r\n?/g, "\n").split("\n");
   const blocks = [];
   let current = null;
-  // Require whitespace after the question marker. This prevents document metadata such as
-  // "1.ข้อสอบมีทั้งหมด..." from becoming a quiz question.
-  const qStart = /^\s*(\d{1,3})[\.\)]\s+(.+)$/;
+  // PDFs may write a number as "1.", "1 .", or "1.โจทย์".
+  const qStart = /^\s*(\d{1,3})\s*[\.\)]\s*(.*\S)\s*$/;
+  const isMetadata = value => /^(?:ข้อสอบ|นักศึกษา|หมายเหตุ)|(?:คะแนนเต็ม|จำนวนผู้สอบ|ฝ่ายวิชาการ|\bMAX\b|\bMIN\b|\bMEAN\b|\bS\.D\.)/i.test(value.trim());
   for(const raw of lines){
     const m = raw.match(qStart);
-    if(m && parseInt(m[1],10) < 300){
+    if(m && parseInt(m[1],10) < 300 && !isMetadata(m[2])){
       if(current) blocks.push(current);
       current = {number: m[1], lines:[m[2]]};
     } else if(current){
@@ -237,13 +258,28 @@ function parseQuestions(text){
         stemLines.push(ln);
       }
     }
-    const stem = stemLines.join("\n").trim();
-    if(!stem) continue;
+    let stem = stemLines.join("\n").trim();
+    const choiceCount = Object.values(choices).filter(Boolean).length;
+    // A number with no usable text and no choices is usually PDF noise; do not create
+    // a blank question. If choices exist, keep the item so its original numbering survives.
+    if(!stem && choiceCount===0) continue;
+    const issues = [];
+    if(!stem){
+      stem = "[ไม่พบข้อความโจทย์ — กรุณาตรวจ PDF ต้นฉบับ]";
+      issues.push("ไม่พบข้อความโจทย์");
+    }
+    if(choiceCount===0) issues.push("ไม่พบตัวเลือก");
+    else if(choiceCount<2) issues.push(`พบตัวเลือกเพียง ${choiceCount} ตัว`);
     questions.push({
-      id: uid(), number: b.number, stem, choices,
+      id: uid(), number: b.number, sourceNumber:b.number, stem, choices, issues,
       correct: null, explanation: "", image: null
     });
   }
+  const usedNumbers = new Set();
+  questions.forEach(q=>{
+    if(usedNumbers.has(q.number)) q.issues.push(`เลขข้อ ${q.number} ซ้ำในข้อความต้นฉบับ`);
+    usedNumbers.add(q.number);
+  });
   return questions;
 }
 
@@ -609,11 +645,14 @@ function renderImport(){
       box.innerHTML = `<div class="empty">ยังไม่ได้แยกข้อ — กด "แยกข้อสอบอัตโนมัติ" ด้านบน</div>`;
       return;
     }
-    box.innerHTML = `<p class="small">พบทั้งหมด ${state.parsedPreview.length} ข้อ — ไปแก้ไขรายละเอียด/ใส่เฉลยได้ที่แท็บ "แก้ไข/เฉลย" หลังบันทึก</p>`;
+    const flagged = state.parsedPreview.filter(q=>(q.issues||[]).length);
+    box.innerHTML = `<p class="small">พบทั้งหมด ${state.parsedPreview.length} ข้อ · เลขข้อจะคงตาม PDF ต้นฉบับ — ไปแก้ไขรายละเอียด/ใส่เฉลยได้ที่แท็บ "แก้ไข/เฉลย" หลังบันทึก</p>` +
+      (flagged.length ? `<p class="small" style="color:var(--clay);">⚠️ มี ${flagged.length} ข้อที่ต้องตรวจ (เช่น โจทย์หรือตัวเลือกไม่ครบ) ระบบจะไม่สร้างข้อว่างจากหัว/ท้ายกระดาษ</p>` : "");
     state.parsedPreview.slice(0,3).forEach(q=>{
       const d = document.createElement("div");
       d.className = "qcard";
-      d.innerHTML = `<div class="qnum">ข้อ ${q.number}</div><div>${escapeHtml(q.stem).slice(0,300)}</div>`;
+      const warning = (q.issues||[]).length ? `<div class="small" style="color:var(--clay); margin-top:5px;">⚠️ ${escapeHtml(q.issues.join(" · "))}</div>` : "";
+      d.innerHTML = `<div class="qnum">ข้อจริง ${q.number}</div><div>${escapeHtml(q.stem).slice(0,300)}</div>${warning}`;
       box.appendChild(d);
     });
     if(state.parsedPreview.length>3){
@@ -928,9 +967,10 @@ function renderEdit(){
     });
     card.innerHTML = `
       <div class="flex-between">
-        <div class="qnum">ข้อ ${escapeHtml(q.number)}</div>
+        <div class="qnum">ข้อจริง ${escapeHtml(q.sourceNumber||q.number)} · ลำดับในชุด ${exam.questions.indexOf(q)+1}</div>
         <button class="btn danger" data-act="delQ" style="padding:4px 10px; font-size:.78rem;">ลบข้อนี้</button>
       </div>
+      ${(q.issues||[]).length ? `<div class="small" style="color:var(--clay); margin-bottom:8px;">⚠️ ต้องตรวจ: ${escapeHtml(q.issues.join(" · "))}</div>` : ""}
       <label>โจทย์</label>
       <textarea rows="3" data-field="stem">${escapeHtml(q.stem)}</textarea>
 
@@ -977,9 +1017,11 @@ function renderEdit(){
 
   setTimeout(()=>{
     document.getElementById("addQBtn").onclick = ()=>{
+      const highest = Math.max(0, ...exam.questions.map(q=>parseInt(q.number,10)||0));
+      const number = String(highest+1);
       exam.questions.push({
-        id: uid(), number: String(exam.questions.length+1), stem: "",
-        choices:{A:"",B:"",C:"",D:"",E:""}, correct: null, explanation: "", image: null
+        id: uid(), number, sourceNumber:number, stem: "",
+        choices:{A:"",B:"",C:"",D:"",E:""}, issues:["เพิ่มด้วยมือ — กรุณาใส่โจทย์และตัวเลือก"], correct: null, explanation: "", image: null
       });
       save(); render();
     };
