@@ -196,10 +196,14 @@ async function extractPdfText(file){
 
 /* ---------------- parser: text -> questions ---------------- */
 function parseQuestions(text){
-  const lines = text.split("\n");
+  // Choices may be indented with a TAB and use lowercase a.–e. (as in copied MCQs).
+  // Normalize line endings so the same parser works with text from Windows, macOS, and iOS.
+  const lines = text.replace(/\r\n?/g, "\n").split("\n");
   const blocks = [];
   let current = null;
-  const qStart = /^\s*(\d{1,3})[\.\)]\s*(.*)$/;
+  // Require whitespace after the question marker. This prevents document metadata such as
+  // "1.ข้อสอบมีทั้งหมด..." from becoming a quiz question.
+  const qStart = /^\s*(\d{1,3})[\.\)]\s+(.+)$/;
   for(const raw of lines){
     const m = raw.match(qStart);
     if(m && parseInt(m[1],10) < 300){
@@ -211,7 +215,8 @@ function parseQuestions(text){
   }
   if(current) blocks.push(current);
 
-  const choiceRe = /^\s*([A-E])[\.\)]\s*(.*)$/;
+  // \s* includes TAB indentation; the i flag accepts both a.–e. and A.–E.
+  const choiceRe = /^\s*([A-E])[\.\)]\s*(.*)$/i;
   const questions = [];
   for(const b of blocks){
     const stemLines = [];
@@ -221,7 +226,8 @@ function parseQuestions(text){
       const cm = ln.match(choiceRe);
       if(cm){
         inChoices = true;
-        choices[cm[1]] = (choices[cm[1]] ? choices[cm[1]]+" " : "") + cm[2].trim();
+        const letter = cm[1].toUpperCase();
+        choices[letter] = (choices[letter] ? choices[letter]+" " : "") + cm[2].trim();
       } else if(inChoices){
         const letters = ["A","B","C","D","E"];
         for(let i=letters.length-1;i>=0;i--){
