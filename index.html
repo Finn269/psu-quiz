@@ -113,7 +113,7 @@
 
 <div class="topbar">
   <h1>EXAM Quiz Builder</h1>
-  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-10-05.1</span>
+  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-10-05.2</span>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -222,7 +222,6 @@ async function extractPdfText(file){
 
 /* ---------------- parser: text -> questions ---------------- */
 function parseQuestions(text){
-  // Fix PDF merging issue: Force newline if a number is stuck at the end of a choice line
   text = text.replace(/([^\s])\s+(\d{1,3}\.\s+[A-Za-zก-๙])/g, "$1\n$2");
   
   const lines = text.replace(/\r\n?/g, "\n").split("\n");
@@ -665,7 +664,6 @@ function renderProjects(){
   const wrap = document.createElement("div");
 
   if(!state.currentProjectId){
-    // ---- project list view ----
     const panel = document.createElement("div");
     panel.className = "panel";
     panel.innerHTML = `
@@ -776,7 +774,6 @@ function renderProjects(){
     return wrap;
   }
 
-  // ---- inside a project: exam list view ----
   const project = state.projects.find(p=>p.id===state.currentProjectId);
   if(!project){
     state.currentProjectId = null;
@@ -815,6 +812,7 @@ function renderProjects(){
             <div class="name">${escapeHtml(ex.name)}</div>
             <div class="row">
               <button class="btn ghost" data-act="exportExam" style="padding:2px 8px; font-size:.78rem;" title="ส่งออกชุดนี้เป็นไฟล์แยกต่างหาก">📤 ส่งออกชุดนี้</button>
+              <button class="btn ghost" data-act="clearScore" style="padding:2px 8px; font-size:.78rem; color:var(--bad); border-color:var(--bad);" title="ล้างประวัติคะแนนชุดนี้">🗑️ เคลียร์คะแนน</button>
               <button class="btn ghost" data-act="rename" style="padding:2px 8px; font-size:.78rem;" title="แก้ชื่อชุดข้อสอบ">✏️ แก้ชื่อ</button>
               <button class="btn ghost" data-act="moveUp" ${examIndex===0 ? "disabled" : ""} style="padding:2px 8px; font-size:.78rem;">↑</button>
               <button class="btn ghost" data-act="moveDown" ${examIndex===project.exams.length-1 ? "disabled" : ""} style="padding:2px 8px; font-size:.78rem;">↓</button>
@@ -842,6 +840,14 @@ function renderProjects(){
       `;
       card.querySelector('[data-act="edit"]').onclick = ()=>{
         state.currentExamId = ex.id; state.activeTab="edit"; render();
+      };
+      card.querySelector('[data-act="clearScore"]').onclick = ()=>{
+        if(confirm(`ต้องการล้างประวัติคะแนนทั้งหมดของชุดข้อสอบ "${ex.name}" ใช่หรือไม่?`)){
+          delete ex.history;
+          delete ex.lastFull;
+          save();
+          render();
+        }
       };
       card.querySelector('[data-act="rename"]').onclick = ()=>{
         const name = prompt("ชื่อชุดข้อสอบใหม่", ex.name);
@@ -1247,6 +1253,11 @@ function renderQuiz(){
         state.quiz.answers[q.id] = letter; state.quiz.revealed = true;
         if(!(q.id in state.quiz.firstAttempt)) state.quiz.firstAttempt[q.id] = {answer: letter, correct: q.correct ? isAnswerCorrect(q, letter) : null};
         if(q.correct && !isAnswerCorrect(q, letter)) state.quiz.wrongIds.push(q.id);
+        
+        // Auto-save result immediately on last card for practice mode if ready
+        if(state.quiz.idx === state.quiz.order.length-1) {
+          finishQuizSilent();
+        }
         render();
       } else {
         state.quiz.answers[q.id] = letter; render();
@@ -1259,7 +1270,7 @@ function renderQuiz(){
     const isCorrect = isAnswerCorrect(q, userAns);
     const box = document.createElement("div");
     box.className = "reveal-box " + (q.correct ? (isCorrect ? "ok" : "no") : "");
-    if(!q.correct) box.innerHTML = `<b>ยังไม่ได้ใส่เฉลยข้อนี้ไว้</b> — กด ✏️ แก้เฉลย ด้านบนเพื่อเพิ่ม`;
+    if(!q.correct) box.innerHTML = `<b>ยังไม่ได้ใส่เฉลยข้อนี้ไว้</b> — กด ✏️️ แก้เฉลย ด้านบนเพื่อเพิ่ม`;
     else box.innerHTML = `<b>${isCorrect ? "✅ ถูกต้อง" : "❌ ยังไม่ถูก"}</b> — เฉลย: <b>${correctAnswerLabel(q)}</b>
       ${q.explanation ? `<div class="small" style="margin-top:6px; white-space:pre-wrap;">${escapeHtml(q.explanation)}</div>` : ""}`;
     panel.querySelector("#revealArea").appendChild(box);
@@ -1315,7 +1326,7 @@ function renderNotepad(exam){
   return holder;
 }
 
-function finishQuiz(){
+function processQuizResultData(){
   const exam = findExam(state.quiz.examId).exam;
   const rows = (state.quiz.mode === "practice" ? state.quiz.originalOrder : state.quiz.order).map(id=>{
     const q = exam.questions.find(qq=>qq.id===id);
@@ -1326,17 +1337,26 @@ function finishQuiz(){
   });
   const keyed = rows.filter(r=>r.q.correct).length;
   const correctCount = rows.filter(r=>r.isCorrect).length;
+  return { exam, rows, keyed, correctCount };
+}
 
+function finishQuizSilent(){
+  if(state.quiz.isReview) return;
+  const { exam, rows, keyed, correctCount } = processQuizResultData();
+  exam.history = exam.history || {exam:[], practice:[]};
+  exam.history[state.quiz.mode] = exam.history[state.quiz.mode] || [];
+  exam.history[state.quiz.mode].unshift({date: Date.now(), correctCount, keyed, total: rows.length});
+  exam.history[state.quiz.mode] = exam.history[state.quiz.mode].slice(0,20);
+  exam.lastFull = exam.lastFull || {};
+  exam.lastFull[state.quiz.mode] = { date: Date.now(), rows: rows.map(r=>({qId: r.q.id, userAns: r.userAns})) };
+  save();
+}
+
+function finishQuiz(){
+  const { exam, rows, keyed, correctCount } = processQuizResultData();
   if(!state.quiz.isReview){
-    exam.history = exam.history || {exam:[], practice:[]};
-    exam.history[state.quiz.mode] = exam.history[state.quiz.mode] || [];
-    exam.history[state.quiz.mode].unshift({date: Date.now(), correctCount, keyed, total: rows.length});
-    exam.history[state.quiz.mode] = exam.history[state.quiz.mode].slice(0,20);
-    exam.lastFull = exam.lastFull || {};
-    exam.lastFull[state.quiz.mode] = { date: Date.now(), rows: rows.map(r=>({qId: r.q.id, userAns: r.userAns})) };
-    save();
+    finishQuizSilent();
   }
-
   state.lastResult = {
     examId: exam.id, examName: exam.name, mode: state.quiz.mode, isReview: !!state.quiz.isReview,
     flaggedIds: (state.quiz.flagged || []).slice(), total: rows.length, keyed, correctCount, rows
@@ -1363,10 +1383,15 @@ function renderResult(){
   wrap.appendChild(hero);
 
   const found = findExam(r.examId);
-  if(found && found.exam.history && found.exam.history[r.mode] && found.exam.history[r.mode].length>1){
+  if(found && found.exam.history && found.exam.history[r.mode] && found.exam.history[r.mode].length>0){
     const histPanel = document.createElement("div");
     histPanel.className = "panel";
-    histPanel.innerHTML = `<h2>ประวัติย้อนหลัง</h2>`;
+    histPanel.innerHTML = `
+      <div class="flex-between" style="margin-bottom:8px;">
+        <h2 style="border:none; margin:0;">ประวัติย้อนหลัง</h2>
+        <button class="btn ghost" id="clearScoreBtn" style="padding:4px 10px; font-size:.78rem; color:var(--bad); border-color:var(--bad);">🗑️ เคลียร์ประวัติคะแนน</button>
+      </div>
+    `;
     found.exam.history[r.mode].forEach((h,i)=>{
       const p = h.keyed>0 ? Math.round((h.correctCount/h.keyed)*100) : 0;
       const row = document.createElement("div");
@@ -1375,6 +1400,19 @@ function renderResult(){
       histPanel.appendChild(row);
     });
     wrap.appendChild(histPanel);
+    setTimeout(()=>{
+      const csBtn = document.getElementById("clearScoreBtn");
+      if(csBtn){
+        csBtn.onclick = ()=>{
+          if(confirm("ต้องการล้างประวัติและคะแนนทั้งหมดของชุดข้อสอบนี้ใช่หรือไม่?")){
+            delete found.exam.history;
+            delete found.exam.lastFull;
+            save();
+            render();
+          }
+        };
+      }
+    },0);
   }
 
   const list = document.createElement("div");
