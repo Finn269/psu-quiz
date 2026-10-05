@@ -1,0 +1,1459 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2775.1">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="th"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1">&lt;title&gt;PSU Quiz Builder — คลังข้อสอบส่วนตัว&lt;/title&gt;</p>
+<p class="p1">&lt;meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"&gt;</p>
+<p class="p1">&lt;meta http-equiv="Pragma" content="no-cache"&gt;</p>
+<p class="p1">&lt;meta http-equiv="Expires" content="0"&gt;</p>
+<p class="p1">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>:root{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--ink:#1c2b30;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--paper:#f6f3ea;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--paper2:#ffffff;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--line:#d8d0bd;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--teal:#1f5f5b;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--teal-dark:#123a37;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--clay:#b5563f;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--good:#2f6b3a;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--bad:#a3312a;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--muted:#7a7264;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: "IBM Plex Sans Thai", "Sarabun", "Noto Sans Thai", system-ui, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>*{box-sizing:border-box;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>body{margin:0; background:var(--paper); color:var(--ink); min-height:100vh;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.topbar{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background:var(--teal-dark); color:#f6f3ea; padding:18px 24px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-bottom:4px solid var(--clay);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.topbar h1{font-size:1.25rem; margin:0; letter-spacing:.02em; font-weight:700;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.topbar .tag{font-size:.78rem; color:#c9d9d6; font-family:"JetBrains Mono", monospace; letter-spacing:.05em;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.tabs{display:flex; gap:2px; background:var(--teal-dark); padding:0 24px; flex-wrap:wrap;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.tabs button{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background:transparent; border:none; color:#cfe0dd; padding:10px 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size:.88rem; cursor:pointer; border-radius:6px 6px 0 0; font-family:inherit;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.tabs button.active{background:var(--paper); color:var(--teal-dark); font-weight:700;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>main{max-width:960px; margin:0 auto; padding:28px 20px 80px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.panel{background:var(--paper2); border:1px solid var(--line); border-radius:10px; padding:22px; margin-bottom:18px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>h2{margin-top:0; font-size:1.05rem; color:var(--teal-dark); border-bottom:2px solid var(--line); padding-bottom:8px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>label{font-size:.85rem; color:var(--muted); display:block; margin-bottom:4px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>input[type=text], textarea, select{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>width:100%; font-family:inherit; font-size:.95rem; border:1px solid var(--line);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius:6px; padding:8px 10px; background:#fff; color:var(--ink);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>textarea{resize:vertical;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>button.btn{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background:var(--teal); color:#fff; border:none; padding:9px 16px; border-radius:6px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>cursor:pointer; font-size:.9rem; font-family:inherit; font-weight:600;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>button.btn:hover{background:var(--teal-dark);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>button.btn.secondary{background:transparent; color:var(--teal-dark); border:1px solid var(--teal);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>button.btn.danger{background:var(--bad);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>button.btn.clay{background:var(--clay);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>button.btn.ghost{background:transparent; color:var(--muted); border:1px solid var(--line);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>button.btn:disabled{opacity:.4; cursor:not-allowed;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.row{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border:1px solid var(--line); border-radius:8px; padding:12px 14px; margin-bottom:10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background:#fffdf8;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card .meta{font-size:.8rem; color:var(--muted);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.card .name{font-weight:700; color:var(--teal-dark); font-size:1.02rem;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.qcard{border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:12px; background:#fffdf8;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.qcard .qnum{font-family:"JetBrains Mono", monospace; color:var(--clay); font-weight:700; font-size:.85rem; margin-bottom:6px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.choice-edit{display:flex; gap:6px; align-items:center; margin-bottom:6px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.choice-edit span{width:18px; font-weight:700; color:var(--teal-dark);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.quiz-progress{font-family:"JetBrains Mono", monospace; font-size:.85rem; color:var(--muted); margin-bottom:10px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.mode-tag{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display:inline-block; font-size:.72rem; padding:2px 10px; border-radius:20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family:"JetBrains Mono", monospace; background:#e4efee; color:var(--teal-dark); margin-left:8px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.quiz-q{font-size:1.02rem; line-height:1.6; white-space:pre-wrap; margin-bottom:16px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.choice-btn{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display:block; width:100%; text-align:left; background:#fff; border:1px solid var(--line);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius:8px; padding:10px 14px; margin-bottom:8px; cursor:pointer; font-size:.95rem;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family:inherit; color:var(--ink); line-height:1.5; white-space:pre-wrap;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.choice-btn:hover{border-color:var(--teal);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.choice-btn.selected{background:#e4efee; border-color:var(--teal); font-weight:600;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.choice-btn.correct{border-color:var(--good); background:#e7f2e8; font-weight:600;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.choice-btn.incorrect{border-color:var(--bad); background:#fbe9e7;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.choice-btn:disabled{cursor:default;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.reveal-box{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border:1px solid var(--line); border-radius:8px; padding:12px 14px; margin:10px 0 4px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background:#f1ecd8;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.reveal-box.ok{border-left:5px solid var(--good);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.reveal-box.no{border-left:5px solid var(--bad);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.nav-row{display:flex; justify-content:space-between; margin-top:18px; gap:8px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.score-hero{text-align:center; padding:30px 10px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.score-hero .num{font-size:3.2rem; font-weight:800; color:var(--teal-dark); font-family:"JetBrains Mono", monospace;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.score-hero .sub{color:var(--muted); font-size:.95rem;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.review-row{border:1px solid var(--line); border-radius:8px; padding:12px 14px; margin-bottom:10px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.review-row.wrong{border-left:5px solid var(--bad);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.review-row.right{border-left:5px solid var(--good);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.badge{display:inline-block; font-size:.72rem; padding:2px 8px; border-radius:20px; font-family:"JetBrains Mono", monospace; margin-left:6px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.badge.ok{background:#e7f2e8; color:var(--good);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.badge.no{background:#fbe9e7; color:var(--bad);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.badge.pending{background:#f1ecd8; color:var(--muted);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.empty{color:var(--muted); font-size:.9rem; padding:20px 0; text-align:center;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.small{font-size:.8rem; color:var(--muted);}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.flex-between{display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>hr.sep{border:none; border-top:1px solid var(--line); margin:16px 0;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.crumb{font-size:.85rem; color:var(--muted); margin-bottom:10px;}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.crumb button{background:none; border:none; color:var(--teal); cursor:pointer; font-size:.85rem; padding:0; font-family:inherit; text-decoration:underline;}</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="topbar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1&gt;EXAM Quiz Builder&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;span class="tag"&gt;ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-10-05.1&lt;/span&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="tabs" id="tabs"&gt;&lt;/div&gt;</p>
+<p class="p1">&lt;main id="main"&gt;&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";</p>
+<p class="p2"><br></p>
+<p class="p1">/* ---------------- storage keys ---------------- */</p>
+<p class="p1">const PROJECTS_KEY = "psu_quiz_projects_v2";</p>
+<p class="p1">const OLD_EXAMS_KEY = "psu_quiz_exams_v1";</p>
+<p class="p2"><br></p>
+<p class="p1">/* ---------------- state ---------------- */</p>
+<p class="p1">let state = {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>projects: [],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>activeTab: "import",</p>
+<p class="p1"><span class="Apple-converted-space">  </span>currentProjectId: null,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>currentExamId: null,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>editReviewOnly: false,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>rawText: "",</p>
+<p class="p1"><span class="Apple-converted-space">  </span>parsedPreview: [],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>quiz: { examId:null, mode:"exam", order:[], idx:0, answers:{}, revealed:false, choiceOrder:{} },</p>
+<p class="p1"><span class="Apple-converted-space">  </span>lastResult: null</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">function uid(){ return Math.random().toString(36).slice(2,10); }</p>
+<p class="p2"><br></p>
+<p class="p1">const ALL_CHOICES_CORRECT = "__ALL__";</p>
+<p class="p1">function isAnswerCorrect(q, answer){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return !!q.correct &amp;&amp; !!answer &amp;&amp; (q.correct===ALL_CHOICES_CORRECT || q.correct===answer);</p>
+<p class="p1">}</p>
+<p class="p1">function correctAnswerLabel(q){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return q.correct===ALL_CHOICES_CORRECT ? "ทุกตัวเลือกถูก" : q.correct;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function save(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>localStorage.setItem(PROJECTS_KEY, JSON.stringify(state.projects));</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function load(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>try{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const rawNew = localStorage.getItem(PROJECTS_KEY);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(rawNew){ state.projects = JSON.parse(rawNew); return; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}catch(e){}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>try{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const rawOld = localStorage.getItem(OLD_EXAMS_KEY);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(rawOld){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const oldExams = JSON.parse(rawOld);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(Array.isArray(oldExams) &amp;&amp; oldExams.length){</p>
+<p class="p1"><span class="Apple-converted-space">        </span>state.projects = [{id:uid(), name:"ข้อสอบที่นำเข้าไว้ก่อนหน้า", exams: oldExams}];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>save();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}catch(e){}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.projects = [];</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function findExam(examId){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(const p of state.projects){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const e = (p.exams||[]).find(x=&gt;x.id===examId);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(e) return {exam:e, project:p};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return null;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* ---------------- PDF -&gt; text ---------------- */</p>
+<p class="p1">async function extractPdfText(file){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const buf = await file.arrayBuffer();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const pdf = await pdfjsLib.getDocument({data: buf}).promise;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const pages = [];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(let p=1;p&lt;=pdf.numPages;p++){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const page = await pdf.getPage(p);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const content = await page.getTextContent();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const rows = [];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>for(const item of content.items){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const y = item.transform[5];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let row = rows.find(r=&gt;Math.abs(r.y-y) &lt;= 2);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(!row){ row = {y, items:[]}; rows.push(row); }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>row.items.push({x:item.transform[4], text:item.str});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>rows.sort((a,b)=&gt;b.y-a.y).forEach(r=&gt;r.items.sort((a,b)=&gt;a.x-b.x));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>pages.push({</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: page.getViewport({scale:1}).height,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>rows: rows.map(r=&gt;({y:r.y, text:r.items.map(i=&gt;i.text).join("").trim()})).filter(r=&gt;r.text)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const repeatedMargins = new Map();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>pages.forEach((page,pageIndex)=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>page.rows.forEach(row=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const inMargin = row.y &gt; page.height*.84 || row.y &lt; page.height*.16;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(!inMargin) return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const key = row.text.replace(/\s+/g," ").trim().toLowerCase();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(!key) return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(!repeatedMargins.has(key)) repeatedMargins.set(key, new Set());</p>
+<p class="p1"><span class="Apple-converted-space">      </span>repeatedMargins.get(key).add(pageIndex);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const noise = new Set([...repeatedMargins].filter(([,seen])=&gt;seen.size&gt;=2).map(([key])=&gt;key));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return pages.flatMap(page=&gt;page.rows</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.filter(row=&gt;!noise.has(row.text.replace(/\s+/g," ").trim().toLowerCase()))</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.map(row=&gt;row.text)</p>
+<p class="p1"><span class="Apple-converted-space">  </span>).join("\n");</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* ---------------- parser: text -&gt; questions ---------------- */</p>
+<p class="p1">function parseQuestions(text){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Fix PDF merging issue: Force newline if a number is stuck at the end of a choice line</p>
+<p class="p1"><span class="Apple-converted-space">  </span>text = text.replace(/([^\s])\s+(\d{1,3}\.\s+[A-Za-zก-๙])/g, "$1\n$2");</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const lines = text.replace(/\r\n?/g, "\n").split("\n");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const blocks = [];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>let current = null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const qStart = /^\s*(\d{1,3})\s*[\.\)]\s*(.*\S)\s*$/;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const isMetadata = value =&gt; /^(?:ข้อสอบ|นักศึกษา|หมายเหตุ)|(?:คะแนนเต็ม|จำนวนผู้สอบ|ฝ่ายวิชาการ|\bMAX\b|\bMIN\b|\bMEAN\b|\bS\.D\.)/i.test(value.trim());</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(const raw of lines){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const m = raw.match(qStart);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(m &amp;&amp; parseInt(m[1],10) &lt; 300 &amp;&amp; !isMetadata(m[2])){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(current) blocks.push(current);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>current = {number: m[1], lines:[m[2]]};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>} else if(current){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>current.lines.push(raw);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(current) blocks.push(current);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const choiceRe = /^\s*([A-E])[\.\)]\s*(.*)$/i;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const questions = [];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(const b of blocks){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const stemLines = [];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const choices = {A:"",B:"",C:"",D:"",E:""};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let inChoices = false;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>for(const ln of b.lines){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const cm = ln.match(choiceRe);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(cm){</p>
+<p class="p1"><span class="Apple-converted-space">        </span>inChoices = true;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const letter = cm[1].toUpperCase();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>choices[letter] = (choices[letter] ? choices[letter]+" " : "") + cm[2].trim();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else if(inChoices){</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const letters = ["A","B","C","D","E"];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>for(let i=letters.length-1;i&gt;=0;i--){</p>
+<p class="p1"><span class="Apple-converted-space">          </span>if(choices[letters[i]]){ choices[letters[i]] += " " + ln.trim(); break; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>stemLines.push(ln);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let stem = stemLines.join("\n").trim();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const choiceCount = Object.values(choices).filter(Boolean).length;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(!stem &amp;&amp; choiceCount===0) continue;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const issues = [];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(!stem){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>stem = "[ไม่พบข้อความโจทย์ — กรุณาตรวจ PDF ต้นฉบับ]";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>issues.push("ไม่พบข้อความโจทย์");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(choiceCount===0) issues.push("ไม่พบตัวเลือก");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>else if(choiceCount&lt;2) issues.push(`พบตัวเลือกเพียง ${choiceCount} ตัว`);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>questions.push({</p>
+<p class="p1"><span class="Apple-converted-space">      </span>id: uid(), number: b.number, sourceNumber:b.number, stem, choices, issues,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>correct: null, explanation: "", image: null</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const usedNumbers = new Set();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>questions.forEach(q=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(usedNumbers.has(q.number)) q.issues.push(`เลขข้อ ${q.number} ซ้ำในข้อความต้นฉบับ`);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>usedNumbers.add(q.number);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return questions;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* ---------------- flexible answer-key parser ---------------- */</p>
+<p class="p1">let pendingKeyImport = null;</p>
+<p class="p2"><br></p>
+<p class="p1">function parseAnswerKeyFlexible(text){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const lines = text.split("\n");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const blocks = [];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>let current = null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const numRe = /^\s*#{0,4}\s*\**\s*(?:ข้อ(?:ที่)?\s*)?(\d{1,3})\s*[\.\):\：]?\s*\**\s*(.*)$/;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(const raw of lines){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const m = raw.match(numRe);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const n = m ? parseInt(m[1],10) : NaN;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(m &amp;&amp; n&gt;0 &amp;&amp; n&lt;300){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(current) blocks.push(current);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>current = {number:m[1], lines:[m[2]]};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>} else if(current){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>current.lines.push(raw);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(current) blocks.push(current);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const explicitAnsRe = /(?:ตอบ|เฉลย|answer|ans|correct\s*answer)\s*[:\-]?\s*\**\(?([A-E])\)?\**/i;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const bareLetterRe = /^\**\(?([A-E])\)?\**\s*[:\.\-]?\s*$/;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const leadLetterRe = /^\**\(?([A-E])\)?\**[\s\.\:\-]/;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const explPrefixRe = /^\s*\**(เหตุผล|คำอธิบาย|explanation|rationale)\s*[:\-]\s*\**/i;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return blocks.map(b=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const full = b.lines.slice();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let letter = null, ansLineIndex = -1;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>for(let i=0;i&lt;full.length;i++){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const m = full[i].match(explicitAnsRe);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(m){ letter = m[1].toUpperCase(); ansLineIndex = i; break; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(!letter){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>for(let i=0;i&lt;full.length;i++){</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const trimmed = full[i].trim();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(!trimmed) continue;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const m = trimmed.match(bareLetterRe) || trimmed.match(leadLetterRe);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(m){ letter = m[1].toUpperCase(); ansLineIndex = i; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>break;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>let explLines = full.slice();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(ansLineIndex&gt;=0){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let ln = explLines[ansLineIndex];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>ln = ln.replace(explicitAnsRe,"").replace(bareLetterRe,"").replace(leadLetterRe,"").trim();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>explLines[ansLineIndex] = ln;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let explanation = explLines.join("\n").trim();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>explanation = explanation.replace(explPrefixRe,"").trim();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>explanation = explanation.replace(/\n{3,}/g,"\n\n");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>return {number: b.number, letter, explanation};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* ---------------- export / import with location choice ---------------- */</p>
+<p class="p1">async function exportJSON(data, filename){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const json = JSON.stringify(data, null, 2);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(window.showSaveFilePicker){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>try{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const handle = await window.showSaveFilePicker({</p>
+<p class="p1"><span class="Apple-converted-space">        </span>suggestedName: filename,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>types: [{description:"JSON", accept:{"application/json":[".json"]}}]</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const writable = await handle.createWritable();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>await writable.write(json);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>await writable.close();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}catch(e){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(e &amp;&amp; e.name === "AbortError") return;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>try{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const blob = new Blob([json], {type:"application/json"});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const file = new File([blob], filename, {type:"application/json"});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(navigator.canShare &amp;&amp; navigator.canShare({files:[file]})){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>await navigator.share({files:[file], title:filename});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}catch(e){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(e &amp;&amp; e.name === "AbortError") return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const blob = new Blob([json], {type:"application/json"});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const a = document.createElement("a");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>a.href = URL.createObjectURL(blob);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>a.download = filename;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>a.click();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* ---------------- GitHub-repo sync ---------------- */</p>
+<p class="p1">async function fetchRemoteData(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const url = "./data.json?t=" + Date.now();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const res = await fetch(url, {cache:"no-store"});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!res.ok){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>throw new Error(`ไม่พบไฟล์ data.json ใน repo (HTTP ${res.status})`);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const data = await res.json();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!Array.isArray(data)) throw new Error("รูปแบบไฟล์ data.json ไม่ถูกต้อง");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return data;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function mergeProjectsFromRemote(remoteProjects, mode){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(mode === "replace"){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>state.projects = remoteProjects;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>remoteProjects.forEach(rp=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const idx = state.projects.findIndex(p=&gt;p.id===rp.id);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(idx&gt;=0) state.projects[idx] = rp;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>else state.projects.push(rp);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>save();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>render();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">async function autoSyncIfEmpty(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(state.projects.length &gt; 0) return;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>try{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const remote = await fetchRemoteData();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(remote.length &gt; 0){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>state.projects = remote;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>save();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>render();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}catch(e){}</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* ---------------- image attach ---------------- */</p>
+<p class="p1">function compressImageFile(file, maxW){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return new Promise((resolve, reject)=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const reader = new FileReader();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>reader.onerror = reject;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>reader.onload = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const img = new Image();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>img.onerror = reject;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>img.onload = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const scale = Math.min(1, (maxW||1000)/img.width);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const w = Math.round(img.width*scale);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const h = Math.round(img.height*scale);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const canvas = document.createElement("canvas");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>canvas.width = w; canvas.height = h;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>canvas.getContext("2d").drawImage(img,0,0,w,h);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>resolve(canvas.toDataURL("image/jpeg", 0.72));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>img.src = reader.result;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>reader.readAsDataURL(file);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function renderImageArea(container, q){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!container) return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>container.innerHTML = "";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(q.image){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const wrap = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wrap.style.marginBottom = "8px";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const img = document.createElement("img");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>img.src = q.image;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>img.style.maxWidth = "260px";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>img.style.maxHeight = "220px";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>img.style.display = "block";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>img.style.border = "1px solid var(--line)";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>img.style.borderRadius = "6px";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>img.style.marginBottom = "6px";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wrap.appendChild(img);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const rmBtn = document.createElement("button");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>rmBtn.className = "btn danger";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>rmBtn.style.padding = "4px 10px";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>rmBtn.style.fontSize = ".78rem";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>rmBtn.textContent = "ลบรูปนี้";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>rmBtn.onclick = ()=&gt;{ q.image = null; save(); renderImageArea(container, q); };</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wrap.appendChild(rmBtn);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>container.appendChild(wrap);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const label = document.createElement("label");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>label.className = "btn secondary";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>label.style.cursor = "pointer";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>label.style.display = "inline-block";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>label.textContent = "📷 แนบรูป (ถ่ายรูปหรือเลือกจากคลังภาพ)";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const input = document.createElement("input");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>input.type = "file";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>input.accept = "image/*";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>input.style.display = "none";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>input.addEventListener("change", async (e)=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const f = e.target.files[0];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(!f) return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>label.textContent = "กำลังบีบอัดรูป...";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>try{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const dataUrl = await compressImageFile(f, 1000);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>q.image = dataUrl;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>save();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>renderImageArea(container, q);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}catch(err){</p>
+<p class="p1"><span class="Apple-converted-space">        </span>alert("แนบรูปไม่สำเร็จ: " + err.message);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>renderImageArea(container, q);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>label.appendChild(input);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>container.appendChild(label);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* ---------------- tabs / router ---------------- */</p>
+<p class="p1">const TABS = [</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:"import", <span class="Apple-converted-space">  </span>label:"① นำเข้า PDF"},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:"projects", label:"② โปรเจกต์"},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:"edit", <span class="Apple-converted-space">    </span>label:"③ แก้ไข/เฉลย"},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:"quiz", <span class="Apple-converted-space">    </span>label:"④ ทำข้อสอบ"},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:"result", <span class="Apple-converted-space">  </span>label:"⑤ ผลคะแนน"},</p>
+<p class="p1">];</p>
+<p class="p2"><br></p>
+<p class="p1">function renderTabs(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const el = document.getElementById("tabs");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>el.innerHTML = "";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>TABS.forEach(t=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const b = document.createElement("button");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>b.textContent = t.label;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>b.className = state.activeTab===t.id ? "active" : "";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>b.onclick = ()=&gt;{ state.activeTab = t.id; render(); };</p>
+<p class="p1"><span class="Apple-converted-space">    </span>el.appendChild(b);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function render(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>renderTabs();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const main = document.getElementById("main");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>main.innerHTML = "";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(state.activeTab==="import") <span class="Apple-converted-space">  </span>main.appendChild(renderImport());</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(state.activeTab==="projects") main.appendChild(renderProjects());</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(state.activeTab==="edit") <span class="Apple-converted-space">    </span>main.appendChild(renderEdit());</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(state.activeTab==="quiz") <span class="Apple-converted-space">    </span>main.appendChild(renderQuiz());</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(state.activeTab==="result") <span class="Apple-converted-space">  </span>main.appendChild(renderResult());</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* ---------------- TAB: import ---------------- */</p>
+<p class="p1">function renderImport(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const wrap = document.createElement("div");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const p1 = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>p1.className = "panel";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>p1.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;1. อัปโหลดไฟล์ PDF ข้อสอบ&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p class="small"&gt;เลือกไฟล์ PDF ได้ทีละไฟล์ ระบบจะดึงข้อความออกมาให้ในกล่องด้านล่าง — ตรวจสอบ/แก้คำผิดจาก OCR ได้ก่อนแยกข้อ&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="file" id="pdfFile" accept="application/pdf" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="pdfStatus" class="small" style="margin-top:8px;"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>wrap.appendChild(p1);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const p2 = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>p2.className = "panel";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>p2.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;2. ข้อความดิบ (แก้ไขได้ก่อนแยกข้อ)&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;textarea id="rawTextBox" rows="12" placeholder="วางข้อความข้อสอบที่นี่ หรืออัปโหลด PDF ด้านบน"&gt;${escapeHtml(state.rawText)}&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="row" style="margin-top:10px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn" id="parseBtn"&gt;แยกข้อสอบอัตโนมัติ&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="small"&gt;รูปแบบที่รองรับ: ข้อขึ้นต้นด้วยเลข "1." ตัวเลือกขึ้นต้นด้วย "A." ถึง "E."&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>wrap.appendChild(p2);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const p3 = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>p3.className = "panel";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>p3.innerHTML = `&lt;h2&gt;3. ตัวอย่างที่แยกได้&lt;/h2&gt;&lt;div id="previewBox"&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>wrap.appendChild(p3);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const p4 = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>p4.className = "panel";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const projectOptions = state.projects.map(p=&gt;`&lt;option value="${p.id}"&gt;${escapeHtml(p.name)}&lt;/option&gt;`).join("");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>p4.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;4. บันทึกเข้าโปรเจกต์ (บล็อกวิชา)&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;โปรเจกต์ปลายทาง&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;select id="targetProjectSelect"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;option value="__new__"&gt;+ สร้างโปรเจกต์ใหม่&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>${projectOptions}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="newProjectNameWrap" style="margin-top:8px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;ชื่อโปรเจกต์ใหม่&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="text" id="newProjectNameInput" placeholder="เช่น Respiratory Block"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;label style="margin-top:10px;"&gt;ชื่อชุดข้อสอบ&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="text" id="examNameInput" placeholder="เช่น Respiratory MED 44" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="row" style="margin-top:10px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn clay" id="saveExamBtn" disabled&gt;บันทึกชุดข้อสอบนี้&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>wrap.appendChild(p4);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>setTimeout(()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("pdfFile").addEventListener("change", async (e)=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const f = e.target.files[0];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(!f) return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const statusEl = document.getElementById("pdfStatus");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>statusEl.textContent = "กำลังอ่านไฟล์...";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>try{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const text = await extractPdfText(f);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>state.rawText = text;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById("rawTextBox").value = text;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>statusEl.textContent = "อ่านไฟล์สำเร็จ: " + f.name;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(!document.getElementById("examNameInput").value){</p>
+<p class="p1"><span class="Apple-converted-space">          </span>document.getElementById("examNameInput").value = f.name.replace(/\.pdf$/i,"");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}catch(err){</p>
+<p class="p1"><span class="Apple-converted-space">        </span>statusEl.textContent = "อ่านไฟล์ไม่สำเร็จ: " + err.message;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("parseBtn").addEventListener("click", ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>state.rawText = document.getElementById("rawTextBox").value;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>state.parsedPreview = parseQuestions(state.rawText);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>renderPreview();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById("saveExamBtn").disabled = state.parsedPreview.length===0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const targetSel = document.getElementById("targetProjectSelect");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const newWrap = document.getElementById("newProjectNameWrap");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function syncNewProjectVisibility(){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>newWrap.style.display = targetSel.value === "__new__" ? "block" : "none";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>targetSel.addEventListener("change", syncNewProjectVisibility);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>syncNewProjectVisibility();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("saveExamBtn").addEventListener("click", ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const examName = document.getElementById("examNameInput").value.trim() || ("ชุดข้อสอบ " + Date.now());</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let project;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(targetSel.value === "__new__"){</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const pname = document.getElementById("newProjectNameInput").value.trim() || "โปรเจกต์ใหม่";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>project = {id: uid(), name: pname, exams: []};</p>
+<p class="p1"><span class="Apple-converted-space">        </span>state.projects.push(project);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>project = state.projects.find(p=&gt;p.id===targetSel.value);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(!project) return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>project.exams.push({id: uid(), name: examName, questions: state.parsedPreview});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>save();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>state.rawText = "";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>state.parsedPreview = [];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>state.currentProjectId = project.id;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>state.activeTab = "projects";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>render();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>renderPreview();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},0);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>function renderPreview(){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const box = document.getElementById("previewBox");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(!box) return;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(state.parsedPreview.length===0){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box.innerHTML = `&lt;div class="empty"&gt;ยังไม่ได้แยกข้อ — กด "แยกข้อสอบอัตโนมัติ" ด้านบน&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const flagged = state.parsedPreview.filter(q=&gt;(q.issues||[]).length);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>box.innerHTML = `&lt;p class="small"&gt;พบทั้งหมด ${state.parsedPreview.length} ข้อ · เลขข้อจะคงตาม PDF ต้นฉบับ — ไปแก้ไขรายละเอียด/ใส่เฉลยได้ที่แท็บ "แก้ไข/เฉลย" หลังบันทึก&lt;/p&gt;` +</p>
+<p class="p1"><span class="Apple-converted-space">      </span>(flagged.length ? `&lt;p class="small" style="color:var(--clay);"&gt;⚠️ มี ${flagged.length} ข้อที่ต้องตรวจ (เช่น โจทย์หรือตัวเลือกไม่ครบ) ระบบจะไม่สร้างข้อว่างจากหัว/ท้ายกระดาษ&lt;/p&gt;` : "");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>state.parsedPreview.slice(0,3).forEach(q=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const d = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>d.className = "qcard";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const warning = (q.issues||[]).length ? `&lt;div class="small" style="color:var(--clay); margin-top:5px;"&gt;⚠️ ${escapeHtml(q.issues.join(" · "))}&lt;/div&gt;` : "";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>d.innerHTML = `&lt;div class="qnum"&gt;ข้อจริง ${q.number}&lt;/div&gt;&lt;div&gt;${escapeHtml(q.stem).slice(0,300)}&lt;/div&gt;${warning}`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box.appendChild(d);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(state.parsedPreview.length&gt;3){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const more = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>more.className="small";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>more.textContent = `...และอีก ${state.parsedPreview.length-3} ข้อ`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box.appendChild(more);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return wrap;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* ---------------- TAB: projects ---------------- */</p>
+<p class="p1">function renderProjects(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const wrap = document.createElement("div");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!state.currentProjectId){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// ---- project list view ----</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const panel = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>panel.className = "panel";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>panel.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="flex-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2 style="border:none; margin:0;"&gt;โปรเจกต์ (บล็อกวิชา) — ${state.projects.length} โปรเจกต์&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" id="newProjBtn"&gt;+ สร้างโปรเจกต์&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(state.projects.length===0){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>panel.innerHTML += `&lt;div class="empty"&gt;ยังไม่มีโปรเจกต์ — สร้างใหม่ หรือไปนำเข้า PDF ที่แท็บ "① นำเข้า PDF" ก่อน&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>state.projects.forEach(p=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const examCount = (p.exams||[]).length;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const card = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>card.className = "card";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>card.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="name"&gt;📁 ${escapeHtml(p.name)}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="meta"&gt;${examCount} ชุดข้อสอบ&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="btn" data-act="open"&gt;เปิดโปรเจกต์&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="btn ghost" data-act="rename"&gt;แก้ชื่อ&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="btn danger" data-act="del"&gt;ลบ&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>card.querySelector('[data-act="open"]').onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">          </span>state.currentProjectId = p.id; render();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p1"><span class="Apple-converted-space">        </span>card.querySelector('[data-act="rename"]').onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const n = prompt("ตั้งชื่อโปรเจกต์ใหม่:", p.name);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>if(n &amp;&amp; n.trim()){ p.name = n.trim(); save(); render(); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p1"><span class="Apple-converted-space">        </span>card.querySelector('[data-act="del"]').onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">          </span>if(confirm(`ลบโปรเจกต์ "${p.name}" พร้อมชุดข้อสอบทั้งหมดข้างใน (${examCount} ชุด) ?`)){</p>
+<p class="p1"><span class="Apple-converted-space">            </span>state.projects = state.projects.filter(x=&gt;x.id!==p.id);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>save(); render();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p1"><span class="Apple-converted-space">        </span>panel.appendChild(card);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wrap.appendChild(panel);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const sync = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>sync.className = "panel";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>sync.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;🔄 ซิงก์ข้ามเครื่องผ่าน GitHub&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p class="small"&gt;วิธีใช้: กด "ส่งออก data.json" บนเครื่องที่มีข้อมูลล่าสุด → อัปโหลดไฟล์ &lt;code&gt;data.json&lt;/code&gt; เข้า repo เดียวกับ &lt;code&gt;index.html&lt;/code&gt; บน GitHub → แล้วมาเครื่องอื่น กดปุ่ม "ดึงข้อมูลจาก GitHub"&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn clay" id="exportAllBtn"&gt;📤 ส่งออก data.json&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" id="syncPullBtn"&gt;📥 ดึงข้อมูลจาก GitHub&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div id="syncStatus" class="small" style="margin-top:8px;"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wrap.appendChild(sync);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const io = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>io.className = "panel";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>io.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;สำรองข้อมูลด้วยตัวเอง&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn secondary" id="exportBackupBtn"&gt;ส่งออกไฟล์สำรอง (ตั้งชื่อเอง)&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="btn secondary" style="cursor:pointer;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>นำเข้าไฟล์ JSON</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="file" id="importFile" accept="application/json" style="display:none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wrap.appendChild(io);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>setTimeout(()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById("newProjBtn").onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const n = prompt("ตั้งชื่อโปรเจกต์ใหม่ (เช่น ชื่อบล็อกวิชา):", "");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(n &amp;&amp; n.trim()){</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const proj = {id:uid(), name:n.trim(), exams:[]};</p>
+<p class="p1"><span class="Apple-converted-space">          </span>state.projects.push(proj);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>save();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>state.currentProjectId = proj.id;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>render();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById("exportAllBtn").onclick = ()=&gt; exportJSON(state.projects, "data.json");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById("exportBackupBtn").onclick = ()=&gt; exportJSON(state.projects, "psu_quiz_backup_" + Date.now() + ".json");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById("syncPullBtn").onclick = async ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const statusEl = document.getElementById("syncStatus");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>statusEl.textContent = "กำลังดึงข้อมูลจาก GitHub...";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>try{</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const remote = await fetchRemoteData();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>if(confirm(`เจอ data.json บน GitHub (${remote.length} โปรเจกต์)\nกด OK เพื่อรวมเข้ากับข้อมูลในเครื่องนี้`)){</p>
+<p class="p1"><span class="Apple-converted-space">            </span>mergeProjectsFromRemote(remote, "merge");</p>
+<p class="p1"><span class="Apple-converted-space">            </span>statusEl.textContent = "ซิงก์สำเร็จ ✅";</p>
+<p class="p1"><span class="Apple-converted-space">          </span>} else statusEl.textContent = "ยกเลิกการซิงก์";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}catch(err){ statusEl.textContent = "ดึงข้อมูลไม่สำเร็จ: " + err.message; }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById("importFile").onchange = async (e)=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const f = e.target.files[0];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(!f) return;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>try{</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const data = JSON.parse(await f.text());</p>
+<p class="p1"><span class="Apple-converted-space">          </span>if(Array.isArray(data) &amp;&amp; data.length &amp;&amp; data[0].exams) state.projects = state.projects.concat(data);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>else if(Array.isArray(data)) state.projects.push({id:uid(), name:"นำเข้า "+new Date().toLocaleDateString("th-TH"), exams: data});</p>
+<p class="p1"><span class="Apple-converted-space">          </span>save(); render();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}catch(err){ alert("ไฟล์ไม่ถูกต้อง: " + err.message); }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},0);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>return wrap;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// ---- inside a project: exam list view ----</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const project = state.projects.find(p=&gt;p.id===state.currentProjectId);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!project){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>state.currentProjectId = null;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return renderProjects();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const crumb = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>crumb.className = "crumb";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>crumb.innerHTML = `&lt;button id="backBtn"&gt;← โปรเจกต์ทั้งหมด&lt;/button&gt; / ${escapeHtml(project.name)}`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>wrap.appendChild(crumb);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const panel = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>panel.className = "panel";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>panel.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="flex-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2 style="border:none; margin:0;"&gt;📁 ${escapeHtml(project.name)}&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn secondary" id="exportProjBtn"&gt;ส่งออกโปรเจกต์นี้ (JSON)&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if((project.exams||[]).length===0){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>panel.innerHTML += `&lt;div class="empty"&gt;โปรเจกต์นี้ยังไม่มีชุดข้อสอบ — ไปที่แท็บ "① นำเข้า PDF" แล้วเลือกโปรเจกต์นี้เป็นปลายทาง&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>project.exams.forEach((ex, examIndex)=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const answered = ex.questions.filter(q=&gt;q.correct).length;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const hist = ex.history || {exam:[], practice:[]};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const lastExam = hist.exam &amp;&amp; hist.exam[0];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const lastPractice = hist.practice &amp;&amp; hist.practice[0];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const hasFullExam = ex.lastFull &amp;&amp; ex.lastFull.exam;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const hasFullPractice = ex.lastFull &amp;&amp; ex.lastFull.practice;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const card = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>card.className = "card";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>card.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="flex:1;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="flex-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="name"&gt;${escapeHtml(ex.name)}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;button class="btn ghost" data-act="exportExam" style="padding:2px 8px; font-size:.78rem;" title="ส่งออกชุดนี้เป็นไฟล์แยกต่างหาก"&gt;📤 ส่งออกชุดนี้&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;button class="btn ghost" data-act="rename" style="padding:2px 8px; font-size:.78rem;" title="แก้ชื่อชุดข้อสอบ"&gt;✏️ แก้ชื่อ&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;button class="btn ghost" data-act="moveUp" ${examIndex===0 ? "disabled" : ""} style="padding:2px 8px; font-size:.78rem;"&gt;↑&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;button class="btn ghost" data-act="moveDown" ${examIndex===project.exams.length-1 ? "disabled" : ""} style="padding:2px 8px; font-size:.78rem;"&gt;↓&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="meta" style="margin-top:4px;"&gt;${ex.questions.length} ข้อ · ใส่เฉลยแล้ว ${answered}/${ex.questions.length}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="meta"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>📝 สอบจริงล่าสุด: ${lastExam ? (hasFullExam ? `&lt;button class="small" data-act="viewExam" style="background:none; border:none; color:var(--teal); text-decoration:underline; cursor:pointer; padding:0; font-family:inherit;"&gt;${lastExam.correctCount}/${lastExam.keyed} (ดูอีกครั้ง)&lt;/button&gt;` : `${lastExam.correctCount}/${lastExam.keyed}`) : "ยังไม่เคยทำ"}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&amp;nbsp;·&amp;nbsp; ⚡ ฝึกล่าสุด: ${lastPractice ? (hasFullPractice ? `&lt;button class="small" data-act="viewPractice" style="background:none; border:none; color:var(--teal); text-decoration:underline; cursor:pointer; padding:0; font-family:inherit;"&gt;${lastPractice.correctCount}/${lastPractice.keyed} (ดูอีกครั้ง)&lt;/button&gt;` : `${lastPractice.correctCount}/${lastPractice.keyed}`) : "ยังไม่เคยทำ"}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="width:100%; border-top:1px dashed var(--line); margin:6px 0;"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="row" style="width:100%; justify-content:space-between; align-items:center;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="row" style="gap:14px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="small" style="display:flex; align-items:center; gap:4px; margin:0;"&gt;&lt;input type="checkbox" id="shuf-${ex.id}" style="width:auto;"&gt; สุ่มข้อ&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label class="small" style="display:flex; align-items:center; gap:4px; margin:0;"&gt;&lt;input type="checkbox" id="shuf-choice-${ex.id}" style="width:auto;"&gt; สุ่มช้อยส์&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="btn ghost" data-act="edit"&gt;แก้ไข/เฉลย&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="btn" data-act="examMode"&gt;📝 สอบจริง&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="btn clay" data-act="practiceMode"&gt;⚡ โหมดฝึก&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button class="btn danger" data-act="del" style="padding:4px 8px;"&gt;✕&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>card.querySelector('[data-act="edit"]').onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>state.currentExamId = ex.id; state.activeTab="edit"; render();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>card.querySelector('[data-act="rename"]').onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const name = prompt("ชื่อชุดข้อสอบใหม่", ex.name);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(name &amp;&amp; name.trim()){ ex.name = name.trim(); save(); render(); }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>card.querySelector('[data-act="exportExam"]').onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const safeName = ex.name.replace(/[^\w\u0E00-\u0E7F\-]+/g,"_");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>exportJSON([{ id: uid(), name: `Exported: ${ex.name}`, exams: [ex] }], `psu_quiz_exam_${safeName}.json`);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>card.querySelector('[data-act="moveUp"]').onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(examIndex===0) return;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>[project.exams[examIndex-1], project.exams[examIndex]] = [project.exams[examIndex], project.exams[examIndex-1]];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>save(); render();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>card.querySelector('[data-act="moveDown"]').onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(examIndex&gt;=project.exams.length-1) return;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>[project.exams[examIndex], project.exams[examIndex+1]] = [project.exams[examIndex+1], project.exams[examIndex]];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>save(); render();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>card.querySelector('[data-act="examMode"]').onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>startQuiz(ex.id, "exam", {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>shuffle: card.querySelector(`#shuf-${ex.id}`).checked,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>shuffleChoices: card.querySelector(`#shuf-choice-${ex.id}`).checked</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>card.querySelector('[data-act="practiceMode"]').onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>startQuiz(ex.id, "practice", {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>shuffle: card.querySelector(`#shuf-${ex.id}`).checked,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>shuffleChoices: card.querySelector(`#shuf-choice-${ex.id}`).checked</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>card.querySelector('[data-act="del"]').onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(confirm(`ลบชุดข้อสอบ "${ex.name}" ?`)){</p>
+<p class="p1"><span class="Apple-converted-space">          </span>project.exams = project.exams.filter(e=&gt;e.id!==ex.id);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>save(); render();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const viewExamBtn = card.querySelector('[data-act="viewExam"]');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(viewExamBtn) viewExamBtn.onclick = ()=&gt; viewLastResult(ex.id, "exam");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const viewPracticeBtn = card.querySelector('[data-act="viewPractice"]');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(viewPracticeBtn) viewPracticeBtn.onclick = ()=&gt; viewLastResult(ex.id, "practice");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>panel.appendChild(card);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>wrap.appendChild(panel);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>setTimeout(()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("backBtn").onclick = ()=&gt;{ state.currentProjectId = null; render(); };</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("exportProjBtn").onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const safeName = project.name.replace(/[^\w\u0E00-\u0E7F\-]+/g,"_");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>exportJSON([project], `psu_quiz_${safeName}.json`);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},0);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return wrap;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* ---------------- TAB: edit ---------------- */</p>
+<p class="p1">function renderEdit(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const wrap = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const found = findExam(state.currentExamId);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!found){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wrap.innerHTML = `&lt;div class="panel"&gt;&lt;div class="empty"&gt;เลือกชุดข้อสอบจากแท็บ "② โปรเจกต์" ก่อน&lt;/div&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return wrap;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const {exam, project} = found;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const crumb = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>crumb.className = "crumb";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>crumb.textContent = `📁 ${project.name} / ${exam.name}`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>wrap.appendChild(crumb);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const head = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>head.className = "panel";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>head.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="flex-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2 style="border:none; margin:0;"&gt;${escapeHtml(exam.name)}&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="small" style="display:flex; align-items:center; gap:6px; margin:0;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="checkbox" id="reviewOnlyChk" style="width:auto;" ${state.editReviewOnly ? "checked" : ""}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>⚠ แสดงเฉพาะข้อที่ต้องตรวจ</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" id="addQBtn"&gt;+ เพิ่มข้อใหม่&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p class="small"&gt;แก้คำถาม/ตัวเลือก และเลือก "คำตอบที่ถูก" ของแต่ละข้อ ใส่เหตุผล (rationale) เพิ่มได้ ระบบบันทึกอัตโนมัติทุกครั้งที่แก้&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>wrap.appendChild(head);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const keyPanel = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>keyPanel.className = "panel";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>keyPanel.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;วางเฉลยจาก Claude (หรือรูปแบบอื่น)&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p class="small"&gt;ก็อปเฉลยที่ Claude สร้างให้มาวางในกล่องด้านล่าง ระบบจะจับคู่กับเลขข้อให้อัตโนมัติ&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;textarea id="keyPasteBox" rows="8" placeholder="วางเฉลยที่นี่..."&gt;&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="row" style="margin-top:8px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn secondary" id="previewKeyBtn"&gt;ตรวจสอบ&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn clay" id="applyKeyBtn" disabled&gt;นำเข้าเฉลยทั้งหมด&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label class="small" style="display:flex; align-items:center; gap:6px; margin:0;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="checkbox" id="overwriteChk" checked style="width:auto;"&gt; เขียนทับเฉลย/เหตุผลเดิม</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="keyPreview"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>wrap.appendChild(keyPanel);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const questionsToShow = state.editReviewOnly ? exam.questions.filter(q=&gt;(q.issues||[]).length || q.answerKeyIssue) : exam.questions;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(questionsToShow.length===0){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const empty = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>empty.className = "panel";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>empty.innerHTML = `&lt;div class="empty"&gt;ไม่มีข้อที่ถูกทำเครื่องหมายว่าต้องตรวจ&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wrap.appendChild(empty);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>questionsToShow.forEach((q)=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const card = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>card.className = "qcard";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let choicesHtml = "";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>["A","B","C","D","E"].forEach(letter=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>choicesHtml += `</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="choice-edit"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;span&gt;${letter}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="text" data-letter="${letter}" data-field="choice" value="${escapeAttr(q.choices[letter]||"")}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>card.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="flex-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="qnum"&gt;ข้อจริง ${escapeHtml(q.sourceNumber||q.number)} · ลำดับในชุด ${exam.questions.indexOf(q)+1}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn danger" data-act="delQ" style="padding:4px 10px; font-size:.78rem;"&gt;ลบข้อนี้&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>${(q.issues||[]).length || q.answerKeyIssue ? `&lt;div class="small" style="color:var(--clay); margin-bottom:8px;"&gt;⚠️ ต้องตรวจ: ${escapeHtml([...(q.issues||[]), ...(q.answerKeyIssue ? [q.answerKeyIssue] : [])].join(" · "))}&lt;/div&gt;` : ""}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;โจทย์&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;textarea rows="3" data-field="stem"&gt;${escapeHtml(q.stem)}&lt;/textarea&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label style="margin-top:8px;"&gt;รูปภาพประกอบ (ถ้ามี)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div id="imgArea-${q.id}"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label style="margin-top:8px;"&gt;ตัวเลือก&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>${choicesHtml}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="row" style="margin-top:8px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="flex:1; min-width:160px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;คำตอบที่ถูก&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;select data-field="correct"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;option value=""&gt;— ยังไม่ระบุ —&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>${["A","B","C","D","E"].map(l=&gt;`&lt;option value="${l}" ${q.correct===l?"selected":""}&gt;${l}&lt;/option&gt;`).join("")}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;option value="${ALL_CHOICES_CORRECT}" ${q.correct===ALL_CHOICES_CORRECT?"selected":""}&gt;ทุกตัวเลือกถูก&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="flex:2; min-width:220px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;เหตุผล / คำอธิบาย (ไม่บังคับ)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="text" data-field="explanation" value="${escapeAttr(q.explanation||"")}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>renderImageArea(card.querySelector(`#imgArea-${q.id}`), q);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>card.querySelector('[data-field="stem"]').addEventListener("input", (e)=&gt;{ q.stem = e.target.value; save(); });</p>
+<p class="p1"><span class="Apple-converted-space">    </span>card.querySelectorAll('[data-field="choice"]').forEach(inp=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>inp.addEventListener("input", (e)=&gt;{ q.choices[e.target.dataset.letter] = e.target.value; save(); });</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>card.querySelector('[data-field="correct"]').addEventListener("change", (e)=&gt;{ q.correct = e.target.value || null; save(); });</p>
+<p class="p1"><span class="Apple-converted-space">    </span>card.querySelector('[data-field="explanation"]').addEventListener("input", (e)=&gt;{ q.explanation = e.target.value; save(); });</p>
+<p class="p1"><span class="Apple-converted-space">    </span>card.querySelector('[data-act="delQ"]').addEventListener("click", ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>exam.questions = exam.questions.filter(qq=&gt;qq.id!==q.id);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>save(); render();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wrap.appendChild(card);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>setTimeout(()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("reviewOnlyChk").onchange = (e)=&gt;{ state.editReviewOnly = e.target.checked; render(); };</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("addQBtn").onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const highest = Math.max(0, ...exam.questions.map(q=&gt;parseInt(q.number,10)||0));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const number = String(highest+1);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>exam.questions.push({</p>
+<p class="p1"><span class="Apple-converted-space">        </span>id: uid(), number, sourceNumber:number, stem: "",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>choices:{A:"",B:"",C:"",D:"",E:""}, issues:["เพิ่มด้วยมือ — กรุณาใส่โจทย์และตัวเลือก"], correct: null, explanation: "", image: null</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>save(); render();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("previewKeyBtn").onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const parsed = parseAnswerKeyFlexible(document.getElementById("keyPasteBox").value);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const matches = parsed.map(p=&gt;({...p, q: exam.questions.find(qq=&gt;String(qq.number).trim()===String(p.number).trim())}));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>exam.questions.forEach(q=&gt;delete q.answerKeyIssue);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>matches.filter(m=&gt;m.q &amp;&amp; !m.letter).forEach(m=&gt;{ m.q.answerKeyIssue = "อ่านคำตอบจากเฉลยไม่ได้"; });</p>
+<p class="p1"><span class="Apple-converted-space">      </span>save();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>pendingKeyImport = matches;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const matchedCount = matches.filter(m=&gt;m.q &amp;&amp; m.letter).length;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById("keyPreview").innerHTML = `&lt;hr class="sep"&gt;&lt;p class="small"&gt;พบ ${parsed.length} รายการ — จับคู่และอ่านคำตอบได้ ${matchedCount} ข้อ&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById("applyKeyBtn").disabled = matchedCount===0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("applyKeyBtn").onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(!pendingKeyImport) return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const overwrite = document.getElementById("overwriteChk").checked;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let applied = 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>pendingKeyImport.forEach(m=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(!m.q || !m.letter) return;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(!overwrite &amp;&amp; m.q.correct) return;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>m.q.correct = m.letter;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(m.explanation &amp;&amp; (overwrite || !m.q.explanation)) m.q.explanation = m.explanation;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>applied++;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">      </span>save(); pendingKeyImport = null; alert(`นำเข้าเฉลยแล้ว ${applied} ข้อ`); render();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},0);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return wrap;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* ---------------- TAB: quiz ---------------- */</p>
+<p class="p1">function shuffleArray(arr){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const a = arr.slice();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>for(let i=a.length-1;i&gt;0;i--){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const j = Math.floor(Math.random()*(i+1));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>[a[i],a[j]] = [a[j],a[i]];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return a;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function startQuiz(examId, mode, opts={}){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const found = findExam(examId);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!found || found.exam.questions.length===0) return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>let ids = found.exam.questions.map(q=&gt;q.id);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(opts.shuffle) ids = shuffleArray(ids);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.quiz = {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>examId, mode,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>order: ids.slice(),</p>
+<p class="p1"><span class="Apple-converted-space">    </span>originalOrder: ids.slice(),</p>
+<p class="p1"><span class="Apple-converted-space">    </span>idx: 0,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>answers: {},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>revealed: false,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>shuffle: !!opts.shuffle,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>shuffleChoices: !!opts.shuffleChoices,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>choiceOrder: {},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>round: 1,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wrongIds: [],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>firstAttempt: {},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flagged: [],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>isReview: false</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.lastResult = null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.activeTab = "quiz";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>render();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function startFlaggedReview(examId, ids){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const found = findExam(examId);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!found || !ids || ids.length===0) return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.quiz = Object.assign({}, state.quiz, {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>examId, mode: "exam", order: ids.slice(), originalOrder: ids.slice(),</p>
+<p class="p1"><span class="Apple-converted-space">    </span>idx: 0, answers: {}, revealed: false, round: 1, wrongIds: [], firstAttempt: {}, flagged: [], isReview: true</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.lastResult = null; state.activeTab = "quiz"; render();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function startWrongReview(examId, ids){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const found = findExam(examId);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!found || !ids || ids.length===0) return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.quiz = Object.assign({}, state.quiz, {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>examId, mode: "practice", order: ids.slice(), originalOrder: ids.slice(),</p>
+<p class="p1"><span class="Apple-converted-space">    </span>idx: 0, answers: {}, revealed: false, round: 1, wrongIds: [], firstAttempt: {}, flagged: [], isReview: true</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.lastResult = null; state.activeTab = "quiz"; render();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function viewLastResult(examId, mode){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const found = findExam(examId);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!found) return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const lf = found.exam.lastFull &amp;&amp; found.exam.lastFull[mode];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!lf) return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const rows = lf.rows.map(r=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const q = found.exam.questions.find(qq=&gt;qq.id===r.qId);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return q ? {q, userAns: r.userAns, isCorrect: isAnswerCorrect(q, r.userAns)} : null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}).filter(Boolean);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.lastResult = {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>examId, examName: found.exam.name, mode, isReview: true, flaggedIds: [],</p>
+<p class="p1"><span class="Apple-converted-space">    </span>total: rows.length, keyed: rows.filter(r=&gt;r.q.correct).length, correctCount: rows.filter(r=&gt;r.isCorrect).length, rows</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.activeTab = "result"; render();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function startNextRound(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const ids = Array.from(new Set(state.quiz.wrongIds));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.quiz.round += 1;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.quiz.order = state.quiz.shuffle ? shuffleArray(ids) : ids;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.quiz.wrongIds = []; state.quiz.idx = 0; state.quiz.revealed = false; render();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function goToIndex(newIdx){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.quiz.idx = newIdx;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const qid = state.quiz.order[newIdx];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.quiz.revealed = state.quiz.mode==="practice" &amp;&amp; !!state.quiz.answers[qid];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>render();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function renderQuiz(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const wrap = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const found = findExam(state.quiz.examId);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!found){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wrap.innerHTML = `&lt;div class="panel"&gt;&lt;div class="empty"&gt;ยังไม่ได้เลือกชุดข้อสอบ&lt;/div&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return wrap;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const {exam} = found;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const q = exam.questions.find(qq=&gt;qq.id===state.quiz.order[state.quiz.idx]);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const isPractice = state.quiz.mode === "practice";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const revealed = isPractice &amp;&amp; state.quiz.revealed;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const userAns = state.quiz.answers[q.id] || null;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const isFlagged = !isPractice &amp;&amp; state.quiz.flagged &amp;&amp; state.quiz.flagged.includes(q.id);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const panel = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>panel.className = "panel";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>panel.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="flex-between" style="align-items:flex-start;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="quiz-progress" style="margin-bottom:0;"&gt;${escapeHtml(exam.name)} — ข้อ ${state.quiz.idx+1} / ${state.quiz.order.length}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span class="mode-tag"&gt;${isPractice ? "⚡ ฝึก" : "📝 สอบ"}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="row" style="gap:6px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>${!isPractice ? `&lt;button id="flagBtn" class="btn ${isFlagged ? 'danger' : 'ghost'}" style="border-radius:20px; padding:5px 12px; font-size:.8rem;"&gt;${isFlagged ? "🔴 ไม่ชัวร์" : "⚪ ไม่ชัวร์?"}&lt;/button&gt;` : ""}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button id="quickEditBtn" class="btn secondary" style="border-radius:20px; padding:5px 12px; font-size:.8rem;"&gt;✏️ แก้เฉลย&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="quickEditArea" style="display:none; background:#f1ecd8; border:1px solid var(--line); border-radius:8px; padding:12px; margin-top:12px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">       </span>&lt;label&gt;คำตอบที่ถูก&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">       </span>&lt;select id="quickEditCorrect" style="margin-bottom:8px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">         </span>&lt;option value=""&gt;— ยังไม่ระบุ —&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">         </span>${["A","B","C","D","E"].map(l=&gt;`&lt;option value="${l}" ${q.correct===l?"selected":""}&gt;${l}&lt;/option&gt;`).join("")}</p>
+<p class="p1"><span class="Apple-converted-space">         </span>&lt;option value="${ALL_CHOICES_CORRECT}" ${q.correct===ALL_CHOICES_CORRECT?"selected":""}&gt;ทุกตัวเลือกถูก&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">       </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">       </span>&lt;label&gt;เหตุผล / คำอธิบาย (ไม่บังคับ)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">       </span>&lt;textarea id="quickEditExpl" rows="2" style="margin-bottom:8px;"&gt;${escapeHtml(q.explanation||"")}&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">       </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">         </span>&lt;button id="quickEditSaveBtn" class="btn" style="padding:6px 12px; font-size:.85rem;"&gt;บันทึกเฉลย&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">         </span>&lt;button id="quickEditCancelBtn" class="btn ghost" style="padding:6px 12px; font-size:.85rem;"&gt;ยกเลิก&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">       </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>${q.image ? `&lt;img src="${q.image}" style="max-width:100%; border:1px solid var(--line); border-radius:8px; margin:12px 0 14px; display:block;"&gt;` : ""}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="quiz-q" style="margin-top:14px;"&gt;${escapeHtml(q.number)}. ${escapeHtml(q.stem)}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="choicesArea"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="revealArea"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="nav-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn secondary" id="prevBtn" ${state.quiz.idx===0?"disabled":""}&gt;← ข้อก่อนหน้า&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span id="nextSlot"&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>wrap.appendChild(panel);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const flagBtn = panel.querySelector("#flagBtn");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(flagBtn) flagBtn.onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const i = state.quiz.flagged.indexOf(q.id);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(i&gt;=0) state.quiz.flagged.splice(i,1); else state.quiz.flagged.push(q.id);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>render();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const qeBtn = panel.querySelector("#quickEditBtn");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const qeArea = panel.querySelector("#quickEditArea");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(qeBtn) qeBtn.onclick = () =&gt; { qeArea.style.display = qeArea.style.display === "none" ? "block" : "none"; };</p>
+<p class="p1"><span class="Apple-converted-space">  </span>panel.querySelector("#quickEditCancelBtn").onclick = () =&gt; { qeArea.style.display = "none"; };</p>
+<p class="p1"><span class="Apple-converted-space">  </span>panel.querySelector("#quickEditSaveBtn").onclick = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>q.correct = panel.querySelector("#quickEditCorrect").value || null;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>q.explanation = panel.querySelector("#quickEditExpl").value;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>save();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(isPractice &amp;&amp; state.quiz.firstAttempt[q.id]){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>state.quiz.firstAttempt[q.id].correct = q.correct ? isAnswerCorrect(q, state.quiz.firstAttempt[q.id].answer) : null;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>render();<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const nextSlot = panel.querySelector("#nextSlot");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(state.quiz.idx &lt; state.quiz.order.length-1){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>nextSlot.innerHTML = `&lt;button class="btn" id="nextBtn"&gt;ข้อถัดไป →&lt;/button&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} else if(isPractice){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const wrongCount = new Set(state.quiz.wrongIds).size;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(revealed || wrongCount&gt;0) nextSlot.innerHTML = wrongCount&gt;0 ? `&lt;button class="btn clay" id="reviewBtn"&gt;🔁 ทบทวนข้อที่ตอบผิด (${wrongCount} ข้อ)&lt;/button&gt;` : `&lt;button class="btn clay" id="submitBtn"&gt;ดูผลสรุป&lt;/button&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>else nextSlot.innerHTML = `&lt;button class="btn" disabled&gt;ตอบข้อนี้ก่อน&lt;/button&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>nextSlot.innerHTML = `&lt;button class="btn clay" id="submitBtn"&gt;ส่งคำตอบ&lt;/button&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const choicesArea = panel.querySelector("#choicesArea");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>let letters = ["A","B","C","D","E"].filter(l =&gt; q.choices[l] &amp;&amp; q.choices[l].trim() !== "");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(state.quiz.shuffleChoices) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(!state.quiz.choiceOrder[q.id]) state.quiz.choiceOrder[q.id] = shuffleArray(letters);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letters = state.quiz.choiceOrder[q.id];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>letters.forEach(letter=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const b = document.createElement("button");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let cls = "choice-btn";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(!revealed &amp;&amp; userAns===letter) cls += " selected";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(revealed){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(q.correct &amp;&amp; (q.correct===ALL_CHOICES_CORRECT || letter===q.correct)) cls += " correct";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>else if(letter===userAns) cls += " incorrect";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>b.className = cls;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>b.textContent = letter + ". " + q.choices[letter];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(revealed) b.disabled = true;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>b.onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(isPractice){</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(state.quiz.revealed) return;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>state.quiz.answers[q.id] = letter; state.quiz.revealed = true;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(!(q.id in state.quiz.firstAttempt)) state.quiz.firstAttempt[q.id] = {answer: letter, correct: q.correct ? isAnswerCorrect(q, letter) : null};</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(q.correct &amp;&amp; !isAnswerCorrect(q, letter)) state.quiz.wrongIds.push(q.id);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>render();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>state.quiz.answers[q.id] = letter; render();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>choicesArea.appendChild(b);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(revealed){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const isCorrect = isAnswerCorrect(q, userAns);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const box = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>box.className = "reveal-box " + (q.correct ? (isCorrect ? "ok" : "no") : "");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(!q.correct) box.innerHTML = `&lt;b&gt;ยังไม่ได้ใส่เฉลยข้อนี้ไว้&lt;/b&gt; — กด ✏️ แก้เฉลย ด้านบนเพื่อเพิ่ม`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>else box.innerHTML = `&lt;b&gt;${isCorrect ? "✅ ถูกต้อง" : "❌ ยังไม่ถูก"}&lt;/b&gt; — เฉลย: &lt;b&gt;${correctAnswerLabel(q)}&lt;/b&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>${q.explanation ? `&lt;div class="small" style="margin-top:6px; white-space:pre-wrap;"&gt;${escapeHtml(q.explanation)}&lt;/div&gt;` : ""}`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>panel.querySelector("#revealArea").appendChild(box);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>setTimeout(()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const prevBtn = document.getElementById("prevBtn");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(prevBtn) prevBtn.onclick = ()=&gt; goToIndex(state.quiz.idx-1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const nextBtn = document.getElementById("nextBtn");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(nextBtn) nextBtn.onclick = ()=&gt; goToIndex(state.quiz.idx+1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const reviewBtn = document.getElementById("reviewBtn");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(reviewBtn) reviewBtn.onclick = ()=&gt; startNextRound();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const submitBtn = document.getElementById("submitBtn");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(submitBtn) submitBtn.onclick = ()=&gt; finishQuiz();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},0);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>wrap.appendChild(renderNotepad(exam));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return wrap;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">let notepadOpen = false;</p>
+<p class="p1">function renderNotepad(exam){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const holder = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>holder.style.position = "fixed"; holder.style.right = "16px"; holder.style.bottom = "16px";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>holder.style.zIndex = "50"; holder.style.display = "flex"; holder.style.flexDirection = "column";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>holder.style.alignItems = "flex-end"; holder.style.gap = "8px";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(notepadOpen){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const box = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>box.style.width = "270px"; box.style.maxWidth = "82vw"; box.style.background = "#fffdf8";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>box.style.border = "1px solid var(--line)"; box.style.borderRadius = "10px"; box.style.padding = "10px";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>box.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="flex-between" style="margin-bottom:6px;"&gt;&lt;b class="small"&gt;📝 โน้ต&lt;/b&gt;&lt;button id="notepadCloseBtn" class="btn ghost" style="padding:2px 8px; font-size:.72rem;"&gt;ปิด&lt;/button&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;textarea id="notepadText" rows="7" placeholder="จดคำศัพท์..."&gt;${escapeHtml(exam.notes||"")}&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>holder.appendChild(box);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const btn = document.createElement("button");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>btn.style.background = "var(--clay)"; btn.style.color = "#fff"; btn.style.border = "none";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>btn.style.borderRadius = "50%"; btn.style.width = "48px"; btn.style.height = "48px";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>btn.style.fontSize = "1.25rem"; btn.style.cursor = "pointer"; btn.textContent = notepadOpen ? "✕" : "📝";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>btn.onclick = ()=&gt;{ notepadOpen = !notepadOpen; render(); };</p>
+<p class="p1"><span class="Apple-converted-space">  </span>holder.appendChild(btn);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>setTimeout(()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const cBtn = document.getElementById("notepadCloseBtn");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(cBtn) cBtn.onclick = ()=&gt;{ notepadOpen=false; render(); };</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const ta = document.getElementById("notepadText");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(ta) ta.addEventListener("input", (e)=&gt;{ exam.notes = e.target.value; save(); });</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},0);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return holder;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function finishQuiz(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const exam = findExam(state.quiz.examId).exam;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const rows = (state.quiz.mode === "practice" ? state.quiz.originalOrder : state.quiz.order).map(id=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const q = exam.questions.find(qq=&gt;qq.id===id);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const fa = state.quiz.mode === "practice" ? state.quiz.firstAttempt[id] : null;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const userAns = state.quiz.mode === "practice" ? (fa ? fa.answer : null) : (state.quiz.answers[q.id] || null);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const isCorrect = state.quiz.mode === "practice" ? !!(fa &amp;&amp; fa.correct===true) : isAnswerCorrect(q, userAns);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return {q, userAns, isCorrect};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const keyed = rows.filter(r=&gt;r.q.correct).length;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const correctCount = rows.filter(r=&gt;r.isCorrect).length;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!state.quiz.isReview){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>exam.history = exam.history || {exam:[], practice:[]};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>exam.history[state.quiz.mode] = exam.history[state.quiz.mode] || [];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>exam.history[state.quiz.mode].unshift({date: Date.now(), correctCount, keyed, total: rows.length});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>exam.history[state.quiz.mode] = exam.history[state.quiz.mode].slice(0,20);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>exam.lastFull = exam.lastFull || {};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>exam.lastFull[state.quiz.mode] = { date: Date.now(), rows: rows.map(r=&gt;({qId: r.q.id, userAns: r.userAns})) };</p>
+<p class="p1"><span class="Apple-converted-space">    </span>save();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.lastResult = {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>examId: exam.id, examName: exam.name, mode: state.quiz.mode, isReview: !!state.quiz.isReview,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flaggedIds: (state.quiz.flagged || []).slice(), total: rows.length, keyed, correctCount, rows</p>
+<p class="p1"><span class="Apple-converted-space">  </span>};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>state.activeTab = "result"; render();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">/* ---------------- TAB: result ---------------- */</p>
+<p class="p1">function renderResult(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const wrap = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const r = state.lastResult;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!r){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wrap.innerHTML = `&lt;div class="panel"&gt;&lt;div class="empty"&gt;ยังไม่มีผลคะแนน&lt;/div&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return wrap;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const hero = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>hero.className = "panel score-hero";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const pct = r.keyed&gt;0 ? Math.round((r.correctCount/r.keyed)*100) : 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>hero.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="small"&gt;${escapeHtml(r.examName)} &lt;span class="mode-tag"&gt;${r.mode==="practice" ? "⚡ ฝึก" : "📝 สอบ"}&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="num"&gt;${r.correctCount} / ${r.keyed}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sub"&gt;ตอบถูก ${r.correctCount} จาก ${r.keyed} ข้อที่มีเฉลย (${pct}%)${r.total&gt;r.keyed ? ` · อีก ${r.total-r.keyed} ข้อยังไม่ได้ใส่เฉลย` : ""}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>wrap.appendChild(hero);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const found = findExam(r.examId);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(found &amp;&amp; found.exam.history &amp;&amp; found.exam.history[r.mode] &amp;&amp; found.exam.history[r.mode].length&gt;1){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const histPanel = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>histPanel.className = "panel";</p>
+<p class="p1"><span class="Apple-converted-space">    </span>histPanel.innerHTML = `&lt;h2&gt;ประวัติย้อนหลัง&lt;/h2&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>found.exam.history[r.mode].forEach((h,i)=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const p = h.keyed&gt;0 ? Math.round((h.correctCount/h.keyed)*100) : 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const row = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>row.className = "small"; row.style.padding = "4px 0";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>row.textContent = `${new Date(h.date).toLocaleString("th-TH",{dateStyle:"short", timeStyle:"short"})} — ${h.correctCount}/${h.keyed} (${p}%)`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>histPanel.appendChild(row);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>wrap.appendChild(histPanel);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const list = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>list.className = "panel";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>list.innerHTML = `&lt;h2&gt;เฉลยรายข้อ&lt;/h2&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const wrongQuestionIds = r.rows.filter(({q,userAns,isCorrect})=&gt;q.correct &amp;&amp; userAns &amp;&amp; !isCorrect).map(({q})=&gt;q.id);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>r.rows.forEach(({q,userAns,isCorrect})=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const row = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let cls = "review-row ", badge = `&lt;span class="badge pending"&gt;ไม่มีเฉลย&lt;/span&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(q.correct){</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cls += isCorrect ? "right" : "wrong";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>badge = isCorrect ? `&lt;span class="badge ok"&gt;ถูก&lt;/span&gt;` : `&lt;span class="badge no"&gt;ผิด&lt;/span&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>row.className = cls;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>row.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="flex-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="qnum"&gt;ข้อ ${escapeHtml(q.number)}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;${badge}${wrongQuestionIds.includes(q.id) ? `&lt;label class="small" style="margin:0 0 0 8px; display:inline-flex; align-items:center; gap:4px;"&gt;&lt;input type="checkbox" data-wrong-review="${q.id}" checked style="width:auto;"&gt; ซ้ำ&lt;/label&gt;` : ""}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="margin:6px 0; white-space:pre-wrap;"&gt;${escapeHtml(q.stem)}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="small"&gt;คำตอบของคุณ: &lt;b&gt;${userAns || "—"}&lt;/b&gt;${q.correct ? ` &amp;nbsp;·&amp;nbsp; เฉลย: &lt;b&gt;${correctAnswerLabel(q)}&lt;/b&gt;` : ""}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>${q.explanation ? `&lt;div class="small" style="margin-top:4px;"&gt;เหตุผล: ${escapeHtml(q.explanation)}&lt;/div&gt;` : ""}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>list.appendChild(row);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>wrap.appendChild(list);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const again = document.createElement("div");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>again.className = "panel";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const hasFlagged = r.mode==="exam" &amp;&amp; r.flaggedIds &amp;&amp; r.flaggedIds.length&gt;0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>again.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">    </span>${hasFlagged ? `&lt;p class="small"&gt;มีข้อที่ทำเครื่องหมาย "ไม่ชัวร์" ไว้ ${r.flaggedIds.length} ข้อ&lt;/p&gt;` : ""}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>${hasFlagged ? `&lt;button class="btn danger" id="flaggedReviewBtn"&gt;🔴 ทำข้อที่ไม่ชัวร์ซ้ำ&lt;/button&gt;` : ""}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>${wrongQuestionIds.length ? `&lt;button class="btn clay" id="wrongReviewBtn"&gt;🔁 ทำข้อที่ผิดซ้ำ&lt;/button&gt;` : ""}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn" id="retryExamBtn"&gt;📝 ทำทั้งชุดอีกครั้ง (สอบ)&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="btn clay" id="retryPracticeBtn"&gt;⚡ ทำทั้งชุดอีกครั้ง (ฝึก)&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>wrap.appendChild(again);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>setTimeout(()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("retryExamBtn").onclick = ()=&gt; startQuiz(r.examId, "exam");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById("retryPracticeBtn").onclick = ()=&gt; startQuiz(r.examId, "practice");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const flaggedBtn = document.getElementById("flaggedReviewBtn");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(flaggedBtn) flaggedBtn.onclick = ()=&gt; startFlaggedReview(r.examId, r.flaggedIds);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const wrongBtn = document.getElementById("wrongReviewBtn");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if(wrongBtn) wrongBtn.onclick = ()=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const ids = [...document.querySelectorAll("[data-wrong-review]:checked")].map(el=&gt;el.dataset.wrongReview);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(!ids.length){ alert("เลือกข้อที่ต้องการทำซ้ำอย่างน้อย 1 ข้อ"); return; }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>startWrongReview(r.examId, ids);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>},0);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return wrap;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function escapeHtml(s){ return String(s||"").replace(/[&amp;&lt;&gt;"']/g, c=&gt;({"&amp;":"&amp;amp;","&lt;":"&amp;lt;","&gt;":"&amp;gt;",'"':"&amp;quot;","'":"&amp;#39;"}[c])); }</p>
+<p class="p1">function escapeAttr(s){ return escapeHtml(s); }</p>
+<p class="p2"><br></p>
+<p class="p1">load();</p>
+<p class="p1">render();</p>
+<p class="p1">autoSyncIfEmpty();</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
