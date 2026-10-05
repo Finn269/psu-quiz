@@ -113,7 +113,7 @@
 
 <div class="topbar">
   <h1>EXAM Quiz Builder</h1>
-  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-10-06.2</span>
+  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-10-06.3</span>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -198,7 +198,8 @@ async function extractPdfText(file){
     rows.sort((a,b)=>b.y-a.y).forEach(r=>r.items.sort((a,b)=>a.x-b.x));
     pages.push({
       height: page.getViewport({scale:1}).height,
-      rows: rows.map(r=>({y:r.y, text:r.items.map(i=>i.text).join("").trim()})).filter(r=>r.text)
+      // FIX: ใช้ .join(" ") แทน .join("") เพื่อป้องกันคำติดกันเมื่อ PDF.js ตัดคำแยกช่อง X
+      rows: rows.map(r=>({y:r.y, text:r.items.map(i=>i.text).join(" ").trim()})).filter(r=>r.text)
     });
   }
 
@@ -222,28 +223,25 @@ async function extractPdfText(file){
 
 /* ---------------- parser: text -> questions ---------------- */
 function parseQuestions(text){
-  // 1. ตัดฉับถ้าเจอเลขข้อซ่อนอยู่กลางบรรทัด (ปกติจะมีช่องว่างนำหน้า)
-  text = text.replace(/([^\s\n])[\s\u200B]+(\d{1,3})\s*[\.\)](?=\s*[A-Za-zก-๙0-9"'\(\[\{]|$)/g, "$1\n$2. ");
-  
-  // 2. ตัดฉับถ้าเจอตัวเลือก A-E ซ่อนอยู่กลางบรรทัด (ปกติจะมีช่องว่างนำหน้า)
-  text = text.replace(/([^\s\n])[\s\u200B]+([A-E])\s*[\.\)](?=\s*[A-Za-zก-๙0-9"'\(\[\{]|$)/g, "$1\n$2. ");
-  
-  // 3. กู้ชีพ: กรณีที่ PDF อ่านข้อความติดกันไม่มีช่องว่าง (เช่น ventricles23. หรือหา SVR24.) - ปลอดภัยเพราะเช็กว่าข้างหน้าต้องเป็นตัวพิมพ์เล็กหรือภาษาไทย
-  text = text.replace(/([a-zก-๙])(\d{1,3})\s*[\.\)](?=\s*[A-Za-zก-๙0-9"'\(\[\{]|$)/g, "$1\n$2. ");
-  
-  // 4. กู้ชีพ: กรณีตัวเลือก A-E ติดกับข้อความก่อนหน้า (เช่น 15mmHgA.)
-  text = text.replace(/([a-zก-๙0-9])([A-E])\s*[\.\)](?=\s*[A-Za-zก-๙0-9"'\(\[\{]|$)/g, "$1\n$2. ");
+  // แปลงช่องว่างพิเศษให้เป็นช่องว่างปกติ
+  text = text.replace(/[\u00A0\u200B\r]/g, " ");
+
+  // 1. ตัดฉับเมื่อเจอเลขข้อ (รองรับทั้งแบบมีช่องว่างและแบบติดกันไม่มีช่องว่าง)
+  text = text.replace(/([^\n])\s*(\b\d{1,3})\s*[\.\)](?=\s+[A-Za-zก-๙0-9"'\(\[\{]|$)/g, "$1\n$2. ");
+  text = text.replace(/([a-zก-๙])(\d{1,3})\s*[\.\)](?=\s+[A-Za-zก-๙0-9"'\(\[\{]|$)/g, "$1\n$2. ");
+
+  // 2. ตัดฉับเมื่อเจอตัวเลือก A-E (รองรับทั้งแบบมีช่องว่างและแบบติดกันไม่มีช่องว่าง)
+  text = text.replace(/([^\n])\s*\b([A-E])\s*[\.\)](?=\s+[A-Za-zก-๙0-9"'\(\[\{]|$)/g, "$1\n$2. ");
+  text = text.replace(/([a-zก-๙0-9])([A-E])\s*[\.\)](?=\s+[A-Za-zก-๙0-9"'\(\[\{]|$)/g, "$1\n$2. ");
 
   const lines = text.replace(/\r\n?/g, "\n").split("\n");
   const blocks = [];
   let current = null;
-  // อัปเกรด: รองรับกรณีที่ไม่มีช่องว่างตามหลังจุดเลยก็ยังดึงข้อความได้
   const qStart = /^\s*(\d{1,3})\s*[\.\)]\s*(.*)$/;
   const isMetadata = value => /^(?:ข้อสอบ|นักศึกษา|หมายเหตุ)|(?:คะแนนเต็ม|จำนวนผู้สอบ|ฝ่ายวิชาการ|\bMAX\b|\bMIN\b|\bMEAN\b|\bS\.D\.)/i.test((value||"").trim());
   
   for(const raw of lines){
     const m = raw.match(qStart);
-    // ปรับให้รองรับได้ถึง 400 ข้อเผื่อข้อสอบยาวมาก
     if(m && parseInt(m[1],10) < 400 && !isMetadata(m[2] || "")){
       if(current) blocks.push(current);
       current = {number: m[1], lines:[m[2] || ""]};
@@ -253,7 +251,6 @@ function parseQuestions(text){
   }
   if(current) blocks.push(current);
 
-  // อัปเกรด: รองรับกรณีไม่มีช่องว่างหลังช้อยส์
   const choiceRe = /^\s*([A-E])\s*[\.\)]\s*(.*)$/i;
   const questions = [];
   for(const b of blocks){
@@ -1262,7 +1259,6 @@ function renderQuiz(){
     
     if(isPractice && state.quiz.firstAttempt[q.id]){
       state.quiz.firstAttempt[q.id].correct = q.correct ? isAnswerCorrect(q, state.quiz.firstAttempt[q.id].answer) : null;
-      // Re-evaluate wrongIds in practice mode just in case they fixed the answer
       const isWrong = q.correct && !isAnswerCorrect(q, state.quiz.firstAttempt[q.id].answer);
       const wIdx = state.quiz.wrongIds.indexOf(q.id);
       if (isWrong && wIdx === -1) state.quiz.wrongIds.push(q.id);
@@ -1308,7 +1304,6 @@ function renderQuiz(){
         if(!(q.id in state.quiz.firstAttempt)) state.quiz.firstAttempt[q.id] = {answer: letter, correct: q.correct ? isAnswerCorrect(q, letter) : null};
         if(q.correct && !isAnswerCorrect(q, letter)) state.quiz.wrongIds.push(q.id);
         
-        // Auto-save result immediately on last card for practice mode if ready
         if(state.quiz.idx === state.quiz.order.length-1) {
           finishQuizSilent();
         }
