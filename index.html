@@ -113,7 +113,7 @@
 
 <div class="topbar">
   <h1>EXAM Quiz Builder</h1>
-  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-08-17.6</span>
+  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-10-05.1</span>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -124,18 +124,18 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs
 
 /* ---------------- storage keys ---------------- */
 const PROJECTS_KEY = "psu_quiz_projects_v2";
-const OLD_EXAMS_KEY = "psu_quiz_exams_v1"; // legacy flat format, migrated on first load
+const OLD_EXAMS_KEY = "psu_quiz_exams_v1";
 
 /* ---------------- state ---------------- */
 let state = {
-  projects: [],            // [{id, name, exams:[{id,name,questions:[...]}]}]
+  projects: [],
   activeTab: "import",
-  currentProjectId: null,  // when set, Projects tab shows exams inside this project
-  currentExamId: null,     // for editor tab
-  editReviewOnly: false,   // show only parser/answer-key flagged questions in the editor
+  currentProjectId: null,
+  currentExamId: null,
+  editReviewOnly: false,
   rawText: "",
   parsedPreview: [],
-  quiz: { examId:null, mode:"exam", order:[], idx:0, answers:{}, revealed:false },
+  quiz: { examId:null, mode:"exam", order:[], idx:0, answers:{}, revealed:false, choiceOrder:{} },
   lastResult: null
 };
 
@@ -158,7 +158,6 @@ function load(){
     const rawNew = localStorage.getItem(PROJECTS_KEY);
     if(rawNew){ state.projects = JSON.parse(rawNew); return; }
   }catch(e){}
-  // migrate legacy flat exam list into a default project, if present
   try{
     const rawOld = localStorage.getItem(OLD_EXAMS_KEY);
     if(rawOld){
@@ -186,9 +185,6 @@ async function extractPdfText(file){
   const buf = await file.arrayBuffer();
   const pdf = await pdfjsLib.getDocument({data: buf}).promise;
   const pages = [];
-
-  // Repeated text at the very top/bottom of pages is normally a header or footer,
-  // not part of a question. Remember it before joining pages together.
   for(let p=1;p<=pdf.numPages;p++){
     const page = await pdf.getPage(p);
     const content = await page.getTextContent();
@@ -226,14 +222,15 @@ async function extractPdfText(file){
 
 /* ---------------- parser: text -> questions ---------------- */
 function parseQuestions(text){
-  // Choices may be indented with a TAB and use lowercase a.–e. (as in copied MCQs).
-  // Normalize line endings so the same parser works with text from Windows, macOS, and iOS.
+  // Fix PDF merging issue: Force newline if a number is stuck at the end of a choice line
+  text = text.replace(/([^\s])\s+(\d{1,3}\.\s+[A-Za-zก-๙])/g, "$1\n$2");
+  
   const lines = text.replace(/\r\n?/g, "\n").split("\n");
   const blocks = [];
   let current = null;
-  // PDFs may write a number as "1.", "1 .", or "1.โจทย์".
   const qStart = /^\s*(\d{1,3})\s*[\.\)]\s*(.*\S)\s*$/;
   const isMetadata = value => /^(?:ข้อสอบ|นักศึกษา|หมายเหตุ)|(?:คะแนนเต็ม|จำนวนผู้สอบ|ฝ่ายวิชาการ|\bMAX\b|\bMIN\b|\bMEAN\b|\bS\.D\.)/i.test(value.trim());
+  
   for(const raw of lines){
     const m = raw.match(qStart);
     if(m && parseInt(m[1],10) < 300 && !isMetadata(m[2])){
@@ -245,7 +242,6 @@ function parseQuestions(text){
   }
   if(current) blocks.push(current);
 
-  // \s* includes TAB indentation; the i flag accepts both a.–e. and A.–E.
   const choiceRe = /^\s*([A-E])[\.\)]\s*(.*)$/i;
   const questions = [];
   for(const b of blocks){
@@ -269,8 +265,6 @@ function parseQuestions(text){
     }
     let stem = stemLines.join("\n").trim();
     const choiceCount = Object.values(choices).filter(Boolean).length;
-    // A number with no usable text and no choices is usually PDF noise; do not create
-    // a blank question. If choices exist, keep the item so its original numbering survives.
     if(!stem && choiceCount===0) continue;
     const issues = [];
     if(!stem){
@@ -352,8 +346,6 @@ function parseAnswerKeyFlexible(text){
 /* ---------------- export / import with location choice ---------------- */
 async function exportJSON(data, filename){
   const json = JSON.stringify(data, null, 2);
-
-  // Desktop: native save-file dialog (choose exact folder + filename)
   if(window.showSaveFilePicker){
     try{
       const handle = await window.showSaveFilePicker({
@@ -365,12 +357,9 @@ async function exportJSON(data, filename){
       await writable.close();
       return;
     }catch(e){
-      if(e && e.name === "AbortError") return; // user cancelled
-      // fall through to next method
+      if(e && e.name === "AbortError") return; 
     }
   }
-
-  // iOS / mobile Safari: Web Share sheet lets user "Save to Files" and pick a folder
   try{
     const blob = new Blob([json], {type:"application/json"});
     const file = new File([blob], filename, {type:"application/json"});
@@ -381,8 +370,6 @@ async function exportJSON(data, filename){
   }catch(e){
     if(e && e.name === "AbortError") return;
   }
-
-  // fallback: plain download (goes to default Downloads location)
   const blob = new Blob([json], {type:"application/json"});
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
@@ -390,12 +377,12 @@ async function exportJSON(data, filename){
   a.click();
 }
 
-/* ---------------- GitHub-repo sync (pull data.json hosted alongside index.html) ---------------- */
+/* ---------------- GitHub-repo sync ---------------- */
 async function fetchRemoteData(){
-  const url = "./data.json?t=" + Date.now(); // cache-bust so we always get the latest committed file
+  const url = "./data.json?t=" + Date.now();
   const res = await fetch(url, {cache:"no-store"});
   if(!res.ok){
-    throw new Error(`ไม่พบไฟล์ data.json ใน repo (HTTP ${res.status}) — อัปโหลด data.json ไว้ตำแหน่งเดียวกับ index.html หรือยัง?`);
+    throw new Error(`ไม่พบไฟล์ data.json ใน repo (HTTP ${res.status})`);
   }
   const data = await res.json();
   if(!Array.isArray(data)) throw new Error("รูปแบบไฟล์ data.json ไม่ถูกต้อง");
@@ -417,7 +404,7 @@ function mergeProjectsFromRemote(remoteProjects, mode){
 }
 
 async function autoSyncIfEmpty(){
-  if(state.projects.length > 0) return; // only auto-pull on a fresh/empty device, never overwrite existing data silently
+  if(state.projects.length > 0) return; 
   try{
     const remote = await fetchRemoteData();
     if(remote.length > 0){
@@ -425,12 +412,10 @@ async function autoSyncIfEmpty(){
       save();
       render();
     }
-  }catch(e){
-    // no data.json published yet, or fetch failed — silently ignore, this is just a convenience auto-pull
-  }
+  }catch(e){}
 }
 
-/* ---------------- image attach (per question) ---------------- */
+/* ---------------- image attach ---------------- */
 function compressImageFile(file, maxW){
   return new Promise((resolve, reject)=>{
     const reader = new FileReader();
@@ -725,16 +710,11 @@ function renderProjects(){
     }
     wrap.appendChild(panel);
 
-    // GitHub sync panel
     const sync = document.createElement("div");
     sync.className = "panel";
     sync.innerHTML = `
       <h2>🔄 ซิงก์ข้ามเครื่องผ่าน GitHub</h2>
-      <p class="small">
-        วิธีใช้: กด "ส่งออก data.json" บนเครื่องที่มีข้อมูลล่าสุด → อัปโหลดไฟล์ <code>data.json</code> นั้นเข้า repo เดียวกับ
-        <code>index.html</code> บน GitHub (วางไว้ตำแหน่งเดียวกัน) → แล้วมาเครื่องอื่น กดปุ่ม "ดึงข้อมูลจาก GitHub"
-        ด้านล่าง ระบบจะโหลด <code>data.json</code> ล่าสุดจาก repo มารวมเข้ากับข้อมูลในเครื่องนี้ให้อัตโนมัติ
-      </p>
+      <p class="small">วิธีใช้: กด "ส่งออก data.json" บนเครื่องที่มีข้อมูลล่าสุด → อัปโหลดไฟล์ <code>data.json</code> เข้า repo เดียวกับ <code>index.html</code> บน GitHub → แล้วมาเครื่องอื่น กดปุ่ม "ดึงข้อมูลจาก GitHub"</p>
       <div class="row">
         <button class="btn clay" id="exportAllBtn">📤 ส่งออก data.json</button>
         <button class="btn" id="syncPullBtn">📥 ดึงข้อมูลจาก GitHub</button>
@@ -743,7 +723,6 @@ function renderProjects(){
     `;
     wrap.appendChild(sync);
 
-    // manual backup / restore (separate from the GitHub-sync file)
     const io = document.createElement("div");
     io.className = "panel";
     io.innerHTML = `
@@ -755,7 +734,6 @@ function renderProjects(){
           <input type="file" id="importFile" accept="application/json" style="display:none;">
         </label>
       </div>
-      <p class="small">กด "ส่งออก" แล้วเลือกตำแหน่งที่จะเซฟไฟล์ได้เอง (บน iOS จะเด้งหน้าต่างแชร์ให้เลือก "บันทึกลงใน Files" แล้วเลือกโฟลเดอร์) ข้อมูลทั้งหมดเก็บอยู่ในเบราว์เซอร์นี้เท่านั้น</p>
     `;
     wrap.appendChild(io);
 
@@ -770,48 +748,26 @@ function renderProjects(){
           render();
         }
       };
-      document.getElementById("exportAllBtn").onclick = ()=>{
-        exportJSON(state.projects, "data.json");
-      };
-      document.getElementById("exportBackupBtn").onclick = ()=>{
-        exportJSON(state.projects, "psu_quiz_backup_" + Date.now() + ".json");
-      };
+      document.getElementById("exportAllBtn").onclick = ()=> exportJSON(state.projects, "data.json");
+      document.getElementById("exportBackupBtn").onclick = ()=> exportJSON(state.projects, "psu_quiz_backup_" + Date.now() + ".json");
       document.getElementById("syncPullBtn").onclick = async ()=>{
         const statusEl = document.getElementById("syncStatus");
         statusEl.textContent = "กำลังดึงข้อมูลจาก GitHub...";
         try{
           const remote = await fetchRemoteData();
-          const mergeIt = confirm(
-            `เจอ data.json บน GitHub (${remote.length} โปรเจกต์)\n\n` +
-            `กด OK เพื่อ "รวม" เข้ากับข้อมูลในเครื่องนี้ (โปรเจกต์ id ซ้ำจะถูกอัปเดตทับด้วยเวอร์ชันจาก GitHub)\n` +
-            `กด Cancel เพื่อยกเลิก`
-          );
-          if(mergeIt){
+          if(confirm(`เจอ data.json บน GitHub (${remote.length} โปรเจกต์)\nกด OK เพื่อรวมเข้ากับข้อมูลในเครื่องนี้`)){
             mergeProjectsFromRemote(remote, "merge");
             statusEl.textContent = "ซิงก์สำเร็จ ✅";
-          } else {
-            statusEl.textContent = "ยกเลิกการซิงก์";
-          }
-        }catch(err){
-          statusEl.textContent = "ดึงข้อมูลไม่สำเร็จ: " + err.message;
-        }
+          } else statusEl.textContent = "ยกเลิกการซิงก์";
+        }catch(err){ statusEl.textContent = "ดึงข้อมูลไม่สำเร็จ: " + err.message; }
       };
       document.getElementById("importFile").onchange = async (e)=>{
         const f = e.target.files[0];
         if(!f) return;
-        const text = await f.text();
         try{
-          const data = JSON.parse(text);
-          if(Array.isArray(data) && data.length && data[0].exams){
-            // new project-array format
-            state.projects = state.projects.concat(data);
-          } else if(Array.isArray(data)){
-            // legacy flat exam-array format
-            state.projects.push({id:uid(), name:"นำเข้า " + new Date().toLocaleDateString("th-TH"), exams: data});
-          } else {
-            alert("รูปแบบไฟล์ไม่ถูกต้อง");
-            return;
-          }
+          const data = JSON.parse(await f.text());
+          if(Array.isArray(data) && data.length && data[0].exams) state.projects = state.projects.concat(data);
+          else if(Array.isArray(data)) state.projects.push({id:uid(), name:"นำเข้า "+new Date().toLocaleDateString("th-TH"), exams: data});
           save(); render();
         }catch(err){ alert("ไฟล์ไม่ถูกต้อง: " + err.message); }
       };
@@ -839,7 +795,6 @@ function renderProjects(){
       <h2 style="border:none; margin:0;">📁 ${escapeHtml(project.name)}</h2>
       <button class="btn secondary" id="exportProjBtn">ส่งออกโปรเจกต์นี้ (JSON)</button>
     </div>
-    <p class="small">ชุดข้อสอบทั้งหมดใน "${escapeHtml(project.name)}" — เลือกโหมดทำข้อสอบได้ 2 แบบต่อชุด</p>
   `;
 
   if((project.exams||[]).length===0){
@@ -855,31 +810,34 @@ function renderProjects(){
       const card = document.createElement("div");
       card.className = "card";
       card.innerHTML = `
-        <div>
-          <div class="name">${escapeHtml(ex.name)}</div>
-          <div class="meta">${ex.questions.length} ข้อ · ใส่เฉลยแล้ว ${answered}/${ex.questions.length}</div>
+        <div style="flex:1;">
+          <div class="flex-between">
+            <div class="name">${escapeHtml(ex.name)}</div>
+            <div class="row">
+              <button class="btn ghost" data-act="exportExam" style="padding:2px 8px; font-size:.78rem;" title="ส่งออกชุดนี้เป็นไฟล์แยกต่างหาก">📤 ส่งออกชุดนี้</button>
+              <button class="btn ghost" data-act="rename" style="padding:2px 8px; font-size:.78rem;" title="แก้ชื่อชุดข้อสอบ">✏️ แก้ชื่อ</button>
+              <button class="btn ghost" data-act="moveUp" ${examIndex===0 ? "disabled" : ""} style="padding:2px 8px; font-size:.78rem;">↑</button>
+              <button class="btn ghost" data-act="moveDown" ${examIndex===project.exams.length-1 ? "disabled" : ""} style="padding:2px 8px; font-size:.78rem;">↓</button>
+            </div>
+          </div>
+          <div class="meta" style="margin-top:4px;">${ex.questions.length} ข้อ · ใส่เฉลยแล้ว ${answered}/${ex.questions.length}</div>
           <div class="meta">
-            📝 สอบจริงล่าสุด:
-            ${lastExam
-              ? (hasFullExam ? `<button class="small" data-act="viewExam" style="background:none; border:none; color:var(--teal); text-decoration:underline; cursor:pointer; padding:0; font-family:inherit;">${lastExam.correctCount}/${lastExam.keyed} (ดูอีกครั้ง)</button>` : `${lastExam.correctCount}/${lastExam.keyed}`)
-              : "ยังไม่เคยทำ"}
-            &nbsp;·&nbsp; ⚡ ฝึกล่าสุด:
-            ${lastPractice
-              ? (hasFullPractice ? `<button class="small" data-act="viewPractice" style="background:none; border:none; color:var(--teal); text-decoration:underline; cursor:pointer; padding:0; font-family:inherit;">${lastPractice.correctCount}/${lastPractice.keyed} (ดูอีกครั้ง)</button>` : `${lastPractice.correctCount}/${lastPractice.keyed}`)
-              : "ยังไม่เคยทำ"}
+            📝 สอบจริงล่าสุด: ${lastExam ? (hasFullExam ? `<button class="small" data-act="viewExam" style="background:none; border:none; color:var(--teal); text-decoration:underline; cursor:pointer; padding:0; font-family:inherit;">${lastExam.correctCount}/${lastExam.keyed} (ดูอีกครั้ง)</button>` : `${lastExam.correctCount}/${lastExam.keyed}`) : "ยังไม่เคยทำ"}
+            &nbsp;·&nbsp; ⚡ ฝึกล่าสุด: ${lastPractice ? (hasFullPractice ? `<button class="small" data-act="viewPractice" style="background:none; border:none; color:var(--teal); text-decoration:underline; cursor:pointer; padding:0; font-family:inherit;">${lastPractice.correctCount}/${lastPractice.keyed} (ดูอีกครั้ง)</button>` : `${lastPractice.correctCount}/${lastPractice.keyed}`) : "ยังไม่เคยทำ"}
           </div>
         </div>
-        <div class="row" style="align-items:center;">
-          <label class="small" style="display:flex; align-items:center; gap:4px; margin:0;">
-            <input type="checkbox" id="shuf-${ex.id}" style="width:auto;"> สุ่มข้อ
-          </label>
-          <button class="btn ghost" data-act="rename" title="แก้ชื่อชุดข้อสอบ">✏️ ชื่อ</button>
-          <button class="btn ghost" data-act="moveUp" ${examIndex===0 ? "disabled" : ""} title="เลื่อนขึ้น">↑</button>
-          <button class="btn ghost" data-act="moveDown" ${examIndex===project.exams.length-1 ? "disabled" : ""} title="เลื่อนลง">↓</button>
-          <button class="btn ghost" data-act="edit">แก้ไข/เฉลย</button>
-          <button class="btn" data-act="examMode">📝 โหมดสอบจริง</button>
-          <button class="btn clay" data-act="practiceMode">⚡ โหมดฝึก</button>
-          <button class="btn danger" data-act="del">ลบ</button>
+        <div style="width:100%; border-top:1px dashed var(--line); margin:6px 0;"></div>
+        <div class="row" style="width:100%; justify-content:space-between; align-items:center;">
+          <div class="row" style="gap:14px;">
+            <label class="small" style="display:flex; align-items:center; gap:4px; margin:0;"><input type="checkbox" id="shuf-${ex.id}" style="width:auto;"> สุ่มข้อ</label>
+            <label class="small" style="display:flex; align-items:center; gap:4px; margin:0;"><input type="checkbox" id="shuf-choice-${ex.id}" style="width:auto;"> สุ่มช้อยส์</label>
+          </div>
+          <div class="row">
+            <button class="btn ghost" data-act="edit">แก้ไข/เฉลย</button>
+            <button class="btn" data-act="examMode">📝 สอบจริง</button>
+            <button class="btn clay" data-act="practiceMode">⚡ โหมดฝึก</button>
+            <button class="btn danger" data-act="del" style="padding:4px 8px;">✕</button>
+          </div>
         </div>
       `;
       card.querySelector('[data-act="edit"]').onclick = ()=>{
@@ -887,10 +845,11 @@ function renderProjects(){
       };
       card.querySelector('[data-act="rename"]').onclick = ()=>{
         const name = prompt("ชื่อชุดข้อสอบใหม่", ex.name);
-        if(name===null) return;
-        const trimmed = name.trim();
-        if(!trimmed){ alert("กรุณาใส่ชื่อชุดข้อสอบ"); return; }
-        ex.name = trimmed; save(); render();
+        if(name && name.trim()){ ex.name = name.trim(); save(); render(); }
+      };
+      card.querySelector('[data-act="exportExam"]').onclick = ()=>{
+        const safeName = ex.name.replace(/[^\w\u0E00-\u0E7F\-]+/g,"_");
+        exportJSON([{ id: uid(), name: `Exported: ${ex.name}`, exams: [ex] }], `psu_quiz_exam_${safeName}.json`);
       };
       card.querySelector('[data-act="moveUp"]').onclick = ()=>{
         if(examIndex===0) return;
@@ -903,12 +862,16 @@ function renderProjects(){
         save(); render();
       };
       card.querySelector('[data-act="examMode"]').onclick = ()=>{
-        const shuffle = card.querySelector(`#shuf-${ex.id}`).checked;
-        startQuiz(ex.id, "exam", {shuffle});
+        startQuiz(ex.id, "exam", {
+          shuffle: card.querySelector(`#shuf-${ex.id}`).checked,
+          shuffleChoices: card.querySelector(`#shuf-choice-${ex.id}`).checked
+        });
       };
       card.querySelector('[data-act="practiceMode"]').onclick = ()=>{
-        const shuffle = card.querySelector(`#shuf-${ex.id}`).checked;
-        startQuiz(ex.id, "practice", {shuffle});
+        startQuiz(ex.id, "practice", {
+          shuffle: card.querySelector(`#shuf-${ex.id}`).checked,
+          shuffleChoices: card.querySelector(`#shuf-choice-${ex.id}`).checked
+        });
       };
       card.querySelector('[data-act="del"]').onclick = ()=>{
         if(confirm(`ลบชุดข้อสอบ "${ex.name}" ?`)){
@@ -959,12 +922,12 @@ function renderEdit(){
       <div class="row">
         <label class="small" style="display:flex; align-items:center; gap:6px; margin:0;">
           <input type="checkbox" id="reviewOnlyChk" style="width:auto;" ${state.editReviewOnly ? "checked" : ""}>
-          ⚠️ แสดงเฉพาะข้อที่ต้องตรวจ
+          ⚠ แสดงเฉพาะข้อที่ต้องตรวจ
         </label>
         <button class="btn" id="addQBtn">+ เพิ่มข้อใหม่</button>
       </div>
     </div>
-    <p class="small">แก้คำถาม/ตัวเลือก และเลือก "คำตอบที่ถูก" ของแต่ละข้อ ใส่เหตุผล (rationale) เพิ่มได้ ระบบบันทึกอัตโนมัติทุกครั้งที่แก้ · ${state.editReviewOnly ? `กำลังแสดง ${exam.questions.filter(q=>(q.issues||[]).length || q.answerKeyIssue).length} ข้อที่ต้องตรวจ` : `ทั้งหมด ${exam.questions.length} ข้อ`}</p>
+    <p class="small">แก้คำถาม/ตัวเลือก และเลือก "คำตอบที่ถูก" ของแต่ละข้อ ใส่เหตุผล (rationale) เพิ่มได้ ระบบบันทึกอัตโนมัติทุกครั้งที่แก้</p>
   `;
   wrap.appendChild(head);
 
@@ -972,26 +935,20 @@ function renderEdit(){
   keyPanel.className = "panel";
   keyPanel.innerHTML = `
     <h2>วางเฉลยจาก Claude (หรือรูปแบบอื่น)</h2>
-    <p class="small">
-      ก็อปเฉลยที่ Claude สร้างให้ (ไม่ว่าจะเป็น "1. B" หรือ "ข้อ 1 ตอบ: B เหตุผล: ..." หรือหัวข้อ
-      markdown แบบ "## ข้อ 1" ตามด้วยบรรทัด "คำตอบ: B") มาวางในกล่องด้านล่าง ระบบจะจับคู่กับเลขข้อในชุดนี้ให้อัตโนมัติ —
-      กด "ตรวจสอบ" ดูตัวอย่างก่อน แล้วค่อย "นำเข้าเฉลยทั้งหมด"
-    </p>
+    <p class="small">ก็อปเฉลยที่ Claude สร้างให้มาวางในกล่องด้านล่าง ระบบจะจับคู่กับเลขข้อให้อัตโนมัติ</p>
     <textarea id="keyPasteBox" rows="8" placeholder="วางเฉลยที่นี่..."></textarea>
     <div class="row" style="margin-top:8px;">
       <button class="btn secondary" id="previewKeyBtn">ตรวจสอบ</button>
       <button class="btn clay" id="applyKeyBtn" disabled>นำเข้าเฉลยทั้งหมด</button>
       <label class="small" style="display:flex; align-items:center; gap:6px; margin:0;">
-        <input type="checkbox" id="overwriteChk" checked style="width:auto;"> เขียนทับเฉลย/เหตุผลเดิมถ้ามีอยู่แล้ว
+        <input type="checkbox" id="overwriteChk" checked style="width:auto;"> เขียนทับเฉลย/เหตุผลเดิม
       </label>
     </div>
     <div id="keyPreview"></div>
   `;
   wrap.appendChild(keyPanel);
 
-  const questionsToShow = state.editReviewOnly
-    ? exam.questions.filter(q=>(q.issues||[]).length || q.answerKeyIssue)
-    : exam.questions;
+  const questionsToShow = state.editReviewOnly ? exam.questions.filter(q=>(q.issues||[]).length || q.answerKeyIssue) : exam.questions;
   if(questionsToShow.length===0){
     const empty = document.createElement("div");
     empty.className = "panel";
@@ -1019,7 +976,7 @@ function renderEdit(){
       <label>โจทย์</label>
       <textarea rows="3" data-field="stem">${escapeHtml(q.stem)}</textarea>
 
-      <label style="margin-top:8px;">รูปภาพประกอบ (ถ้ามี เช่น CXR, H&E, EKG)</label>
+      <label style="margin-top:8px;">รูปภาพประกอบ (ถ้ามี)</label>
       <div id="imgArea-${q.id}"></div>
 
       <label style="margin-top:8px;">ตัวเลือก</label>
@@ -1040,20 +997,12 @@ function renderEdit(){
       </div>
     `;
     renderImageArea(card.querySelector(`#imgArea-${q.id}`), q);
-    card.querySelector('[data-field="stem"]').addEventListener("input", (e)=>{
-      q.stem = e.target.value; save();
-    });
+    card.querySelector('[data-field="stem"]').addEventListener("input", (e)=>{ q.stem = e.target.value; save(); });
     card.querySelectorAll('[data-field="choice"]').forEach(inp=>{
-      inp.addEventListener("input", (e)=>{
-        q.choices[e.target.dataset.letter] = e.target.value; save();
-      });
+      inp.addEventListener("input", (e)=>{ q.choices[e.target.dataset.letter] = e.target.value; save(); });
     });
-    card.querySelector('[data-field="correct"]').addEventListener("change", (e)=>{
-      q.correct = e.target.value || null; save();
-    });
-    card.querySelector('[data-field="explanation"]').addEventListener("input", (e)=>{
-      q.explanation = e.target.value; save();
-    });
+    card.querySelector('[data-field="correct"]').addEventListener("change", (e)=>{ q.correct = e.target.value || null; save(); });
+    card.querySelector('[data-field="explanation"]').addEventListener("input", (e)=>{ q.explanation = e.target.value; save(); });
     card.querySelector('[data-act="delQ"]').addEventListener("click", ()=>{
       exam.questions = exam.questions.filter(qq=>qq.id!==q.id);
       save(); render();
@@ -1062,10 +1011,7 @@ function renderEdit(){
   });
 
   setTimeout(()=>{
-    document.getElementById("reviewOnlyChk").onchange = (e)=>{
-      state.editReviewOnly = e.target.checked;
-      render();
-    };
+    document.getElementById("reviewOnlyChk").onchange = (e)=>{ state.editReviewOnly = e.target.checked; render(); };
     document.getElementById("addQBtn").onclick = ()=>{
       const highest = Math.max(0, ...exam.questions.map(q=>parseInt(q.number,10)||0));
       const number = String(highest+1);
@@ -1077,57 +1023,14 @@ function renderEdit(){
     };
 
     document.getElementById("previewKeyBtn").onclick = ()=>{
-      const text = document.getElementById("keyPasteBox").value;
-      const parsed = parseAnswerKeyFlexible(text);
-      const matches = parsed.map(p=>{
-        const q = exam.questions.find(qq=>String(qq.number).trim()===String(p.number).trim());
-        return {...p, q};
-      });
-      // Keep answer-key problems on the question so the editor filter can find them.
+      const parsed = parseAnswerKeyFlexible(document.getElementById("keyPasteBox").value);
+      const matches = parsed.map(p=>({...p, q: exam.questions.find(qq=>String(qq.number).trim()===String(p.number).trim())}));
       exam.questions.forEach(q=>delete q.answerKeyIssue);
-      matches.filter(m=>m.q && !m.letter).forEach(m=>{
-        m.q.answerKeyIssue = "อ่านคำตอบจากเฉลยไม่ได้";
-      });
+      matches.filter(m=>m.q && !m.letter).forEach(m=>{ m.q.answerKeyIssue = "อ่านคำตอบจากเฉลยไม่ได้"; });
       save();
       pendingKeyImport = matches;
       const matchedCount = matches.filter(m=>m.q && m.letter).length;
-      const noLetterCount = matches.filter(m=>m.q && !m.letter).length;
-      const noMatchCount = matches.filter(m=>!m.q).length;
-      const unreadable = matches.filter(m=>m.q && !m.letter);
-      const missingQuestions = matches.filter(m=>!m.q);
-      const box = document.getElementById("keyPreview");
-      let html = `<hr class="sep"><p class="small">
-        พบ ${parsed.length} รายการ — จับคู่และอ่านคำตอบได้ ${matchedCount} ข้อ
-        ${noLetterCount ? ` · เจอเลขข้อแต่อ่านคำตอบไม่ได้ ${noLetterCount} ข้อ` : ""}
-        ${noMatchCount ? ` · ไม่พบเลขข้อนี้ในชุดข้อสอบ ${noMatchCount} รายการ` : ""}
-      </p>`;
-      if(unreadable.length || missingQuestions.length){
-        html += `<div class="review-row wrong"><b>⚠️ รายการที่ยังนำเข้าไม่ได้</b>`;
-        unreadable.forEach(m=>{
-          html += `<div class="small" style="margin-top:6px;"><span class="badge pending">ข้อ ${escapeHtml(m.number)}</span> พบเลขข้อแล้ว แต่ไม่พบคำตอบ A–E — ${escapeHtml(m.explanation || "ตรวจข้อความเฉลยต้นฉบับ")}</div>`;
-        });
-        missingQuestions.forEach(m=>{
-          html += `<div class="small" style="margin-top:6px;"><span class="badge no">ข้อ ${escapeHtml(m.number)}</span> ไม่พบเลขข้อนี้ในชุดข้อสอบ</div>`;
-        });
-        html += `<label class="small" style="display:flex; align-items:center; gap:6px; margin-top:10px;"><input type="checkbox" id="answerIssueFilterChk" style="width:auto;"> ⚠️ เปิดดูเฉพาะข้อที่มีปัญหาในหน้าแก้ไข</label></div>`;
-      }
-      matches.filter(m=>m.q && m.letter).slice(0,8).forEach(m=>{
-        html += `<div class="review-row right">
-          <div class="flex-between"><div class="qnum"><span class="badge ok">ข้อ ${escapeHtml(m.number)} → ${m.letter}</span></div></div>
-          ${m.explanation ? `<div class="small" style="margin-top:4px;">${escapeHtml(m.explanation).slice(0,200)}</div>` : ""}
-        </div>`;
-      });
-      if(matchedCount>8){
-        html += `<div class="small">...และเฉลยที่อ่านได้อีก ${matchedCount-8} ข้อ</div>`;
-      }
-      box.innerHTML = html;
-      const answerIssueFilter = document.getElementById("answerIssueFilterChk");
-      if(answerIssueFilter) answerIssueFilter.onchange = (e)=>{
-        if(!e.target.checked) return;
-        state.editReviewOnly = true;
-        state.activeTab = "edit";
-        render();
-      };
+      document.getElementById("keyPreview").innerHTML = `<hr class="sep"><p class="small">พบ ${parsed.length} รายการ — จับคู่และอ่านคำตอบได้ ${matchedCount} ข้อ</p>`;
       document.getElementById("applyKeyBtn").disabled = matchedCount===0;
     };
 
@@ -1139,15 +1042,10 @@ function renderEdit(){
         if(!m.q || !m.letter) return;
         if(!overwrite && m.q.correct) return;
         m.q.correct = m.letter;
-        if(m.explanation && (overwrite || !m.q.explanation)){
-          m.q.explanation = m.explanation;
-        }
+        if(m.explanation && (overwrite || !m.q.explanation)) m.q.explanation = m.explanation;
         applied++;
       });
-      save();
-      pendingKeyImport = null;
-      alert(`นำเข้าเฉลยแล้ว ${applied} ข้อ`);
-      render();
+      save(); pendingKeyImport = null; alert(`นำเข้าเฉลยแล้ว ${applied} ข้อ`); render();
     };
   },0);
 
@@ -1177,10 +1075,12 @@ function startQuiz(examId, mode, opts={}){
     answers: {},
     revealed: false,
     shuffle: !!opts.shuffle,
+    shuffleChoices: !!opts.shuffleChoices,
+    choiceOrder: {},
     round: 1,
-    wrongIds: [],       // questions answered wrong in the CURRENT round (practice mode)
-    firstAttempt: {},   // qid -> {answer, correct} recorded only on first-ever answer (practice mode scoring)
-    flagged: [],         // qids marked "ไม่ชัวร์" (exam mode)
+    wrongIds: [],
+    firstAttempt: {},
+    flagged: [],
     isReview: false
   };
   state.lastResult = null;
@@ -1191,45 +1091,21 @@ function startQuiz(examId, mode, opts={}){
 function startFlaggedReview(examId, ids){
   const found = findExam(examId);
   if(!found || !ids || ids.length===0) return;
-  state.quiz = {
-    examId, mode: "exam",
-    order: ids.slice(),
-    originalOrder: ids.slice(),
-    idx: 0,
-    answers: {},
-    revealed: false,
-    shuffle: false,
-    round: 1,
-    wrongIds: [],
-    firstAttempt: {},
-    flagged: [],
-    isReview: true
-  };
-  state.lastResult = null;
-  state.activeTab = "quiz";
-  render();
+  state.quiz = Object.assign({}, state.quiz, {
+    examId, mode: "exam", order: ids.slice(), originalOrder: ids.slice(),
+    idx: 0, answers: {}, revealed: false, round: 1, wrongIds: [], firstAttempt: {}, flagged: [], isReview: true
+  });
+  state.lastResult = null; state.activeTab = "quiz"; render();
 }
 
 function startWrongReview(examId, ids){
   const found = findExam(examId);
   if(!found || !ids || ids.length===0) return;
-  state.quiz = {
-    examId, mode: "practice",
-    order: ids.slice(),
-    originalOrder: ids.slice(),
-    idx: 0,
-    answers: {},
-    revealed: false,
-    shuffle: false,
-    round: 1,
-    wrongIds: [],
-    firstAttempt: {},
-    flagged: [],
-    isReview: true
-  };
-  state.lastResult = null;
-  state.activeTab = "quiz";
-  render();
+  state.quiz = Object.assign({}, state.quiz, {
+    examId, mode: "practice", order: ids.slice(), originalOrder: ids.slice(),
+    idx: 0, answers: {}, revealed: false, round: 1, wrongIds: [], firstAttempt: {}, flagged: [], isReview: true
+  });
+  state.lastResult = null; state.activeTab = "quiz"; render();
 }
 
 function viewLastResult(examId, mode){
@@ -1237,33 +1113,22 @@ function viewLastResult(examId, mode){
   if(!found) return;
   const lf = found.exam.lastFull && found.exam.lastFull[mode];
   if(!lf) return;
-  const rows = lf.rows
-    .map(r=>{
-      const q = found.exam.questions.find(qq=>qq.id===r.qId);
-      if(!q) return null;
-      const isCorrect = isAnswerCorrect(q, r.userAns);
-      return {q, userAns: r.userAns, isCorrect};
-    })
-    .filter(Boolean);
-  const keyed = rows.filter(r=>r.q.correct).length;
-  const correctCount = rows.filter(r=>r.isCorrect).length;
+  const rows = lf.rows.map(r=>{
+    const q = found.exam.questions.find(qq=>qq.id===r.qId);
+    return q ? {q, userAns: r.userAns, isCorrect: isAnswerCorrect(q, r.userAns)} : null;
+  }).filter(Boolean);
   state.lastResult = {
-    examId, examName: found.exam.name, mode,
-    isReview: true, flaggedIds: [],
-    total: rows.length, keyed, correctCount, rows
+    examId, examName: found.exam.name, mode, isReview: true, flaggedIds: [],
+    total: rows.length, keyed: rows.filter(r=>r.q.correct).length, correctCount: rows.filter(r=>r.isCorrect).length, rows
   };
-  state.activeTab = "result";
-  render();
+  state.activeTab = "result"; render();
 }
 
 function startNextRound(){
   const ids = Array.from(new Set(state.quiz.wrongIds));
   state.quiz.round += 1;
   state.quiz.order = state.quiz.shuffle ? shuffleArray(ids) : ids;
-  state.quiz.wrongIds = [];
-  state.quiz.idx = 0;
-  state.quiz.revealed = false;
-  render();
+  state.quiz.wrongIds = []; state.quiz.idx = 0; state.quiz.revealed = false; render();
 }
 
 function goToIndex(newIdx){
@@ -1277,38 +1142,46 @@ function renderQuiz(){
   const wrap = document.createElement("div");
   const found = findExam(state.quiz.examId);
   if(!found){
-    const panel = document.createElement("div");
-    panel.className = "panel";
-    panel.innerHTML = `<div class="empty">ยังไม่ได้เลือกชุดข้อสอบ — ไปที่แท็บ "② โปรเจกต์" แล้วเลือกโหมดทำข้อสอบจากชุดที่ต้องการ</div>`;
-    wrap.appendChild(panel);
+    wrap.innerHTML = `<div class="panel"><div class="empty">ยังไม่ได้เลือกชุดข้อสอบ</div></div>`;
     return wrap;
   }
   const {exam} = found;
   const q = exam.questions.find(qq=>qq.id===state.quiz.order[state.quiz.idx]);
-  const total = state.quiz.order.length;
   const isPractice = state.quiz.mode === "practice";
   const revealed = isPractice && state.quiz.revealed;
   const userAns = state.quiz.answers[q.id] || null;
-  const isLast = state.quiz.idx === total-1;
-  const roundTag = isPractice && state.quiz.round>1 ? ` · รอบทบทวนที่ ${state.quiz.round-1}` : "";
   const isFlagged = !isPractice && state.quiz.flagged && state.quiz.flagged.includes(q.id);
 
   const panel = document.createElement("div");
   panel.className = "panel";
   panel.innerHTML = `
     <div class="flex-between" style="align-items:flex-start;">
-      <div class="quiz-progress" style="margin-bottom:0;">${escapeHtml(exam.name)} — ข้อ ${state.quiz.idx+1} / ${total}${roundTag}
-        <span class="mode-tag">${isPractice ? "⚡ โหมดฝึก" : "📝 โหมดสอบจริง"}</span>
-        ${state.quiz.shuffle ? `<span class="mode-tag">🔀 สุ่มข้อ</span>` : ""}
+      <div class="quiz-progress" style="margin-bottom:0;">${escapeHtml(exam.name)} — ข้อ ${state.quiz.idx+1} / ${state.quiz.order.length}
+        <span class="mode-tag">${isPractice ? "⚡ ฝึก" : "📝 สอบ"}</span>
       </div>
-      ${!isPractice ? `
-        <button id="flagBtn" class="btn ${isFlagged ? 'danger' : 'ghost'}" style="border-radius:20px; padding:5px 12px; font-size:.8rem; white-space:nowrap;">
-          ${isFlagged ? "🔴 ไม่ชัวร์" : "⚪ ไม่ชัวร์?"}
-        </button>` : ""
-      }
+      <div class="row" style="gap:6px;">
+        ${!isPractice ? `<button id="flagBtn" class="btn ${isFlagged ? 'danger' : 'ghost'}" style="border-radius:20px; padding:5px 12px; font-size:.8rem;">${isFlagged ? "🔴 ไม่ชัวร์" : "⚪ ไม่ชัวร์?"}</button>` : ""}
+        <button id="quickEditBtn" class="btn secondary" style="border-radius:20px; padding:5px 12px; font-size:.8rem;">✏️ แก้เฉลย</button>
+      </div>
     </div>
+    
+    <div id="quickEditArea" style="display:none; background:#f1ecd8; border:1px solid var(--line); border-radius:8px; padding:12px; margin-top:12px;">
+       <label>คำตอบที่ถูก</label>
+       <select id="quickEditCorrect" style="margin-bottom:8px;">
+         <option value="">— ยังไม่ระบุ —</option>
+         ${["A","B","C","D","E"].map(l=>`<option value="${l}" ${q.correct===l?"selected":""}>${l}</option>`).join("")}
+         <option value="${ALL_CHOICES_CORRECT}" ${q.correct===ALL_CHOICES_CORRECT?"selected":""}>ทุกตัวเลือกถูก</option>
+       </select>
+       <label>เหตุผล / คำอธิบาย (ไม่บังคับ)</label>
+       <textarea id="quickEditExpl" rows="2" style="margin-bottom:8px;">${escapeHtml(q.explanation||"")}</textarea>
+       <div class="row">
+         <button id="quickEditSaveBtn" class="btn" style="padding:6px 12px; font-size:.85rem;">บันทึกเฉลย</button>
+         <button id="quickEditCancelBtn" class="btn ghost" style="padding:6px 12px; font-size:.85rem;">ยกเลิก</button>
+       </div>
+    </div>
+
     ${q.image ? `<img src="${q.image}" style="max-width:100%; border:1px solid var(--line); border-radius:8px; margin:12px 0 14px; display:block;">` : ""}
-    <div class="quiz-q">${escapeHtml(q.number)}. ${escapeHtml(q.stem)}</div>
+    <div class="quiz-q" style="margin-top:14px;">${escapeHtml(q.number)}. ${escapeHtml(q.stem)}</div>
     <div id="choicesArea"></div>
     <div id="revealArea"></div>
     <div class="nav-row">
@@ -1319,35 +1192,45 @@ function renderQuiz(){
   wrap.appendChild(panel);
 
   const flagBtn = panel.querySelector("#flagBtn");
-  if(flagBtn){
-    flagBtn.onclick = ()=>{
-      const i = state.quiz.flagged.indexOf(q.id);
-      if(i>=0) state.quiz.flagged.splice(i,1);
-      else state.quiz.flagged.push(q.id);
-      render();
-    };
-  }
+  if(flagBtn) flagBtn.onclick = ()=>{
+    const i = state.quiz.flagged.indexOf(q.id);
+    if(i>=0) state.quiz.flagged.splice(i,1); else state.quiz.flagged.push(q.id);
+    render();
+  };
+
+  const qeBtn = panel.querySelector("#quickEditBtn");
+  const qeArea = panel.querySelector("#quickEditArea");
+  if(qeBtn) qeBtn.onclick = () => { qeArea.style.display = qeArea.style.display === "none" ? "block" : "none"; };
+  panel.querySelector("#quickEditCancelBtn").onclick = () => { qeArea.style.display = "none"; };
+  panel.querySelector("#quickEditSaveBtn").onclick = () => {
+    q.correct = panel.querySelector("#quickEditCorrect").value || null;
+    q.explanation = panel.querySelector("#quickEditExpl").value;
+    save();
+    if(isPractice && state.quiz.firstAttempt[q.id]){
+      state.quiz.firstAttempt[q.id].correct = q.correct ? isAnswerCorrect(q, state.quiz.firstAttempt[q.id].answer) : null;
+    }
+    render(); 
+  };
 
   const nextSlot = panel.querySelector("#nextSlot");
-  if(!isLast){
+  if(state.quiz.idx < state.quiz.order.length-1){
     nextSlot.innerHTML = `<button class="btn" id="nextBtn">ข้อถัดไป →</button>`;
   } else if(isPractice){
     const wrongCount = new Set(state.quiz.wrongIds).size;
-    // last item of round not yet revealed -> hide nav button until answered, unless already revealed
-    if(revealed || wrongCount>0){
-      nextSlot.innerHTML = wrongCount>0
-        ? `<button class="btn clay" id="reviewBtn">🔁 ทบทวนข้อที่ตอบผิด (${wrongCount} ข้อ)</button>`
-        : `<button class="btn clay" id="submitBtn">ดูผลสรุปทั้งหมด</button>`;
-    } else {
-      nextSlot.innerHTML = `<button class="btn" id="waitBtn" disabled>ตอบข้อนี้ก่อนเพื่อดูสรุป</button>`;
-    }
+    if(revealed || wrongCount>0) nextSlot.innerHTML = wrongCount>0 ? `<button class="btn clay" id="reviewBtn">🔁 ทบทวนข้อที่ตอบผิด (${wrongCount} ข้อ)</button>` : `<button class="btn clay" id="submitBtn">ดูผลสรุป</button>`;
+    else nextSlot.innerHTML = `<button class="btn" disabled>ตอบข้อนี้ก่อน</button>`;
   } else {
-    nextSlot.innerHTML = `<button class="btn clay" id="submitBtn">ส่งคำตอบ / ดูคะแนน</button>`;
+    nextSlot.innerHTML = `<button class="btn clay" id="submitBtn">ส่งคำตอบ</button>`;
   }
 
   const choicesArea = panel.querySelector("#choicesArea");
-  ["A","B","C","D","E"].forEach(letter=>{
-    if(!q.choices[letter]) return;
+  let letters = ["A","B","C","D","E"].filter(l => q.choices[l] && q.choices[l].trim() !== "");
+  if(state.quiz.shuffleChoices) {
+    if(!state.quiz.choiceOrder[q.id]) state.quiz.choiceOrder[q.id] = shuffleArray(letters);
+    letters = state.quiz.choiceOrder[q.id];
+  }
+
+  letters.forEach(letter=>{
     const b = document.createElement("button");
     let cls = "choice-btn";
     if(!revealed && userAns===letter) cls += " selected";
@@ -1361,103 +1244,70 @@ function renderQuiz(){
     b.onclick = ()=>{
       if(isPractice){
         if(state.quiz.revealed) return;
-        state.quiz.answers[q.id] = letter;
-        state.quiz.revealed = true;
-        if(!(q.id in state.quiz.firstAttempt)){
-          state.quiz.firstAttempt[q.id] = {answer: letter, correct: q.correct ? isAnswerCorrect(q, letter) : null};
-        }
-        if(q.correct && !isAnswerCorrect(q, letter)){
-          state.quiz.wrongIds.push(q.id);
-        }
+        state.quiz.answers[q.id] = letter; state.quiz.revealed = true;
+        if(!(q.id in state.quiz.firstAttempt)) state.quiz.firstAttempt[q.id] = {answer: letter, correct: q.correct ? isAnswerCorrect(q, letter) : null};
+        if(q.correct && !isAnswerCorrect(q, letter)) state.quiz.wrongIds.push(q.id);
         render();
       } else {
-        state.quiz.answers[q.id] = letter;
-        render();
+        state.quiz.answers[q.id] = letter; render();
       }
     };
     choicesArea.appendChild(b);
   });
 
   if(revealed){
-    const revealArea = panel.querySelector("#revealArea");
     const isCorrect = isAnswerCorrect(q, userAns);
     const box = document.createElement("div");
     box.className = "reveal-box " + (q.correct ? (isCorrect ? "ok" : "no") : "");
-    if(!q.correct){
-      box.innerHTML = `<b>ยังไม่ได้ใส่เฉลยข้อนี้ไว้</b> — ไปเพิ่มเฉลยได้ที่แท็บ "③ แก้ไข/เฉลย"`;
-    } else {
-      box.innerHTML = `<b>${isCorrect ? "✅ ถูกต้อง" : "❌ ยังไม่ถูก — จะเจอข้อนี้อีกครั้งในรอบทบทวน"}</b> — เฉลย: <b>${correctAnswerLabel(q)}</b>
-        ${q.explanation ? `<div class="small" style="margin-top:6px; white-space:pre-wrap;">${escapeHtml(q.explanation)}</div>` : ""}`;
-    }
-    revealArea.appendChild(box);
+    if(!q.correct) box.innerHTML = `<b>ยังไม่ได้ใส่เฉลยข้อนี้ไว้</b> — กด ✏️ แก้เฉลย ด้านบนเพื่อเพิ่ม`;
+    else box.innerHTML = `<b>${isCorrect ? "✅ ถูกต้อง" : "❌ ยังไม่ถูก"}</b> — เฉลย: <b>${correctAnswerLabel(q)}</b>
+      ${q.explanation ? `<div class="small" style="margin-top:6px; white-space:pre-wrap;">${escapeHtml(q.explanation)}</div>` : ""}`;
+    panel.querySelector("#revealArea").appendChild(box);
   }
 
   setTimeout(()=>{
     const prevBtn = document.getElementById("prevBtn");
-    if(prevBtn) prevBtn.onclick = ()=>{ goToIndex(state.quiz.idx-1); };
+    if(prevBtn) prevBtn.onclick = ()=> goToIndex(state.quiz.idx-1);
     const nextBtn = document.getElementById("nextBtn");
-    if(nextBtn) nextBtn.onclick = ()=>{ goToIndex(state.quiz.idx+1); };
+    if(nextBtn) nextBtn.onclick = ()=> goToIndex(state.quiz.idx+1);
     const reviewBtn = document.getElementById("reviewBtn");
-    if(reviewBtn) reviewBtn.onclick = ()=>{ startNextRound(); };
+    if(reviewBtn) reviewBtn.onclick = ()=> startNextRound();
     const submitBtn = document.getElementById("submitBtn");
-    if(submitBtn) submitBtn.onclick = ()=>{ finishQuiz(); };
+    if(submitBtn) submitBtn.onclick = ()=> finishQuiz();
   },0);
 
   wrap.appendChild(renderNotepad(exam));
-
   return wrap;
 }
 
-/* ---------------- floating per-exam notepad ---------------- */
 let notepadOpen = false;
 function renderNotepad(exam){
   const holder = document.createElement("div");
-  holder.style.position = "fixed";
-  holder.style.right = "16px";
-  holder.style.bottom = "16px";
-  holder.style.zIndex = "50";
-  holder.style.display = "flex";
-  holder.style.flexDirection = "column";
-  holder.style.alignItems = "flex-end";
-  holder.style.gap = "8px";
+  holder.style.position = "fixed"; holder.style.right = "16px"; holder.style.bottom = "16px";
+  holder.style.zIndex = "50"; holder.style.display = "flex"; holder.style.flexDirection = "column";
+  holder.style.alignItems = "flex-end"; holder.style.gap = "8px";
 
   if(notepadOpen){
     const box = document.createElement("div");
-    box.style.width = "270px";
-    box.style.maxWidth = "82vw";
-    box.style.background = "#fffdf8";
-    box.style.border = "1px solid var(--line)";
-    box.style.borderRadius = "10px";
-    box.style.padding = "10px";
-    box.style.boxShadow = "0 6px 18px rgba(0,0,0,.18)";
+    box.style.width = "270px"; box.style.maxWidth = "82vw"; box.style.background = "#fffdf8";
+    box.style.border = "1px solid var(--line)"; box.style.borderRadius = "10px"; box.style.padding = "10px";
     box.innerHTML = `
-      <div class="flex-between" style="margin-bottom:6px;">
-        <b class="small">📝 โน้ต — ${escapeHtml(exam.name)}</b>
-        <button id="notepadCloseBtn" class="btn ghost" style="padding:2px 8px; font-size:.72rem;">ปิด</button>
-      </div>
-      <textarea id="notepadText" rows="7" placeholder="จดคำศัพท์ / จุดที่ไม่เข้าใจของข้อสอบชุดนี้...">${escapeHtml(exam.notes||"")}</textarea>
-      <div class="small" style="margin-top:4px;">บันทึกอัตโนมัติ · แยกเก็บเฉพาะชุดนี้</div>
+      <div class="flex-between" style="margin-bottom:6px;"><b class="small">📝 โน้ต</b><button id="notepadCloseBtn" class="btn ghost" style="padding:2px 8px; font-size:.72rem;">ปิด</button></div>
+      <textarea id="notepadText" rows="7" placeholder="จดคำศัพท์...">${escapeHtml(exam.notes||"")}</textarea>
     `;
     holder.appendChild(box);
   }
 
-  const toggleBtn = document.createElement("button");
-  toggleBtn.style.background = "var(--clay)";
-  toggleBtn.style.color = "#fff";
-  toggleBtn.style.border = "none";
-  toggleBtn.style.borderRadius = "50%";
-  toggleBtn.style.width = "48px";
-  toggleBtn.style.height = "48px";
-  toggleBtn.style.fontSize = "1.25rem";
-  toggleBtn.style.cursor = "pointer";
-  toggleBtn.style.boxShadow = "0 4px 12px rgba(0,0,0,.2)";
-  toggleBtn.textContent = notepadOpen ? "✕" : "📝";
-  toggleBtn.onclick = ()=>{ notepadOpen = !notepadOpen; render(); };
-  holder.appendChild(toggleBtn);
+  const btn = document.createElement("button");
+  btn.style.background = "var(--clay)"; btn.style.color = "#fff"; btn.style.border = "none";
+  btn.style.borderRadius = "50%"; btn.style.width = "48px"; btn.style.height = "48px";
+  btn.style.fontSize = "1.25rem"; btn.style.cursor = "pointer"; btn.textContent = notepadOpen ? "✕" : "📝";
+  btn.onclick = ()=>{ notepadOpen = !notepadOpen; render(); };
+  holder.appendChild(btn);
 
   setTimeout(()=>{
-    const closeBtn = document.getElementById("notepadCloseBtn");
-    if(closeBtn) closeBtn.onclick = ()=>{ notepadOpen=false; render(); };
+    const cBtn = document.getElementById("notepadCloseBtn");
+    if(cBtn) cBtn.onclick = ()=>{ notepadOpen=false; render(); };
     const ta = document.getElementById("notepadText");
     if(ta) ta.addEventListener("input", (e)=>{ exam.notes = e.target.value; save(); });
   },0);
@@ -1466,57 +1316,32 @@ function renderNotepad(exam){
 }
 
 function finishQuiz(){
-  const found = findExam(state.quiz.examId);
-  const exam = found.exam;
-  let rows, correctCount, keyed, total;
-
-  if(state.quiz.mode === "practice"){
-    // score reflects the FIRST time each question was answered, not repeat-review rounds
-    rows = state.quiz.originalOrder.map(id=>{
-      const q = exam.questions.find(qq=>qq.id===id);
-      const fa = state.quiz.firstAttempt[id];
-      const userAns = fa ? fa.answer : null;
-      const isCorrect = !!(fa && fa.correct === true);
-      return {q, userAns, isCorrect};
-    });
-  } else {
-    rows = state.quiz.order.map(id=>{
-      const q = exam.questions.find(qq=>qq.id===id);
-      const userAns = state.quiz.answers[q.id] || null;
-      const isCorrect = isAnswerCorrect(q, userAns);
-      return {q, userAns, isCorrect};
-    });
-  }
-  keyed = rows.filter(r=>r.q.correct).length;
-  correctCount = rows.filter(r=>r.isCorrect).length;
-  total = rows.length;
+  const exam = findExam(state.quiz.examId).exam;
+  const rows = (state.quiz.mode === "practice" ? state.quiz.originalOrder : state.quiz.order).map(id=>{
+    const q = exam.questions.find(qq=>qq.id===id);
+    const fa = state.quiz.mode === "practice" ? state.quiz.firstAttempt[id] : null;
+    const userAns = state.quiz.mode === "practice" ? (fa ? fa.answer : null) : (state.quiz.answers[q.id] || null);
+    const isCorrect = state.quiz.mode === "practice" ? !!(fa && fa.correct===true) : isAnswerCorrect(q, userAns);
+    return {q, userAns, isCorrect};
+  });
+  const keyed = rows.filter(r=>r.q.correct).length;
+  const correctCount = rows.filter(r=>r.isCorrect).length;
 
   if(!state.quiz.isReview){
     exam.history = exam.history || {exam:[], practice:[]};
     exam.history[state.quiz.mode] = exam.history[state.quiz.mode] || [];
-    exam.history[state.quiz.mode].unshift({date: Date.now(), correctCount, keyed, total});
+    exam.history[state.quiz.mode].unshift({date: Date.now(), correctCount, keyed, total: rows.length});
     exam.history[state.quiz.mode] = exam.history[state.quiz.mode].slice(0,20);
-
-    // persist full per-question snapshot so this exact result can be reopened later ("ดูอีกครั้ง")
     exam.lastFull = exam.lastFull || {};
-    exam.lastFull[state.quiz.mode] = {
-      date: Date.now(),
-      rows: rows.map(r=>({qId: r.q.id, userAns: r.userAns}))
-    };
+    exam.lastFull[state.quiz.mode] = { date: Date.now(), rows: rows.map(r=>({qId: r.q.id, userAns: r.userAns})) };
     save();
   }
 
   state.lastResult = {
-    examId: exam.id,
-    examName: exam.name,
-    mode: state.quiz.mode,
-    isReview: !!state.quiz.isReview,
-    flaggedIds: (state.quiz.flagged || []).slice(),
-    total, keyed, correctCount,
-    rows
+    examId: exam.id, examName: exam.name, mode: state.quiz.mode, isReview: !!state.quiz.isReview,
+    flaggedIds: (state.quiz.flagged || []).slice(), total: rows.length, keyed, correctCount, rows
   };
-  state.activeTab = "result";
-  render();
+  state.activeTab = "result"; render();
 }
 
 /* ---------------- TAB: result ---------------- */
@@ -1524,16 +1349,16 @@ function renderResult(){
   const wrap = document.createElement("div");
   const r = state.lastResult;
   if(!r){
-    wrap.innerHTML = `<div class="panel"><div class="empty">ยังไม่มีผลคะแนน — ไปทำข้อสอบที่แท็บ "④ ทำข้อสอบ" ก่อน</div></div>`;
+    wrap.innerHTML = `<div class="panel"><div class="empty">ยังไม่มีผลคะแนน</div></div>`;
     return wrap;
   }
   const hero = document.createElement("div");
   hero.className = "panel score-hero";
   const pct = r.keyed>0 ? Math.round((r.correctCount/r.keyed)*100) : 0;
   hero.innerHTML = `
-    <div class="small">${escapeHtml(r.examName)} <span class="mode-tag">${r.mode==="practice" ? "⚡ โหมดฝึก" : "📝 โหมดสอบจริง"}</span></div>
+    <div class="small">${escapeHtml(r.examName)} <span class="mode-tag">${r.mode==="practice" ? "⚡ ฝึก" : "📝 สอบ"}</span></div>
     <div class="num">${r.correctCount} / ${r.keyed}</div>
-    <div class="sub">ตอบถูก ${r.correctCount} จาก ${r.keyed} ข้อที่มีเฉลย (${pct}%)${r.total>r.keyed ? ` · อีก ${r.total-r.keyed} ข้อยังไม่ได้ใส่เฉลยไว้ ระบบไม่นับคะแนน` : ""}</div>
+    <div class="sub">ตอบถูก ${r.correctCount} จาก ${r.keyed} ข้อที่มีเฉลย (${pct}%)${r.total>r.keyed ? ` · อีก ${r.total-r.keyed} ข้อยังไม่ได้ใส่เฉลย` : ""}</div>
   `;
   wrap.appendChild(hero);
 
@@ -1541,13 +1366,11 @@ function renderResult(){
   if(found && found.exam.history && found.exam.history[r.mode] && found.exam.history[r.mode].length>1){
     const histPanel = document.createElement("div");
     histPanel.className = "panel";
-    histPanel.innerHTML = `<h2>ประวัติการทำ${r.mode==="practice" ? "โหมดฝึก" : "โหมดสอบจริง"} (ชุดนี้)</h2>`;
+    histPanel.innerHTML = `<h2>ประวัติย้อนหลัง</h2>`;
     found.exam.history[r.mode].forEach((h,i)=>{
       const p = h.keyed>0 ? Math.round((h.correctCount/h.keyed)*100) : 0;
       const row = document.createElement("div");
-      row.className = "small";
-      row.style.padding = "4px 0";
-      row.style.borderBottom = i < found.exam.history[r.mode].length-1 ? "1px solid var(--line)" : "none";
+      row.className = "small"; row.style.padding = "4px 0";
       row.textContent = `${new Date(h.date).toLocaleString("th-TH",{dateStyle:"short", timeStyle:"short"})} — ${h.correctCount}/${h.keyed} (${p}%)`;
       histPanel.appendChild(row);
     });
@@ -1557,13 +1380,10 @@ function renderResult(){
   const list = document.createElement("div");
   list.className = "panel";
   list.innerHTML = `<h2>เฉลยรายข้อ</h2>`;
-  const wrongQuestionIds = r.rows
-    .filter(({q,userAns,isCorrect})=>q.correct && userAns && !isCorrect)
-    .map(({q})=>q.id);
+  const wrongQuestionIds = r.rows.filter(({q,userAns,isCorrect})=>q.correct && userAns && !isCorrect).map(({q})=>q.id);
   r.rows.forEach(({q,userAns,isCorrect})=>{
     const row = document.createElement("div");
-    let cls = "review-row ";
-    let badge = `<span class="badge pending">ไม่มีเฉลย</span>`;
+    let cls = "review-row ", badge = `<span class="badge pending">ไม่มีเฉลย</span>`;
     if(q.correct){
       cls += isCorrect ? "right" : "wrong";
       badge = isCorrect ? `<span class="badge ok">ถูก</span>` : `<span class="badge no">ผิด</span>`;
@@ -1572,11 +1392,10 @@ function renderResult(){
     row.innerHTML = `
       <div class="flex-between">
         <div class="qnum">ข้อ ${escapeHtml(q.number)}</div>
-        <div>${badge}${wrongQuestionIds.includes(q.id) ? `<label class="small" style="margin:0 0 0 8px; display:inline-flex; align-items:center; gap:4px;"><input type="checkbox" data-wrong-review="${q.id}" checked style="width:auto;"> เลือกทำซ้ำ</label>` : ""}</div>
+        <div>${badge}${wrongQuestionIds.includes(q.id) ? `<label class="small" style="margin:0 0 0 8px; display:inline-flex; align-items:center; gap:4px;"><input type="checkbox" data-wrong-review="${q.id}" checked style="width:auto;"> ซ้ำ</label>` : ""}</div>
       </div>
-      ${q.image ? `<img src="${q.image}" style="max-width:100%; max-height:220px; border:1px solid var(--line); border-radius:6px; margin:6px 0; display:block;">` : ""}
       <div style="margin:6px 0; white-space:pre-wrap;">${escapeHtml(q.stem)}</div>
-      <div class="small">คำตอบของคุณ: <b>${userAns || "— ไม่ได้ตอบ —"}</b>${q.correct ? ` &nbsp;·&nbsp; เฉลย: <b>${correctAnswerLabel(q)}</b>` : ""}</div>
+      <div class="small">คำตอบของคุณ: <b>${userAns || "—"}</b>${q.correct ? ` &nbsp;·&nbsp; เฉลย: <b>${correctAnswerLabel(q)}</b>` : ""}</div>
       ${q.explanation ? `<div class="small" style="margin-top:4px;">เหตุผล: ${escapeHtml(q.explanation)}</div>` : ""}
     `;
     list.appendChild(row);
@@ -1587,15 +1406,16 @@ function renderResult(){
   again.className = "panel";
   const hasFlagged = r.mode==="exam" && r.flaggedIds && r.flaggedIds.length>0;
   again.innerHTML = `
-    ${hasFlagged ? `<p class="small">คุณทำเครื่องหมาย "ไม่ชัวร์" ไว้ ${r.flaggedIds.length} ข้อระหว่างทำ</p>` : ""}
+    ${hasFlagged ? `<p class="small">มีข้อที่ทำเครื่องหมาย "ไม่ชัวร์" ไว้ ${r.flaggedIds.length} ข้อ</p>` : ""}
     <div class="row">
-      ${hasFlagged ? `<button class="btn danger" id="flaggedReviewBtn">🔴 ทำข้อที่ติ๊กไว้ใหม่ (${r.flaggedIds.length} ข้อ)</button>` : ""}
-      ${wrongQuestionIds.length ? `<button class="btn clay" id="wrongReviewBtn">🔁 ทำข้อที่เลือกซ้ำ (${wrongQuestionIds.length} ข้อ)</button>` : ""}
-      <button class="btn" id="retryExamBtn">📝 ทำชุดนี้อีกครั้ง (สอบจริง)</button>
-      <button class="btn clay" id="retryPracticeBtn">⚡ ทำชุดนี้อีกครั้ง (ฝึก)</button>
+      ${hasFlagged ? `<button class="btn danger" id="flaggedReviewBtn">🔴 ทำข้อที่ไม่ชัวร์ซ้ำ</button>` : ""}
+      ${wrongQuestionIds.length ? `<button class="btn clay" id="wrongReviewBtn">🔁 ทำข้อที่ผิดซ้ำ</button>` : ""}
+      <button class="btn" id="retryExamBtn">📝 ทำทั้งชุดอีกครั้ง (สอบ)</button>
+      <button class="btn clay" id="retryPracticeBtn">⚡ ทำทั้งชุดอีกครั้ง (ฝึก)</button>
     </div>
   `;
   wrap.appendChild(again);
+
   setTimeout(()=>{
     document.getElementById("retryExamBtn").onclick = ()=> startQuiz(r.examId, "exam");
     document.getElementById("retryPracticeBtn").onclick = ()=> startQuiz(r.examId, "practice");
@@ -1612,13 +1432,9 @@ function renderResult(){
   return wrap;
 }
 
-/* ---------------- helpers ---------------- */
-function escapeHtml(s){
-  return String(s||"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-}
+function escapeHtml(s){ return String(s||"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 function escapeAttr(s){ return escapeHtml(s); }
 
-/* ---------------- boot ---------------- */
 load();
 render();
 autoSyncIfEmpty();
