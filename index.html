@@ -184,6 +184,11 @@
   .pick{display:flex; gap:8px; align-items:flex-start; padding:11px 14px; margin-bottom:8px; border:1px solid var(--line); border-radius:var(--radius); cursor:pointer; line-height:1.5; font-size:16px; color:var(--text); margin-bottom:8px;}
   .pick input{width:auto; margin-top:5px;}
   .pick.on{border-color:var(--blue); background:var(--blue-soft);}
+  .opinions{margin:12px 0;}
+  .op{display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:8px 12px; border-radius:10px; margin:6px 0; background:var(--bg); font-size:15px;}
+  .op.diff{background:#fff4e0;}
+  .op.agree{background:var(--good-soft);}
+  .op button{padding:4px 12px; font-size:14px;}
   @media (max-width:640px){
     body{font-size:16px;}
     .topbar{padding:12px 18px;}
@@ -204,7 +209,7 @@
 
 <div class="topbar">
   <h1>EXAM Quiz Builder</h1>
-  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-11-03.3</span>
+  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-11-03.4</span>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -822,6 +827,11 @@ function renderReviewCard(ex, q){
     ? `<div class="small">ภาพจากไฟล์ต้นฉบับ (ไฟล์เฉลยก่อน):</div>` + crops.map(s=>`<img class="crop" loading="lazy" src="${escapeAttr(s)}" alt="ภาพโจทย์ต้นฉบับ">`).join("")
     : "";
   const reasons = (q.reasons||[]).map(r=>`<li>${escapeHtml(r)}</li>`).join("");
+  const OPL = {file:"ไฟล์เฉลย", ai:"AI", lecture:"Lecture", cross_cohort:"ข้อซ้ำรุ่นอื่น"};
+  const opsHtml = (q.opinions||[]).length>1 ? `<div class="opinions"><div class="small">ความเห็นแต่ละฝั่ง (กด "เลือก" เพื่อใช้คำตอบนั้น):</div>` +
+    q.opinions.map(o=>`<div class="op ${o.agree?"agree":"diff"}"><b>${escapeHtml(OPL[o.source]||o.source)}</b> → ${escapeHtml(o.letter||"-")}
+      <span class="small">${escapeHtml(o.reason||"")}${/^https?:/.test(o.ref||"")?` <a href="${escapeAttr(o.ref)}" target="_blank" rel="noopener">ดูอ้างอิง</a>`:""}</span>
+      ${o.letter?`<button class="btn ghost op-pick" data-l="${escapeAttr(o.letter)}">เลือก ${escapeHtml(o.letter)}</button>`:""}</div>`).join("") + `</div>` : "";
   const picked = (d && d.correct) || sug || "";
   const choiceHtml = Object.keys(q.choices).map(k=>`
     <label class="pick ${picked===k?"on":""}">
@@ -831,6 +841,7 @@ function renderReviewCard(ex, q){
   card.innerHTML = `
     <div class="flex-between"><h2 style="margin:0">ข้อ ${escapeHtml(q.number)}</h2><div>${statusBadge(st)}${d?` <span class="badge pending">ฉันตัดสิน</span>`:""}</div></div>
     ${reasons ? `<ul class="reasons">${reasons}</ul>` : ""}
+    ${opsHtml}
     ${q.evidence ? `<div class="small">หลักฐานจากไฟล์เฉลย: “${escapeHtml(q.evidence)}”</div>` : ""}
     <div class="quiz-q" style="margin-top:14px">${escapeHtml(q.stem)}</div>
     ${imgs}
@@ -841,6 +852,10 @@ function renderReviewCard(ex, q){
       <button class="btn danger" data-act="no">🚫 ใช้ไม่ได้</button>
       ${d ? `<button class="btn ghost" data-act="undo">↩ ล้างการตัดสิน</button>` : ""}
     </div>`;
+  card.querySelectorAll(".op-pick").forEach(b=>b.onclick = ()=>{
+    const r = card.querySelector('input[type=radio][value="'+b.dataset.l+'"]');
+    if(r){ r.checked = true; r.dispatchEvent(new Event("change")); }
+  });
   const chosen = ()=>{ const r = card.querySelector('input[type=radio]:checked'); return r ? r.value : null; };
   card.querySelectorAll('input[type=radio]').forEach(r=>r.onchange = ()=>{
     card.querySelectorAll(".pick").forEach(x=>x.classList.remove("on")); r.closest(".pick").classList.add("on");

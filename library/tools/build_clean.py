@@ -28,6 +28,8 @@ CLEAN = ROOT / "library" / "clean"
 IMAGES = ROOT / "library" / "images"
 DECISIONS = ROOT / "library" / "decisions"
 EVIDENCE = ROOT / "library" / "evidence"
+OPINIONS = ROOT / "library" / "opinions"
+OP_LABEL = {"file": "ไฟล์เฉลย", "ai": "AI", "lecture": "Lecture", "cross_cohort": "ข้อซ้ำรุ่นอื่น"}
 LETTERS = "ABCDE"
 PLACEHOLDERS = {"", "-", "—", "–"}
 IMAGE_HINT = re.compile(
@@ -101,6 +103,16 @@ def build(block, cohort, typ="MCQ", year_group=None, question_pdf=None, key_pdf=
     dpath = DECISIONS / f"{slug}.json"
     if dpath.exists():
         decisions = json.loads(dpath.read_text(encoding="utf-8"))
+
+    # ความเห็นจากแหล่งอื่น (AI / Lecture): library/opinions/<ชื่อ>.<แหล่ง>.json
+    ext, ext_reviewed = {}, {}
+    for f in sorted(OPINIONS.glob(f"{slug}.*.json")):
+        d = json.loads(f.read_text(encoding="utf-8"))
+        src = d.get("source") or f.stem.split(".")[-1]
+        ext_reviewed.setdefault(src, set()).update(str(x) for x in d.get("reviewed", []))
+        for num, o in (d.get("opinions") or {}).items():
+            ext.setdefault(str(num), []).append({"source": src, "letter": o.get("letter"),
+                                                  "reason": o.get("reason", ""), "ref": o.get("ref", "")})
 
     questions, counts = [], {"verified": 0, "quick_check": 0, "review": 0, "rejected": 0}
     for r in base:
@@ -189,6 +201,18 @@ def build(block, cohort, typ="MCQ", year_group=None, question_pdf=None, key_pdf=
                 entry["correct"] = d.get("correct") or entry["correct"]
                 entry["status"] = "verified"
                 entry["key_source"] = "manual"
+        file_letter = correct if source else None
+        ops = []
+        if file_letter:
+            ops.append({"source": "file", "letter": file_letter,
+                        "reason": {"highlight": "ไฮไลต์ในไฟล์เฉลย", "text": "คำอธิบายในไฟล์เฉลย",
+                                   "text-implied": "คำอธิบายในไฟล์เฉลย (ตีความ)"}.get(source, "")})
+        ops += ext.get(n, [])
+        for src, rv in ext_reviewed.items():
+            if n in rv and file_letter and not any(o["source"] == src for o in ops):
+                ops.append({"source": src, "letter": file_letter, "reason": "เห็นด้วยกับเฉลยในไฟล์"})
+        entry["opinions"] = ops
+        entry["base_status"] = entry["status"]
         counts[entry["status"]] += 1
         questions.append(entry)
 
@@ -215,23 +239,39 @@ def build_index():
     exams, groups = [], {}
     files = sorted(p for p in CLEAN.glob("*.json") if p.name != "index.json")
     data = {p: json.loads(p.read_text(encoding="utf-8")) for p in files}
+    # ล้างผลที่ index รอบก่อนเติมไว้ (ให้รันซ้ำได้ ผลเหมือนเดิม)
+    for ex in data.values():
+        for q in ex["questions"]:
+            q["status"] = q.get("base_status", q["status"])
+            q["opinions"] = [o for o in q.get("opinions", []) if o["source"] != "cross_cohort"]
+            q["reasons"] = [r for r in q.get("reasons", []) if not r.startswith("มีความเห็นต่าง")]
+            q.pop("duplicate_of", None); q.pop("duplicate_group_size", None)
     for p, ex in data.items():
         for q in ex["questions"]:
             key = norm(q["stem"]) + "|" + "|".join(norm(q["choices"].get(L, "")) for L in LETTERS)
-            groups.setdefault(key, []).append((p, q))
+            groups.setdefault(key, []).append(q)
     dup = 0
     for members in groups.values():
         if len(members) < 2:
             continue
-        first = members[0][1]
-        letters = {m[1]["correct"] for m in members if m[1]["correct"]}
-        for _, q in members:
-            q["duplicate_of"] = first["id"] if q is not first else None
+        for q in members:
+            q["duplicate_of"] = members[0]["id"] if q is not members[0] else None
             q["duplicate_group_size"] = len(members)
-            if len(letters) > 1 and q["status"] in ("verified", "quick_check"):
-                q["status"] = "review"
-                q.setdefault("reasons", []).append("ข้อเดียวกันซ้ำในหลายชุด แต่เฉลยไม่ตรงกัน")
+            for o in members:
+                if o is not q and o.get("correct"):
+                    q["opinions"].append({"source": "cross_cohort", "letter": o["correct"],
+                                          "reason": "ข้อเดียวกันในชุด " + o["id"], "ref": o["id"]})
         dup += len(members) - 1
+    # ความเห็นไม่ตรง -> ต้องตรวจ (ยกเว้นคนตัดสินแล้ว)
+    for p, ex in data.items():
+        for q in ex["questions"]:
+            for o in q["opinions"]:
+                o["agree"] = o.get("letter") == q.get("correct")
+            diff = [o for o in q["opinions"] if o["source"] != "file" and o.get("letter") and q.get("correct") and not o["agree"]]
+            q["dispute"] = bool(diff)
+            if diff and q.get("key_source") != "manual" and q["status"] in ("verified", "quick_check"):
+                q["status"] = "review"
+                q["reasons"].append("มีความเห็นต่าง: " + ", ".join(f"{OP_LABEL.get(o['source'], o['source'])} ชี้ {o['letter']}" for o in diff))
     for p, ex in data.items():
         c = {"verified": 0, "quick_check": 0, "review": 0, "rejected": 0}
         for q in ex["questions"]:

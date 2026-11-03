@@ -9,9 +9,9 @@
    "name": "Respiratory PSU 52 MCQ",
    "file": "library/clean/respiratory-52-mcq.json",
    "counts": {
-    "verified": 77,
+    "verified": 74,
     "quick_check": 0,
-    "review": 0,
+    "review": 3,
     "rejected": 3
    },
    "total": 80
