@@ -11,3 +11,9 @@
 - Use plain everyday Thai that anyone can understand. Avoid technical jargon, or explain it in simple words when it is needed.
 - Keep answers very short to save tokens: max ~6 lines or a few bullets. No long intros, no repeating what was done, no option lists unless asked.
 - Do not narrate each tool step. Report only the result and the one thing needed from the user.
+
+## Library (clean exam bank)
+- Pipeline lives in `library/` (see `library/README.md`). PDFs go in `library/raw/<Block>/<cohort>/MCQ.pdf` and `MCQ-key.pdf`; run `python3 library/tools/build_clean.py --all`.
+- Never guess an answer key. Correct answer comes only from highlight/text in the key file, or from a human decision (`library/decisions/`).
+- Only questions with status `verified` are used for quizzes. After changing `library/tools/`, run `python3 library/tools/selftest.py`.
+- The web app reads `library/clean/index.json`, so it must be served over http (GitHub Pages or `python3 -m http.server`).

@@ -1,0 +1,20 @@
+{
+ "exams": [
+  {
+   "id": "respiratory-52-mcq",
+   "block": "Respiratory",
+   "year_group": 2,
+   "cohort": "52",
+   "type": "MCQ",
+   "name": "Respiratory PSU 52 MCQ",
+   "file": "library/clean/respiratory-52-mcq.json",
+   "counts": {
+    "verified": 49,
+    "quick_check": 12,
+    "review": 16,
+    "rejected": 3
+   },
+   "total": 80
+  }
+ ]
+}

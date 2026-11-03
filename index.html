@@ -176,6 +176,14 @@
   .badge.pending{background:var(--line-soft); color:var(--muted);}
 
   /* ---------- small screens ---------- */
+  .badge.warn{background:#fff4e0; color:#9a5b00;}
+  .badge.check{background:var(--blue-soft); color:var(--blue);}
+  .reasons{margin:12px 0 4px; padding:12px 16px 12px 32px; background:#fff8ec; border-radius:var(--radius); color:#7a4a00; font-size:15px;}
+  .crop{display:block; max-width:100%; margin:10px 0; border:1px solid var(--line-soft); border-radius:var(--radius);}
+  .picks{margin-top:10px;}
+  .pick{display:flex; gap:8px; align-items:flex-start; padding:11px 14px; margin-bottom:8px; border:1px solid var(--line); border-radius:var(--radius); cursor:pointer; line-height:1.5; font-size:16px; color:var(--text); margin-bottom:8px;}
+  .pick input{width:auto; margin-top:5px;}
+  .pick.on{border-color:var(--blue); background:var(--blue-soft);}
   @media (max-width:640px){
     body{font-size:16px;}
     .topbar{padding:12px 18px;}
@@ -196,7 +204,7 @@
 
 <div class="topbar">
   <h1>EXAM Quiz Builder</h1>
-  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-11-03.2</span>
+  <span class="tag">ทำงานในเบราว์เซอร์ล้วนๆ · ไม่ส่งข้อมูลออกจากเครื่อง · ไม่ใช้ API · build 2026-11-03.3</span>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -212,7 +220,7 @@ const OLD_EXAMS_KEY = "psu_quiz_exams_v1";
 /* ---------------- state ---------------- */
 let state = {
   projects: [],
-  activeTab: "import",
+  activeTab: "library",
   currentProjectId: null,
   currentExamId: null,
   editReviewOnly: false,
@@ -582,13 +590,281 @@ function renderImageArea(container, q){
   }
 }
 
+/* ---------------- LIBRARY: ข้อสอบสะอาดจาก library/clean ---------------- */
+const DECISIONS_KEY = "psu_quiz_decisions_v1";
+let libDecisions = {};          // {examId: {เลขข้อ: {action, correct, at}}}
+try{ libDecisions = JSON.parse(localStorage.getItem(DECISIONS_KEY) || "{}"); }catch(e){ libDecisions = {}; }
+function saveDecisions(){ try{ localStorage.setItem(DECISIONS_KEY, JSON.stringify(libDecisions)); }catch(e){} }
+
+state.library = { status:"idle", index:[], exams:{}, error:"" };
+state.reviewExamId = null;
+state.reviewFilter = "todo";
+state.libIncludeQuick = false;
+
+const STATUS_LABEL = {
+  verified:   {t:"✅ ผ่าน",          c:"ok"},
+  quick_check:{t:"🔎 กวาดตาดู",      c:"check"},
+  review:     {t:"⚠️ ต้องตรวจ",      c:"warn"},
+  rejected:   {t:"❌ ใช้ไม่ได้",     c:"no"}
+};
+function statusBadge(s){ const x = STATUS_LABEL[s] || STATUS_LABEL.review; return `<span class="badge ${x.c}">${x.t}</span>`; }
+
+function decisionOf(ex, q){ return (libDecisions[ex.id]||{})[q.number] || null; }
+function effStatus(ex, q){
+  const d = decisionOf(ex, q);
+  if(d && d.action==="reject") return "rejected";
+  if(d && d.action==="approve") return "verified";
+  return q.status;
+}
+function effCorrect(ex, q){ const d = decisionOf(ex, q); return (d && d.correct) || q.correct; }
+function effCounts(ex){
+  const c = {verified:0, quick_check:0, review:0, rejected:0};
+  ex.questions.forEach(q=>{ c[effStatus(ex,q)]++; });
+  return c;
+}
+
+async function libraryLoadIndex(force){
+  if(state.library.status==="loading") return;
+  if(state.library.status==="ready" && !force) return;
+  state.library.status = "loading"; state.library.error = "";
+  try{
+    const r = await fetch("library/clean/index.json", {cache:"no-store"});
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    state.library.index = (await r.json()).exams || [];
+    state.library.status = "ready";
+  }catch(e){
+    state.library.status = "error"; state.library.error = String(e.message || e);
+  }
+  render();
+}
+async function libraryLoadExam(id){
+  if(state.library.exams[id]) return state.library.exams[id];
+  const meta = state.library.index.find(x=>x.id===id);
+  if(!meta) return null;
+  const r = await fetch(meta.file, {cache:"no-store"});
+  if(!r.ok) throw new Error("HTTP "+r.status);
+  state.library.exams[id] = await r.json();
+  return state.library.exams[id];
+}
+
+async function libraryStart(id){
+  let ex;
+  try{ ex = await libraryLoadExam(id); }catch(e){ alert("โหลดข้อสอบไม่ได้: "+e.message); return; }
+  const okStatus = state.libIncludeQuick ? ["verified","quick_check"] : ["verified"];
+  const qs = ex.questions.filter(q=>okStatus.includes(effStatus(ex,q)) && effCorrect(ex,q)).map(q=>{
+    const choices = {A:"",B:"",C:"",D:"",E:""};
+    Object.keys(q.choices).forEach(k=>{ choices[k] = q.choices[k]; });
+    return { id:q.id, number:q.number, sourceNumber:q.number, stem:q.stem, choices,
+             correct:effCorrect(ex,q), explanation:"", image:(q.images&&q.images[0])||null, issues:[] };
+  });
+  if(qs.length===0){ alert("ชุดนี้ยังไม่มีข้อที่ผ่านการตรวจ — ไปที่แท็บ \"ตรวจเฉลย\" ก่อน"); return; }
+  const pid = "lib-"+ex.block.toLowerCase().replace(/[^a-z0-9ก-๙]+/g,"-");
+  let proj = state.projects.find(p=>p.id===pid);
+  if(!proj){ proj = {id:pid, name:"📚 "+ex.block, exams:[], library:true}; state.projects.push(proj); }
+  const old = proj.exams.find(e=>e.id===ex.id);
+  const exam = Object.assign({}, old || {}, {id:ex.id, name:ex.name, questions:qs, library:true});
+  proj.exams = proj.exams.filter(e=>e.id!==ex.id).concat([exam]);
+  save();
+  state.currentProjectId = pid; state.activeTab = "projects"; render();
+}
+
+/* ---------- TAB: คลังข้อสอบ ---------- */
+function renderLibrary(){
+  const wrap = document.createElement("div");
+  const L = state.library;
+  if(L.status==="idle"){ libraryLoadIndex(); }
+  const p = document.createElement("div");
+  p.className = "panel";
+  p.innerHTML = `<h2>คลังข้อสอบ</h2>
+    <p class="sub">ข้อสอบที่ล้างและตรวจแล้ว ใช้ทำข้อสอบได้เลย ข้อที่ยังไม่แน่ใจจะไม่ถูกนำมาใช้จนกว่าคุณจะตรวจ</p>`;
+  wrap.appendChild(p);
+
+  if(L.status==="loading" || L.status==="idle"){
+    p.innerHTML += `<div class="empty">กำลังโหลดคลัง…</div>`;
+    return wrap;
+  }
+  if(L.status==="error"){
+    p.innerHTML += `<div class="empty">โหลดคลังไม่ได้ (${escapeHtml(L.error)})<br><span class="small">ต้องเปิดหน้านี้ผ่านเว็บ (เช่น GitHub Pages) หรือรันในเครื่อง: <code>python3 -m http.server</code> แล้วเปิด <code>http://localhost:8000</code></span></div>
+      <div class="row" style="justify-content:center"><button class="btn" id="libRetry">ลองอีกครั้ง</button></div>`;
+    p.querySelector("#libRetry").onclick = ()=>libraryLoadIndex(true);
+    return wrap;
+  }
+  if(L.index.length===0){
+    p.innerHTML += `<div class="empty">ยังไม่มีข้อสอบในคลัง</div>`;
+    return wrap;
+  }
+
+  const opt = document.createElement("label");
+  opt.style.cssText = "display:flex; gap:8px; align-items:center; color:var(--text-2); margin-bottom:16px; cursor:pointer;";
+  opt.innerHTML = `<input type="checkbox" id="libQuick" ${state.libIncludeQuick?"checked":""} style="width:auto"> รวมข้อ 🔎 ที่ยังไม่ได้กวาดตา (ไม่แนะนำ)`;
+  opt.querySelector("input").onchange = e=>{ state.libIncludeQuick = e.target.checked; };
+  p.appendChild(opt);
+
+  const groups = {};
+  L.index.forEach(m=>{ (groups[m.block] = groups[m.block] || []).push(m); });
+  Object.keys(groups).sort().forEach(block=>{
+    const h = document.createElement("div");
+    h.className = "name"; h.style.margin = "18px 0 10px"; h.textContent = "📁 "+block;
+    p.appendChild(h);
+    groups[block].sort((a,b)=>String(b.cohort).localeCompare(String(a.cohort), undefined, {numeric:true})).forEach(m=>{
+      const ex = L.exams[m.id];
+      const c = ex ? effCounts(ex) : m.counts;
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <div>
+          <div class="name">รุ่น ${escapeHtml(m.cohort)} · ${escapeHtml(m.type)}</div>
+          <div class="meta">${m.total} ข้อ · ✅ ${c.verified} · 🔎 ${c.quick_check} · ⚠️ ${c.review} · ❌ ${c.rejected}</div>
+        </div>
+        <div class="row">
+          <button class="btn" data-act="start" ${c.verified+(state.libIncludeQuick?c.quick_check:0)===0?"disabled":""}>ทำข้อสอบ</button>
+          <button class="btn secondary" data-act="review">ตรวจเฉลย${(c.review+c.quick_check)?` (${c.review+c.quick_check})`:""}</button>
+        </div>`;
+      card.querySelector('[data-act="start"]').onclick = ()=>libraryStart(m.id);
+      card.querySelector('[data-act="review"]').onclick = ()=>{ state.reviewExamId = m.id; state.activeTab = "review"; render(); };
+      p.appendChild(card);
+    });
+  });
+  // โหลดรายละเอียดทุกชุดเบื้องหลัง เพื่อให้ตัวเลขรวมการตัดสินของเรา
+  L.index.forEach(m=>{ if(!L.exams[m.id]) libraryLoadExam(m.id).then(()=>{ if(state.activeTab==="library") render(); }).catch(()=>{}); });
+  return wrap;
+}
+
+/* ---------- TAB: ตรวจเฉลย ---------- */
+function downloadDecisions(ex){
+  const blob = new Blob([JSON.stringify(libDecisions[ex.id]||{}, null, 1)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = ex.id+".json";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+}
+function setDecision(ex, q, d){
+  libDecisions[ex.id] = libDecisions[ex.id] || {};
+  if(d) libDecisions[ex.id][q.number] = Object.assign({at:new Date().toISOString().slice(0,10)}, d);
+  else delete libDecisions[ex.id][q.number];
+  saveDecisions();
+  const y = window.scrollY; render(); window.scrollTo(0, y);
+}
+
+function renderReview(){
+  const wrap = document.createElement("div");
+  const L = state.library;
+  if(L.status==="idle"){ libraryLoadIndex(); }
+  const p = document.createElement("div");
+  p.className = "panel";
+  p.innerHTML = `<h2>ตรวจเฉลย</h2>
+    <p class="sub">ดูโจทย์เทียบกับรูปจากไฟล์ต้นฉบับ แล้วกดยืนยันหรือแก้ตัวเลือกที่ถูก ผลจะบันทึกในเครื่องนี้ทันที</p>`;
+  wrap.appendChild(p);
+  if(L.status!=="ready"){
+    p.innerHTML += `<div class="empty">${L.status==="error" ? "โหลดคลังไม่ได้ — ดูที่แท็บ \"คลังข้อสอบ\"" : "กำลังโหลดคลัง…"}</div>`;
+    return wrap;
+  }
+  if(!L.index.length){ p.innerHTML += `<div class="empty">ยังไม่มีข้อสอบในคลัง</div>`; return wrap; }
+  if(!state.reviewExamId || !L.index.find(m=>m.id===state.reviewExamId)) state.reviewExamId = L.index[0].id;
+
+  const sel = document.createElement("select");
+  L.index.forEach(m=>{ const o = document.createElement("option"); o.value = m.id; o.textContent = `${m.block} · รุ่น ${m.cohort} · ${m.type}`; if(m.id===state.reviewExamId) o.selected = true; sel.appendChild(o); });
+  sel.onchange = ()=>{ state.reviewExamId = sel.value; render(); };
+  p.appendChild(sel);
+
+  const ex = L.exams[state.reviewExamId];
+  if(!ex){
+    libraryLoadExam(state.reviewExamId).then(()=>{ if(state.activeTab==="review") render(); }).catch(e=>alert("โหลดข้อสอบไม่ได้: "+e.message));
+    p.innerHTML += `<div class="empty">กำลังโหลดชุดนี้…</div>`;
+    return wrap;
+  }
+  const c = effCounts(ex);
+  const mine = Object.keys(libDecisions[ex.id]||{}).length;
+  const bar = document.createElement("div");
+  bar.className = "row"; bar.style.margin = "16px 0 6px";
+  const filters = [["todo",`ต้องตรวจ (${c.review+c.quick_check})`],["all",`ทั้งหมด (${ex.questions.length})`],["verified",`ผ่าน (${c.verified})`],["rejected",`ใช้ไม่ได้ (${c.rejected})`],["mine",`ที่ฉันตัดสิน (${mine})`]];
+  filters.forEach(([k,t])=>{
+    const b = document.createElement("button");
+    b.className = "btn " + (state.reviewFilter===k ? "clay" : "ghost");
+    b.textContent = t; b.onclick = ()=>{ state.reviewFilter = k; render(); };
+    bar.appendChild(b);
+  });
+  p.appendChild(bar);
+  if(mine){
+    const dl = document.createElement("div");
+    dl.className = "row"; dl.style.marginTop = "8px";
+    dl.innerHTML = `<button class="btn secondary">⬇ ดาวน์โหลดผลตรวจ (${mine} ข้อ)</button><span class="small">เก็บไฟล์นี้ไว้เป็นสำรอง หรือส่งให้ผมนำเข้า repo (ชื่อไฟล์ ${escapeHtml(ex.id)}.json)</span>`;
+    dl.querySelector("button").onclick = ()=>downloadDecisions(ex);
+    p.appendChild(dl);
+  }
+
+  const list = ex.questions.filter(q=>{
+    const s = effStatus(ex,q);
+    if(state.reviewFilter==="todo") return s==="review" || s==="quick_check";
+    if(state.reviewFilter==="verified") return s==="verified";
+    if(state.reviewFilter==="rejected") return s==="rejected";
+    if(state.reviewFilter==="mine") return !!decisionOf(ex,q);
+    return true;
+  });
+  if(list.length===0){
+    const e = document.createElement("div");
+    e.className = "panel"; e.innerHTML = `<div class="empty">${state.reviewFilter==="todo" ? "ตรวจครบแล้ว 🎉 ไม่มีข้อค้าง" : "ไม่มีข้อในหมวดนี้"}</div>`;
+    wrap.appendChild(e);
+    return wrap;
+  }
+  list.forEach(q=>wrap.appendChild(renderReviewCard(ex,q)));
+  return wrap;
+}
+
+function renderReviewCard(ex, q){
+  const card = document.createElement("div");
+  card.className = "panel";
+  const st = effStatus(ex,q), d = decisionOf(ex,q);
+  const sug = q.correct;
+  const crops = (q.crops_key||[]).concat(q.crops_question||[]);
+  const imgs = (q.images||[]).map(s=>`<img class="crop" loading="lazy" src="${escapeAttr(s)}" alt="รูปประกอบโจทย์">`).join("");
+  const cropHtml = crops.length
+    ? `<div class="small">ภาพจากไฟล์ต้นฉบับ (ไฟล์เฉลยก่อน):</div>` + crops.map(s=>`<img class="crop" loading="lazy" src="${escapeAttr(s)}" alt="ภาพโจทย์ต้นฉบับ">`).join("")
+    : "";
+  const reasons = (q.reasons||[]).map(r=>`<li>${escapeHtml(r)}</li>`).join("");
+  const picked = (d && d.correct) || sug || "";
+  const choiceHtml = Object.keys(q.choices).map(k=>`
+    <label class="pick ${picked===k?"on":""}">
+      <input type="radio" name="pick-${escapeAttr(q.id)}" value="${k}" ${picked===k?"checked":""}>
+      <b>${k}.</b> <span>${escapeHtml(q.choices[k])}</span>${sug===k?` <span class="badge check">จากไฟล์เฉลย</span>`:""}
+    </label>`).join("");
+  card.innerHTML = `
+    <div class="flex-between"><h2 style="margin:0">ข้อ ${escapeHtml(q.number)}</h2><div>${statusBadge(st)}${d?` <span class="badge pending">ฉันตัดสิน</span>`:""}</div></div>
+    ${reasons ? `<ul class="reasons">${reasons}</ul>` : ""}
+    ${q.evidence ? `<div class="small">หลักฐานจากไฟล์เฉลย: “${escapeHtml(q.evidence)}”</div>` : ""}
+    <div class="quiz-q" style="margin-top:14px">${escapeHtml(q.stem)}</div>
+    ${imgs}
+    <div class="picks">${choiceHtml}</div>
+    ${cropHtml}
+    <div class="row" style="margin-top:14px">
+      <button class="btn" data-act="ok">✅ ยืนยันข้อนี้</button>
+      <button class="btn danger" data-act="no">🚫 ใช้ไม่ได้</button>
+      ${d ? `<button class="btn ghost" data-act="undo">↩ ล้างการตัดสิน</button>` : ""}
+    </div>`;
+  const chosen = ()=>{ const r = card.querySelector('input[type=radio]:checked'); return r ? r.value : null; };
+  card.querySelectorAll('input[type=radio]').forEach(r=>r.onchange = ()=>{
+    card.querySelectorAll(".pick").forEach(x=>x.classList.remove("on")); r.closest(".pick").classList.add("on");
+  });
+  card.querySelector('[data-act="ok"]').onclick = ()=>{
+    const v = chosen();
+    if(!v){ alert("เลือกตัวเลือกที่ถูกก่อน"); return; }
+    setDecision(ex, q, {action:"approve", correct:v});
+  };
+  card.querySelector('[data-act="no"]').onclick = ()=>setDecision(ex, q, {action:"reject"});
+  const undo = card.querySelector('[data-act="undo"]');
+  if(undo) undo.onclick = ()=>setDecision(ex, q, null);
+  return card;
+}
+
 /* ---------------- tabs / router ---------------- */
 const TABS = [
-  {id:"import",   label:"① นำเข้า PDF"},
-  {id:"projects", label:"② โปรเจกต์"},
-  {id:"edit",     label:"③ แก้ไข/เฉลย"},
+  {id:"library",  label:"① คลังข้อสอบ"},
+  {id:"review",   label:"② ตรวจเฉลย"},
+  {id:"projects", label:"③ โปรเจกต์"},
   {id:"quiz",     label:"④ ทำข้อสอบ"},
   {id:"result",   label:"⑤ ผลคะแนน"},
+  {id:"import",   label:"นำเข้า PDF เอง"},
+  {id:"edit",     label:"แก้ไข/เฉลย"},
 ];
 
 function renderTabs(){
@@ -607,6 +883,8 @@ function render(){
   renderTabs();
   const main = document.getElementById("main");
   main.innerHTML = "";
+  if(state.activeTab==="library")  main.appendChild(renderLibrary());
+  if(state.activeTab==="review")   main.appendChild(renderReview());
   if(state.activeTab==="import")   main.appendChild(renderImport());
   if(state.activeTab==="projects") main.appendChild(renderProjects());
   if(state.activeTab==="edit")     main.appendChild(renderEdit());
