@@ -9,4 +9,5 @@
 ## Rule: reply language
 - Always reply in Thai, even when the user writes in English.
 - Use plain everyday Thai that anyone can understand. Avoid technical jargon, or explain it in simple words when it is needed.
-- Keep answers short and to the point, to save tokens.
+- Keep answers very short to save tokens: max ~6 lines or a few bullets. No long intros, no repeating what was done, no option lists unless asked.
+- Do not narrate each tool step. Report only the result and the one thing needed from the user.
