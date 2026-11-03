@@ -16,6 +16,7 @@
   - คนยืนยันผ่านแท็บตรวจเฉลย (ผลเก็บใน library/decisions/<ชื่อ>.json)
 """
 import argparse
+import difflib
 import json
 import re
 import sys
@@ -245,23 +246,47 @@ def build_index():
             q["status"] = q.get("base_status", q["status"])
             q["opinions"] = [o for o in q.get("opinions", []) if o["source"] != "cross_cohort"]
             q["reasons"] = [r for r in q.get("reasons", []) if not r.startswith("มีความเห็นต่าง")]
-            q.pop("duplicate_of", None); q.pop("duplicate_group_size", None)
-    for p, ex in data.items():
-        for q in ex["questions"]:
-            key = norm(q["stem"]) + "|" + "|".join(norm(q["choices"].get(L, "")) for L in LETTERS)
-            groups.setdefault(key, []).append(q)
+            q.pop("duplicate_of", None); q.pop("duplicate_group_size", None); q.pop("similar", None)
+    # ข้อซ้ำ/คล้ายกันข้ามชุด (บล็อกเดียวกัน) เทียบด้วย "ข้อความของคำตอบ" เพราะแต่ละรุ่นอาจสลับลำดับตัวเลือก
+    def ratio(a, b):
+        sm = difflib.SequenceMatcher(None, a, b)
+        return sm.ratio() if sm.quick_ratio() >= 0.8 else 0.0
+
+    def answer_letter(q, text):
+        best, letter = 0.0, None
+        for L, v in q["choices"].items():
+            r = ratio(norm(v), text)
+            if r > best:
+                best, letter = r, L
+        return letter if best >= 0.85 else None
+
     dup = 0
-    for members in groups.values():
-        if len(members) < 2:
-            continue
-        for q in members:
-            q["duplicate_of"] = members[0]["id"] if q is not members[0] else None
-            q["duplicate_group_size"] = len(members)
-            for o in members:
-                if o is not q and o.get("correct"):
-                    q["opinions"].append({"source": "cross_cohort", "letter": o["correct"],
-                                          "reason": "ข้อเดียวกันในชุด " + o["id"], "ref": o["id"]})
-        dup += len(members) - 1
+    by_block = {}
+    for p, ex in data.items():
+        by_block.setdefault(ex["block"], []).append(ex)
+    for block, exs in by_block.items():
+        for i in range(len(exs)):
+            for j in range(i + 1, len(exs)):
+                for qa in exs[i]["questions"]:
+                    sa = norm(qa["stem"])
+                    if len(sa) < 12:
+                        continue
+                    for qb in exs[j]["questions"]:
+                        sb = norm(qb["stem"])
+                        if len(sb) < 12 or ratio(sa, sb) < 0.85:
+                            continue
+                        ca = {norm(v) for v in qa["choices"].values()}
+                        cb = {norm(v) for v in qb["choices"].values()}
+                        if not ca or not cb or len(ca & cb) / min(len(ca), len(cb)) < 0.6:
+                            continue
+                        dup += 1
+                        for me, other in ((qa, qb), (qb, qa)):
+                            me.setdefault("similar", []).append(other["id"])
+                            if other.get("correct"):
+                                txt = norm(other["choices"].get(other["correct"], ""))
+                                me["opinions"].append({"source": "cross_cohort", "letter": answer_letter(me, txt),
+                                                       "reason": "ข้อคล้ายกันในชุด " + other["id"] + " (เทียบจากข้อความคำตอบ)",
+                                                       "ref": other["id"]})
     # ความเห็นไม่ตรง -> ต้องตรวจ (ยกเว้นคนตัดสินแล้ว)
     for p, ex in data.items():
         for q in ex["questions"]:

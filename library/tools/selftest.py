@@ -63,6 +63,13 @@ def build(path, key=False):
     _lines(p2, 60, [("C", "Intercostal"), ("D", "Sympathetic"), ("E", "Hypoglossal")])
     p2.insert_text((50, 130), "5. A long stem that sits on page two only. What is the answer?", fontsize=FS)
     _lines(p2, 150, [("A", "One"), ("B", "Two"), ("C", "Three"), ("D", "Four"), ("E", "Five")], hi="D" if key else None)
+    # ข้อ 6: เลขติดข้อความ + ตัวเลือกตัวพิมพ์เล็ก
+    p2.insert_text((50, 330), "6.Glued number then stem text. Which is right?", fontsize=FS)
+    _lines(p2, 350, [("a", "alpha"), ("b", "bravo"), ("c", "charlie"), ("d", "delta"), ("e", "echo")])
+    if key:  # วงกลมสีม่วงล้อม c. และกากบาทขีดฆ่า a. (ต้องจับวงกลมเท่านั้น)
+        p2.draw_circle((54, 378), 10, color=(0.6, 0, 1), width=1)
+        p2.draw_line((44, 340), (62, 356), color=(0, 0, 1)); p2.draw_line((44, 356), (62, 340), color=(0, 0, 1))
+    p2.insert_text((50, 450), "7.-", fontsize=FS)  # ข้อว่างแบบเลขติดขีด
     for p in (p1, p2):
         p.insert_text((50, 820), "VICHAKARN MED PSU 52", fontsize=9)
     doc.save(path)
@@ -76,8 +83,8 @@ def main():
 
     q = ex.extract(qpdf, tmp / "imgq", rel_base=tmp)
     nums = [r["number"] for r in q["questions"]]
-    assert nums == ["1", "2", "4", "5"], nums
-    assert q["blank_numbers"] == [3], q["blank_numbers"]
+    assert nums == ["1", "2", "4", "5", "6"], nums
+    assert q["blank_numbers"] == [3, 7], q["blank_numbers"]
     by = {r["number"]: r for r in q["questions"]}
     assert by["1"]["choices"]["A"] == "Trachea" and by["1"]["choices"]["E"] == "Azygos vein", by["1"]["choices"]
     assert all(r["highlight"]["letter"] is None for r in q["questions"]), "ไฟล์ข้อสอบไม่ควรมีไฮไลต์"
@@ -89,7 +96,8 @@ def main():
     k = ex.extract(kpdf, tmp / "imgk", reference=ref, rel_base=tmp)
     kb = {r["number"]: r for r in k["questions"]}
     got = {n: (r["highlight"]["letter"], r["highlight"]["confidence"]) for n, r in kb.items()}
-    assert got["1"][0] == "A" and got["2"][0] == "C" and got["4"][0] == "B" and got["5"][0] == "D", got
+    assert got["1"][0] == "A" and got["2"][0] == "C" and got["4"][0] == "B" and got["5"][0] == "D" and got["6"][0] == "C", got
+    assert by["6"]["choices"]["C"] == "charlie" and by["6"]["stem"].startswith("Glued"), by["6"]
     assert all(c == "high" for _, c in got.values()), got
     print("ผ่านทุกข้อ:", got)
     print("รูปที่ตัดได้ข้อ 2:", by["2"]["images"], "| ภาพโจทย์:", by["1"]["crops"])

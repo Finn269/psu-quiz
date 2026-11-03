@@ -799,9 +799,19 @@
      "letter": "B",
      "reason": "เห็นด้วยกับเฉลยในไฟล์",
      "agree": true
+    },
+    {
+     "source": "cross_cohort",
+     "letter": "B",
+     "reason": "ข้อคล้ายกันในชุด respiratory-51-mcq-018 (เทียบจากข้อความคำตอบ)",
+     "ref": "respiratory-51-mcq-018",
+     "agree": true
     }
    ],
    "base_status": "verified",
+   "similar": [
+    "respiratory-51-mcq-018"
+   ],
    "dispute": false
   },
   {

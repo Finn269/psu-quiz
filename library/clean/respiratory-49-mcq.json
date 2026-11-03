@@ -1,0 +1,2265 @@
+{
+ "id": "respiratory-49-mcq",
+ "block": "Respiratory",
+ "year_group": 2,
+ "cohort": "49",
+ "type": "MCQ",
+ "name": "Respiratory PSU 49 MCQ",
+ "source": {
+  "question_pdf": "library/raw/Respiratory/49/MCQ.pdf",
+  "key_pdf": "library/raw/Respiratory/49/MCQ-key.pdf",
+  "drive_question_id": null,
+  "drive_key_id": null
+ },
+ "source_blank_numbers": [],
+ "source_note": "",
+ "counts": {
+  "verified": 23,
+  "quick_check": 0,
+  "review": 27,
+  "rejected": 14
+ },
+ "questions": [
+  {
+   "id": "respiratory-49-mcq-001",
+   "number": "1",
+   "stem": "A doctor intends to ligate an artery, but he accidentally ligates phrenic nerve instead. What does he intend to ligate actually?",
+   "choices": {
+    "A": "Musculophrenic artery",
+    "B": "Internal thoracic artery",
+    "C": "Intercostal artery",
+    "D": "Superior epigastric artery",
+    "E": "Pericardiacophrenic artery"
+   },
+   "correct": "E",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "E",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q001-p1.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q001-p1.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "E",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-002",
+   "number": "2",
+   "stem": "A 45-year-old woman stridor found vocal cord adduction อาการดังกลMาวเกี่ยวกับสMวนใด",
+   "choices": {
+    "A": "Cricothyroid",
+    "B": "Cricoarytenoid",
+    "C": "Epiarytenoid",
+    "D": "Oblique arytenoid",
+    "E": "Posterior cricoarytenoid"
+   },
+   "correct": "E",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "E",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q002-p1.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q002-p1.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "E",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-003",
+   "number": "3",
+   "stem": "10-year-old boy were stabbed manubriosternal. Which organ will be affected?",
+   "choices": {
+    "A": "Thyroid gland",
+    "B": "Brachiocephalic trunk",
+    "C": "Azygos vein"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q003-p1.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q003-p1.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-004",
+   "number": "4",
+   "stem": "A 3-year-old man suspected a small metal bottom while sitting upright position and play with his toys. Which of the following is most likely site of this falling bottom?",
+   "choices": {
+    "A": "Lingula",
+    "B": "Right upper lobe",
+    "C": "Left upper lobe",
+    "D": "Right lower lobe",
+    "E": "Left lower lobe"
+   },
+   "correct": "D",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "D",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q004-p2.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q004-p2.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "D",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-005",
+   "number": "5",
+   "stem": "บริเวณไหน lack of smooth muscle",
+   "choices": {
+    "A": "Trachea",
+    "B": "Bronchus",
+    "C": "Bronchioles",
+    "D": "Alveolar duct",
+    "E": "Alveolus"
+   },
+   "correct": "E",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "E",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q005-p2.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q005-p2.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "E",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-006",
+   "number": "6",
+   "stem": "Which of the following non-ciliated cuboid epithelium associated in secreting product?",
+   "choices": {
+    "A": "Clara cell",
+    "B": "Cell type1",
+    "C": "Goblet cell",
+    "D": "Basal cell"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q006-p2.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q006-p2.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-007",
+   "number": "7",
+   "stem": "ขbอใดสามารถเพิ่ม lung compliance ไดb",
+   "choices": {
+    "A": "increase alveola tension",
+    "B": "increase lung elastic",
+    "C": "decrease alveoli surface",
+    "D": "decrease surfactant",
+    "E": "decrease chest wall elastic"
+   },
+   "correct": "C",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "C",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q007-p2.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q007-p2.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "C",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-008",
+   "number": "8",
+   "stem": "Which of the following conditions reduce of lung perfusion zone 1?",
+   "choices": {
+    "A": "supine position"
+   },
+   "correct": null,
+   "key_source": "highlight",
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": "A",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q008-p3.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q008-p3.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "A",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": false
+    }
+   ],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-009",
+   "number": "9",
+   "stem": "Which following of the volume gas in the lung after abdominal muscle contract",
+   "choices": {
+    "A": "RV",
+    "B": "TLC",
+    "C": "IRV",
+    "D": "ERV",
+    "E": "FRC"
+   },
+   "correct": "A",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "A",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q009-p3.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q009-p3.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "A",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-010",
+   "number": "10",
+   "stem": "Normal subject has respiratory rate 10 times/min, total ventilation 8 L/min and anatomical dead space 200 ml. What is his alveolar ventilation?",
+   "choices": {
+    "A": "7.2",
+    "B": "7.8",
+    "C": "6.0",
+    "D": "8.2",
+    "E": "0.72"
+   },
+   "correct": "C",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "C",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q010-p3.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q010-p3.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "C",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-011",
+   "number": "11",
+   "stem": "Which of the following is higher in emphysema patient compared to normal healthy person?",
+   "choices": {
+    "A": "FEV1",
+    "B": "FVC",
+    "C": "Airway diameter",
+    "D": "Vital capacity",
+    "E": "Residual volume"
+   },
+   "correct": "E",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "E",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q011-p3.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q011-p3.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "E",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-013",
+   "number": "13",
+   "stem": "What mechanism of pulmonary edema of pneumonia?",
+   "choices": {
+    "A": "Increase oncotic plasma pressure",
+    "B": "Increase vascular permeability",
+    "C": "Increase hydrostatic plasma pressure",
+    "D": "Decrease plasma oncotic",
+    "E": "Decrease lymphatic drainage of visceral pleura"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q013-p3.png",
+    "library/images/respiratory-49-mcq/q/crop-q013-p4.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q013-p3.png",
+    "library/images/respiratory-49-mcq/k/crop-q013-p4.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-014",
+   "number": "14",
+   "stem": "When the V/Q ratio of the lung decreased, what alveolar gas tension would expect?",
+   "choices": {
+    "A": "Decreased PN2",
+    "B": "Increased PCO2",
+    "C": "Increased both PN2 and PCO2",
+    "D": "Increased both PO2 and PCO2",
+    "E": "Increased PO2"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q014-p4.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q014-p4.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-015",
+   "number": "15",
+   "stem": "Barometer 525 mmHg ถาม subject's PaO2 ตอบ",
+   "choices": {},
+   "correct": null,
+   "key_source": null,
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q015-p4.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q015-p4.png"
+   ],
+   "opinions": [],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-016",
+   "number": "16",
+   "stem": "ทำไม PO2 นbอยกวMา PO2 atmospheric dead air ตอบ",
+   "choices": {},
+   "correct": null,
+   "key_source": null,
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q016-p4.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q016-p4.png"
+   ],
+   "opinions": [],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-017",
+   "number": "17",
+   "stem": "ปâจจัยที่ทำใหb Increase PCO2 ในคนไขb asthma",
+   "choices": {
+    "A": "respiratory membrane thickness",
+    "B": "surface area ลด",
+    "C": "ผลตMางความดันระหวMางถุงลมและหลอดเลือดนbอยลง"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q017-p4.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q017-p4.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-018",
+   "number": "18",
+   "stem": "Increase arterial PCO2 ในคนสุภาพดี",
+   "choices": {
+    "A": "moderate exercise",
+    "B": "mountain climbing",
+    "C": "scuba diving"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)",
+    "โจทย์อ้างถึงรูป แต่ไม่พบรูปในโจทย์"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q018-p4.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q018-p4.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-019",
+   "number": "19",
+   "stem": "What factor CO diffusion limit?",
+   "choices": {
+    "A": "Blood pressure"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q019-p4.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q019-p4.png"
+   ],
+   "opinions": [],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-020",
+   "number": "20",
+   "stem": "Deep and slow breathing pattern would be occurred in person who has severe injury brainstem in which brain area?",
+   "choices": {
+    "A": "Medulla oblongata",
+    "B": "Upper pons",
+    "C": "Thalamus",
+    "D": "Midbrain",
+    "E": "Cerebellum"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q020-p5.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q020-p5.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-021",
+   "number": "21",
+   "stem": "Which of the following factor stimulates chemoreceptor resulted in hyperventilation in diabetes mellitus?",
+   "choices": {
+    "A": "decreased PO2 in arterial blood",
+    "B": "increased [H+] in arterial blood",
+    "C": "increased PO2 in venous blood",
+    "D": "decreased PCO2 in venous blood",
+    "E": "increased [H+] in cerebrospinal fluid"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q021-p5.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q021-p5.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-022",
+   "number": "22",
+   "stem": "Which of the following mechanisms is responsible of an increase ventilation during first minute of an aerobic exercise?",
+   "choices": {
+    "A": "activation proprioceptor",
+    "B": "activation peripheral receptor"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q022-p5.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q022-p5.png"
+   ],
+   "opinions": [],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-023",
+   "number": "23",
+   "stem": "เด็ก 2 ปï มีไขb ไอ running nose, wheezing โจทยóถามวMายาอะไรที่รักษาไดbเร็ว",
+   "choices": {
+    "A": "Inhaled albuterol",
+    "B": "Inhaled cromolyn",
+    "C": "Oral montelukast",
+    "D": "Intravenous theophylline",
+    "E": "Inhaled beclomethasone"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q023-p5.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q023-p5.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-024",
+   "number": "24",
+   "stem": "Which of the following medication is inhibit effect block CysLTs by competitive inhibitors to their receptor? ตอบ",
+   "choices": {},
+   "correct": null,
+   "key_source": null,
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q024-p6.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q024-p6.png"
+   ],
+   "opinions": [],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-025",
+   "number": "25",
+   "stem": "ถาม MOA ของยา chlorpheniramine",
+   "choices": {
+    "A": "Alpha-1 adrenergic agonist",
+    "B": "H1 receptor",
+    "C": "H2 receptor"
+   },
+   "correct": "B",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "B",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q025-p6.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q025-p6.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "B",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-026",
+   "number": "26",
+   "stem": "33-weeks-neonatal periodic of breathing association with bradycardia, dx. apnea of prematurity ถามยาที่ใชbในขbอนี้",
+   "choices": {
+    "A": "Zileuton",
+    "B": "Albuterol",
+    "C": "Theophylline",
+    "D": "Omalizumab"
+   },
+   "correct": "C",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "C",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q026-p6.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q026-p6.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "C",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-027",
+   "number": "27",
+   "stem": "A 4-year-old boy is diagnosed acute bronchitis with sticky sputum. Which of the following mucolytic drug is the most appropriate in this patient?",
+   "choices": {
+    "A": "Bromhexine",
+    "B": "Benzonatate",
+    "C": "Dextromethorphan",
+    "D": "Loratadine",
+    "E": "Codeine"
+   },
+   "correct": "A",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "A",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q027-p6.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q027-p6.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "A",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-028",
+   "number": "28",
+   "stem": "ใหbอาการของ TB มา พบ granuloma ถามวMาจะพบอะไรไดbอีก",
+   "choices": {
+    "A": "พบ Langhans giant cell",
+    "B": "พบ keratin pearl"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q028-p6.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q028-p6.png"
+   ],
+   "opinions": [],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-029",
+   "number": "29",
+   "stem": "A 25-year-old man develops fever, cough, dyspnea for a week. Chest x-ray patchy infiltration of right lung. Histopathology of lung tissue demonstrates granulomatous inflammation and mucicarmine stain reveal yeast-like organisms with budding and pink color mucin staining around the organisms. What is diagnosis of this lesion?",
+   "choices": {
+    "A": "penicilliosis",
+    "B": "tuberculosis",
+    "C": "candidiasis",
+    "D": "histoplasmosis",
+    "E": "cryptococcosis"
+   },
+   "correct": "E",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "E",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q029-p7.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q029-p7.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "E",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-030",
+   "number": "30",
+   "stem": "Which of the following is the common abnormality associated with diaphragmatic hernia?",
+   "choices": {
+    "A": "Lung hypoplasia",
+    "B": "Pulmonary agenesis",
+    "C": "Intrauterine infection",
+    "D": "Congenital heart disease",
+    "E": "Hyaline membrane disease"
+   },
+   "correct": "A",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "A",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q030-p7.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q030-p7.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "A",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-031",
+   "number": "31",
+   "stem": "50-year-old kidney transplantation 3 สัปดาหóตMอมา มีไขb ไอ dyspnea bronchoscopy เจอ bronchial epithelial cell enlargement with intracytoplasmic inclusion ขbอไหนคือสาเหตุของอาการ ดังกลMาว",
+   "choices": {
+    "A": "Adenocarcinoma",
+    "B": "CMV",
+    "C": "HSV",
+    "D": "RSV"
+   },
+   "correct": "B",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "B",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q031-p7.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q031-p7.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "B",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-032",
+   "number": "32",
+   "stem": "หญิง 25 ปïเปqน kindergarten teacher ไปโรงพยาบาลดbวย 2 days history of fever, sore throat, sore clearing, postnasal drip, rhinorrhea, and nasal stuffiness. What is the most common of this URI.",
+   "choices": {
+    "A": "Influenza virus",
+    "B": "Rhinovirus",
+    "C": "human metapneumovirus",
+    "D": "RSV",
+    "E": "Streptococcus pneumonia"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q032-p7.png",
+    "library/images/respiratory-49-mcq/q/crop-q032-p8.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q032-p7.png",
+    "library/images/respiratory-49-mcq/k/crop-q032-p8.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-033",
+   "number": "33",
+   "stem": "50-year-old female presented with cough, and right-sided chest pain for 15 days. Gram sputum revealed numerous neutrophils and a rare amount of Gram-positive thin branching beaded filamentous bacteria; however, the result of Kinyoun staining were negative. What is the most likely negative organism?",
+   "choices": {
+    "A": "Mycobacterium tuberculosis",
+    "B": "Listeria monocytogenes",
+    "C": "Corynebacterium diphtheriae",
+    "D": "Erysipelothrix rhusiopathiae",
+    "E": "Nocardia asteroids"
+   },
+   "correct": "E",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "E",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q033-p8.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q033-p8.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "E",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-034",
+   "number": "34",
+   "stem": "หญิงอbวนอายุ 50 ปï มาหbองฉุกเฉิน มีคMาpH 7.5, PO2 60, PCO2 20 และ HCO3- 22, SA O2 90% มา ดbวยอาการผิดปกติอะไร",
+   "choices": {
+    "A": "combined respiratory and metabolism acidosis",
+    "B": "acute respiratory acidosis with normoxia",
+    "C": "acute respiratory alkalosis with hypoxemia",
+    "D": "combined respiratory and metabolism alkalosis",
+    "E": "Respiratory alkalosis with compensate"
+   },
+   "correct": "B",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "B",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q034-p8.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q034-p8.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "B",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-035",
+   "number": "35",
+   "stem": "มี air bubble contaminate ใน syringe จะเกิดอะไรขึ้น",
+   "choices": {
+    "A": "PCO2 เพิ่ม",
+    "B": "PO2 เพิ่ม",
+    "C": "H+ เพิ่ม",
+    "D": "HCO3- เพิ่ม",
+    "E": "Aa gradientเพิ่ม"
+   },
+   "correct": "E",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "E",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q035-p8.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q035-p8.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "E",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-036",
+   "number": "36",
+   "stem": "80-year-old women มี High grade fever, wet cough for 7 days, Dyspnea, Productive cough, Crepitation at right lung field (บอก vital sign ตMางๆมา) Lung biopsy: infiltrate of neutrophil and fibrin into alveolar space What’s the diagnosis?",
+   "choices": {
+    "A": "Pneumonia",
+    "B": "Bronchiectasis",
+    "C": "TB",
+    "D": "Emphysema thoraces",
+    "E": "Acute bronchitis"
+   },
+   "correct": "A",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "A",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q036-p9.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q036-p9.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "A",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-037",
+   "number": "37",
+   "stem": "ชายคนหนึ่ง อายุ 7 ปï 1 ปïที่ผMานมามีอาการ dyspnea และ chronic wet cough ติดเชื้อ pneumonia มาแลbว 5 ครั้ง ตรวจรMางกายพบ Sat O2 92%, increase AP diameter of chest wall and clubbing of fingers. CXR พบ tram and track opacities at bronchial are และพบ bronchodilatation ถาม pathology?",
+   "choices": {
+    "A": "elastin changes of alveoli",
+    "B": "broncho-arteriole damage",
+    "C": "bronchial hyperresponsiveness",
+    "D": "over production of goblet cells",
+    "E": "destruction of alveoli-capillary basement membrane"
+   },
+   "correct": "D",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "D",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q037-p9.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q037-p9.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "D",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-038",
+   "number": "38",
+   "stem": "15-year-boy was diagnosis post operative right upper lung atelectasis. Positive pressure ventilation applying the patient and follow up CXR show no atelectasis. ถาม mechanism ของ การรักษา",
+   "choices": {
+    "A": "increase muscle strength",
+    "B": "increase transpulmonary pressure",
+    "C": "decrease work of breathing",
+    "D": "decrease mean airways pressure",
+    "E": "more negative in plural pressure"
+   },
+   "correct": "C",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "C",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q038-p9.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q038-p9.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "C",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-039",
+   "number": "39",
+   "stem": "2-years-old infant come to the hospital with coughing while having peanut - แพทยóสงสัย Aspiration by foreign body - PE: decreased breath sound at left lung - CXR (AP) Bilateral purulent at left lobe ( มีภาพ CXR ใหb เจอ homogenous opacity ที่ left lung ติดกับหัวใจ) What is the cause?",
+   "choices": {
+    "A": "Obstruction of carina",
+    "B": "Partial obstruction at trachea",
+    "C": "Partial obstruction at main left bronchus",
+    "D": "Complete obstruction at trachea",
+    "E": "Complete obstruction at main left bronchus"
+   },
+   "correct": "E",
+   "key_source": "highlight",
+   "status": "review",
+   "reasons": [
+    "โจทย์อ้างถึงรูป แต่ไม่พบรูปในโจทย์"
+   ],
+   "highlight": {
+    "letter": "E",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q039-p10.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q039-p10.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "E",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-040",
+   "number": "40",
+   "stem": "Which lesion obliterate right hemidiaphragm?",
+   "choices": {
+    "A": "Pneumothorax",
+    "B": "A pneumonia in right lower lobe",
+    "C": "Lung mass in right middle lobe",
+    "D": "Right breast mass",
+    "E": "Anterior Mediastinum mass"
+   },
+   "correct": "B",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "B",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q040-p10.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q040-p10.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "B",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-041",
+   "number": "41",
+   "stem": "A 30-year-old man with asthma. He had exacerbation and came to hospital. He had dyspnea during admit, then endotracheal tube was inserted. Which CXR technique was used to confirm the location of endotracheal tube?",
+   "choices": {
+    "A": "PA",
+    "B": "Portable, AP view",
+    "C": "Portable, lateral view",
+    "D": "left Lateral",
+    "E": "Right lateral decubitus"
+   },
+   "correct": "B",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "B",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q041-p10.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q041-p10.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "B",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-042",
+   "number": "42",
+   "stem": "A 32-year-old woman presents with purulent nasal discharge, facial pain, and high-grade fever for 10 years. Plain X-ray shows air-fluid level in both maxillary sinuses. Which of following is the pathophysiology of this condition?",
+   "choices": {
+    "A": "Obstruction of paranasal sinuses opening",
+    "B": "Traumatic fracture of nasal conchae"
+   },
+   "correct": null,
+   "key_source": "highlight",
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": "A",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q042-p11.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q042-p11.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "A",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": false
+    }
+   ],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-043",
+   "number": "43",
+   "stem": "Which is complicated chest injury? ตอบ Flail chest",
+   "choices": {},
+   "correct": null,
+   "key_source": null,
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q043-p11.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q043-p11.png"
+   ],
+   "opinions": [],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-044",
+   "number": "44",
+   "stem": "A 20-year-old man has a history of a recent dental root infection shows up with right facial swelling. A warm, red, tender fluctuant mass push up the root of mouth. What sinus is the most likely to be affected?",
+   "choices": {
+    "A": "frontal",
+    "B": "sphenoid",
+    "C": "maxillary",
+    "D": "anterior ethmoid",
+    "E": "posterior ethmoid"
+   },
+   "correct": "C",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "C",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q044-p11.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q044-p11.png"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "C",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-045",
+   "number": "45",
+   "stem": "Most common site of nasal bleeding ตอบ",
+   "choices": {},
+   "correct": null,
+   "key_source": null,
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q045-p11.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q045-p11.png"
+   ],
+   "opinions": [],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-046",
+   "number": "46",
+   "stem": "Which of the following change occurs during inspiration?",
+   "choices": {
+    "A": "Intrapleural pressure is more positive",
+    "B": "Transpulmonary pressure is more negative",
+    "C": "Alveolar pressure is lower than atmospheric pressure",
+    "D": "Lung compliance decrease"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q046-p11.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q046-p11.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-047",
+   "number": "47",
+   "stem": "Which of the following conditions cause the positive pleural pressure?",
+   "choices": {
+    "A": "End of forced expiration",
+    "B": "Beginning of inspiration",
+    "C": "End of inspiration",
+    "D": "End of expiration",
+    "E": "Beginning of expiration"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q047-p11.png",
+    "library/images/respiratory-49-mcq/q/crop-q047-p12.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q047-p11.png",
+    "library/images/respiratory-49-mcq/k/crop-q047-p12.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-048",
+   "number": "48",
+   "stem": "Which of the following increase the airway resistance?",
+   "choices": {
+    "A": "staying at high altitude",
+    "B": "in steam room"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q048-p12.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q048-p12.png"
+   ],
+   "opinions": [],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-049",
+   "number": "49",
+   "stem": "Higher value at apex than base",
+   "choices": {
+    "A": "intra alveolar pressure",
+    "B": "resting volume"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q049-p12.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q049-p12.png"
+   ],
+   "opinions": [],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-050",
+   "number": "50",
+   "stem": "Condition อะไรสMงผลใหb v/q ratio ลดลง",
+   "choices": {
+    "A": "Atelectasis",
+    "B": "Emphysema",
+    "C": "Embolism",
+    "D": "Hemorrhage"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q050-p12.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q050-p12.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-051",
+   "number": "51",
+   "stem": "ทำอะไรถึงทำใหb Pco2 ลดลงในคนสุขภาพดี",
+   "choices": {
+    "A": "moderate exercise",
+    "B": "scuba diving",
+    "C": "mountain climbing",
+    "D": "หายใจในถุง"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)",
+    "โจทย์อ้างถึงรูป แต่ไม่พบรูปในโจทย์"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q051-p12.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q051-p12.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-052",
+   "number": "52",
+   "stem": "Which of the following occurs in the patient with anemia?",
+   "choices": {
+    "A": "normal O2 capacity",
+    "B": "normal PO2 content",
+    "C": "normal HbO2 saturation",
+    "D": "decrease arterial PO2",
+    "E": "decrease HbO2 saturation"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q052-p12.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q052-p12.png",
+    "library/images/respiratory-49-mcq/k/crop-q052-p13.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-053",
+   "number": "53",
+   "stem": "increase intracranial pressure เกิด Breathing pattern แบบไหน",
+   "choices": {
+    "A": "Biot’s breathing",
+    "B": "Kussmaul’s respiration",
+    "C": "Ondine’s curse",
+    "D": "Apneustic breathing",
+    "E": "Cheyne-Strokes respiration"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q053-p13.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q053-p13.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-054",
+   "number": "54",
+   "stem": "ชายอายุ 45 ใหbอาการ หมอ prescribed chlorpheniramine ถาม moa ตอบ",
+   "choices": {},
+   "correct": null,
+   "key_source": null,
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q054-p13.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q054-p13.png"
+   ],
+   "opinions": [],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-055",
+   "number": "55",
+   "stem": "60-year-old woman มีประวัติ น้ำหนักลด 4 กิโลกรัมใน 3 เดือน, hemoptysis, pleuritic chest pain for 2 weeks, CXR เจอ reticulonodular infiltration และ cavitation ถามวMา biopsy จะเจอ histologic finding แบบไหน",
+   "choices": {
+    "A": "Septate hyphae fungus with dichotomous branching",
+    "B": "Epithelioid cell aggregation and Langhans giant cell",
+    "C": "Squamous epithelioid cells with keratin and numerous mitosis"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q055-p13.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q055-p13.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-056",
+   "number": "56",
+   "stem": "Captain 35 ปï เปqน allergic symptoms ตbองใหbยาอะไรที่สามารถทำงานไดbปกติ",
+   "choices": {
+    "A": "Chlorpheniramine",
+    "B": "Pyroxamine",
+    "C": "Hydroxyzine"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q056-p13.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q056-p13.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-057",
+   "number": "57",
+   "stem": "Right hilum mass ตรวจยังไง",
+   "choices": {
+    "A": "Sputum examination",
+    "B": "Transthoracic needle biopsy",
+    "C": "Bronchoscope and biopsy",
+    "D": "Brushing and cytology",
+    "E": "Washing and cytology"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q057-p13.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q057-p13.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-058",
+   "number": "58",
+   "stem": "Autopsy พบ goblet cell metaplasia smooth muscle hyperplasia มี infiltrate eosinophil",
+   "choices": {
+    "A": "Bronchitis",
+    "B": "Bronchieectasis",
+    "C": "Acute bronchitis",
+    "D": "Chtonic bronchitis",
+    "E": "Asthma bronchitis"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q058-p14.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q058-p14.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-059",
+   "number": "59",
+   "stem": "A 7-years-old boy had dyspnea and chronic wet cough for 1 year. He was diagnosed pneumonia for 5 times. The physical examination shows SpO2 90%, crackles both lung, AP diameter increase and clubbing fingers. The x-ray reveals tram-track sign peri- bronchial area with bronchial dilatation. What is the pathophysiology of this case?",
+   "choices": {
+    "A": "Elastic change of alveoli",
+    "B": "Broncho-alveolar damage",
+    "C": "Destruction of alveolar-capillary basement membrane",
+    "D": "Obstruction of mucus production",
+    "E": "Bronchial hyper responsive"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q059-p14.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q059-p14.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "similar": [
+    "respiratory-51-mcq-095"
+   ],
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-060",
+   "number": "60",
+   "stem": "A male fetal who born from maternal DM. He develops grunting and cyanosis immediately after birth. His CXR shows bilateral reticulogranular both lungs. Which of the following material is responsible for this condition?",
+   "choices": {
+    "A": "mucin",
+    "B": "lecithin",
+    "C": "sphingomyelin",
+    "D": "glucagon-like peptide",
+    "E": "dipalmitoyl phosphatidylcholine"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q060-p14.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q060-p14.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-061",
+   "number": "61",
+   "stem": "หากตbองการตรวจหาเชื้อจาก saliva ควรปฏิบัติอยMางไรในการเก็บตัวอยMาง",
+   "choices": {
+    "A": "งดน้ำหรืออาหารอยMางนbอย 1 ชั่วโมงกMอนเก็บ saliva",
+    "B": "บbวนปากดbวยน้ำเปลMากMอนเก็บตัวอยMาง",
+    "C": "ดื่มน้ำแลbวจึงเก็บ saliva หลังตื่นนอนในตอนเชbา"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q061-p14.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q061-p14.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-062",
+   "number": "62",
+   "stem": "เด็กพึ่งเกิด ตายในสองวัน มี atelectasis ตอบ เบาหวาน (gestational diabetes)",
+   "choices": {},
+   "correct": null,
+   "key_source": null,
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q062-p15.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q062-p15.png"
+   ],
+   "opinions": [],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-063",
+   "number": "63",
+   "stem": "A 16-year-old lady has acute dyspnea. Her ABG analysis show PH 7.60, PO2 120 mmHg, PCO2 20 mmHg, HCO3- 26 mmol/L, SaO2 99%. What is the interpretation of her ABG analysis?",
+   "choices": {
+    "A": "Acute respiratory alkalosis",
+    "B": "Chronic respiratory alkalosis",
+    "C": "Metabolic alkalosis, uncompensated",
+    "D": "Mix respiratory and Metabolic alkalosis",
+    "E": "Metabolic alkalosis, partially compensated"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q063-p15.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q063-p15.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-064",
+   "number": "64",
+   "stem": "A 60-year-old man, presents with dyspnea on exertion with chronic productive cough for 6 years. He had no fever nor weight loss. PE: good consciousness, not pale no jaundice, Lung: occasional wheezing and crepitation in both lungs Heart: no murmur, Extremities: No edema Which of the following is the possible pulmonary function test result?",
+   "choices": {
+    "A": "FEV1/FVC 70% predicted, FVC 65% predicted, TLC 68% predicted",
+    "B": "FEV1/FVC 85% predicted, FVC 50% predicted, TLC 50% predicted",
+    "C": "FEV1/FVC 65% predicted, FVC 55% predicted, TLC 95% predicted",
+    "D": "FEV1/FVC 90% predicted, FVC 30% predicted, TLC 80% predicted",
+    "E": "FEV1/FVC 50% predicted, FVC 60% predicted, TLC 60% predicted"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q064-p15.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q064-p15.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "respiratory-49-mcq-065",
+   "number": "65",
+   "stem": "A 40-year-old man current heavy smoking 1 pack per day for 4 years, present with chronic productive cough and dyspnea on exertion for 1 year. What is long term effect of smoking in this patient?",
+   "choices": {
+    "A": "Stimulate protease activity",
+    "B": "Induce high antiprotease activity",
+    "C": "Increase protease activity",
+    "D": "Inhibit oxygen free radicals",
+    "E": "Reduce antitrypsin activity"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/respiratory-49-mcq/q/crop-q065-p15.png",
+    "library/images/respiratory-49-mcq/q/crop-q065-p16.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-49-mcq/k/crop-q065-p15.png",
+    "library/images/respiratory-49-mcq/k/crop-q065-p16.png"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  }
+ ]
+}

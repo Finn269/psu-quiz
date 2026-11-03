@@ -1,6 +1,38 @@
 {
  "exams": [
   {
+   "id": "respiratory-49-mcq",
+   "block": "Respiratory",
+   "year_group": 2,
+   "cohort": "49",
+   "type": "MCQ",
+   "name": "Respiratory PSU 49 MCQ",
+   "file": "library/clean/respiratory-49-mcq.json",
+   "counts": {
+    "verified": 23,
+    "quick_check": 0,
+    "review": 27,
+    "rejected": 14
+   },
+   "total": 64
+  },
+  {
+   "id": "respiratory-51-mcq",
+   "block": "Respiratory",
+   "year_group": 2,
+   "cohort": "51",
+   "type": "MCQ",
+   "name": "Respiratory PSU 51 MCQ",
+   "file": "library/clean/respiratory-51-mcq.json",
+   "counts": {
+    "verified": 32,
+    "quick_check": 12,
+    "review": 14,
+    "rejected": 11
+   },
+   "total": 69
+  },
+  {
    "id": "respiratory-52-mcq",
    "block": "Respiratory",
    "year_group": 2,

@@ -8,6 +8,7 @@
 ไม่เดาเฉลยเอง: ถ้าไม่เห็นไฮไลต์ชัด จะได้ highlight.letter = None
 """
 import json
+import math
 import re
 import sys
 from collections import Counter
@@ -20,7 +21,8 @@ except ImportError:  # เวอร์ชันเก่า
 
 ZOOM = 2.0
 Q_RE = re.compile(r"^(\d{1,3})[.)]$")
-C_RE = re.compile(r"^([A-E])[.)](.*)$")
+C_RE = re.compile(r"^([A-Ea-e])[.)](.*)$")
+QGLUE_RE = re.compile(r"^(\d{1,3}[.)])(\D.*)$")
 LETTERS = "ABCDE"
 PLACEHOLDERS = {"", "-", "—", "–"}
 
@@ -35,11 +37,17 @@ def _page_words(page):
     out = []
     for x0, y0, x1, y1, text, block, line, wno in page.get_text("words", sort=True):
         m = C_RE.match(text)
+        g = QGLUE_RE.match(text) if wno == 0 else None  # เลขข้อติดข้อความ เช่น 12.ทารก
         if m and m.group(2):
             w = (x1 - x0)
             cut = x0 + w * 2 / max(len(text), 2)
             out.append({"t": text[0] + text[1], "b": (x0, y0, cut, y1), "line": (block, line), "wno": wno})
             out.append({"t": m.group(2), "b": (cut, y0, x1, y1), "line": (block, line), "wno": wno + 1})
+        elif g:
+            w = (x1 - x0)
+            cut = x0 + w * len(g.group(1)) / max(len(text), 2)
+            out.append({"t": g.group(1), "b": (x0, y0, cut, y1), "line": (block, line), "wno": wno})
+            out.append({"t": g.group(2), "b": (cut, y0, x1, y1), "line": (block, line), "wno": wno + 1})
         else:
             out.append({"t": text, "b": (x0, y0, x1, y1), "line": (block, line), "wno": wno})
     return out
@@ -87,6 +95,74 @@ def _fill_fraction(pix, rect):
     return hit / total if total else 0.0
 
 
+def _stroke_points(page):
+    """จุดตัวอย่างตามเส้นวาด (ทีละเส้น) ใช้หาว่ามีเส้นล้อมตัวอักษรเลือกหรือไม่"""
+    strokes = []
+    for d in page.get_drawings():
+        if d.get("type") not in ("s", "fs", "f"):
+            continue
+        if d["rect"].width > 60 or d["rect"].height > 60:   # ไม่ใช่วงกลม/ลายมือเล็ก ๆ
+            continue
+        pts = []
+        for it in d["items"]:
+            if it[0] == "l":
+                p1, p2 = it[1], it[2]
+                pts += [(p1.x + (p2.x - p1.x) * k / 6, p1.y + (p2.y - p1.y) * k / 6) for k in range(7)]
+            elif it[0] == "c":
+                p1, c1, c2, p2 = it[1], it[2], it[3], it[4]
+                for k in range(11):
+                    s = k / 10
+                    m = 1 - s
+                    pts.append((m ** 3 * p1.x + 3 * m * m * s * c1.x + 3 * m * s * s * c2.x + s ** 3 * p2.x,
+                                m ** 3 * p1.y + 3 * m * m * s * c1.y + 3 * m * s * s * c2.y + s ** 3 * p2.y))
+        if pts:
+            strokes.append(pts)
+    return strokes
+
+
+def _is_circled(strokes, mx, my):
+    """มีเส้นวาดเส้นเดียวล้อมจุด (mx,my) ที่รัศมี 5-17 pt ครอบคลุมอย่างน้อย 7 จาก 12 ช่วง (30 องศา) หรือไม่
+    (หรือเส้นโค้งหลายเส้นที่แต่ละเส้นครอบคลุม >= 4 ช่วง รวมกัน >= 9)
+    วงกลม/วงกลมไม่ปิด = ครอบคลุมมาก; กากบาท ขีดทับ เครื่องหมายถูก = ครอบคลุมน้อย จึงไม่นับ"""
+    per = []
+    through = 0  # จุดของเส้นที่พาดผ่านตัวอักษรเอง (กากบาท/ขีดฆ่า) วงกลมจริงต้องโปร่งตรงกลาง
+    for pts in strokes:
+        cov = set()
+        for x, y in pts:
+            dx, dy = x - mx, y - my
+            r = (dx * dx + dy * dy) ** 0.5
+            if r < 4.5:
+                through += 1
+            elif 5 <= r <= 17:
+                cov.add(int((math.degrees(math.atan2(dy, dx)) + 180) // 30) % 12)
+        per.append(cov)
+    if through >= 2:
+        return False
+    if any(len(c) >= 7 for c in per):
+        return True
+    arcs = [c for c in per if len(c) >= 4]
+    return len(set().union(*arcs)) >= 9 if arcs else False
+
+
+def _repair_zero_bbox(doc):
+    """บาง PDF มีเนื้อหาในฟอร์มที่ BBox = [0 0 0 0] ทำให้เห็นเป็นหน้าว่าง ซ่อมในหน่วยความจำ (ไม่แก้ไฟล์จริง)"""
+    fixed = 0
+    for pi in range(len(doc)):
+        page = doc[pi]
+        w, h = page.rect.width, page.rect.height
+        for x in page.get_xobjects():
+            xr = x[0]
+            try:
+                kind, val = doc.xref_get_key(xr, "BBox")
+            except Exception:
+                continue
+            nums = re.findall(r"-?\d+\.?\d*", val or "")
+            if kind == "array" and nums and all(float(v) == 0 for v in nums):
+                doc.xref_set_key(xr, "BBox", f"[0 0 {w:.0f} {h:.0f}]")
+                fixed += 1
+    return fixed
+
+
 def _annot_overlap(page, rect):
     """ถ้ามี highlight annotation ซ้อนทับกรอบ คืนสัดส่วนการซ้อน"""
     best = 0.0
@@ -104,14 +180,14 @@ def _annot_overlap(page, rect):
     return min(best, 1.0)
 
 
-def _decide_highlight(scores):
+def _decide_highlight(scores, min_best=0.30, amb_ratio=2.0, high_ratio=3.0, high_best=0.5):
     ranked = sorted(scores.items(), key=lambda kv: kv[1], reverse=True)
-    if not ranked or ranked[0][1] < 0.30:
+    if not ranked or ranked[0][1] < min_best:
         return {"letter": None, "confidence": "none", "scores": scores}
     best, second = ranked[0][1], (ranked[1][1] if len(ranked) > 1 else 0.0)
-    if second >= 0.30 and best < 2 * second:
+    if second >= min_best and best < amb_ratio * second:
         return {"letter": None, "confidence": "ambiguous", "scores": scores}
-    conf = "high" if best >= 0.5 and best >= 3 * max(second, 0.01) else "medium"
+    conf = "high" if best >= high_best and best >= high_ratio * max(second, 0.01) else "medium"
     return {"letter": ranked[0][0], "confidence": conf, "scores": scores}
 
 
@@ -119,6 +195,7 @@ def _decide_highlight(scores):
 def extract(pdf_path, out_dir, reference=None, rel_base=None):
     """reference: {เลขข้อ: {ตัวเลือก: ข้อความ}} ใช้กรองคำอธิบายแทรกในไฟล์เฉลย"""
     doc = fitz.open(pdf_path)
+    _repair_zero_bbox(doc)
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     rel_base = Path(rel_base) if rel_base else Path.cwd()
@@ -132,6 +209,7 @@ def extract(pdf_path, out_dir, reference=None, rel_base=None):
     words_by_page = [_page_words(p) for p in doc]
     noise = _repeated_margin_noise(doc, words_by_page)
     pix_cache = {}
+    loops_cache = {}
 
     def pix_of(pi):
         if pi not in pix_cache:
@@ -180,8 +258,8 @@ def extract(pdf_path, out_dir, reference=None, rel_base=None):
         marks, expect = [], 0
         for i, tk in enumerate(toks):
             m = C_RE.match(tk["t"])
-            if m and not m.group(2) and expect < 5 and m.group(1) == LETTERS[expect]:
-                marks.append((m.group(1), i))
+            if m and not m.group(2) and expect < 5 and m.group(1).upper() == LETTERS[expect]:
+                marks.append((LETTERS[expect], i))
                 expect += 1
         stem_end = marks[0][1] if marks else len(toks)
         stem_toks = toks[:stem_end]
@@ -223,6 +301,22 @@ def extract(pdf_path, out_dir, reference=None, rel_base=None):
                     s_sum += s * area
             scores[letter] = round(s_sum / w_sum, 3) if w_sum else 0.0
         highlight = _decide_highlight(scores)
+        highlight["method"] = "fill"
+        if highlight["confidence"] == "none":
+            # ไม่มีไฮไลต์พื้น -> หาวงกลมที่วาดล้อมตัวอักษรเลือก (a. b. c.) โดยดูจากรูปร่างเส้นวาด
+            circled = []
+            for letter, mi in marks:
+                mt = toks[mi]
+                if mt["page"] not in loops_cache:
+                    loops_cache[mt["page"]] = _stroke_points(doc[mt["page"]])
+                mx, my = (mt["b"][0] + mt["b"][2]) / 2, (mt["b"][1] + mt["b"][3]) / 2
+                if _is_circled(loops_cache[mt["page"]], mx, my):
+                    circled.append(letter)
+            sc = {L: (1.0 if L in circled else 0.0) for L, _ in marks}
+            if len(circled) == 1:
+                highlight = {"letter": circled[0], "confidence": "high", "scores": sc, "method": "circle"}
+            elif len(circled) > 1:
+                highlight = {"letter": None, "confidence": "ambiguous", "scores": sc, "method": "circle"}
 
         # ขอบเขตบนหน้า (ใช้ตัดรูป)
         pages = {}
