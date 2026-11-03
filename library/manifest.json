@@ -688,6 +688,121 @@
      "notes": ""
     }
    ]
+  },
+  {
+   "year_group": 2,
+   "block": "12_Community Health Immersion I",
+   "folder_drive_id": "1ErxHaPuXkmAlOE2bTGI1swGGH07HQ0pk",
+   "exam_folder_drive_id": "1yB2iSV7R6OkjiIZYQBEKfLpMf2sLZBe7",
+   "mcq_folder_drive_id": null,
+   "note": "ไฟล์อยู่ในโฟลเดอร์ข้อสอบโดยตรง (ไม่มีโฟลเดอร์ MCQ) ข้ามไฟล์ KF",
+   "exams": [
+    {
+     "cohort": "52",
+     "type": "MCQ",
+     "question_drive_id": "1G5GwVCR-2a3P9o7RQMMq4y2xeS2WmUEV",
+     "key_drive_id": "1U2s2m4UvJzZnA99BPlXiOfnnNZ9RPjUG",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "49",
+     "type": "MCQ",
+     "question_drive_id": null,
+     "key_drive_id": "1Zah-QXGJh_1GzpMdDHNx3mZyYO2y9whX",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "ไม่มีไฟล์ข้อสอบ; มีเฉลย 2 ไฟล์ ต้องเทียบกัน",
+     "alt_keys": [
+      {
+       "drive_id": "13mB48QlZTq40yl-7eaIaVoXkypP3XZuy",
+       "made_by": "52"
+      }
+     ]
+    },
+    {
+     "cohort": "48",
+     "type": "MCQ",
+     "question_drive_id": "1Kmdw7FHYcl2TNw5h6kRy5n5Knk45FooP",
+     "key_drive_id": "1Zzvy5xixkzkZ8iwL34yArPjh_bVv4Pwf",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "มีเฉลย 2 ไฟล์ ต้องเทียบกัน",
+     "alt_keys": [
+      {
+       "drive_id": "1SWfxrzz6bYvt-8DIXLur8eLGoT-nqfqL",
+       "made_by": "52"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "year_group": 2,
+   "block": "13_Fundamental of Health System Sciences",
+   "folder_drive_id": "1Mz-j7w4Ivg7s9ri-eIGICMp_LHgU2OqQ",
+   "exam_folder_drive_id": "1pB-qnywisIS9hL7_Kw85LIfTMjFVAqnK",
+   "mcq_folder_drive_id": null,
+   "note": "ไฟล์อยู่ในโฟลเดอร์ข้อสอบโดยตรง (ไม่มีโฟลเดอร์ MCQ) ข้ามไฟล์ KF",
+   "exams": [
+    {
+     "cohort": "52",
+     "type": "MCQ",
+     "question_drive_id": "1L6jzkUiad4NAD9SEy3gN1xnXXDRIhdna",
+     "key_drive_id": "1a__-rJE1TTvbgYkF_xyxdPRtPWc_xZb4",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    }
+   ]
+  },
+  {
+   "year_group": 2,
+   "block": "14_Community Health immersion II",
+   "folder_drive_id": "1EWPIGhBQrsdIN14I7LTr_dE4fAQ5bFl-",
+   "exam_folder_drive_id": "1oRRQgHsrYOnEeIrANGmE5pLcaL-XEJY8",
+   "mcq_folder_drive_id": null,
+   "note": "ไฟล์อยู่ในโฟลเดอร์ข้อสอบโดยตรง (ไม่มีโฟลเดอร์ MCQ) ข้ามไฟล์ KF",
+   "exams": [
+    {
+     "cohort": "52",
+     "type": "MCQ",
+     "question_drive_id": "14U8PEO1yoWEZ4WwR40PQZ9Ml6acw-fpn",
+     "key_drive_id": "1MUjlDxaQZllB1bAYX7cCnKY-Wyif2-Se",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "48",
+     "type": "MCQ",
+     "question_drive_id": "1ysfEMH1XfEosZJdkQSoIDDDrlbhJhXa7",
+     "key_drive_id": "1SsSA7yWEkTsuUwusjgph5bhjK-X3pZpT",
+     "key_made_by_cohort": "52",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 52 ต้องตรวจ"
+    }
+   ]
+  },
+  {
+   "year_group": 2,
+   "block": "15_Community Health Development",
+   "folder_drive_id": "1U0xha6zecCrR0BgI6toi40zuzwoBW1K9",
+   "exam_folder_drive_id": "1K9PTjf5TQYZ6OXpeDLrsKiAcQYao_DIf",
+   "mcq_folder_drive_id": null,
+   "note": "ไฟล์อยู่ในโฟลเดอร์ข้อสอบโดยตรง (ไม่มีโฟลเดอร์ MCQ) ข้ามไฟล์ KF",
+   "exams": [
+    {
+     "cohort": "52",
+     "type": "MCQ",
+     "question_drive_id": "1OACGezAjg-ejHNtk-s0oy3yX84sl4_Yb",
+     "key_drive_id": "1eXu07t-rtOWc84yTo3Y6OZHDzhsF1eHi",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    }
+   ]
   }
  ],
  "not_mcq_blocks": {
@@ -700,6 +815,14 @@
    "folder": "15k-E5fjufynpL_1cloN6ykYxJgDodcUr",
    "exam_folder": "1GFKtbYLnnbIaRRTEDd6M7FIC76fk-l0Q",
    "note": "มีเฉพาะข้อสอบแบบ KF ไม่ใช่ MCQ ยังไม่สแกน"
+  },
+  "10_วิชาเลือก": {
+   "folder": "1ifrW-JM98Uj6EXp_LpJTS-iLLqNfSz9-",
+   "note": "ไม่มีโฟลเดอร์ข้อสอบ"
+  },
+  "11_Exercise for Holistic Health": {
+   "folder": "1YGIo6vMZ9r1lzM8z_ARmZjPfQ7O4mKsz",
+   "note": "ไม่มีโฟลเดอร์ข้อสอบ"
   }
  },
  "other_exam_formats_note": "แต่ละบล็อกมีโฟลเดอร์ KF / OSPE / Formative แยกอยู่ ยังไม่ได้สแกน"
