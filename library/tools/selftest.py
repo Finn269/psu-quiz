@@ -40,7 +40,8 @@ def build(path, key=False):
     doc.new_page()
     p1, p2 = doc[0], doc[1]
     p1.insert_text((50, 60), "RESPIRATORY SYSTEM", fontsize=14)
-    p1.insert_text((50, 85), "1. Exam has 100 questions", fontsize=FS)  # หัวกระดาษ ไม่ใช่ข้อ 1
+    for i, line in enumerate(["1. first instruction", "2. second instruction", "3. third instruction"]):
+        p1.insert_text((215, 85 + 14 * i), line, fontsize=FS)  # คำชี้แจงกลางหน้า ไม่ใช่ข้อ
     # ข้อ 1: ตัวเลือกอยู่บรรทัดเดียว
     p1.insert_text((50, 130), "1. A patient was stabbed at the manubrium. Which structure is hit?", fontsize=FS)
     _inline(p1, 150, [("A", "Trachea"), ("B", "Aorta"), ("C", "Pulmonary artery"), ("D", "Pulmonary vein"), ("E", "Azygos vein")],

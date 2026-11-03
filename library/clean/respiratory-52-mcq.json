@@ -6,8 +6,8 @@
  "type": "MCQ",
  "name": "Respiratory PSU 52 MCQ",
  "source": {
-  "question_pdf": null,
-  "key_pdf": null,
+  "question_pdf": "library/raw/Respiratory/52/MCQ.pdf",
+  "key_pdf": "library/raw/Respiratory/52/MCQ-key.pdf",
   "drive_question_id": "1GxC5dfbZ4RNNcyVbsMsu3Jy4h59rD4jA",
   "drive_key_id": "1mm7nvFP9LZWhAvDOcEYZYeAQn0Bzf_Kk"
  },
@@ -28,16 +28,16 @@
  ],
  "source_note": "ไฟล์ต้นฉบับเขียนว่า ข้อ 94-100 จำไม่ได้",
  "counts": {
-  "verified": 49,
-  "quick_check": 12,
-  "review": 16,
+  "verified": 77,
+  "quick_check": 0,
+  "review": 0,
   "rejected": 3
  },
  "questions": [
   {
    "id": "respiratory-52-mcq-001",
    "number": "1",
-   "stem": "A patient was stabbed at the level of the manubrium of sternum. Which of the following\nstructures is most likely affected?",
+   "stem": "A patient was stabbed at the level of the manubrium of sternum. Which of the following structures is most likely affected?",
    "choices": {
     "A": "Tracheal bifurcated",
     "B": "Thoracic aorta",
@@ -46,23 +46,27 @@
     "E": "Azygos vein"
    },
    "correct": "A",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "A",
+    "confidence": "high"
    },
    "evidence": "carina (Tracheal bifurcated)",
    "old_correct": "A",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q001-p1.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q001-p1.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-002",
    "number": "2",
-   "stem": "A man was stabbed in the neck, 2 cm above the clavicle, and developed pneumothorax.\nWhich of the following structures is most likely injured?",
+   "stem": "A man was stabbed in the neck, 2 cm above the clavicle, and developed pneumothorax. Which of the following structures is most likely injured?",
    "choices": {
     "A": "Cervical pleura",
     "B": "Clavicular pleura",
@@ -71,23 +75,27 @@
     "E": "Posterior pleura reflection"
    },
    "correct": "A",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "A",
+    "confidence": "high"
    },
    "evidence": "cervical pleura อยู่ apex of lung",
    "old_correct": "A",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q002-p1.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q002-p1.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-003",
    "number": "3",
-   "stem": "A patient presents with herpes zoster (shingles) lesions at the umbilical region.\nWhich of the following dermatomes corresponds to this region?",
+   "stem": "A patient presents with herpes zoster (shingles) lesions at the umbilical region. Which of the following dermatomes corresponds to this region?",
    "choices": {
     "A": "T4",
     "B": "T6",
@@ -96,48 +104,56 @@
     "E": "T12"
    },
    "correct": "D",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "D",
+    "confidence": "high"
    },
    "evidence": "umbilicus T10",
    "old_correct": "D",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q003-p1.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q003-p1.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-004",
    "number": "4",
-   "stem": "45-year-old man has history of hoarseness for 1 month. A chest X-ray shows a mass at\naortopulmonary window. Which of following left-sided nerve most likely to be compressed?",
+   "stem": "45-year-old man has history of hoarseness for 1 month. A chest X-ray shows a mass at aortopulmonary window. Which of following left-sided nerve most likely to be compressed?",
    "choices": {
     "A": "Vagus nerve",
     "B": "Phrenic nerve",
-    "C": "3 rd intercostal nerve",
+    "C": "3rd intercostal nerve",
     "D": "Greater splanchnic nerve",
     "E": "Recurrent laryngeal nerve"
    },
    "correct": "E",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "E",
+    "confidence": "high"
    },
    "evidence": "Lt. recurrent laryngeal nerve",
    "old_correct": "E",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q004-p2.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q004-p2.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-005",
    "number": "5",
-   "stem": "A 60-year-old man has worked in a shipyard handling asbestos insulation for 35 years. He\npresents with fever (38.5°C), productive cough with yellow sputum, and shortness of breath\nfor 3 days. On examination, there are crackles over the right lower lung field. Chest X-ray\nshows right lower-lobe consolidation. Which of the following is the most likely diagnosis?",
+   "stem": "A 60-year-old man has worked in a shipyard handling asbestos insulation for 35 years. He presents with fever (38.5°C), productive cough with yellow sputum, and shortness of breath for 3 days. On examination, there are crackles over the right lower lung field. Chest X-ray shows right lower-lobe consolidation. Which of the following is the most likely diagnosis?",
    "choices": {
     "A": "Community-acquired pneumonia",
     "B": "Asbestosis",
@@ -145,26 +161,28 @@
     "D": "Lung cancer",
     "E": "Pulmonary embolism"
    },
-   "correct": null,
-   "key_source": null,
-   "status": "review",
-   "reasons": [
-    "ไฟล์เฉลยแค่ตัดตัวเลือก asbestosis ออก ไม่ระบุคำตอบ"
-   ],
+   "correct": "A",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "A",
+    "confidence": "high"
    },
    "evidence": null,
    "old_correct": "A",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q005-p2.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q005-p2.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-006",
    "number": "6",
-   "stem": "A 23-year-old man presents with a gunshot wound to the right chest. Chest X-ray shows\npleural effusion and partial collapse of the right lung. Which of the following is the most\nlikely site for intrapleural fluid accumulation?",
+   "stem": "A 23-year-old man presents with a gunshot wound to the right chest. Chest X-ray shows pleural effusion and partial collapse of the right lung. Which of the following is the most likely site for intrapleural fluid accumulation?",
    "choices": {
     "A": "Posterior pleural reflection",
     "B": "Pulmonary ligament",
@@ -173,23 +191,27 @@
     "E": "Costodiaphragmatic recess"
    },
    "correct": "E",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "E",
+    "confidence": "high"
    },
    "evidence": "Costodiaphragmatic recess",
    "old_correct": "E",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q006-p2.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q006-p2.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-007",
    "number": "7",
-   "stem": "A hematoxylin & eosin (H&E)-stained section of lung tissue shows the following features:\nSimple ciliated columnar epithelium, Abundant smooth muscle and elastic fibers in the\nlamina propria, No cartilage or submucosal glands Which of the following structures is most\nlikely represented in this section?",
+   "stem": "A hematoxylin & eosin (H&E)-stained section of lung tissue shows the following features: Simple ciliated columnar epithelium, Abundant smooth muscle and elastic fibers in the lamina propria, No cartilage or submucosal glands Which of the following structures is most likely represented in this section?",
    "choices": {
     "A": "Trachea",
     "B": "Bronchus",
@@ -197,26 +219,28 @@
     "D": "Terminal bronchiole",
     "E": "Respiratory bronchiole"
    },
-   "correct": null,
-   "key_source": null,
-   "status": "review",
-   "reasons": [
-    "บรรยายลักษณะเนื้อเยื่ออย่างเดียว ไม่ระบุชื่อโครงสร้าง"
-   ],
+   "correct": "C",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "C",
+    "confidence": "high"
    },
    "evidence": null,
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q007-p3.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q007-p3.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-008",
    "number": "8",
-   "stem": "A patient is found to have inability of vocal cord abduction. Weakness of which of the\nfollowing muscles is most likely responsible?",
+   "stem": "A patient is found to have inability of vocal cord abduction. Weakness of which of the following muscles is most likely responsible?",
    "choices": {
     "A": "Cricothyroid",
     "B": "Oblique muscle",
@@ -225,23 +249,27 @@
     "E": "Transverse muscle"
    },
    "correct": "D",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "D",
+    "confidence": "high"
    },
    "evidence": "Posterior cricoarytenoid ... abduct",
    "old_correct": "D",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q008-p3.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q008-p3.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-009",
    "number": "9",
-   "stem": "50-years-old man working in a coal mine for 30 years has been persistent cough and\nincrease dyspnea. If a bronchial biopsy brush was done on this man. Which bronchial\nepithelium would be found?",
+   "stem": "50-years-old man working in a coal mine for 30 years has been persistent cough and increase dyspnea. If a bronchial biopsy brush was done on this man. Which bronchial epithelium would be found?",
    "choices": {
     "A": "Simple cuboidal epithelium",
     "B": "Stratified squamous epithelium",
@@ -250,26 +278,29 @@
     "E": "Transitional epithelium"
    },
    "correct": "B",
-   "key_source": "text-implied",
-   "status": "quick_check",
+   "key_source": "highlight",
+   "status": "verified",
    "reasons": [
-    "ไฟล์เฉลยไม่ระบุตรง ๆ ต้องตีความ ให้คนกวาดตาดู",
     "เฉลยเดิมในระบบ (C) ต่างจากเฉลยที่อ่านได้ (B)"
    ],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": "squamous metaplasia",
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q009-p3.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q009-p3.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-010",
    "number": "10",
-   "stem": "Which of the following muscles, when weakened or paralyzed, leads to impaired vocal\ncord adduction?",
+   "stem": "Which of the following muscles, when weakened or paralyzed, leads to impaired vocal cord adduction?",
    "choices": {
     "A": "Cricothyroid",
     "B": "Thyroarytenoid",
@@ -278,25 +309,29 @@
     "E": "Transverse arytenoid"
    },
    "correct": "E",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [
     "เฉลยเดิมในระบบ (B) ต่างจากเฉลยที่อ่านได้ (E)"
    ],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "E",
+    "confidence": "high"
    },
    "evidence": "Transverse arytenoid ... adduct",
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q010-p4.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q010-p4.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-011",
    "number": "11",
-   "stem": "infant presented to the emergency room after respiratory distress. On exam, he was\nobserved to have tachypnea, increased work of breathing, and decreased breath sounds.\nOn chest X-ray, he was found to have a congenital diaphragmatic hernia. Which of these\nstructures fail to develop?",
+   "stem": "infant presented to the emergency room after respiratory distress. On exam, he was observed to have tachypnea, increased work of breathing, and decreased breath sounds. On chest X-ray, he was found to have a congenital diaphragmatic hernia. Which of these structures fail to develop?",
    "choices": {
     "A": "Pericardioperitoneal canal",
     "B": "Pleuroperitoneal membrane",
@@ -305,23 +340,27 @@
     "E": "Lateral body wall folds"
    },
    "correct": "B",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": "Pleuroperitoneal membranes",
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q011-p4.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q011-p4.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-012",
    "number": "12",
-   "stem": "During the first minute of aerobic exercise, ventilation increases rapidly before significant\nchanges in blood gases occur. Which of the following mechanisms is primarily responsible?",
+   "stem": "During the first minute of aerobic exercise, ventilation increases rapidly before significant changes in blood gases occur. Which of the following mechanisms is primarily responsible?",
    "choices": {
     "A": "Decreased plasma K⁺",
     "B": "Activation of thermoreceptors",
@@ -330,23 +369,27 @@
     "E": "Activation of peripheral chemoreceptors"
    },
    "correct": "D",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "D",
+    "confidence": "high"
    },
    "evidence": "Proprioceptors",
    "old_correct": "D",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q012-p4.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q012-p4.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-013",
    "number": "13",
-   "stem": "In the patient with pulmonary fibrosis experiencing dyspnea, which muscle is actively\ninvolved when force expiration?",
+   "stem": "In the patient with pulmonary fibrosis experiencing dyspnea, which muscle is actively involved when force expiration?",
    "choices": {
     "A": "Diaphragm",
     "B": "Scalene muscle",
@@ -354,26 +397,28 @@
     "D": "Abdominal muscle",
     "E": "External intercostal muscle"
    },
-   "correct": null,
-   "key_source": null,
-   "status": "review",
-   "reasons": [
-    "พูดถึงกล้ามเนื้อหายใจออกทั่วไป ไม่ระบุกล้ามเนื้อ"
-   ],
+   "correct": "D",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "D",
+    "confidence": "high"
    },
    "evidence": null,
    "old_correct": "D",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q013-p5.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q013-p5.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-014",
    "number": "14",
-   "stem": "Which of the following lung volumes or airway parameters is typically higher in an\nelderly man compared with a young adult man?",
+   "stem": "Which of the following lung volumes or airway parameters is typically higher in an elderly man compared with a young adult man?",
    "choices": {
     "A": "Forced expiratory volume in 1 second (FEV₁)",
     "B": "Vital capacity (VC)",
@@ -381,26 +426,28 @@
     "D": "Airway diameter",
     "E": "Residual volume (RV)"
    },
-   "correct": null,
-   "key_source": null,
-   "status": "review",
-   "reasons": [
-    "พูดถึงการเปลี่ยนแปลงในผู้สูงอายุ ไม่ระบุค่าที่สูงขึ้น"
-   ],
+   "correct": "E",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "E",
+    "confidence": "high"
    },
    "evidence": null,
    "old_correct": "E",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q014-p5.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q014-p5.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-015",
    "number": "15",
-   "stem": "During forceful expiration, such as when coughing or exercising, which of the following\npressures primarily increases to push air out of the lungs?",
+   "stem": "During forceful expiration, such as when coughing or exercising, which of the following pressures primarily increases to push air out of the lungs?",
    "choices": {
     "A": "Intrapleural pressure",
     "B": "Transpulmonary pressure",
@@ -409,23 +456,27 @@
     "E": "None of the above"
    },
    "correct": "C",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "C",
+    "confidence": "high"
    },
    "evidence": "Alveolar pressure เพิ่มขึ้น ... อากาศไหลออก",
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q015-p5.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q015-p5.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-017",
    "number": "17",
-   "stem": "A 20-year-old man suffers a rib fracture that penetrates his right pleura. Which of the\nfollowing is the most likely pathophysiological effect?",
+   "stem": "A 20-year-old man suffers a rib fracture that penetrates his right pleura. Which of the following is the most likely pathophysiological effect?",
    "choices": {
     "A": "Lung collapse",
     "B": "Chest wall collapse",
@@ -434,18 +485,22 @@
     "E": "Decreased intrapleural pressure"
    },
    "correct": "A",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "A",
+    "confidence": "high"
    },
    "evidence": "ปอดข้างขวายุบตัว (Lung collapse)",
    "old_correct": "A",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q017-p5.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q017-p5.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-018",
@@ -459,23 +514,27 @@
     "E": "Increased transpulmonary pressure"
    },
    "correct": "B",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": "Increased alveolar surface tension",
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q018-p6.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q018-p6.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-019",
    "number": "19",
-   "stem": "A person suffers a severe brainstem injury. On examination, they exhibit deep and slow\nbreathing (Bradypnea with large tidal volumes). Which of the following brain areas is most\nlikely affected?",
+   "stem": "A person suffers a severe brainstem injury. On examination, they exhibit deep and slow breathing (Bradypnea with large tidal volumes). Which of the following brain areas is most likely affected?",
    "choices": {
     "A": "Medulla oblongata",
     "B": "Upper pons",
@@ -484,23 +543,27 @@
     "E": "Cerebellum"
    },
    "correct": "B",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": "Upper pons / Apneustic breathing",
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q019-p6.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q019-p6.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-020",
    "number": "20",
-   "stem": "When V/Q ratio of a lung region decreases (i.e., perfusion > ventilation), which of the\nfollowing changes in alveolar gas tension would you expect?",
+   "stem": "When V/Q ratio of a lung region decreases (i.e., perfusion > ventilation), which of the following changes in alveolar gas tension would you expect?",
    "choices": {
     "A": "Decreased PN₂",
     "B": "Increased PCO₂",
@@ -509,23 +572,27 @@
     "E": "Increased PO₂"
    },
    "correct": "B",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": "Alveolar PCO2 เพิ่มขึ้น",
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q020-p6.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q020-p6.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-021",
    "number": "21",
-   "stem": "A healthy adult experiences an increase in arterial CO₂ (hypercapnia). Which of the\nfollowing responses is most likely?",
+   "stem": "A healthy adult experiences an increase in arterial CO₂ (hypercapnia). Which of the following responses is most likely?",
    "choices": {
     "A": "Stop breathing",
     "B": "Moderate exercise",
@@ -534,25 +601,29 @@
     "E": "Decreased tidal volume"
    },
    "correct": "D",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [
     "เฉลยเดิมในระบบ (C) ต่างจากเฉลยที่อ่านได้ (D)"
    ],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "D",
+    "confidence": "high"
    },
    "evidence": "CO2 สูงขึ้น ... Bronchodilation",
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q021-p6.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q021-p6.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-022",
    "number": "22",
-   "stem": "Which of the following mechanisms is most likely to decrease arterial PO₂ in a patient\nwith asthma?",
+   "stem": "Which of the following mechanisms is most likely to decrease arterial PO₂ in a patient with asthma?",
    "choices": {
     "A": "Increased alveolar PCO₂",
     "B": "Increased pulmonary blood flow",
@@ -561,25 +632,29 @@
     "E": "Increased respiratory membrane thickness"
    },
    "correct": "D",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [
     "เฉลยเดิมในระบบ (A) ต่างจากเฉลยที่อ่านได้ (D)"
    ],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "D",
+    "confidence": "high"
    },
    "evidence": "alveolar-capillary PO2 difference ลดลง",
    "old_correct": "A",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q022-p7.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q022-p7.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-023",
    "number": "23",
-   "stem": "A preterm infant (28 weeks) presents with tachypnea, grunting, intercostal retractions,\nand cyanosis. Chest X-ray shows diffuse ground-glass appearance with air bronchograms.\nWhich of the following is the most likely physiological response?",
+   "stem": "A preterm infant (28 weeks) presents with tachypnea, grunting, intercostal retractions, and cyanosis. Chest X-ray shows diffuse ground-glass appearance with air bronchograms. Which of the following is the most likely physiological response?",
    "choices": {
     "A": "Normal tidal volumes with minimal effort",
     "B": "Increased work of breathing to maintain minute ventilation",
@@ -588,25 +663,27 @@
     "E": "Increased functional residual capacity (FRC)"
    },
    "correct": "B",
-   "key_source": "text-implied",
-   "status": "quick_check",
-   "reasons": [
-    "ไฟล์เฉลยไม่ระบุตรง ๆ ต้องตีความ ให้คนกวาดตาดู"
-   ],
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": "ต้องใช้แรงมากขึ้นในการหายใจ",
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q023-p7.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q023-p7.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-024",
    "number": "24",
-   "stem": "In an upright, healthy adult, which of the following parameters is higher at the apex of\nthe lung compared to the base?",
+   "stem": "In an upright, healthy adult, which of the following parameters is higher at the apex of the lung compared to the base?",
    "choices": {
     "A": "Blood flow",
     "B": "Lung compliance",
@@ -615,23 +692,27 @@
     "E": "Airflow"
    },
    "correct": "C",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "C",
+    "confidence": "high"
    },
    "evidence": "transpulmonary pressure สูงกว่า",
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q024-p7.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q024-p7.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-025",
    "number": "25",
-   "stem": "A 30-year-old man presents with throat pain after swallowing fish. He reports that\nfood passage is painful. Where is the most likely site where the fish bone is lodged?",
+   "stem": "A 30-year-old man presents with throat pain after swallowing fish. He reports that food passage is painful. Where is the most likely site where the fish bone is lodged?",
    "choices": {
     "A": "Pyriform recess",
     "B": "Soft palate",
@@ -640,23 +721,27 @@
     "E": "Uvula"
    },
    "correct": "A",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "A",
+    "confidence": "medium"
    },
    "evidence": "pyriform recess",
    "old_correct": "A",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q025-p7.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q025-p7.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-026",
    "number": "26",
-   "stem": "An X-ray of a patient reveals a tumor located at the floor of the orbit. Which paranasal\nsinus is the most likely origin of this tumor?",
+   "stem": "An X-ray of a patient reveals a tumor located at the floor of the orbit. Which paranasal sinus is the most likely origin of this tumor?",
    "choices": {
     "A": "Frontal sinus",
     "B": "Maxillary sinus",
@@ -665,18 +750,22 @@
     "E": "Posterior ethmoidal air cell"
    },
    "correct": "B",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": "maxillary sinus",
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q026-p8.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q026-p8.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-027",
@@ -690,18 +779,22 @@
     "E": "Pulmonary embolism"
    },
    "correct": "A",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "A",
+    "confidence": "medium"
    },
    "evidence": "atelectasis ... V/Q ratio ลด",
    "old_correct": "A",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q027-p8.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q027-p8.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-028",
@@ -715,23 +808,27 @@
     "E": "HCO₃⁻ in plasma"
    },
    "correct": "E",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "E",
+    "confidence": "high"
    },
    "evidence": "70% ... bicarbonate (HCO3-)",
    "old_correct": "E",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q028-p8.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q028-p8.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-029",
    "number": "29",
-   "stem": "A newborn presents with excessive drooling, choking, and cyanosis during attempts at\nfeeding. The neonatologist attempts to pass a nasogastric tube, but it cannot be advanced\ninto the stomach. Imaging shows coiling of the tube in the upper esophagus. What is the\nmost likely underlying anatomical defect?",
+   "stem": "A newborn presents with excessive drooling, choking, and cyanosis during attempts at feeding. The neonatologist attempts to pass a nasogastric tube, but it cannot be advanced into the stomach. Imaging shows coiling of the tube in the upper esophagus. What is the most likely underlying anatomical defect?",
    "choices": {
     "A": "Pyloric stenosis",
     "B": "Esophageal web",
@@ -739,26 +836,30 @@
     "D": "Tracheoesophageal septum malformation",
     "E": "Laryngeal atresia"
    },
-   "correct": null,
-   "key_source": null,
-   "status": "review",
+   "correct": "D",
+   "key_source": "highlight",
+   "status": "verified",
    "reasons": [
-    "ไฟล์เฉลยพูดถึงทั้ง tracheoesophageal fistula และ septum malformation (ตรงกับ C และ D) กำกวม"
+    "เฉลยเดิมในระบบ (C) ต่างจากเฉลยที่อ่านได้ (D)"
    ],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "D",
+    "confidence": "high"
    },
    "evidence": null,
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q029-p8.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q029-p8.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-030",
    "number": "30",
-   "stem": "A preterm neonate presents with tachypnea, grunting, and chest retractions shortly after\nbirth. Chest X-ray shows a “ground glass” appearance. The underlying abnormality is most\nlikely due to dysfunction or deficiency of which cells?",
+   "stem": "A preterm neonate presents with tachypnea, grunting, and chest retractions shortly after birth. Chest X-ray shows a “ground glass” appearance. The underlying abnormality is most likely due to dysfunction or deficiency of which cells?",
    "choices": {
     "A": "Type I pneumocytes",
     "B": "Type II pneumocytes",
@@ -767,23 +868,27 @@
     "E": "Alveolar macrophages"
    },
    "correct": "B",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": "Type II pneumocytes ผลิต surfactant",
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q030-p9.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q030-p9.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-031",
    "number": "31",
-   "stem": "In neonatal respiratory distress syndrome (RDS), which of the following best describes\nthe consequence of surfactant deficiency in the lungs?",
+   "stem": "In neonatal respiratory distress syndrome (RDS), which of the following best describes the consequence of surfactant deficiency in the lungs?",
    "choices": {
     "A": "An increase of lung compliance",
     "B": "Stabilized alveolar volume",
@@ -792,25 +897,29 @@
     "E": "An increase of airway resistance"
    },
    "correct": "E",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [
     "เฉลยเดิมในระบบ (D) ต่างจากเฉลยที่อ่านได้ (E)"
    ],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "E",
+    "confidence": "high"
    },
    "evidence": "ขาด surfactant ... เพิ่ม airway resistance",
    "old_correct": "D",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q031-p9.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q031-p9.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-032",
    "number": "32",
-   "stem": "A patient with diabetes mellitus presents with altered ventilation(ketoacidosis). Which of\nthe following receptors is primarily responsible for detecting hypoxemia and mediating\nincreased breathing rate in this patient?",
+   "stem": "A patient with diabetes mellitus presents with altered ventilation(ketoacidosis). Which of the following receptors is primarily responsible for detecting hypoxemia and mediating increased breathing rate in this patient?",
    "choices": {
     "A": "Juxtacapillary (J) receptors",
     "B": "Proprioceptors",
@@ -819,23 +928,27 @@
     "E": "Peripheral chemoreceptors"
    },
    "correct": "E",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "E",
+    "confidence": "high"
    },
    "evidence": "Peripheral chemoreceptors",
    "old_correct": "E",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q032-p9.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q032-p9.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-033",
    "number": "33",
-   "stem": "A 60-year-old man presents with acute pulmonary edema. He complains of dyspnea and\nrapid, shallow breathing. Which of the following receptors is primarily responsible for\nstimulating this abnormal breathing pattern?",
+   "stem": "A 60-year-old man presents with acute pulmonary edema. He complains of dyspnea and rapid, shallow breathing. Which of the following receptors is primarily responsible for stimulating this abnormal breathing pattern?",
    "choices": {
     "A": "Peripheral chemoreceptors",
     "B": "Juxtacapillary (J) receptors",
@@ -844,23 +957,27 @@
     "E": "Proprioceptors"
    },
    "correct": "B",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": "J receptors",
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q033-p10.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q033-p10.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-034",
    "number": "34",
-   "stem": "A 30-year-old man develops pulmonary edema after severe hypoxemia. His chest X-ray\nshows bilateral infiltrates, and pulmonary capillary wedge pressure is normal. Which of the\nfollowing best describes the mechanism of his pulmonary edema?",
+   "stem": "A 30-year-old man develops pulmonary edema after severe hypoxemia. His chest X-ray shows bilateral infiltrates, and pulmonary capillary wedge pressure is normal. Which of the following best describes the mechanism of his pulmonary edema?",
    "choices": {
     "A": "Increased hydrostatic pressure",
     "B": "High permeability of alveolar-capillary membrane",
@@ -869,23 +986,27 @@
     "E": "Airway obstruction"
    },
    "correct": "B",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": "alveolar-capillary membrane permeability เพิ่ม (ARDS)",
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q034-p10.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q034-p10.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-035",
    "number": "35",
-   "stem": "In the oxygen-hemoglobin dissociation curve, which of the following conditions increases\noxygen-hemoglobin affinity (shifts the curve to the left)?",
+   "stem": "In the oxygen-hemoglobin dissociation curve, which of the following conditions increases oxygen-hemoglobin affinity (shifts the curve to the left)?",
    "choices": {
     "A": "Hypercapnia",
     "B": "Lactic acidosis",
@@ -894,23 +1015,27 @@
     "E": "Increased body temperature"
    },
    "correct": "C",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "C",
+    "confidence": "high"
    },
    "evidence": "Respiratory alkalosis",
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q035-p10.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q035-p10.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-036",
    "number": "36",
-   "stem": "A 32-year-old man presents with chronic cough, weight loss, and night sweats. Chest X-\nray shows upper lobe infiltrates with cavitation. Biopsy of the lung lesion shows\ngranulomatous inflammation. Which of the following cells are typically seen in this\ncondition?",
+   "stem": "A 32-year-old man presents with chronic cough, weight loss, and night sweats. Chest X- ray shows upper lobe infiltrates with cavitation. Biopsy of the lung lesion shows granulomatous inflammation. Which of the following cells are typically seen in this condition?",
    "choices": {
     "A": "Neutrophils and eosinophils",
     "B": "Epitheloid cells and Langhans giant cells",
@@ -918,26 +1043,28 @@
     "D": "Plasma cells and B lymphocytes",
     "E": "Fibroblasts and chondrocytes"
    },
-   "correct": null,
-   "key_source": null,
-   "status": "review",
-   "reasons": [
-    "ไฟล์เฉลยแค่บอกว่าเข้ากับ tuberculosis ไม่ระบุเซลล์"
-   ],
+   "correct": "B",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": null,
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q036-p11.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q036-p11.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-037",
    "number": "37",
-   "stem": "A patient is stabbed in the right lower chest. He develops pneumothorax. On chest X-\nray, which lung region should be carefully evaluated for collapse or injury?",
+   "stem": "A patient is stabbed in the right lower chest. He develops pneumothorax. On chest X- ray, which lung region should be carefully evaluated for collapse or injury?",
    "choices": {
     "A": "Right upper lobe",
     "B": "Right middle lobe",
@@ -945,26 +1072,28 @@
     "D": "Left upper lobe",
     "E": "Left lower lobe"
    },
-   "correct": null,
-   "key_source": null,
-   "status": "review",
-   "reasons": [
-    "ไม่มีคำอธิบายในไฟล์เฉลย"
-   ],
+   "correct": "C",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "C",
+    "confidence": "high"
    },
    "evidence": null,
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q037-p11.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q037-p11.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-038",
    "number": "38",
-   "stem": "A 40-year-old man suffers injuries in a car accident. On examination, he is breathing\nshallowly and slowly. Which of the following respiratory centers is most likely affected?",
+   "stem": "A 40-year-old man suffers injuries in a car accident. On examination, he is breathing shallowly and slowly. Which of the following respiratory centers is most likely affected?",
    "choices": {
     "A": "Apneustic center (APN)",
     "B": "Pneumotaxic center (PNC)",
@@ -973,20 +1102,24 @@
     "E": "Reticular activating system (RAS)"
    },
    "correct": "C",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [
     "เฉลยเดิมในระบบ (D) ต่างจากเฉลยที่อ่านได้ (C)"
    ],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "C",
+    "confidence": "high"
    },
    "evidence": "Ventral respiratory group (VRG)",
    "old_correct": "D",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q038-p11.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q038-p11.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-039",
@@ -1000,23 +1133,27 @@
     "E": "Pneumothorax"
    },
    "correct": "D",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "D",
+    "confidence": "high"
    },
    "evidence": "Pulmonary fibrosis",
    "old_correct": "D",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q039-p11.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q039-p11.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-040",
    "number": "40",
-   "stem": "In which of the following situations would a healthy person most likely develop an\nincrease in arterial PCO₂?",
+   "stem": "In which of the following situations would a healthy person most likely develop an increase in arterial PCO₂?",
    "choices": {
     "A": "Moderate exercise",
     "B": "Mountain climbing",
@@ -1025,23 +1162,27 @@
     "E": "Staying in a high-altitude area for several weeks"
    },
    "correct": "C",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "C",
+    "confidence": "high"
    },
    "evidence": "ใต้น้ำหายใจไม่ได้ ... (scuba)",
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q040-p12.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q040-p12.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-041",
    "number": "41",
-   "stem": "A 60-year-old man presents with progressive dyspnea and pleuritic chest pain. Physical\nexamination shows decreased breath sounds and stony dullness on percussion at the right\nlower lung zone. Pleural effusion is suspected. Which chest X-ray (CXR) view would best\ndemonstrate the presence of pleural effusion?",
+   "stem": "A 60-year-old man presents with progressive dyspnea and pleuritic chest pain. Physical examination shows decreased breath sounds and stony dullness on percussion at the right lower lung zone. Pleural effusion is suspected. Which chest X-ray (CXR) view would best demonstrate the presence of pleural effusion?",
    "choices": {
     "A": "Posteroanterior (PA) view",
     "B": "Anteroposterior (AP) supine view",
@@ -1050,20 +1191,22 @@
     "E": "Lordotic view"
    },
    "correct": "C",
-   "key_source": "text-implied",
-   "status": "quick_check",
-   "reasons": [
-    "ไฟล์เฉลยไม่ระบุตรง ๆ ต้องตีความ ให้คนกวาดตาดู"
-   ],
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "C",
+    "confidence": "high"
    },
    "evidence": "layering of fluid ชัดเจนกว่าท่าอื่น",
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q041-p12.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q041-p12.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-043",
@@ -1077,18 +1220,22 @@
     "E": "Functional residual capacity (FRC)"
    },
    "correct": "E",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "E",
+    "confidence": "high"
    },
    "evidence": "FRC",
    "old_correct": "E",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q043-p12.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q043-p12.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-044",
@@ -1099,26 +1246,30 @@
     "B": "At tidal volume at rest (functional residual capacity, FRC)",
     "C": "During vagus nerve stimulation",
     "D": "During forced expiration",
-    "E": "At total lung capacity (TLC)  VICHAKARN MED PSU 52"
+    "E": "At total lung capacity (TLC)"
    },
    "correct": "E",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "E",
+    "confidence": "medium"
    },
    "evidence": "TLC ... Resistance ต่ำที่สุด",
    "old_correct": "E",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q044-p12.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q044-p12.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-046",
    "number": "46",
-   "stem": "A 30-year-old man has a respiratory rate (RR) of 10 breaths/min. His tidal volume (Vt) is\nsuch that total ventilation = 8 L/min. The physiological dead space (Vd) is 200 mL.\nCalculate the alveolar ventilation (Va)",
+   "stem": "A 30-year-old man has a respiratory rate (RR) of 10 breaths/min. His tidal volume (Vt) is such that total ventilation = 8 L/min. The physiological dead space (Vd) is 200 mL. Calculate the alveolar ventilation (Va)",
    "choices": {
     "A": "4.0 L/min",
     "B": "5.0 L/min",
@@ -1127,23 +1278,27 @@
     "E": "7.0 L/min"
    },
    "correct": "C",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "C",
+    "confidence": "high"
    },
    "evidence": "Va=(Vt-Vd)xRR; 8 L/min, RR 10, Vd 200 mL = 6.0 L/min",
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q046-p13.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q046-p13.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-047",
    "number": "47",
-   "stem": "A 60-year-old smoker presents with progressive shortness of breath. Pulmonary function\ntest shows decreased FEV₁ and increased lung compliance. What is the most likely diagnosis?",
+   "stem": "A 60-year-old smoker presents with progressive shortness of breath. Pulmonary function test shows decreased FEV₁ and increased lung compliance. What is the most likely diagnosis?",
    "choices": {
     "A": "Asthma",
     "B": "Pneumonia",
@@ -1152,25 +1307,27 @@
     "E": "Pulmonary fibrosis"
    },
    "correct": "C",
-   "key_source": "text-implied",
-   "status": "quick_check",
-   "reasons": [
-    "ไฟล์เฉลยไม่ระบุตรง ๆ ต้องตีความ ให้คนกวาดตาดู"
-   ],
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "C",
+    "confidence": "high"
    },
    "evidence": "FEV1 ลด compliance เพิ่ม ... air trapping",
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q047-p13.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q047-p13.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-048",
    "number": "48",
-   "stem": "A 16-year-old girl with severe allergic asthma continues to have frequent exacerbations\ndespite high-dose inhaled corticosteroids and long-acting β2 agonists. Which of the following\ndrugs binds to IgE and prevents it from activating mast cells and basophils?",
+   "stem": "A 16-year-old girl with severe allergic asthma continues to have frequent exacerbations despite high-dose inhaled corticosteroids and long-acting β2 agonists. Which of the following drugs binds to IgE and prevents it from activating mast cells and basophils?",
    "choices": {
     "A": "Omalizumab",
     "B": "Montelukast",
@@ -1179,20 +1336,22 @@
     "E": "Ipratropium"
    },
    "correct": "A",
-   "key_source": "text-implied",
-   "status": "quick_check",
-   "reasons": [
-    "ไฟล์เฉลยไม่ระบุตรง ๆ ต้องตีความ ให้คนกวาดตาดู"
-   ],
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "A",
+    "confidence": "high"
    },
    "evidence": "Anti-IgE monoclonal antibody",
    "old_correct": "A",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q048-p13.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q048-p13.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-051",
@@ -1205,25 +1364,29 @@
     "D": "Mast cell degranulation"
    },
    "correct": "C",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [
     "ตัวเลือก E เป็น '-'"
    ],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "C",
+    "confidence": "high"
    },
    "evidence": "ลด eosinophil recruitment และ activation",
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q051-p14.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q051-p14.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-053",
    "number": "53",
-   "stem": "A 45-year-old man with chronic bronchitis presents with productive cough and difficulty\nexpectorating sputum. The physician prescribes a drug that not only helps liquefy and\nclear mucus, but also has the ability to stimulate pulmonary surfactant production,\nimproving lung function. Which of the following drugs was most likely prescribed?",
+   "stem": "A 45-year-old man with chronic bronchitis presents with productive cough and difficulty expectorating sputum. The physician prescribes a drug that not only helps liquefy and clear mucus, but also has the ability to stimulate pulmonary surfactant production, improving lung function. Which of the following drugs was most likely prescribed?",
    "choices": {
     "A": "Carbocysteine",
     "B": "Ambroxol",
@@ -1232,18 +1395,22 @@
     "E": "Acetylcysteine"
    },
    "correct": "B",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": "Ambroxol",
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q053-p14.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q053-p14.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-054",
@@ -1253,51 +1420,59 @@
     "A": "Carbocysteine"
    },
    "correct": null,
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "rejected",
    "reasons": [
     "ตัวเลือก B-E เป็น '-' (มีตัวเลือกจริงข้อเดียว)",
     "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
    ],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "A",
+    "confidence": "high"
    },
    "evidence": "carbocysteine",
    "old_correct": "A",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q054-p14.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q054-p14.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-055",
    "number": "55",
-   "stem": "A 30-year-old man with allergic rhinitis uses a topical nasal decongestant spray for\nseveral days. Which of the following adverse effects should be monitored or warned about?",
+   "stem": "A 30-year-old man with allergic rhinitis uses a topical nasal decongestant spray for several days. Which of the following adverse effects should be monitored or warned about?",
    "choices": {
     "A": "Rebound congestion (rhinitis medicamentosa)",
     "B": "Sedation",
     "C": "Gastrointestinal bleeding",
     "D": "Hypoglycemia",
-    "E": "Pulmonary fibrosis  VICHAKARN MED PSU 52"
+    "E": "Pulmonary fibrosis"
    },
    "correct": "A",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "A",
+    "confidence": "high"
    },
    "evidence": "Rhinitis medicamentosa (Rebound congestion)",
    "old_correct": "A",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q055-p14.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q055-p14.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-056",
    "number": "56",
-   "stem": "Which effect of first-generation H1 antihistamines is responsible for reducing rhinorrhea in\ncommon cold?",
+   "stem": "Which effect of first-generation H1 antihistamines is responsible for reducing rhinorrhea in common cold?",
    "choices": {
     "A": "Antimuscarinic",
     "B": "Antiserotonergic",
@@ -1306,72 +1481,84 @@
     "E": "Beta-adrenergic stimulation"
    },
    "correct": "A",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "A",
+    "confidence": "high"
    },
    "evidence": "ยับยั้ง muscarinic receptor",
    "old_correct": "A",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q056-p15.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q056-p15.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-057",
    "number": "57",
-   "stem": "Regarding antihistamines, if the patient is concerned about sedation, which medication\ncauses the least drowsiness?",
+   "stem": "Regarding antihistamines, if the patient is concerned about sedation, which medication causes the least drowsiness?",
    "choices": {
     "A": "Lorathadine"
    },
    "correct": null,
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "rejected",
    "reasons": [
     "ตัวเลือก B-E เป็น '-' (มีตัวเลือกจริงข้อเดียว)",
     "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
    ],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "A",
+    "confidence": "high"
    },
    "evidence": "non-drowsy second-generation antihistamine",
    "old_correct": "A",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q057-p15.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q057-p15.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-058",
    "number": "58",
-   "stem": "A 50-year-old man with COPD has an acute exacerbation with wheezing and dyspnea.\nAfter endotracheal intubation, which chest X-ray position is most appropriate to confirm the\ntube placement?",
+   "stem": "A 50-year-old man with COPD has an acute exacerbation with wheezing and dyspnea. After endotracheal intubation, which chest X-ray position is most appropriate to confirm the tube placement?",
    "choices": {
     "A": "PA",
     "B": "Portable CXR, AP",
     "C": "Portable CXR, lordotic",
     "D": "Lateral",
-    "E": "Left lateral decubitus  VICHAKARN MED PSU 52"
+    "E": "Left lateral decubitus"
    },
    "correct": "B",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": "Portable CXR, AP",
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q058-p15.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q058-p15.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-059",
    "number": "59",
-   "stem": "A 58-year-old man presents with chronic cough and upper chest pain. The physician\nsuspects a Pancoast tumor at the apex of the right lung. Which type of chest X-ray projection\nis most appropriate to visualize the lung apex clearly?",
+   "stem": "A 58-year-old man presents with chronic cough and upper chest pain. The physician suspects a Pancoast tumor at the apex of the right lung. Which type of chest X-ray projection is most appropriate to visualize the lung apex clearly?",
    "choices": {
     "A": "PA (Posteroanterior)",
     "B": "AP (Anteroposterior)",
@@ -1380,25 +1567,27 @@
     "E": "Left lateral decubitus"
    },
    "correct": "D",
-   "key_source": "text-implied",
-   "status": "quick_check",
-   "reasons": [
-    "ไฟล์เฉลยไม่ระบุตรง ๆ ต้องตีความ ให้คนกวาดตาดู"
-   ],
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "D",
+    "confidence": "high"
    },
    "evidence": "ไม่มีกระดูกบังยอดปอด",
    "old_correct": "D",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q059-p16.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q059-p16.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-060",
    "number": "60",
-   "stem": "A 62-year-old male smoker undergoes a chest X-ray. There is a well-defined mass in right\nupper lobe (indicated by the arrow). What is most likely radiographic density of this mass?",
+   "stem": "A 62-year-old male smoker undergoes a chest X-ray. There is a well-defined mass in right upper lobe (indicated by the arrow). What is most likely radiographic density of this mass?",
    "choices": {
     "A": "Air",
     "B": "Soft tissue",
@@ -1406,23 +1595,27 @@
     "D": "Bone",
     "E": "Fat"
    },
-   "correct": null,
-   "key_source": null,
-   "status": "review",
+   "correct": "B",
+   "key_source": "highlight",
+   "status": "verified",
    "reasons": [
-    "โจทย์อ้างถึงรูป (indicated by the arrow) ต้องมีรูป",
-    "ไม่มีคำอธิบาย และโจทย์อ้างถึงรูป",
-    "โจทย์อ้างถึงรูป ต้องใช้ PDF เพื่อตัดรูป"
+    "โจทย์อ้างถึงรูป (indicated by the arrow) ต้องมีรูป"
    ],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": null,
    "old_correct": "B",
-   "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "images": [
+    "library/images/respiratory-52-mcq/q/q060-img1.png"
+   ],
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q060-p16.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q060-p16.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-061",
@@ -1436,23 +1629,27 @@
     "E": "Posterior mediastinum"
    },
    "correct": "C",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "C",
+    "confidence": "high"
    },
    "evidence": "RML อยู่ด้านหน้าติด mediastinum ขวา",
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q061-p16.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q061-p16.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-063",
    "number": "63",
-   "stem": "A 55-year-old woman with a 30-year history of smoking presents with chronic cough.\nA bronchial biopsy reveals squamous epithelium with keratin pearls and prominent\nintercellular bridges. Which of the following is the most likely radiographic pattern of her\nlung lesion?",
+   "stem": "A 55-year-old woman with a 30-year history of smoking presents with chronic cough. A bronchial biopsy reveals squamous epithelium with keratin pearls and prominent intercellular bridges. Which of the following is the most likely radiographic pattern of her lung lesion?",
    "choices": {
     "A": "Large hilar mass",
     "B": "Central lung nodule",
@@ -1460,26 +1657,28 @@
     "D": "Multiple peripheral nodules",
     "E": "Central mass and a peripheral nodule"
    },
-   "correct": null,
-   "key_source": null,
-   "status": "review",
-   "reasons": [
-    "ไฟล์เฉลยบอกว่าอยู่ central ที่ main bronchus แต่ตัวเลือก A, B, E ล้วนเกี่ยวกับ central กำกวม"
-   ],
+   "correct": "A",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "A",
+    "confidence": "high"
    },
    "evidence": null,
    "old_correct": "A",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q063-p17.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q063-p17.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-065",
    "number": "65",
-   "stem": "A 65-year-old male with a 40-pack-year smoking history presents with a central lung\nmass. Biopsy shows small, round blue cells with scant cytoplasm. Immunohistochemistry\nreveals positivity for a neuroendocrine marker and TTF-1. Which combination of IHC markers\nis most useful to confirm the diagnosis of small cell lung carcinoma?",
+   "stem": "A 65-year-old male with a 40-pack-year smoking history presents with a central lung mass. Biopsy shows small, round blue cells with scant cytoplasm. Immunohistochemistry reveals positivity for a neuroendocrine marker and TTF-1. Which combination of IHC markers is most useful to confirm the diagnosis of small cell lung carcinoma?",
    "choices": {
     "A": "CK7 + TTF-1",
     "B": "CK7 + CK20",
@@ -1500,13 +1699,17 @@
    "evidence": null,
    "old_correct": "D",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q065-p17.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q065-p17.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-068",
    "number": "68",
-   "stem": "A 36-week gestation neonate is born with respiratory distress. Imaging shows the spleen,\nliver, and intestines herniated into the left thoracic cavity. What is the most likely\ncomplication affecting the lungs?",
+   "stem": "A 36-week gestation neonate is born with respiratory distress. Imaging shows the spleen, liver, and intestines herniated into the left thoracic cavity. What is the most likely complication affecting the lungs?",
    "choices": {
     "A": "Congenital heart disease",
     "B": "Pulmonary agenesis",
@@ -1515,25 +1718,27 @@
     "E": "Intrauterine infection"
    },
    "correct": "D",
-   "key_source": "text-implied",
-   "status": "quick_check",
-   "reasons": [
-    "ไฟล์เฉลยไม่ระบุตรง ๆ ต้องตีความ ให้คนกวาดตาดู"
-   ],
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "D",
+    "confidence": "high"
    },
    "evidence": "อวัยวะอื่นไปเบียดปอด ทำให้โตน้อย",
    "old_correct": "D",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q068-p18.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q068-p18.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-069",
    "number": "69",
-   "stem": "A 2-year-old boy presents with fever, cough, and signs of otitis media. Gram stain of a\nnasopharyngeal swab shows small Gram-negative coccobacilli. Culture is negative on blood\nagar but grows on chocolate agar. Which organism is the most likely cause?",
+   "stem": "A 2-year-old boy presents with fever, cough, and signs of otitis media. Gram stain of a nasopharyngeal swab shows small Gram-negative coccobacilli. Culture is negative on blood agar but grows on chocolate agar. Which organism is the most likely cause?",
    "choices": {
     "A": "Moraxella catarrhalis",
     "B": "Streptococcus pneumoniae",
@@ -1542,25 +1747,27 @@
     "E": "Bordetella pertussis"
    },
    "correct": "C",
-   "key_source": "text-implied",
-   "status": "quick_check",
-   "reasons": [
-    "ไฟล์เฉลยไม่ระบุตรง ๆ ต้องตีความ ให้คนกวาดตาดู"
-   ],
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "C",
+    "confidence": "high"
    },
    "evidence": "gram-negative coccobacilli, grow only on chocolate agar",
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q069-p18.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q069-p18.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-070",
    "number": "70",
-   "stem": "A 25-year-old male suffers a traumatic brain injury with a complete transection above\nthe pons. Which of the following is expected?",
+   "stem": "A 25-year-old male suffers a traumatic brain injury with a complete transection above the pons. Which of the following is expected?",
    "choices": {
     "A": "The voluntary control of breathing disappears",
     "B": "Only inhalation occurs",
@@ -1569,25 +1776,27 @@
     "E": "Peripheral chemoreceptors cannot control ventilation"
    },
    "correct": "A",
-   "key_source": "text-implied",
-   "status": "quick_check",
-   "reasons": [
-    "ไฟล์เฉลยไม่ระบุตรง ๆ ต้องตีความ ให้คนกวาดตาดู"
-   ],
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "A",
+    "confidence": "high"
    },
    "evidence": "ตัดทางเชื่อมสัญญาณ voluntary จาก cerebral cortex",
    "old_correct": "A",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q070-p18.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q070-p18.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-072",
    "number": "72",
-   "stem": "A 20-year-old man presents with a history of repeated severe pneumonia since\nchildhood. Chest CT shows marked dilation of the right bronchi. Which of the following best\nexplains the underlying cause of his condition?",
+   "stem": "A 20-year-old man presents with a history of repeated severe pneumonia since childhood. Chest CT shows marked dilation of the right bronchi. Which of the following best explains the underlying cause of his condition?",
    "choices": {
     "A": "Severe alveolar wall destruction",
     "B": "Goblet cell hyperplasia with excessive mucus secretion",
@@ -1596,25 +1805,27 @@
     "E": "Malignant tumor obstructing the right main bronchus"
    },
    "correct": "D",
-   "key_source": "text-implied",
-   "status": "quick_check",
-   "reasons": [
-    "ไฟล์เฉลยไม่ระบุตรง ๆ ต้องตีความ ให้คนกวาดตาดู"
-   ],
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "D",
+    "confidence": "high"
    },
    "evidence": "bronchiectasis: ติดเชื้อรุนแรงซ้ำ หลอดลมขยาย",
    "old_correct": "D",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q072-p19.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q072-p19.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-074",
    "number": "74",
-   "stem": "A 68-year-old presents with fever, chills, and productive cough. Sputum Gram stain\nshows Gram-positive, lancet-shaped diplococci. Which of the following additional laboratory\nfindings would support the diagnosis?",
+   "stem": "A 68-year-old presents with fever, chills, and productive cough. Sputum Gram stain shows Gram-positive, lancet-shaped diplococci. Which of the following additional laboratory findings would support the diagnosis?",
    "choices": {
     "A": "Grows on McConkey agar, oxidase positive",
     "B": "Non-hemolytic colonies, optochin resistant",
@@ -1623,23 +1834,27 @@
     "E": "α-hemolytic colonies on blood agar, optochin sensitive"
    },
    "correct": "E",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "E",
+    "confidence": "high"
    },
    "evidence": "alpha-hemolysis, optochin sensitive",
    "old_correct": "E",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q074-p19.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q074-p19.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-075",
    "number": "75",
-   "stem": "A 70-year-old man presents with high fever, productive cough, and pleuritic chest pain.\nGram stain of sputum shows Gram-positive lancet-shaped diplococci. Colonies are alpha-\nhemolytic and optochin-sensitive. Most likely causative organism?",
+   "stem": "A 70-year-old man presents with high fever, productive cough, and pleuritic chest pain. Gram stain of sputum shows Gram-positive lancet-shaped diplococci. Colonies are alpha- hemolytic and optochin-sensitive. Most likely causative organism?",
    "choices": {
     "A": "Moraxella catarrhalis",
     "B": "Streptococcus pneumoniae",
@@ -1648,23 +1863,27 @@
     "E": "Legionella pneumophila"
    },
    "correct": "B",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": "Strep pneumoniae",
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q075-p19.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q075-p19.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-077",
    "number": "77",
-   "stem": "A 12-year-old boy presents with high fever, headache, myalgia, sore throat, and cough\nduring flu season. The physician wants to confirm influenza A infection. Which specimen is\nmost appropriate?",
+   "stem": "A 12-year-old boy presents with high fever, headache, myalgia, sore throat, and cough during flu season. The physician wants to confirm influenza A infection. Which specimen is most appropriate?",
    "choices": {
     "A": "Nasopharyngeal swab in viral transport medium",
     "B": "Throat swab",
@@ -1673,23 +1892,27 @@
     "E": "Stool sample"
    },
    "correct": "A",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "A",
+    "confidence": "high"
    },
    "evidence": "Nasopharynx เชื้อเยอะ -> swab",
    "old_correct": "A",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q077-p20.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q077-p20.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-078",
    "number": "78",
-   "stem": "A 28-year-old man presents with high fever, cough, and progressive dyspnea. He reports\nthat during the past 2 weeks, several chickens he raised at home have died suddenly. Avian\ninfluenza infection is suspected. Which of the following is the most appropriate specimen for\nlaboratory confirmation of the diagnosis?",
+   "stem": "A 28-year-old man presents with high fever, cough, and progressive dyspnea. He reports that during the past 2 weeks, several chickens he raised at home have died suddenly. Avian influenza infection is suspected. Which of the following is the most appropriate specimen for laboratory confirmation of the diagnosis?",
    "choices": {
     "A": "EDTA blood",
     "B": "Sputum (lower respiratory tract specimen)",
@@ -1697,26 +1920,28 @@
     "D": "Throat swab",
     "E": "Urine"
    },
-   "correct": null,
-   "key_source": null,
-   "status": "review",
-   "reasons": [
-    "ไม่มีคำอธิบายเฉพาะข้อนี้"
-   ],
+   "correct": "B",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": null,
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q078-p20.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q078-p20.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-079",
    "number": "79",
-   "stem": "A chest X-ray shows a well-defined mass in the right middle lobe of the lung. Which of\nthe following best describes the radiographic density of this lesion?",
+   "stem": "A chest X-ray shows a well-defined mass in the right middle lobe of the lung. Which of the following best describes the radiographic density of this lesion?",
    "choices": {
     "A": "Metal",
     "B": "Soft tissue",
@@ -1724,26 +1949,30 @@
     "D": "Bone",
     "E": "Air"
    },
-   "correct": null,
-   "key_source": null,
-   "status": "review",
+   "correct": "A",
+   "key_source": "highlight",
+   "status": "verified",
    "reasons": [
-    "ไฟล์เฉลยเขียนว่า density เยอะ ไม่ชัดว่า soft tissue หรือ bone"
+    "เฉลยเดิมในระบบ (B) ต่างจากเฉลยที่อ่านได้ (A)"
    ],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "A",
+    "confidence": "high"
    },
    "evidence": null,
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q079-p20.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q079-p20.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-080",
    "number": "80",
-   "stem": "Which of the following cells is the major source of interleukin-5 (IL-5), a cytokine that\nplays an important role in eosinophil activation and proliferation?",
+   "stem": "Which of the following cells is the major source of interleukin-5 (IL-5), a cytokine that plays an important role in eosinophil activation and proliferation?",
    "choices": {
     "A": "Macrophage",
     "B": "Neutrophil",
@@ -1751,26 +1980,28 @@
     "D": "Th2 lymphocyte",
     "E": "Dendritic cell"
    },
-   "correct": null,
-   "key_source": null,
-   "status": "review",
-   "reasons": [
-    "ไฟล์เฉลยพูดถึงหน้าที่ของ IL-5 ไม่ระบุเซลล์ต้นทาง"
-   ],
+   "correct": "D",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "D",
+    "confidence": "high"
    },
    "evidence": null,
    "old_correct": "D",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q080-p21.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q080-p21.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-081",
    "number": "81",
-   "stem": "A patient undergoes venous blood sampling, and air accidentally enters the syringe.\nWhich of the following changes is expected in the measured arterial blood gas?",
+   "stem": "A patient undergoes venous blood sampling, and air accidentally enters the syringe. Which of the following changes is expected in the measured arterial blood gas?",
    "choices": {
     "A": "Decreased PaO₂",
     "B": "Decreased PaCO₂",
@@ -1779,23 +2010,27 @@
     "E": "No change"
    },
    "correct": "B",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": "PaO2 เพิ่มขึ้น, PaCO2 ลดลง",
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q081-p21.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q081-p21.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-082",
    "number": "82",
-   "stem": "A patient presents with sudden dyspnea, hemoptysis, and hypoxemia after blunt chest\ntrauma. Chest X-ray shows diffuse alveolar infiltrates. Which of the following best describes\nthe site of bleeding?",
+   "stem": "A patient presents with sudden dyspnea, hemoptysis, and hypoxemia after blunt chest trauma. Chest X-ray shows diffuse alveolar infiltrates. Which of the following best describes the site of bleeding?",
    "choices": {
     "A": "Intrapleural bleeding",
     "B": "Intrapulmonary bleeding",
@@ -1804,23 +2039,27 @@
     "E": "Bronchial lumen"
    },
    "correct": "B",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": "intrapulmonary bleeding",
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q082-p21.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q082-p21.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-083",
    "number": "83",
-   "stem": "A 40-year-old man presents with fever, productive cough, dyspnea, and inspiratory\ncrepitations on chest auscultation. Chest X-ray reveals consolidation in the right lower lobe.\nWhich of the following is the main mechanism leading to hypoxemia in this patient?",
+   "stem": "A 40-year-old man presents with fever, productive cough, dyspnea, and inspiratory crepitations on chest auscultation. Chest X-ray reveals consolidation in the right lower lobe. Which of the following is the main mechanism leading to hypoxemia in this patient?",
    "choices": {
     "A": "Increased diffusion capacity of the lung",
     "B": "Increased alveolar ventilation",
@@ -1829,23 +2068,27 @@
     "E": "Decreased oxygen consumption in the tissues"
    },
    "correct": "D",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "D",
+    "confidence": "high"
    },
    "evidence": "V/Q mismatch (shunt-like)",
    "old_correct": "D",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q083-p21.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q083-p21.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-084",
    "number": "84",
-   "stem": "A 19-year-old man has recurrent spontaneous pneumothorax. Which of the following is\nthe most likely underlying cause?",
+   "stem": "A 19-year-old man has recurrent spontaneous pneumothorax. Which of the following is the most likely underlying cause?",
    "choices": {
     "A": "Rib fracture",
     "B": "Rupture of subpleural bleb",
@@ -1854,23 +2097,27 @@
     "E": "Hemothorax"
    },
    "correct": "B",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "B",
+    "confidence": "high"
    },
    "evidence": "rupture of subpleural blebs",
    "old_correct": "B",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q084-p22.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q084-p22.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-085",
    "number": "85",
-   "stem": "A 30-year-old man presents with fever, weight loss, and chronic cough. Chest X-ray\nshows a cavitary lesion, and sputum is AFB-positive (3+). Which of the following immune\nmechanisms is most important for controlling this organism?",
+   "stem": "A 30-year-old man presents with fever, weight loss, and chronic cough. Chest X-ray shows a cavitary lesion, and sputum is AFB-positive (3+). Which of the following immune mechanisms is most important for controlling this organism?",
    "choices": {
     "A": "Complement activity",
     "B": "IgE overactivation",
@@ -1879,25 +2126,27 @@
     "E": "CD4 T-cell-mediated activation of macrophages"
    },
    "correct": "E",
-   "key_source": "text-implied",
-   "status": "quick_check",
-   "reasons": [
-    "ไฟล์เฉลยไม่ระบุตรง ๆ ต้องตีความ ให้คนกวาดตาดู"
-   ],
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "E",
+    "confidence": "high"
    },
    "evidence": "Th1 + macrophage activation (IFN-g)",
    "old_correct": "E",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q085-p22.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q085-p22.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-086",
    "number": "86",
-   "stem": "A 4-year-old boy is brought to the emergency room after accidentally ingesting\npetroleum oil. Physical examination shows bilateral crepitations, nasal flaring, and\nhypoxemia (SaO₂ = 90%). After administering 100% oxygen, the hypoxemia persists. Which\nof the following mechanisms best explains the hypoxemia in this patient?",
+   "stem": "A 4-year-old boy is brought to the emergency room after accidentally ingesting petroleum oil. Physical examination shows bilateral crepitations, nasal flaring, and hypoxemia (SaO₂ = 90%). After administering 100% oxygen, the hypoxemia persists. Which of the following mechanisms best explains the hypoxemia in this patient?",
    "choices": {
     "A": "Excessive mucus production",
     "B": "Airway hypersensitivity and bronchospasm",
@@ -1906,23 +2155,27 @@
     "E": "Hypoventilation"
    },
    "correct": "C",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "C",
+    "confidence": "high"
    },
    "evidence": "surfactant ถูกทำลาย ... intrapulmonary shunt",
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q086-p22.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q086-p22.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-087",
    "number": "87",
-   "stem": "A 35-year-old woman presents with sudden shortness of breath and anxiety. ABG:\npH 7.48, PaCO₂ 28 mmHg, HCO₃⁻ 24 mEq/L. What is the primary acid-base disorder?",
+   "stem": "A 35-year-old woman presents with sudden shortness of breath and anxiety. ABG: pH 7.48, PaCO₂ 28 mmHg, HCO₃⁻ 24 mEq/L. What is the primary acid-base disorder?",
    "choices": {
     "A": "Metabolic acidosis",
     "B": "Metabolic alkalosis",
@@ -1930,26 +2183,28 @@
     "D": "Acute respiratory alkalosis",
     "E": "Mixed disorder"
    },
-   "correct": null,
-   "key_source": null,
-   "status": "review",
-   "reasons": [
-    "ไม่มีคำอธิบายเฉพาะข้อนี้"
-   ],
+   "correct": "D",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "D",
+    "confidence": "high"
    },
    "evidence": null,
    "old_correct": "D",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q087-p23.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q087-p23.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-088",
    "number": "88",
-   "stem": "A 25-year-old man with type 1 diabetes mellitus presents to the emergency room with\nnausea, vomiting, abdominal pain, and fatigue for the past 2 days. He reports polyuria and\npolydipsia. On examination, he is tachypneic with deep, rapid respirations. Laboratory\nfindings show: glucose 450 mg/dL,Serum ketones: positive, ABG: pH 7.33, PaCO₂ 28 mmHg,\nHCO₃⁻ 15 mEq/L. Which of the following best describes his primary acid-base disorder?",
+   "stem": "A 25-year-old man with type 1 diabetes mellitus presents to the emergency room with nausea, vomiting, abdominal pain, and fatigue for the past 2 days. He reports polyuria and polydipsia. On examination, he is tachypneic with deep, rapid respirations. Laboratory findings show: glucose 450 mg/dL,Serum ketones: positive, ABG: pH 7.33, PaCO₂ 28 mmHg, HCO₃⁻ 15 mEq/L. Which of the following best describes his primary acid-base disorder?",
    "choices": {
     "A": "Compensated metabolic acidosis",
     "B": "Metabolic alkalosis",
@@ -1957,26 +2212,28 @@
     "D": "Acute respiratory alkalosis",
     "E": "Mixed disorder"
    },
-   "correct": null,
-   "key_source": null,
-   "status": "review",
-   "reasons": [
-    "ไม่มีคำอธิบายในไฟล์เฉลย"
-   ],
+   "correct": "A",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "A",
+    "confidence": "high"
    },
    "evidence": null,
    "old_correct": "A",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q088-p23.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q088-p23.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-089",
    "number": "89",
-   "stem": "A 32-year-old woman is brought to the emergency department with sudden onset of\nshortness of breath, chest pain, palpitations, and dizziness after receiving news of a family\nemergency. She is anxious, restless, and breathing rapidly at 30 breaths/min. Physical\nexamination reveals no cyanosis and clear lung sounds. ABG shows: pH 7.51, PaCO₂\n28 mmHg, HCO₃⁻23 mEq/L. Which of the following is the most likely acid-base disorder?",
+   "stem": "A 32-year-old woman is brought to the emergency department with sudden onset of shortness of breath, chest pain, palpitations, and dizziness after receiving news of a family emergency. She is anxious, restless, and breathing rapidly at 30 breaths/min. Physical examination reveals no cyanosis and clear lung sounds. ABG shows: pH 7.51, PaCO₂ 28 mmHg, HCO₃⁻23 mEq/L. Which of the following is the most likely acid-base disorder?",
    "choices": {
     "A": "Acute respiratory acidosis",
     "B": "Compensated metabolic acidosis",
@@ -1985,25 +2242,27 @@
     "E": "Mixed disorder"
    },
    "correct": "C",
-   "key_source": "text-implied",
-   "status": "quick_check",
-   "reasons": [
-    "ไฟล์เฉลยไม่ระบุตรง ๆ ต้องตีความ ให้คนกวาดตาดู"
-   ],
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "C",
+    "confidence": "high"
    },
    "evidence": "pH สูง PaCO2 ต่ำ HCO3- ปกติ",
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q089-p23.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q089-p23.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-090",
    "number": "90",
-   "stem": "A 65-year-old man with chronic bronchitis presents with progressive dyspnea. Arterial\nblood gas shows PaO₂ 60 mmHg, PaCO₂ 40 mmHg. He is given supplemental oxygen, and\nhis PaO₂ improves significantly. Which of the following is the most likely mechanism of his\nhypoxemia?",
+   "stem": "A 65-year-old man with chronic bronchitis presents with progressive dyspnea. Arterial blood gas shows PaO₂ 60 mmHg, PaCO₂ 40 mmHg. He is given supplemental oxygen, and his PaO₂ improves significantly. Which of the following is the most likely mechanism of his hypoxemia?",
    "choices": {
     "A": "Hypoventilation",
     "B": "Diffusion impairment",
@@ -2012,23 +2271,27 @@
     "E": "Low inspired O₂"
    },
    "correct": "C",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "C",
+    "confidence": "medium"
    },
    "evidence": "V/Q mismatch",
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q090-p24.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q090-p24.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-091",
    "number": "91",
-   "stem": "A 3-year-old child with cyanotic congenital heart disease presents with low oxygen\nsaturation despite oxygen therapy. Which mechanism best explains the hypoxemia?",
+   "stem": "A 3-year-old child with cyanotic congenital heart disease presents with low oxygen saturation despite oxygen therapy. Which mechanism best explains the hypoxemia?",
    "choices": {
     "A": "Hypoventilation",
     "B": "Diffusion impairment",
@@ -2037,23 +2300,27 @@
     "E": "Low inspired O₂"
    },
    "correct": "D",
-   "key_source": "text",
+   "key_source": "highlight",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "D",
+    "confidence": "high"
    },
    "evidence": "R to L shunt",
    "old_correct": "D",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q091-p24.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q091-p24.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-092",
    "number": "92",
-   "stem": "A 35-year-old man is brought to the emergency room after a car accident. He has\nmultiple rib fractures involving several adjacent ribs. On physical examination, the chest wall\nmoves inward during inspiration and outward during expiration. Which of the following best\nexplains this paradoxical chest wall movement?",
+   "stem": "A 35-year-old man is brought to the emergency room after a car accident. He has multiple rib fractures involving several adjacent ribs. On physical examination, the chest wall moves inward during inspiration and outward during expiration. Which of the following best explains this paradoxical chest wall movement?",
    "choices": {
     "A": "Flail chest due to multiple rib fractures",
     "B": "Pneumothorax causing mediastinal shift",
@@ -2061,26 +2328,28 @@
     "D": "Hemothorax compressing the lung",
     "E": "Pulmonary contusion"
    },
-   "correct": null,
-   "key_source": null,
-   "status": "review",
-   "reasons": [
-    "ไม่มีคำอธิบายในไฟล์เฉลย"
-   ],
+   "correct": "A",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "A",
+    "confidence": "high"
    },
    "evidence": null,
    "old_correct": "A",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q092-p24.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q092-p24.png"
+   ]
   },
   {
    "id": "respiratory-52-mcq-093",
    "number": "93",
-   "stem": "A 32-year-old woman accidentally aspirates a peanut while laughing. On chest examination,\ndecreased breath sounds are noted on the right lower lung field. Which of the following\nanatomic characteristics best explains why aspirated foreign bodies are more likely to lodge\nin the right lower lobe bronchus?",
+   "stem": "A 32-year-old woman accidentally aspirates a peanut while laughing. On chest examination, decreased breath sounds are noted on the right lower lung field. Which of the following anatomic characteristics best explains why aspirated foreign bodies are more likely to lodge in the right lower lobe bronchus?",
    "choices": {
     "A": "Right main bronchus is longer and more horizontal than the left",
     "B": "Right main bronchus is narrower and more curved than the left",
@@ -2088,21 +2357,23 @@
     "D": "Left main bronchus is shorter and wider than the right",
     "E": "Left main bronchus is more vertical than the right 94-100 จำไม่ได้งับอ้วงง"
    },
-   "correct": null,
-   "key_source": null,
-   "status": "review",
-   "reasons": [
-    "ไม่มีคำอธิบายในไฟล์เฉลย"
-   ],
+   "correct": "C",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
    "highlight": {
-    "letter": null,
-    "confidence": "none"
+    "letter": "C",
+    "confidence": "high"
    },
    "evidence": null,
    "old_correct": "C",
    "images": [],
-   "crops_question": [],
-   "crops_key": []
+   "crops_question": [
+    "library/images/respiratory-52-mcq/q/crop-q093-p25.png"
+   ],
+   "crops_key": [
+    "library/images/respiratory-52-mcq/k/crop-q093-p25.png"
+   ]
   }
  ]
 }

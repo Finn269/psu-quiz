@@ -10,6 +10,7 @@
 import json
 import re
 import sys
+from collections import Counter
 from pathlib import Path
 
 try:
@@ -139,13 +140,14 @@ def extract(pdf_path, out_dir, reference=None, rel_base=None):
 
     # --- กรองคำ + หาจุดเริ่มข้อ
     tokens = []  # ลำดับอ่านทั้งเอกสาร
+    # ขอบซ้ายของเลขข้อ = ตำแหน่งที่พบบ่อยที่สุดทั้งเอกสาร (กันรายการคำชี้แจงกลางหน้าแรก)
+    xs = [round(w["b"][0] / 4) * 4 for ws in words_by_page for w in ws if Q_RE.match(w["t"]) and w["wno"] == 0]
+    left = Counter(xs).most_common(1)[0][0] if xs else None
     for pi, words in enumerate(words_by_page):
         h = doc[pi].rect.height
         line_text = {}
         for w in words:
             line_text.setdefault(w["line"], []).append(w["t"])
-        starts_x = [w["b"][0] for w in words if Q_RE.match(w["t"]) and w["wno"] == 0]
-        left = sorted(starts_x)[len(starts_x) // 2] if starts_x else None
         for w in words:
             in_margin = w["b"][1] < 0.10 * h or w["b"][3] > 0.90 * h
             if in_margin and _norm(" ".join(line_text[w["line"]])) in noise:
