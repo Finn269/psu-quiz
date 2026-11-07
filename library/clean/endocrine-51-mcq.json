@@ -1,0 +1,1645 @@
+{
+ "id": "endocrine-51-mcq",
+ "block": "Endocrine",
+ "year_group": 2,
+ "cohort": "51",
+ "type": "MCQ",
+ "name": "Endocrine PSU 51 MCQ",
+ "source": {
+  "question_pdf": "library/raw/Endocrine/51/MCQ.pdf",
+  "key_pdf": "library/raw/Endocrine/51/MCQ-key.pdf",
+  "drive_question_id": null,
+  "drive_key_id": null
+ },
+ "source_blank_numbers": [
+  3,
+  4,
+  11,
+  16,
+  17,
+  20,
+  21,
+  22,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+  32,
+  35,
+  36,
+  39,
+  41,
+  42,
+  44,
+  46,
+  47,
+  48,
+  49,
+  54,
+  56,
+  62,
+  66,
+  67,
+  68,
+  70,
+  72,
+  73
+ ],
+ "source_note": "",
+ "counts": {
+  "verified": 13,
+  "quick_check": 8,
+  "review": 12,
+  "rejected": 6
+ },
+ "questions": [
+  {
+   "id": "endocrine-51-mcq-001",
+   "number": "1",
+   "stem": "From the synthesis and secretion of hormone in the following picture. *(ไม่ใช่ภาพจริงในข้อสอบ) จากภาพเป็นการหลั่งของฮอร์โมนใดต่อไปนี้?",
+   "choices": {
+    "A": "Thyroxine",
+    "B": "Vitamin D",
+    "C": "Estrogen",
+    "D": "Growth hormone",
+    "E": "Cortisol"
+   },
+   "correct": "D",
+   "key_source": "highlight",
+   "status": "quick_check",
+   "reasons": [
+    "ไฮไลต์ไม่ชัดมาก ให้คนกวาดตาดู"
+   ],
+   "highlight": {
+    "letter": "D",
+    "confidence": "medium"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [
+    "library/images/endocrine-51-mcq/q/q001-img1.jpg"
+   ],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q001-p1.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q001-p1.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "D",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": null,
+     "reason": "โจทย์ระบุว่า 'ไม่ใช่ภาพจริงในข้อสอบ' จึงเทียบคำตอบกับรูปจริงไม่ได้ (เฉลยในไฟล์คือ D)",
+     "ref": "",
+     "agree": false
+    }
+   ],
+   "base_status": "quick_check",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-002",
+   "number": "2",
+   "stem": "PTH activates the G alpha(s) receptor. What is the cellular mechanism of the response?",
+   "choices": {
+    "A": "Activate PDE",
+    "B": "Produce cAMP",
+    "C": "Produce DAG and IP3",
+    "D": "JAK2 pathway"
+   },
+   "correct": "B",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "B",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q002-p2.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q002-p2.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "B",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "B",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-005",
+   "number": "5",
+   "stem": "41 yo man มาด้วยหิวน้ำมากๆ กินน้ำ 10 ลิตรต่อวันมาหลายสัปดาห์ ตรงไหนผิดปกติ",
+   "choices": {
+    "A": "Chromaffin cells",
+    "B": "Supraoptic nuclei",
+    "C": "Paraventicullar nuclei",
+    "D": "Corticotroph",
+    "E": "Somatrotroph"
+   },
+   "correct": "B",
+   "key_source": "highlight",
+   "status": "review",
+   "reasons": [
+    "โจทย์ในไฟล์ข้อสอบกับไฟล์เฉลยไม่ตรงกัน"
+   ],
+   "highlight": {
+    "letter": "B",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q005-p2.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q005-p2.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "B",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    }
+   ],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-006",
+   "number": "6",
+   "stem": "The obstruction in which the following blood vessels would most likely impair the production of ACTH",
+   "choices": {
+    "A": "Suprarenal vein",
+    "B": "Superior thyroid artery",
+    "C": "Inferioir thyroid artery",
+    "D": "Hypophyseal portal vein",
+    "E": "Inferior hypophyseal vein"
+   },
+   "correct": "D",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "D",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q006-p2.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q006-p2.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "D",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "D",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-007",
+   "number": "7",
+   "stem": "A patient shows symptoms including thirst, producing large amounts of pale urine, and urinating and drinking water frequently. Which of the following is the possible mechanism of the symptoms in the patient?",
+   "choices": {
+    "A": "Insulin resistance",
+    "B": "Antidiuretic hormone resistance",
+    "C": "Hyposecretion of Oxytocin",
+    "D": "Hypersecretion of Vasopressin",
+    "E": "Hypersecretion of Corticotropin-releasing hormone"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q007-p2.jpg",
+    "library/images/endocrine-51-mcq/q/crop-q007-p3.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q007-p2.jpg",
+    "library/images/endocrine-51-mcq/k/crop-q007-p3.jpg"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-008",
+   "number": "8",
+   "stem": "เด็กชาย 14 ปี มาด้วย extremely tall , frontal bossing,increased hand and foot size, coarse facial features ,enlarged tongue ข้อใดคือ cause ของ symptom เหล่านี้",
+   "choices": {
+    "A": "Antidiuretic hormone resistance",
+    "B": "Damaging of Pituitary stalk",
+    "C": "Hypo-secretion GH",
+    "D": "Hyper-production IGF-1",
+    "E": "Hyper-secretion Growth hormone inhibiting hormone"
+   },
+   "correct": "D",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "D",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q008-p3.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q008-p3.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "D",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "D",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-009",
+   "number": "9",
+   "stem": "Which sign and symptoms would be found in patients with low TSH and high thyroid hormone level?",
+   "choices": {
+    "A": "Tachycardia",
+    "B": "Weight gain",
+    "C": "Easy fatigued",
+    "D": "Easy bruising",
+    "E": "Easy bruising"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q009-p3.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q009-p3.jpg"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-010",
+   "number": "10",
+   "stem": "การ mutations ของ NIS ส่งผลให้เกิดhypothyroid ยังไง",
+   "choices": {
+    "A": "ทำให้หยุดการสร้าง TGB",
+    "B": "Inhibition การ transport Iodine",
+    "C": "อะไรสักอย่างเกี่ยวกับ thyropeoxidase"
+   },
+   "correct": "B",
+   "key_source": "highlight",
+   "status": "quick_check",
+   "reasons": [
+    "ไฮไลต์ไม่ชัดมาก ให้คนกวาดตาดู"
+   ],
+   "highlight": {
+    "letter": "B",
+    "confidence": "medium"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q010-p3.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q010-p3.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "B",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "B",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "quick_check",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-012",
+   "number": "12",
+   "stem": "หญิงอายุ 68 ปี มีอาการ Dyspnea, dysphagia มี anterior neck lesion มี mass 5 cm ที่ left thyroid",
+   "choices": {
+    "A": "Papillary carcinoma",
+    "B": "Follicular carcinoma",
+    "C": "Anaplastic carcinoma",
+    "D": "Hurthle cell carcinoma",
+    "E": "Poorly differentiated carcinoma"
+   },
+   "correct": "C",
+   "key_source": "highlight",
+   "status": "quick_check",
+   "reasons": [
+    "ไฮไลต์ไม่ชัดมาก ให้คนกวาดตาดู"
+   ],
+   "highlight": {
+    "letter": "C",
+    "confidence": "medium"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q012-p3.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q012-p3.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "C",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "C",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "quick_check",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-013",
+   "number": "13",
+   "stem": "60 yo man เป็น chronic renal failure , blood sereum result ; Ca ต่ำ Pi สูง PTH สูง ถาม patho ของ parathyroid gland",
+   "choices": {
+    "A": "fibrosis",
+    "B": "atrophy",
+    "C": "hyperplasia",
+    "D": "Inflammation",
+    "E": "Calcification"
+   },
+   "correct": "C",
+   "key_source": "highlight",
+   "status": "quick_check",
+   "reasons": [
+    "ไฮไลต์ไม่ชัดมาก ให้คนกวาดตาดู"
+   ],
+   "highlight": {
+    "letter": "C",
+    "confidence": "medium"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q013-p4.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q013-p4.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "C",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "C",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "quick_check",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-014",
+   "number": "14",
+   "stem": "\"A 45-year-old female present to the clinic with symptoms of fatigue, weight lose, and cold intolerance. she is diagnosed with hypothyroidism and has been prescribed levothyroxine. what is the most appropriate recommendation regarding administration levothyroxine in this patient?\"",
+   "choices": {
+    "A": "It should be taken once a week to reduce cardiotoxicity.",
+    "B": "It should be taken at bedtime to reduce the risk of insomnia.",
+    "C": "It should be taken on an empty stomach to optimize absorption.",
+    "D": "It should be taken with mineral supplements to improve energy.",
+    "E": "It should be taken with food to minimize gastrointestinal side effects."
+   },
+   "correct": "C",
+   "key_source": "highlight",
+   "status": "quick_check",
+   "reasons": [
+    "ไฮไลต์ไม่ชัดมาก ให้คนกวาดตาดู"
+   ],
+   "highlight": {
+    "letter": "C",
+    "confidence": "medium"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q014-p4.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q014-p4.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "C",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "C",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "quick_check",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-015",
+   "number": "15",
+   "stem": "55 yo เป็นผู้ชาย มีอาการ palpitation, tremor, อาการเหมือน hyperthyroidism แล้วให้ lugol solution",
+   "choices": {},
+   "correct": null,
+   "key_source": null,
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q015-p4.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q015-p4.jpg"
+   ],
+   "opinions": [],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-018",
+   "number": "18",
+   "stem": "ผู้ป่วยเป็น congenital adrenal hyperplasia จาก 11 hydroxy resistance(ไม่แน่ใจ) ถามว่ามีความผิดปกติใด",
+   "choices": {},
+   "correct": null,
+   "key_source": null,
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q018-p4.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q018-p4.jpg"
+   ],
+   "opinions": [],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-019",
+   "number": "19",
+   "stem": "a patient with an autoimmune disease takes an exogenous glucocorticoid and causes Cushing syndrome. Which of the following would be occurred in this patient?",
+   "choices": {
+    "A": "Anemia",
+    "B": "Hypoglycemia",
+    "C": "Hyperkalemia",
+    "D": "Hypercalcemia",
+    "E": "Truncal obesity"
+   },
+   "correct": "E",
+   "key_source": "highlight",
+   "status": "quick_check",
+   "reasons": [
+    "ไฮไลต์ไม่ชัดมาก ให้คนกวาดตาดู"
+   ],
+   "highlight": {
+    "letter": "E",
+    "confidence": "medium"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q019-p4.jpg",
+    "library/images/endocrine-51-mcq/q/crop-q019-p5.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q019-p4.jpg",
+    "library/images/endocrine-51-mcq/k/crop-q019-p5.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "E",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "E",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "quick_check",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-023",
+   "number": "23",
+   "stem": "บรรยาย pancreas tumor มาแล้วถามว่า ควรใช้อะไรย้อมแล้วได้ผลpositive",
+   "choices": {
+    "A": "Chromogranin",
+    "B": "Alpha-feto",
+    "C": "Myelin"
+   },
+   "correct": "A",
+   "key_source": "highlight",
+   "status": "quick_check",
+   "reasons": [
+    "ไฮไลต์ไม่ชัดมาก ให้คนกวาดตาดู"
+   ],
+   "highlight": {
+    "letter": "A",
+    "confidence": "medium"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q023-p5.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q023-p5.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "A",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "A",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "quick_check",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-033",
+   "number": "33",
+   "stem": "(ไม่มีโจทย์)",
+   "choices": {
+    "A": "decrease lipolysis",
+    "B": "decease glycogenolysis",
+    "C": "increase ketogenesis",
+    "D": "increase protein synthesis",
+    "E": "increase GLUT4 expression"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q033-p5.jpg",
+    "library/images/endocrine-51-mcq/q/crop-q033-p6.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q033-p5.jpg",
+    "library/images/endocrine-51-mcq/k/crop-q033-p6.jpg"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-034",
+   "number": "34",
+   "stem": "Patient with severe hypoglycemia, the differential test of over use self-administered insulin with tumor that release insulin, which one",
+   "choices": {
+    "A": "Chromogranin",
+    "B": "C-peptide",
+    "C": "Hba1c",
+    "D": "FBG",
+    "E": "IGF-1"
+   },
+   "correct": "B",
+   "key_source": "highlight",
+   "status": "quick_check",
+   "reasons": [
+    "ไฮไลต์ไม่ชัดมาก ให้คนกวาดตาดู"
+   ],
+   "highlight": {
+    "letter": "B",
+    "confidence": "medium"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q034-p6.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q034-p6.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "B",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "B",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "quick_check",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-037",
+   "number": "37",
+   "stem": "45 year old man with DM type 2, prescribed sulfonylurea. What are the effects of these drugs.",
+   "choices": {
+    "A": "Inhibition of ATP sensitive K channel",
+    "B": "Decreasing of intercellular ATP",
+    "C": "Increasing of insulin vesicle synthesis",
+    "D": "Decreasing of ca influx",
+    "E": "nhibition of membrane depolarization"
+   },
+   "correct": "A",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "A",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q037-p6.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q037-p6.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "A",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "A",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-038",
+   "number": "38",
+   "stem": "คนไข้ 45 ชาย มาด้วยอาการ thirsty ปัสสาวะบ่อย อาการอะไรอีกซักอย่าง เป็นมาหลายเดือนแล้ว พ่อมีประวัติเป็น t2dm ตอนอายุประมาณ 50 (มีอะไรสำคัญอีกมั้ยมมนจ) mechanism คืออะไร",
+   "choices": {
+    "A": "insulin resistance ของ peripheral tissue เพิ่ม",
+    "B": "genetic ทำให้หลั่ง insulin น้อย",
+    "C": "autoimmune ทำลาย pancrease"
+   },
+   "correct": "A",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "A",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q038-p6.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q038-p6.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "A",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "A",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-040",
+   "number": "40",
+   "stem": "Patient with diabetes presents with fatigue, frequent urination, severe thirsty and have no lactic acid in the urine. Laboratory test reveals a blood glucose level 900 mg/dL. What is the most likely diagnosis?",
+   "choices": {
+    "A": "DKA",
+    "B": "Hypoglycemia",
+    "C": "HHS",
+    "D": "diabetic neuropathy",
+    "E": "Lactic acidosis"
+   },
+   "correct": "C",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "C",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q040-p6.jpg",
+    "library/images/endocrine-51-mcq/q/crop-q040-p7.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q040-p6.jpg",
+    "library/images/endocrine-51-mcq/k/crop-q040-p7.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "C",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "C",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-043",
+   "number": "43",
+   "stem": "คนไข้เป็นเบาหวาน และมีอาการติดเชื้อ UTI",
+   "choices": {
+    "A": "Dapaglifozin"
+   },
+   "correct": null,
+   "key_source": "highlight",
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": "A",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q043-p7.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q043-p7.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "A",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": false
+    }
+   ],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-045",
+   "number": "45",
+   "stem": "A 52 years-old women with type 2 diabetes has been receiving one diabetic drug. She was brought to the hospital with unconscious and plasma glucose level of 40 mg/dL. What is the following drugs is most likely to cause hypoglycemia?",
+   "choices": {
+    "A": "Acarbose",
+    "B": "Delaglutide",
+    "C": "Glibenclamide",
+    "D": "Bromocriptine",
+    "E": "Dapagliflozin"
+   },
+   "correct": "C",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "C",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q045-p7.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q045-p7.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "C",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "C",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-050",
+   "number": "50",
+   "stem": "A 6-year old child with hyperglycemia is diagnosed with type I diabetes. which of the following occur in this child?",
+   "choices": {
+    "A": "Increase ketogenesis",
+    "B": "Decrease glycogenolysis",
+    "D": "Increase protein synthesis"
+   },
+   "correct": "A",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "A",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q050-p8.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q050-p8.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "A",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": null,
+     "reason": "กำกวม: T1DM เกิด gluconeogenesis เพิ่มด้วย (ถ้ามีตัวเลือกนี้) ไฟล์เฉลยเลือก A (ketogenesis)",
+     "ref": "",
+     "agree": false
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-051",
+   "number": "51",
+   "stem": "อะไรคือสิ่งที่ดีที่สุดของ HDL ที่ปกป้อง ไม่ให้เกิด atherosclerosis",
+   "choices": {
+    "A": "Active efflux Cholesterol Oxidative LDL to liver",
+    "B": "Active convert Cholesterol to bile duct",
+    "C": "Facilitate cholesterol to peripheral tissue",
+    "D": "Active การ adhesion กระตุ้นให้เกิด vascular inflammation",
+    "E": "Active macrophage (อะไรสักอย่าง)"
+   },
+   "correct": "B",
+   "key_source": "highlight",
+   "status": "review",
+   "reasons": [
+    "มีความเห็นต่าง: AI ชี้ A"
+   ],
+   "highlight": {
+    "letter": "B",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q051-p8.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q051-p8.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "B",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "A",
+     "reason": "บทบาทหลักของ HDL คือ reverse cholesterol transport (efflux คอเลสเตอรอลกลับตับ) ตรงกับข้อเดียวกันของรุ่น 52 ที่เฉลย A ส่วน B (แปลงเป็นน้ำดี) ไม่ใช่หน้าที่ของ HDL โดยตรง",
+     "ref": "",
+     "agree": false
+    }
+   ],
+   "base_status": "verified",
+   "dispute": true
+  },
+  {
+   "id": "endocrine-51-mcq-052",
+   "number": "52",
+   "stem": "The 46-year-old woman presented with discomfort due to upper abdominal pain and headache. She was diagnosed with acute pancreatitis. Which of following Laboratory result associated with the diagnosis of the patient",
+   "choices": {
+    "A": "Total triglyceride with 500 mg/dL",
+    "B": "Total triglyceride with 1200 mg/dL",
+    "C": "LDL-c with 300mg/dL",
+    "D": "Total cholesterol with 500 mg/dL",
+    "E": "Total cholesterol with 1200 mg/dL"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q052-p8.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q052-p8.jpg"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-053",
+   "number": "53",
+   "stem": "ถามเกี่ยวกับ small LDL-c อันไหนมากสุด",
+   "choices": {},
+   "correct": null,
+   "key_source": null,
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q053-p8.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q053-p8.jpg"
+   ],
+   "opinions": [],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-055",
+   "number": "55",
+   "stem": "A 25-years old patient diagnosed with familial hypercholesteremia treat with simvastatin/Ezetimibe but can not target the LDL-C level. The doctor want to prescribe medication that lower PCSK9 synthesis. Which following medication to prescribe?",
+   "choices": {
+    "A": "Inclisiran",
+    "B": "Alirocumab",
+    "C": "Atorvastatin",
+    "D": "Colestipol"
+   },
+   "correct": "A",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "A",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q055-p9.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q055-p9.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "A",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "A",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-057",
+   "number": "57",
+   "stem": "Which of following stimulate 1,25 (OH) 2D3 production",
+   "choices": {
+    "A": "PTH",
+    "B": "FGF-23",
+    "C": "24(OH)",
+    "D": "Hypercalemia",
+    "E": "Hyperphosphotemia"
+   },
+   "correct": "A",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "A",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q057-p9.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q057-p9.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "A",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "A",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-058",
+   "number": "58",
+   "stem": "30-year-old-man has thyroidectomy and some part of parathyroid was damaged. 2 weeks after operation ชีมาหาหมอด้วยอาการ arrhythmia, muscle spasm. Which of the following mechanism ทำให้ calcium dyshomeostasis?",
+   "choices": {
+    "A": "Decrease calcitonin release",
+    "B": "Decrease bone reabsorption",
+    "C": "Increase FGF-23",
+    "D": "Increase 1,25-dihydroxycholecalciferol"
+   },
+   "correct": "B",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "B",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q058-p9.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q058-p9.jpg",
+    "library/images/endocrine-51-mcq/k/crop-q058-p10.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "B",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "B",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-059",
+   "number": "59",
+   "stem": "Decreased calcium reabsorption in the kidney",
+   "choices": {
+    "A": "Hypocalcemia",
+    "B": "Loop diuretics use",
+    "C": "Hyperparathyroidism",
+    "D": "Vitamin D",
+    "E": "Increase bone mineralization"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q059-p10.jpg"
+   ],
+   "crops_key": [],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-060",
+   "number": "60",
+   "stem": "52-year-old women มีภาวะ post menstrual osteoporosis ถามว่ากลไกของ post menstrual osteoporosis ตรงกับข้อใด",
+   "choices": {
+    "A": "Increasing of OPG",
+    "B": "Increasing of TRAP",
+    "C": "Decreasing of RANKL",
+    "D": "Up-regulated of RANKL",
+    "E": "Increasing of NFATc-1"
+   },
+   "correct": "D",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "D",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q060-p10.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q060-p10.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "D",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "D",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-061",
+   "number": "61",
+   "stem": "which one is related to effect of hormone replacement therapy in post-menopausal osteoporosis",
+   "choices": {
+    "A": "down-regulation of RANKL",
+    "B": "decreased RANK expression",
+    "C": "increased RANKL-OPG interaction",
+    "D": "decreased RANKL-OPG interaction",
+    "E": "increased RANK-RANKL interaction"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "ไฮไลต์ในไฟล์เฉลยกำกวม (เห็นหลายตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "ambiguous"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q061-p10.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q061-p10.jpg"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-063",
+   "number": "63",
+   "stem": "ยาที่ estrogen agonist bone แต่ antagonist breast and endothelium",
+   "choices": {},
+   "correct": null,
+   "key_source": null,
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q063-p10.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q063-p10.jpg"
+   ],
+   "opinions": [],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-064",
+   "number": "64",
+   "stem": "45-year-old man reports headache, vision problem, decrease libido. MRI shows pituitary adenoma. Which of the following hormone will excess produce in this man?",
+   "choices": {
+    "A": "Prolactin",
+    "B": "Thyroid-stimulating hormone",
+    "C": "Follicle-stimulating hormone",
+    "D": "Adrenocorticotropic hormone",
+    "E": "Luteinizing Hormone"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)",
+    "โจทย์ในไฟล์ข้อสอบกับไฟล์เฉลยไม่ตรงกัน"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q064-p10.jpg",
+    "library/images/endocrine-51-mcq/q/crop-q064-p11.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q064-p10.jpg",
+    "library/images/endocrine-51-mcq/k/crop-q064-p11.jpg",
+    "library/images/endocrine-51-mcq/k/crop-q064-p12.jpg"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-065",
+   "number": "65",
+   "stem": "Fatigue ผอม ความดันต่ำ พบcortisol ต่ำ อยากทราบว่าเป็นอะไร",
+   "choices": {
+    "A": "Addison",
+    "B": "Cushing",
+    "C": "Hyperthyroidism",
+    "D": "Hypothyroidism",
+    "E": "Diabetes insipidus"
+   },
+   "correct": "A",
+   "key_source": "highlight",
+   "status": "verified",
+   "reasons": [],
+   "highlight": {
+    "letter": "A",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q065-p11.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q065-p12.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "A",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "A",
+     "reason": "เห็นด้วยกับเฉลยในไฟล์",
+     "agree": true
+    }
+   ],
+   "base_status": "verified",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-069",
+   "number": "69",
+   "stem": "Which of the following is normalizing plasma glucose in subject with insulin resistance",
+   "choices": {
+    "A": "Decreased appetite",
+    "B": "Increased insulin secretion",
+    "C": "Increased glucose urinary excretion",
+    "D": "Increased glucose uptake to brain",
+    "E": "Decreased intestinal absorbtion"
+   },
+   "correct": "C",
+   "key_source": "highlight",
+   "status": "review",
+   "reasons": [
+    "มีความเห็นต่าง: AI ชี้ B"
+   ],
+   "highlight": {
+    "letter": "C",
+    "confidence": "high"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q069-p11.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q069-p12.jpg"
+   ],
+   "opinions": [
+    {
+     "source": "file",
+     "letter": "C",
+     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "agree": true
+    },
+    {
+     "source": "ai",
+     "letter": "B",
+     "reason": "ในภาวะดื้ออินซูลิน กลไกชดเชยหลักคือหลั่งอินซูลินเพิ่ม (รุ่น 52 และ 47 เฉลยข้อนี้เช่นกัน) และในไฟล์เฉลยมีลายมือเขียนว่า 'ไม่แน่ใจ' เหนือข้อนี้",
+     "ref": "",
+     "agree": false
+    }
+   ],
+   "base_status": "verified",
+   "dispute": true
+  },
+  {
+   "id": "endocrine-51-mcq-071",
+   "number": "71",
+   "stem": "Which of the following lipoprotein particles storage energy for the cells?",
+   "choices": {
+    "A": "VLDL",
+    "B": "IDL",
+    "C": "HDL",
+    "D": "LDL",
+    "E": "Chylomicron"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q071-p11.jpg",
+    "library/images/endocrine-51-mcq/q/crop-q071-p12.jpg"
+   ],
+   "crops_key": [
+    "library/images/endocrine-51-mcq/k/crop-q071-p12.jpg"
+   ],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-074",
+   "number": "74",
+   "stem": "what is the major pathophysiology of osteoporosis in estrogen deficiency?",
+   "choices": {
+    "A": "increase OPG-RANK interaction"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "rejected",
+   "reasons": [
+    "ตัวเลือกไม่ครบ ใช้เป็นข้อสอบไม่ได้"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q074-p12.jpg"
+   ],
+   "crops_key": [],
+   "opinions": [],
+   "base_status": "rejected",
+   "dispute": false
+  },
+  {
+   "id": "endocrine-51-mcq-075",
+   "number": "75",
+   "stem": "what is major association of bone dimensional growth",
+   "choices": {
+    "A": "Bone modeling",
+    "B": "Bone remodeling",
+    "C": "Bone apposition",
+    "D": "Bone tuberculosis",
+    "E": "melanocytes survival"
+   },
+   "correct": null,
+   "key_source": null,
+   "status": "review",
+   "reasons": [
+    "อ่านเฉลยไม่ได้ (ไม่เห็นไฮไลต์ และไม่มีคำอธิบายระบุตัวเลือก)"
+   ],
+   "highlight": {
+    "letter": null,
+    "confidence": "none"
+   },
+   "evidence": null,
+   "old_correct": null,
+   "images": [],
+   "crops_question": [
+    "library/images/endocrine-51-mcq/q/crop-q075-p12.jpg"
+   ],
+   "crops_key": [],
+   "opinions": [],
+   "base_status": "review",
+   "dispute": false
+  }
+ ]
+}

@@ -19,7 +19,9 @@ try:
 except ImportError:  # เวอร์ชันเก่า
     import fitz
 
-ZOOM = 2.0
+ZOOM = 2.0          # ความละเอียดตอนวิเคราะห์สี
+SAVE_ZOOM = 1.6     # ความละเอียดภาพที่เก็บ (ประหยัดพื้นที่)
+JPG_Q = 72
 Q_RE = re.compile(r"^(\d{1,3})[.)]$")
 C_RE = re.compile(r"^([A-Ea-e])[.)](.*)$")
 QGLUE_RE = re.compile(r"^(\d{1,3}[.)])(\D.*)$")
@@ -218,11 +220,38 @@ def extract(pdf_path, out_dir, reference=None, rel_base=None):
 
     # --- กรองคำ + หาจุดเริ่มข้อ
     tokens = []  # ลำดับอ่านทั้งเอกสาร
-    # ขอบซ้ายของเลขข้อ = ตำแหน่งที่พบบ่อยที่สุดทั้งเอกสาร (กันรายการคำชี้แจงกลางหน้าแรก)
-    xs = [round(w["b"][0] / 4) * 4 for ws in words_by_page for w in ws if Q_RE.match(w["t"]) and w["wno"] == 0]
-    left = Counter(xs).most_common(1)[0][0] if xs else None
+    # ขอบซ้ายของเลขข้อ: ตำแหน่งที่พบบ่อยทั้งเอกสาร (กันรายการคำชี้แจงกลางหน้าแรก)
+    # ถ้ามีหลายตำแหน่งที่พบบ่อยพอกัน = เลย์เอาต์หลายคอลัมน์
+    xs, pages_of = [], {}
+    for pi_, ws in enumerate(words_by_page):
+        for w in ws:
+            if Q_RE.match(w["t"]) and w["wno"] == 0:
+                x = round(w["b"][0] / 4) * 4
+                xs.append(x)
+                pages_of.setdefault(x, set()).add(pi_)
+    cnt = Counter(xs)
+    top_x = cnt.most_common(1)[0][0] if cnt else None
+    margins = []
+    for x in sorted(cnt):
+        # ต้องพบบ่อยพอ และปรากฏในหลายหน้าเท่า ๆ กับตำแหน่งหลัก (ตัดรายการคำชี้แจงที่มีหน้าเดียว)
+        if cnt[x] >= max(2, 0.25 * cnt[top_x]) and len(pages_of[x]) > 0.5 * len(pages_of[top_x]):
+            if not margins or x - margins[-1] >= 20:
+                margins.append(x)
+    if not margins and top_x is not None:
+        margins = [top_x]
+
+    def col_of(x0):
+        c = 0
+        for i, m in enumerate(margins):
+            if x0 >= m - 10:
+                c = i
+        return c
+
+    multi = len(margins) > 1
     for pi, words in enumerate(words_by_page):
         h = doc[pi].rect.height
+        if multi:  # อ่านทีละคอลัมน์ ซ้ายไปขวา แต่ละคอลัมน์บนลงล่าง
+            words = sorted(words, key=lambda w: (col_of(w["b"][0]), round(w["b"][1] / 2), w["b"][0]))
         line_text = {}
         for w in words:
             line_text.setdefault(w["line"], []).append(w["t"])
@@ -230,7 +259,7 @@ def extract(pdf_path, out_dir, reference=None, rel_base=None):
             in_margin = w["b"][1] < 0.10 * h or w["b"][3] > 0.90 * h
             if in_margin and _norm(" ".join(line_text[w["line"]])) in noise:
                 continue
-            is_q = bool(Q_RE.match(w["t"])) and w["wno"] == 0 and left is not None and abs(w["b"][0] - left) <= 25
+            is_q = bool(Q_RE.match(w["t"])) and w["wno"] == 0 and any(abs(w["b"][0] - m) <= 25 for m in margins)
             tokens.append({"page": pi, "t": w["t"], "b": w["b"], "is_q": is_q})
 
     questions = []
@@ -300,28 +329,40 @@ def extract(pdf_path, out_dir, reference=None, rel_base=None):
                     w_sum += area
                     s_sum += s * area
             scores[letter] = round(s_sum / w_sum, 3) if w_sum else 0.0
-        highlight = _decide_highlight(scores)
-        highlight["method"] = "fill"
-        if highlight["confidence"] == "none":
-            # ไม่มีไฮไลต์พื้น -> หาวงกลมที่วาดล้อมตัวอักษรเลือก (a. b. c.) โดยดูจากรูปร่างเส้นวาด
-            circled = []
-            for letter, mi in marks:
-                mt = toks[mi]
-                if mt["page"] not in loops_cache:
-                    loops_cache[mt["page"]] = _stroke_points(doc[mt["page"]])
-                mx, my = (mt["b"][0] + mt["b"][2]) / 2, (mt["b"][1] + mt["b"][3]) / 2
-                if _is_circled(loops_cache[mt["page"]], mx, my):
-                    circled.append(letter)
-            sc = {L: (1.0 if L in circled else 0.0) for L, _ in marks}
-            if len(circled) == 1:
-                highlight = {"letter": circled[0], "confidence": "high", "scores": sc, "method": "circle"}
-            elif len(circled) > 1:
-                highlight = {"letter": None, "confidence": "ambiguous", "scores": sc, "method": "circle"}
+        # ไฮไลต์พื้นที่ลามต่อไปทางขวาของข้อความ = ลายน้ำ/พื้นหลัง ไม่ใช่ไฮไลต์ -> ลดคะแนน
+        for letter, seg in choice_toks.items():
+            seg = [s for s in seg if _norm(s["t"])]
+            if not seg or scores.get(letter, 0) <= 0:
+                continue
+            last = seg[-1]
+            sb = (last["b"][2] + 3, last["b"][1], last["b"][2] + 50, last["b"][3])
+            if _fill_fraction(pix_of(last["page"]), sb) >= max(0.15, 0.4 * scores[letter]):
+                scores[letter] = round(scores[letter] * 0.25, 3)
+        fill_h = _decide_highlight(scores)
+        # วงกลมที่วาดล้อมตัวอักษรเลือก (a. b. c.) ดูจากรูปร่างเส้นวาด
+        circled = []
+        for letter, mi in marks:
+            mt = toks[mi]
+            if mt["page"] not in loops_cache:
+                loops_cache[mt["page"]] = _stroke_points(doc[mt["page"]])
+            mx, my = (mt["b"][0] + mt["b"][2]) / 2, (mt["b"][1] + mt["b"][3]) / 2
+            if _is_circled(loops_cache[mt["page"]], mx, my):
+                circled.append(letter)
+        sc = {L: (1.0 if L in circled else 0.0) for L, _ in marks}
+        if len(circled) == 1 and (fill_h["letter"] in (None, circled[0]) or fill_h["confidence"] == "medium"):
+            highlight = {"letter": circled[0], "confidence": "high", "scores": sc, "method": "circle"}
+        elif len(circled) == 1:      # วงกลมกับสีพื้นชี้คนละตัว -> ไม่เดา
+            highlight = {"letter": None, "confidence": "ambiguous", "scores": {"fill": scores, "circle": sc}, "method": "conflict"}
+        elif len(circled) > 1:
+            highlight = {"letter": None, "confidence": "ambiguous", "scores": sc, "method": "circle"}
+        else:
+            highlight = fill_h
+            highlight["method"] = "fill"
 
         # ขอบเขตบนหน้า (ใช้ตัดรูป)
         pages = {}
         for t in [q["start"]] + toks:
-            pg = pages.setdefault(t["page"], [1e9, 1e9, -1e9, -1e9])
+            pg = pages.setdefault((t["page"], col_of(t["b"][0]) if multi else 0), [1e9, 1e9, -1e9, -1e9])
             pg[0] = min(pg[0], t["b"][0]); pg[1] = min(pg[1], t["b"][1])
             pg[2] = max(pg[2], t["b"][2]); pg[3] = max(pg[3], t["b"][3])
         page_regions[q["number"]] = pages
@@ -332,7 +373,7 @@ def extract(pdf_path, out_dir, reference=None, rel_base=None):
             "highlight": highlight,
             "images": [],
             "crops": [],
-            "pages": sorted(pages),
+            "pages": sorted({k[0] for k in pages}),
             "issues": issues,
         })
 
@@ -343,11 +384,16 @@ def extract(pdf_path, out_dir, reference=None, rel_base=None):
         r = by_num.get(str(num))
         if not r:
             continue
-        for pi, (x0, y0, x1, y1) in sorted(pages.items()):
+        for (pi, col), (x0, y0, x1, y1) in sorted(pages.items()):
             page = doc[pi]
-            clip = fitz.Rect(0, max(y0 - 8, 0), page.rect.width, min(y1 + 8, page.rect.height))
-            path = out_dir / f"crop-q{num:03d}-p{pi + 1}.png"
-            page.get_pixmap(matrix=fitz.Matrix(ZOOM, ZOOM), clip=clip, alpha=False).save(str(path))
+            x_lo, x_hi = 0, page.rect.width
+            if multi:  # ตัดเฉพาะคอลัมน์ของส่วนนี้
+                x_lo = max(margins[col] - 12, 0)
+                x_hi = (margins[col + 1] - 8) if col + 1 < len(margins) else page.rect.width
+            clip = fitz.Rect(x_lo, max(y0 - 8, 0), x_hi, min(y1 + 8, page.rect.height))
+            suffix = f"-c{col + 1}" if multi else ""
+            path = out_dir / f"crop-q{num:03d}-p{pi + 1}{suffix}.jpg"
+            path.write_bytes(page.get_pixmap(matrix=fitz.Matrix(SAVE_ZOOM, SAVE_ZOOM), clip=clip, alpha=False).tobytes("jpeg", jpg_quality=JPG_Q))
             r["crops"].append(rel(path))
 
     # --- รูปประกอบโจทย์
@@ -372,18 +418,20 @@ def extract(pdf_path, out_dir, reference=None, rel_base=None):
         bb = info["bbox"]
         cy = (bb[1] + bb[3]) / 2
         owner = None
+        icol = col_of(bb[0]) if multi else 0
         for n, pages in sorted(flat):
-            if pi in pages and pages[pi][1] - 4 <= cy:
+            reg = pages.get((pi, icol))
+            if reg and reg[1] - 4 <= cy:
                 owner = n
-        if owner is None:  # อยู่เหนือข้อแรกของหน้า -> เป็นของข้อสุดท้ายของหน้าก่อน
-            prev = [n for n, pages in sorted(flat) if any(p < pi for p in pages)]
+        if owner is None:  # อยู่เหนือข้อแรกของหน้า/คอลัมน์ -> เป็นของข้อสุดท้ายก่อนหน้า
+            prev = [n for n, pages in sorted(flat) if any((k[0], k[1]) < (pi, icol) for k in pages)]
             owner = prev[-1] if prev else None
         r = by_num.get(str(owner)) if owner else None
         if not r:
             continue
         counters[owner] = counters.get(owner, 0) + 1
-        path = out_dir / f"q{owner:03d}-img{counters[owner]}.png"
-        doc[pi].get_pixmap(matrix=fitz.Matrix(ZOOM, ZOOM), clip=fitz.Rect(*bb), alpha=False).save(str(path))
+        path = out_dir / f"q{owner:03d}-img{counters[owner]}.jpg"
+        path.write_bytes(doc[pi].get_pixmap(matrix=fitz.Matrix(SAVE_ZOOM, SAVE_ZOOM), clip=fitz.Rect(*bb), alpha=False).tobytes("jpeg", jpg_quality=JPG_Q))
         r["images"].append(rel(path))
 
     return {

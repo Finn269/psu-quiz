@@ -323,6 +323,9 @@ def main():
             if q.stem.endswith("-key"):
                 continue
             key = q.with_name(q.stem + "-key.pdf")
+            if not key.exists():
+                print(f"ข้าม {q.parent.parent.name}/{q.parent.name}: ยังไม่มีไฟล์เฉลย (วาง {key.name} ก่อน)")
+                continue
             build(q.parent.parent.name, q.parent.name, q.stem, a.year_group, str(q.relative_to(ROOT)),
                   str(key.relative_to(ROOT)) if key.exists() else None)
     else:
