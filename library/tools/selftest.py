@@ -75,6 +75,33 @@ def build(path, key=False):
     doc.save(path)
 
 
+def build_2col(path):
+    doc = fitz.open()
+    doc.new_page()
+    p = doc[0]
+    p.insert_text((200, 50), "ENDOCRINE (two columns)", fontsize=13)
+    blocks = [(37, 90, "1", "Left top question about insulin?", ["HDL", "IDL", "Chylomicron", "LDL", "VLDL"]),
+              (37, 250, "2", "Left bottom question about iodine?", ["Alpha", "Beta", "Gamma", "Delta", "Epsilon"]),
+              (324, 90, "3", "Right top question about glucagon?", ["Red", "Green", "Blue", "Black", "White"]),
+              (324, 250, "4", "Right bottom question about cortisol?", ["One", "Two", "Three", "Four", "Five"])]
+    for x, y, n, stem, chs in blocks:
+        p.insert_text((x, y), f"{n}. {stem}", fontsize=FS)
+        for i, c in enumerate(chs):
+            p.insert_text((x + 36, y + 20 + 18 * i), f"{'ABCDE'[i]}. {c}", fontsize=FS)
+    doc.save(path)
+
+
+def test_two_columns(tmp):
+    f = tmp / "two.pdf"
+    build_2col(f)
+    r = ex.extract(f, tmp / "img2", rel_base=tmp)
+    by = {q["number"]: q for q in r["questions"]}
+    assert sorted(by) == ["1", "2", "3", "4"], sorted(by)
+    assert by["1"]["choices"]["E"] == "VLDL" and by["3"]["choices"]["B"] == "Green" and by["4"]["choices"]["E"] == "Five", by
+    assert "glucagon" in by["3"]["stem"] and "insulin" in by["1"]["stem"]
+    print("2 คอลัมน์ ผ่าน")
+
+
 def main():
     tmp = Path(tempfile.mkdtemp())
     qpdf, kpdf = tmp / "q.pdf", tmp / "k.pdf"
@@ -100,6 +127,7 @@ def main():
     assert by["6"]["choices"]["C"] == "charlie" and by["6"]["stem"].startswith("Glued"), by["6"]
     assert all(c == "high" for _, c in got.values()), got
     print("ผ่านทุกข้อ:", got)
+    test_two_columns(tmp)
     print("รูปที่ตัดได้ข้อ 2:", by["2"]["images"], "| ภาพโจทย์:", by["1"]["crops"])
 
 

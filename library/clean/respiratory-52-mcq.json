@@ -57,10 +57,10 @@
    "old_correct": "A",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q001-p1.png"
+    "library/images/respiratory-52-mcq/q/crop-q001-p1.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q001-p1.png"
+    "library/images/respiratory-52-mcq/k/crop-q001-p1.jpg"
    ],
    "opinions": [
     {
@@ -102,10 +102,10 @@
    "old_correct": "A",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q002-p1.png"
+    "library/images/respiratory-52-mcq/q/crop-q002-p1.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q002-p1.png"
+    "library/images/respiratory-52-mcq/k/crop-q002-p1.jpg"
    ],
    "opinions": [
     {
@@ -147,10 +147,10 @@
    "old_correct": "D",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q003-p1.png"
+    "library/images/respiratory-52-mcq/q/crop-q003-p1.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q003-p1.png"
+    "library/images/respiratory-52-mcq/k/crop-q003-p1.jpg"
    ],
    "opinions": [
     {
@@ -192,10 +192,10 @@
    "old_correct": "E",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q004-p2.png"
+    "library/images/respiratory-52-mcq/q/crop-q004-p2.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q004-p2.png"
+    "library/images/respiratory-52-mcq/k/crop-q004-p2.jpg"
    ],
    "opinions": [
     {
@@ -237,10 +237,10 @@
    "old_correct": "A",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q005-p2.png"
+    "library/images/respiratory-52-mcq/q/crop-q005-p2.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q005-p2.png"
+    "library/images/respiratory-52-mcq/k/crop-q005-p2.jpg"
    ],
    "opinions": [
     {
@@ -282,10 +282,10 @@
    "old_correct": "E",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q006-p2.png"
+    "library/images/respiratory-52-mcq/q/crop-q006-p2.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q006-p2.png"
+    "library/images/respiratory-52-mcq/k/crop-q006-p2.jpg"
    ],
    "opinions": [
     {
@@ -327,10 +327,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q007-p3.png"
+    "library/images/respiratory-52-mcq/q/crop-q007-p3.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q007-p3.png"
+    "library/images/respiratory-52-mcq/k/crop-q007-p3.jpg"
    ],
    "opinions": [
     {
@@ -372,10 +372,10 @@
    "old_correct": "D",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q008-p3.png"
+    "library/images/respiratory-52-mcq/q/crop-q008-p3.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q008-p3.png"
+    "library/images/respiratory-52-mcq/k/crop-q008-p3.jpg"
    ],
    "opinions": [
     {
@@ -419,10 +419,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q009-p3.png"
+    "library/images/respiratory-52-mcq/q/crop-q009-p3.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q009-p3.png"
+    "library/images/respiratory-52-mcq/k/crop-q009-p3.jpg"
    ],
    "opinions": [
     {
@@ -466,10 +466,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q010-p4.png"
+    "library/images/respiratory-52-mcq/q/crop-q010-p4.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q010-p4.png"
+    "library/images/respiratory-52-mcq/k/crop-q010-p4.jpg"
    ],
    "opinions": [
     {
@@ -512,10 +512,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q011-p4.png"
+    "library/images/respiratory-52-mcq/q/crop-q011-p4.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q011-p4.png"
+    "library/images/respiratory-52-mcq/k/crop-q011-p4.jpg"
    ],
    "opinions": [
     {
@@ -557,10 +557,10 @@
    "old_correct": "D",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q012-p4.png"
+    "library/images/respiratory-52-mcq/q/crop-q012-p4.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q012-p4.png"
+    "library/images/respiratory-52-mcq/k/crop-q012-p4.jpg"
    ],
    "opinions": [
     {
@@ -602,10 +602,10 @@
    "old_correct": "D",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q013-p5.png"
+    "library/images/respiratory-52-mcq/q/crop-q013-p5.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q013-p5.png"
+    "library/images/respiratory-52-mcq/k/crop-q013-p5.jpg"
    ],
    "opinions": [
     {
@@ -647,10 +647,10 @@
    "old_correct": "E",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q014-p5.png"
+    "library/images/respiratory-52-mcq/q/crop-q014-p5.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q014-p5.png"
+    "library/images/respiratory-52-mcq/k/crop-q014-p5.jpg"
    ],
    "opinions": [
     {
@@ -692,10 +692,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q015-p5.png"
+    "library/images/respiratory-52-mcq/q/crop-q015-p5.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q015-p5.png"
+    "library/images/respiratory-52-mcq/k/crop-q015-p5.jpg"
    ],
    "opinions": [
     {
@@ -737,10 +737,10 @@
    "old_correct": "A",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q017-p5.png"
+    "library/images/respiratory-52-mcq/q/crop-q017-p5.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q017-p5.png"
+    "library/images/respiratory-52-mcq/k/crop-q017-p5.jpg"
    ],
    "opinions": [
     {
@@ -782,10 +782,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q018-p6.png"
+    "library/images/respiratory-52-mcq/q/crop-q018-p6.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q018-p6.png"
+    "library/images/respiratory-52-mcq/k/crop-q018-p6.jpg"
    ],
    "opinions": [
     {
@@ -837,10 +837,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q019-p6.png"
+    "library/images/respiratory-52-mcq/q/crop-q019-p6.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q019-p6.png"
+    "library/images/respiratory-52-mcq/k/crop-q019-p6.jpg"
    ],
    "opinions": [
     {
@@ -882,10 +882,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q020-p6.png"
+    "library/images/respiratory-52-mcq/q/crop-q020-p6.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q020-p6.png"
+    "library/images/respiratory-52-mcq/k/crop-q020-p6.jpg"
    ],
    "opinions": [
     {
@@ -929,10 +929,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q021-p6.png"
+    "library/images/respiratory-52-mcq/q/crop-q021-p6.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q021-p6.png"
+    "library/images/respiratory-52-mcq/k/crop-q021-p6.jpg"
    ],
    "opinions": [
     {
@@ -976,10 +976,10 @@
    "old_correct": "A",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q022-p7.png"
+    "library/images/respiratory-52-mcq/q/crop-q022-p7.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q022-p7.png"
+    "library/images/respiratory-52-mcq/k/crop-q022-p7.jpg"
    ],
    "opinions": [
     {
@@ -1022,10 +1022,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q023-p7.png"
+    "library/images/respiratory-52-mcq/q/crop-q023-p7.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q023-p7.png"
+    "library/images/respiratory-52-mcq/k/crop-q023-p7.jpg"
    ],
    "opinions": [
     {
@@ -1067,10 +1067,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q024-p7.png"
+    "library/images/respiratory-52-mcq/q/crop-q024-p7.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q024-p7.png"
+    "library/images/respiratory-52-mcq/k/crop-q024-p7.jpg"
    ],
    "opinions": [
     {
@@ -1112,10 +1112,10 @@
    "old_correct": "A",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q025-p7.png"
+    "library/images/respiratory-52-mcq/q/crop-q025-p7.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q025-p7.png"
+    "library/images/respiratory-52-mcq/k/crop-q025-p7.jpg"
    ],
    "opinions": [
     {
@@ -1157,10 +1157,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q026-p8.png"
+    "library/images/respiratory-52-mcq/q/crop-q026-p8.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q026-p8.png"
+    "library/images/respiratory-52-mcq/k/crop-q026-p8.jpg"
    ],
    "opinions": [
     {
@@ -1202,10 +1202,10 @@
    "old_correct": "A",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q027-p8.png"
+    "library/images/respiratory-52-mcq/q/crop-q027-p8.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q027-p8.png"
+    "library/images/respiratory-52-mcq/k/crop-q027-p8.jpg"
    ],
    "opinions": [
     {
@@ -1247,10 +1247,10 @@
    "old_correct": "E",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q028-p8.png"
+    "library/images/respiratory-52-mcq/q/crop-q028-p8.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q028-p8.png"
+    "library/images/respiratory-52-mcq/k/crop-q028-p8.jpg"
    ],
    "opinions": [
     {
@@ -1294,10 +1294,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q029-p8.png"
+    "library/images/respiratory-52-mcq/q/crop-q029-p8.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q029-p8.png"
+    "library/images/respiratory-52-mcq/k/crop-q029-p8.jpg"
    ],
    "opinions": [
     {
@@ -1340,10 +1340,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q030-p9.png"
+    "library/images/respiratory-52-mcq/q/crop-q030-p9.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q030-p9.png"
+    "library/images/respiratory-52-mcq/k/crop-q030-p9.jpg"
    ],
    "opinions": [
     {
@@ -1388,10 +1388,10 @@
    "old_correct": "D",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q031-p9.png"
+    "library/images/respiratory-52-mcq/q/crop-q031-p9.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q031-p9.png"
+    "library/images/respiratory-52-mcq/k/crop-q031-p9.jpg"
    ],
    "opinions": [
     {
@@ -1434,10 +1434,10 @@
    "old_correct": "E",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q032-p9.png"
+    "library/images/respiratory-52-mcq/q/crop-q032-p9.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q032-p9.png"
+    "library/images/respiratory-52-mcq/k/crop-q032-p9.jpg"
    ],
    "opinions": [
     {
@@ -1479,10 +1479,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q033-p10.png"
+    "library/images/respiratory-52-mcq/q/crop-q033-p10.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q033-p10.png"
+    "library/images/respiratory-52-mcq/k/crop-q033-p10.jpg"
    ],
    "opinions": [
     {
@@ -1524,10 +1524,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q034-p10.png"
+    "library/images/respiratory-52-mcq/q/crop-q034-p10.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q034-p10.png"
+    "library/images/respiratory-52-mcq/k/crop-q034-p10.jpg"
    ],
    "opinions": [
     {
@@ -1569,10 +1569,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q035-p10.png"
+    "library/images/respiratory-52-mcq/q/crop-q035-p10.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q035-p10.png"
+    "library/images/respiratory-52-mcq/k/crop-q035-p10.jpg"
    ],
    "opinions": [
     {
@@ -1614,10 +1614,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q036-p11.png"
+    "library/images/respiratory-52-mcq/q/crop-q036-p11.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q036-p11.png"
+    "library/images/respiratory-52-mcq/k/crop-q036-p11.jpg"
    ],
    "opinions": [
     {
@@ -1659,10 +1659,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q037-p11.png"
+    "library/images/respiratory-52-mcq/q/crop-q037-p11.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q037-p11.png"
+    "library/images/respiratory-52-mcq/k/crop-q037-p11.jpg"
    ],
    "opinions": [
     {
@@ -1707,10 +1707,10 @@
    "old_correct": "D",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q038-p11.png"
+    "library/images/respiratory-52-mcq/q/crop-q038-p11.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q038-p11.png"
+    "library/images/respiratory-52-mcq/k/crop-q038-p11.jpg"
    ],
    "opinions": [
     {
@@ -1753,10 +1753,10 @@
    "old_correct": "D",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q039-p11.png"
+    "library/images/respiratory-52-mcq/q/crop-q039-p11.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q039-p11.png"
+    "library/images/respiratory-52-mcq/k/crop-q039-p11.jpg"
    ],
    "opinions": [
     {
@@ -1798,10 +1798,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q040-p12.png"
+    "library/images/respiratory-52-mcq/q/crop-q040-p12.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q040-p12.png"
+    "library/images/respiratory-52-mcq/k/crop-q040-p12.jpg"
    ],
    "opinions": [
     {
@@ -1843,10 +1843,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q041-p12.png"
+    "library/images/respiratory-52-mcq/q/crop-q041-p12.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q041-p12.png"
+    "library/images/respiratory-52-mcq/k/crop-q041-p12.jpg"
    ],
    "opinions": [
     {
@@ -1877,27 +1877,27 @@
     "E": "Functional residual capacity (FRC)"
    },
    "correct": "E",
-   "key_source": "highlight",
+   "key_source": "text",
    "status": "verified",
    "reasons": [],
    "highlight": {
-    "letter": "E",
-    "confidence": "high"
+    "letter": null,
+    "confidence": "none"
    },
    "evidence": "FRC",
    "old_correct": "E",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q043-p12.png"
+    "library/images/respiratory-52-mcq/q/crop-q043-p12.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q043-p12.png"
+    "library/images/respiratory-52-mcq/k/crop-q043-p12.jpg"
    ],
    "opinions": [
     {
      "source": "file",
      "letter": "E",
-     "reason": "ไฮไลต์ในไฟล์เฉลย",
+     "reason": "คำอธิบายในไฟล์เฉลย",
      "agree": true
     },
     {
@@ -1933,10 +1933,10 @@
    "old_correct": "E",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q044-p12.png"
+    "library/images/respiratory-52-mcq/q/crop-q044-p12.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q044-p12.png"
+    "library/images/respiratory-52-mcq/k/crop-q044-p12.jpg"
    ],
    "opinions": [
     {
@@ -1978,10 +1978,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q046-p13.png"
+    "library/images/respiratory-52-mcq/q/crop-q046-p13.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q046-p13.png"
+    "library/images/respiratory-52-mcq/k/crop-q046-p13.jpg"
    ],
    "opinions": [
     {
@@ -2023,10 +2023,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q047-p13.png"
+    "library/images/respiratory-52-mcq/q/crop-q047-p13.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q047-p13.png"
+    "library/images/respiratory-52-mcq/k/crop-q047-p13.jpg"
    ],
    "opinions": [
     {
@@ -2068,10 +2068,10 @@
    "old_correct": "A",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q048-p13.png"
+    "library/images/respiratory-52-mcq/q/crop-q048-p13.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q048-p13.png"
+    "library/images/respiratory-52-mcq/k/crop-q048-p13.jpg"
    ],
    "opinions": [
     {
@@ -2114,10 +2114,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q051-p14.png"
+    "library/images/respiratory-52-mcq/q/crop-q051-p14.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q051-p14.png"
+    "library/images/respiratory-52-mcq/k/crop-q051-p14.jpg"
    ],
    "opinions": [
     {
@@ -2159,10 +2159,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q053-p14.png"
+    "library/images/respiratory-52-mcq/q/crop-q053-p14.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q053-p14.png"
+    "library/images/respiratory-52-mcq/k/crop-q053-p14.jpg"
    ],
    "opinions": [
     {
@@ -2203,10 +2203,10 @@
    "old_correct": "A",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q054-p14.png"
+    "library/images/respiratory-52-mcq/q/crop-q054-p14.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q054-p14.png"
+    "library/images/respiratory-52-mcq/k/crop-q054-p14.jpg"
    ],
    "opinions": [
     {
@@ -2242,10 +2242,10 @@
    "old_correct": "A",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q055-p14.png"
+    "library/images/respiratory-52-mcq/q/crop-q055-p14.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q055-p14.png"
+    "library/images/respiratory-52-mcq/k/crop-q055-p14.jpg"
    ],
    "opinions": [
     {
@@ -2287,10 +2287,10 @@
    "old_correct": "A",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q056-p15.png"
+    "library/images/respiratory-52-mcq/q/crop-q056-p15.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q056-p15.png"
+    "library/images/respiratory-52-mcq/k/crop-q056-p15.jpg"
    ],
    "opinions": [
     {
@@ -2331,10 +2331,10 @@
    "old_correct": "A",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q057-p15.png"
+    "library/images/respiratory-52-mcq/q/crop-q057-p15.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q057-p15.png"
+    "library/images/respiratory-52-mcq/k/crop-q057-p15.jpg"
    ],
    "opinions": [
     {
@@ -2370,10 +2370,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q058-p15.png"
+    "library/images/respiratory-52-mcq/q/crop-q058-p15.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q058-p15.png"
+    "library/images/respiratory-52-mcq/k/crop-q058-p15.jpg"
    ],
    "opinions": [
     {
@@ -2415,10 +2415,10 @@
    "old_correct": "D",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q059-p16.png"
+    "library/images/respiratory-52-mcq/q/crop-q059-p16.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q059-p16.png"
+    "library/images/respiratory-52-mcq/k/crop-q059-p16.jpg"
    ],
    "opinions": [
     {
@@ -2461,13 +2461,13 @@
    "evidence": null,
    "old_correct": "B",
    "images": [
-    "library/images/respiratory-52-mcq/q/q060-img1.png"
+    "library/images/respiratory-52-mcq/q/q060-img1.jpg"
    ],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q060-p16.png"
+    "library/images/respiratory-52-mcq/q/crop-q060-p16.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q060-p16.png"
+    "library/images/respiratory-52-mcq/k/crop-q060-p16.jpg"
    ],
    "opinions": [
     {
@@ -2509,10 +2509,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q061-p16.png"
+    "library/images/respiratory-52-mcq/q/crop-q061-p16.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q061-p16.png"
+    "library/images/respiratory-52-mcq/k/crop-q061-p16.jpg"
    ],
    "opinions": [
     {
@@ -2554,10 +2554,10 @@
    "old_correct": "A",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q063-p17.png"
+    "library/images/respiratory-52-mcq/q/crop-q063-p17.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q063-p17.png"
+    "library/images/respiratory-52-mcq/k/crop-q063-p17.jpg"
    ],
    "opinions": [
     {
@@ -2601,10 +2601,10 @@
    "old_correct": "D",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q065-p17.png"
+    "library/images/respiratory-52-mcq/q/crop-q065-p17.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q065-p17.png"
+    "library/images/respiratory-52-mcq/k/crop-q065-p17.jpg"
    ],
    "opinions": [],
    "base_status": "rejected",
@@ -2633,10 +2633,10 @@
    "old_correct": "D",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q068-p18.png"
+    "library/images/respiratory-52-mcq/q/crop-q068-p18.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q068-p18.png"
+    "library/images/respiratory-52-mcq/k/crop-q068-p18.jpg"
    ],
    "opinions": [
     {
@@ -2678,10 +2678,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q069-p18.png"
+    "library/images/respiratory-52-mcq/q/crop-q069-p18.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q069-p18.png"
+    "library/images/respiratory-52-mcq/k/crop-q069-p18.jpg"
    ],
    "opinions": [
     {
@@ -2723,10 +2723,10 @@
    "old_correct": "A",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q070-p18.png"
+    "library/images/respiratory-52-mcq/q/crop-q070-p18.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q070-p18.png"
+    "library/images/respiratory-52-mcq/k/crop-q070-p18.jpg"
    ],
    "opinions": [
     {
@@ -2768,10 +2768,10 @@
    "old_correct": "D",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q072-p19.png"
+    "library/images/respiratory-52-mcq/q/crop-q072-p19.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q072-p19.png"
+    "library/images/respiratory-52-mcq/k/crop-q072-p19.jpg"
    ],
    "opinions": [
     {
@@ -2813,10 +2813,10 @@
    "old_correct": "E",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q074-p19.png"
+    "library/images/respiratory-52-mcq/q/crop-q074-p19.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q074-p19.png"
+    "library/images/respiratory-52-mcq/k/crop-q074-p19.jpg"
    ],
    "opinions": [
     {
@@ -2858,10 +2858,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q075-p19.png"
+    "library/images/respiratory-52-mcq/q/crop-q075-p19.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q075-p19.png"
+    "library/images/respiratory-52-mcq/k/crop-q075-p19.jpg"
    ],
    "opinions": [
     {
@@ -2903,10 +2903,10 @@
    "old_correct": "A",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q077-p20.png"
+    "library/images/respiratory-52-mcq/q/crop-q077-p20.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q077-p20.png"
+    "library/images/respiratory-52-mcq/k/crop-q077-p20.jpg"
    ],
    "opinions": [
     {
@@ -2948,10 +2948,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q078-p20.png"
+    "library/images/respiratory-52-mcq/q/crop-q078-p20.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q078-p20.png"
+    "library/images/respiratory-52-mcq/k/crop-q078-p20.jpg"
    ],
    "opinions": [
     {
@@ -2996,10 +2996,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q079-p20.png"
+    "library/images/respiratory-52-mcq/q/crop-q079-p20.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q079-p20.png"
+    "library/images/respiratory-52-mcq/k/crop-q079-p20.jpg"
    ],
    "opinions": [
     {
@@ -3042,10 +3042,10 @@
    "old_correct": "D",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q080-p21.png"
+    "library/images/respiratory-52-mcq/q/crop-q080-p21.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q080-p21.png"
+    "library/images/respiratory-52-mcq/k/crop-q080-p21.jpg"
    ],
    "opinions": [
     {
@@ -3087,10 +3087,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q081-p21.png"
+    "library/images/respiratory-52-mcq/q/crop-q081-p21.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q081-p21.png"
+    "library/images/respiratory-52-mcq/k/crop-q081-p21.jpg"
    ],
    "opinions": [
     {
@@ -3132,10 +3132,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q082-p21.png"
+    "library/images/respiratory-52-mcq/q/crop-q082-p21.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q082-p21.png"
+    "library/images/respiratory-52-mcq/k/crop-q082-p21.jpg"
    ],
    "opinions": [
     {
@@ -3177,10 +3177,10 @@
    "old_correct": "D",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q083-p21.png"
+    "library/images/respiratory-52-mcq/q/crop-q083-p21.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q083-p21.png"
+    "library/images/respiratory-52-mcq/k/crop-q083-p21.jpg"
    ],
    "opinions": [
     {
@@ -3222,10 +3222,10 @@
    "old_correct": "B",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q084-p22.png"
+    "library/images/respiratory-52-mcq/q/crop-q084-p22.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q084-p22.png"
+    "library/images/respiratory-52-mcq/k/crop-q084-p22.jpg"
    ],
    "opinions": [
     {
@@ -3267,10 +3267,10 @@
    "old_correct": "E",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q085-p22.png"
+    "library/images/respiratory-52-mcq/q/crop-q085-p22.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q085-p22.png"
+    "library/images/respiratory-52-mcq/k/crop-q085-p22.jpg"
    ],
    "opinions": [
     {
@@ -3312,10 +3312,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q086-p22.png"
+    "library/images/respiratory-52-mcq/q/crop-q086-p22.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q086-p22.png"
+    "library/images/respiratory-52-mcq/k/crop-q086-p22.jpg"
    ],
    "opinions": [
     {
@@ -3357,10 +3357,10 @@
    "old_correct": "D",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q087-p23.png"
+    "library/images/respiratory-52-mcq/q/crop-q087-p23.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q087-p23.png"
+    "library/images/respiratory-52-mcq/k/crop-q087-p23.jpg"
    ],
    "opinions": [
     {
@@ -3402,10 +3402,10 @@
    "old_correct": "A",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q088-p23.png"
+    "library/images/respiratory-52-mcq/q/crop-q088-p23.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q088-p23.png"
+    "library/images/respiratory-52-mcq/k/crop-q088-p23.jpg"
    ],
    "opinions": [
     {
@@ -3447,10 +3447,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q089-p23.png"
+    "library/images/respiratory-52-mcq/q/crop-q089-p23.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q089-p23.png"
+    "library/images/respiratory-52-mcq/k/crop-q089-p23.jpg"
    ],
    "opinions": [
     {
@@ -3492,10 +3492,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q090-p24.png"
+    "library/images/respiratory-52-mcq/q/crop-q090-p24.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q090-p24.png"
+    "library/images/respiratory-52-mcq/k/crop-q090-p24.jpg"
    ],
    "opinions": [
     {
@@ -3537,10 +3537,10 @@
    "old_correct": "D",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q091-p24.png"
+    "library/images/respiratory-52-mcq/q/crop-q091-p24.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q091-p24.png"
+    "library/images/respiratory-52-mcq/k/crop-q091-p24.jpg"
    ],
    "opinions": [
     {
@@ -3582,10 +3582,10 @@
    "old_correct": "A",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q092-p24.png"
+    "library/images/respiratory-52-mcq/q/crop-q092-p24.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q092-p24.png"
+    "library/images/respiratory-52-mcq/k/crop-q092-p24.jpg"
    ],
    "opinions": [
     {
@@ -3627,10 +3627,10 @@
    "old_correct": "C",
    "images": [],
    "crops_question": [
-    "library/images/respiratory-52-mcq/q/crop-q093-p25.png"
+    "library/images/respiratory-52-mcq/q/crop-q093-p25.jpg"
    ],
    "crops_key": [
-    "library/images/respiratory-52-mcq/k/crop-q093-p25.png"
+    "library/images/respiratory-52-mcq/k/crop-q093-p25.jpg"
    ],
    "opinions": [
     {

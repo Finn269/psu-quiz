@@ -1,6 +1,54 @@
 {
  "exams": [
   {
+   "id": "endocrine-47-mcq",
+   "block": "Endocrine",
+   "year_group": 2,
+   "cohort": "47",
+   "type": "MCQ",
+   "name": "Endocrine PSU 47 MCQ",
+   "file": "library/clean/endocrine-47-mcq.json",
+   "counts": {
+    "verified": 44,
+    "quick_check": 0,
+    "review": 19,
+    "rejected": 0
+   },
+   "total": 63
+  },
+  {
+   "id": "endocrine-51-mcq",
+   "block": "Endocrine",
+   "year_group": 2,
+   "cohort": "51",
+   "type": "MCQ",
+   "name": "Endocrine PSU 51 MCQ",
+   "file": "library/clean/endocrine-51-mcq.json",
+   "counts": {
+    "verified": 13,
+    "quick_check": 8,
+    "review": 12,
+    "rejected": 6
+   },
+   "total": 39
+  },
+  {
+   "id": "endocrine-52-mcq",
+   "block": "Endocrine",
+   "year_group": 2,
+   "cohort": "52",
+   "type": "MCQ",
+   "name": "Endocrine PSU 52 MCQ",
+   "file": "library/clean/endocrine-52-mcq.json",
+   "counts": {
+    "verified": 65,
+    "quick_check": 0,
+    "review": 1,
+    "rejected": 1
+   },
+   "total": 67
+  },
+  {
    "id": "respiratory-49-mcq",
    "block": "Respiratory",
    "year_group": 2,
