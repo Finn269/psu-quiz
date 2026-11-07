@@ -1,0 +1,829 @@
+{
+ "source_root_drive_id": "1bG5wSUEjS1b4xCGzpl4KgBMqW_5AgMOA",
+ "note": "สารบัญไฟล์ต้นฉบับ (ไม่เก็บ PDF ใน repo) status: raw/staged/verified",
+ "blocks": [
+  {
+   "year_group": 2,
+   "block": "01_Fundamental biomedical science of medication",
+   "folder_drive_id": "11jzMWJtu2MGqey9olrAcGVKc23NQQrxo",
+   "exam_folder_drive_id": "1V5RGmfysinNrHm8G8aEA6C0aTxuSx7Yi",
+   "mcq_folder_drive_id": "1XqtFp-MBgiF160hXg2-_rss3MXkiaBO-",
+   "exams": [
+    {
+     "cohort": "52",
+     "type": "MCQ",
+     "question_drive_id": "1A4LtMqMptFax27cwKN9TEMJxuS4vhQHB",
+     "key_drive_id": "1OIRNm-sfqfcy9sXmcf1c7AjlXjdADajC",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "51",
+     "type": "MCQ",
+     "question_drive_id": "16p1fZbmvSHx-Z35tXRKfNblw2N34lVWa",
+     "key_drive_id": "1tzgSPXAcf61mNSYso7Immk-lOfpw8mUC",
+     "key_made_by_cohort": "52",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 52 ต้องตรวจ"
+    },
+    {
+     "cohort": "50",
+     "type": "MCQ",
+     "question_drive_id": "1MQYztAMvjp8VZGpj9C36-N45WcSeiwEz",
+     "key_drive_id": null,
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "ไม่มีไฟล์เฉลย"
+    },
+    {
+     "cohort": "49",
+     "type": "MCQ",
+     "question_drive_id": "1FTLKKLsEYx1NBK7H5VBn-4QI9rgh_bKn",
+     "key_drive_id": "1Nr26DS010z1SMQ7q1sweqqG1rXQYEROZ",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "46-48",
+     "type": "MCQ",
+     "question_drive_id": "1hM1Vk1bMGBFe2G41Xqz03IVlZ8QeC-Lv",
+     "key_drive_id": "17u9QOToOSDV7clZO_AbURLCHHseE1zjC",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    }
+   ]
+  },
+  {
+   "year_group": 2,
+   "block": "04_Body defense, Immunity, and Infection",
+   "folder_drive_id": "1rApywo-J6KI9_DgIMR3cLJmYREFLNxOG",
+   "exam_folder_drive_id": "1OoFLe_Eescp_os8npmkcxwo7V6KDTWwP",
+   "mcq_folder_drive_id": "1jy0ShzFa2y1mmqvIVKvBbfdELHrs7bgq",
+   "exams": [
+    {
+     "cohort": "52",
+     "type": "MCQ",
+     "question_drive_id": "1ltjTf6a3PJwk8FyZeXY1e0DOcims8ACp",
+     "key_drive_id": "19CfSiOFZQ4p66a5eNgwgMhLPM-6k9s0_",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "51",
+     "type": "MCQ",
+     "question_drive_id": "1J1K8q89NUeiXgSAG2G2nPiOpsk_Iwi_7",
+     "key_drive_id": "1NM0XAAnRVov2EV-lwbc9Qopg7fHoIdO_",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "50",
+     "type": "MCQ",
+     "question_drive_id": "1MUqDly2bD-ghZZaCh8Y_sqVrwWBdvaQP",
+     "key_drive_id": "1bkN2afRCSaBafSeM2lHeLHlRU4W29Huf",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "49",
+     "type": "MCQ",
+     "question_drive_id": "1AFKFSomsTnxAdiJzaHCuU4CDocakq-II",
+     "key_drive_id": "1R_ig8K3TIbXHLkpaYb7J5rNsKmKYv99W",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "48",
+     "type": "MCQ",
+     "question_drive_id": "1XHJ5Br3olIskBGpDUcKMnEewuxlggvGX",
+     "key_drive_id": null,
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "ไม่มีไฟล์เฉลย"
+    },
+    {
+     "cohort": "47",
+     "type": "MCQ",
+     "question_drive_id": "1XwEj46yPehWuDNmhfEfO0LcSC4QTVN5c",
+     "key_drive_id": "1S-q9zXdfe1cnUiq0XlC00UYowznSq11i",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "46",
+     "type": "MCQ",
+     "question_drive_id": "1DdanPdQv4G6_0gu6-p2sDonWxe22H1Cy",
+     "key_drive_id": "1c0Cg6t51T0kb_0ddKR1jDwFvSO5A6ezl",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "45",
+     "type": "MCQ",
+     "question_drive_id": "1RQ7qJ8tx8iD7P1NP5bZnRlxEjNqhhLj7",
+     "key_drive_id": "1wCroBcoeGAuYd__6qNbQOr0XRiR032ed",
+     "key_made_by_cohort": "46",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 46 ต้องตรวจ"
+    },
+    {
+     "cohort": "44",
+     "type": "MCQ",
+     "question_drive_id": "1B1m63EnCFCvduT7BHB3fy8rkJPKDQuQH",
+     "key_drive_id": "1rWvIe11CuCnXk_Uplr3SlLrAsaiYU2eh",
+     "key_made_by_cohort": "45",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 45 ต้องตรวจ"
+    },
+    {
+     "cohort": "41-43",
+     "type": "MCQ",
+     "question_drive_id": "1lRVc9vxI_U6x4y5XkDLvP3NWU4HLZ592",
+     "key_drive_id": "1x0AyWaCklx1Rwa0AFf9BA6njQpHSk_Vq",
+     "key_made_by_cohort": "44",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 44 ต้องตรวจ"
+    },
+    {
+     "cohort": "40",
+     "type": "MCQ",
+     "question_drive_id": "13RUiJvJAyyEUPw6uAs6-ErVZ7f_vCt7G",
+     "key_drive_id": null,
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "ไม่มีไฟล์เฉลย"
+    }
+   ]
+  },
+  {
+   "year_group": 2,
+   "block": "05_Endocrine System and Metabolism",
+   "folder_drive_id": "1LaGF9n4c-opuLF35V4wffuEDbOM3PVMJ",
+   "exam_folder_drive_id": "1irgF6KHXcTjItZJBMKih1y7BHnWHfuCt",
+   "mcq_folder_drive_id": "1OkZn4IyYs5ueuzyqzuM1iTiOlwyfPyWX",
+   "exams": [
+    {
+     "cohort": "52",
+     "type": "MCQ",
+     "question_drive_id": "1qR3PUndUoEQavYYge0z9rAUvdvhydBj-",
+     "key_drive_id": "1Sc4rc8TJeHXN0BambNux3N_fnHn7OXOV",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "51",
+     "type": "MCQ",
+     "question_drive_id": "1sm79rL4v8wdFNppQGrGAOJwIFAsvFQHZ",
+     "key_drive_id": "1cLN5_RyTqi1KTzKGC1VYAJ0VwcN0Y1cc",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "50",
+     "type": "MCQ",
+     "question_drive_id": "1NkrU0I2fPStpC7_eQfXrJYIc-GFYDIoh",
+     "key_drive_id": "1Pz4hIPmQD0V3dZ8QiClggXzoKb3BNvlH",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "49",
+     "type": "MCQ",
+     "question_drive_id": "1XB6v_TMmOBXZD4t2a-d0vwoCE9leDFhM",
+     "key_drive_id": "1O_9WouR0udk8qmvuGSWdZ9HFcO-7SHqq",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "48",
+     "type": "MCQ",
+     "question_drive_id": null,
+     "key_drive_id": null,
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "ไม่มีไฟล์ข้อสอบ; ไม่มีไฟล์เฉลย; ไม่มีทั้งข้อสอบและเฉลยในโฟลเดอร์"
+    },
+    {
+     "cohort": "47",
+     "type": "MCQ",
+     "question_drive_id": "1iukYzHTYWwclCz82Ai06tWC3X-DP9Hs-",
+     "key_drive_id": "137AffGbf5EtPtlOfhQozwBvHVo5Jg5mL",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "46",
+     "type": "MCQ",
+     "question_drive_id": "1DugAAChiwEh3nxRY6evolpL59YyTzyl6",
+     "key_drive_id": "1lutoGN4_zJ0SOrj6hMcjBfj4tkWFigJy",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "45",
+     "type": "MCQ",
+     "question_drive_id": "1WSpFPBa95Lt0EZTVus0EQi_JrKSvBaXp",
+     "key_drive_id": "1b_Kf-vnAVzX5NUL0trfNwZaGPlp1ZWAv",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "มีเฉลย 2 ไฟล์ ต้องเทียบกัน",
+     "alt_keys": [
+      {
+       "drive_id": "1sO9JBAMu09MB3PYYvoSlWej2xB-gP5le",
+       "made_by": null
+      }
+     ]
+    },
+    {
+     "cohort": "44",
+     "type": "MCQ",
+     "question_drive_id": "1DpE_Nn8s5SoENNuFUeYt5iREzwTY-zlI",
+     "key_drive_id": "1_JXDWpuRuAjYTXV6OvLePugHLTALDUVl",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "42-43",
+     "type": "MCQ",
+     "question_drive_id": "1US4wA1OAFWPsskvDOxBExtS8WXYuWGpR",
+     "key_drive_id": "1DaTUJoYWcxKo77r5ISuS_rD7IYm_sKoP",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "ไฟล์ข้อสอบชื่อมี 'โดย Med PSU 44' ตรวจที่มา; ไฟล์เฉลยใหญ่มาก (>100MB)"
+    }
+   ]
+  },
+  {
+   "year_group": 2,
+   "block": "06_Respiratory System",
+   "folder_drive_id": "1ZPQ8t6PW7p4h944DvP-G_yE9XPBLa5zj",
+   "exam_folder_drive_id": "1CRyVXwUDEvY4Xzb6KdmzpKb1iZK__pi0",
+   "mcq_folder_drive_id": "1ik4cWvP4zvZCgfQP5swxeKznESjgRF3a",
+   "exams": [
+    {
+     "cohort": "52",
+     "type": "MCQ",
+     "question_drive_id": "1GxC5dfbZ4RNNcyVbsMsu3Jy4h59rD4jA",
+     "key_drive_id": "1mm7nvFP9LZWhAvDOcEYZYeAQn0Bzf_Kk",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "51",
+     "type": "MCQ",
+     "question_drive_id": "1KKFsp3TLLdM9IO9cgSHt5MVuCy4jHuMl",
+     "key_drive_id": "1AMxHL5wRCN5jbz5jLfKVK_fYe1x9OUEF",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "50",
+     "type": "MCQ",
+     "question_drive_id": "17wOKed9LSQ9LBVjYIoqf86ZfiDSkBrG7",
+     "key_drive_id": "1-NfkhWmVMKibj00zZ7UHaFF8GgIC5f7J",
+     "key_made_by_cohort": "51",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 51 ต้องตรวจ"
+    },
+    {
+     "cohort": "49",
+     "type": "MCQ",
+     "question_drive_id": "1bHo2lOV_PwnTj7bzT-ommXCNrMdI4yM8",
+     "key_drive_id": "1v4LBy4P3dAgAVEmk5x-C23gZ0ZhC5vPS",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "48",
+     "type": "MCQ",
+     "question_drive_id": "19y6_9_8vTmvhlPoq4-3eSs5IVYJaGGEJ",
+     "key_drive_id": "19nN12xXdrB92IB7Dj1y6XNjFqOA8XsEh",
+     "key_made_by_cohort": "52",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 52 ต้องตรวจ"
+    },
+    {
+     "cohort": "47",
+     "type": "MCQ",
+     "question_drive_id": "1XXjgu1jgY3LPj3h96lfwZE2uglKr1T0T",
+     "key_drive_id": "1fkyHFQU6s4aSnce3UjOw59Um3bRukmRi",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "46",
+     "type": "MCQ",
+     "question_drive_id": "114gndSWcfeKJNEnORJmygWKE-SJksXmr",
+     "key_drive_id": "18WS3iNXDkSg3YxqK-7jEkDReYzGyUZ-W",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "45",
+     "type": "MCQ",
+     "question_drive_id": "1u5m2LmaB8DGNirLPb-F-O91sUXaUIkkG",
+     "key_drive_id": "17NxBiQZAq3Ie8PfQrBBNrE6syCjPDr50",
+     "key_made_by_cohort": "46",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 46 ต้องตรวจ"
+    },
+    {
+     "cohort": "44",
+     "type": "MCQ",
+     "question_drive_id": "1CEyoYvt7EcrNz5Uy3y0kvy198m4wDPHh",
+     "key_drive_id": "1s6TivsM6q1bEbNDccC_utk2efGGJ3oyE",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "42-43",
+     "type": "MCQ",
+     "question_drive_id": "1s1g8tl_QdaLofs8VVAkHBFrGN9erNd5X",
+     "key_drive_id": "1-ndlNn8C6Hd2Stxhv4Cp4uRJbStE8Lk5",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "40",
+     "type": "MCQ",
+     "question_drive_id": "1rdixe5_6FpR-BQkehXIIlYQXhF578FR1",
+     "key_drive_id": null,
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "ไม่มีไฟล์เฉลย"
+    }
+   ]
+  },
+  {
+   "year_group": 2,
+   "block": "07_Cardiovascular System",
+   "folder_drive_id": "1wfspSBknpMPSsuGRXkJQTF1uPT6jU0W3",
+   "exam_folder_drive_id": "1Nq_rYDkDVnX2jhYI_MbdNtHWoD2PNc8P",
+   "mcq_folder_drive_id": "17Ca2gdCSzeOVjgMObaqUbQnEt0FkBtfA",
+   "exams": [
+    {
+     "cohort": "52",
+     "type": "MCQ",
+     "question_drive_id": "1bjY7nRom8G-66ktVgy-dwt3LqfvrBscn",
+     "key_drive_id": "1T4Odwr6CXL8daVK3FvjVbrzSyG-K6NTb",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "51",
+     "type": "MCQ",
+     "question_drive_id": "1xt9j601e8i88ilplT-uZu9r77QlAozZw",
+     "key_drive_id": "1xe8pz0mCpIH1P8hvF8ifOfm4x0ERgP8-",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "มีเฉลย 2 ไฟล์ ต้องเทียบกัน",
+     "alt_keys": [
+      {
+       "drive_id": "17H_W3wxoLOzqYoHn7m9oy6cpSOQpzbBo",
+       "made_by": "พี่ภูมิ Med PSU 51"
+      }
+     ]
+    },
+    {
+     "cohort": "50",
+     "type": "MCQ",
+     "question_drive_id": "1LUgk_i4CtFcuBfL6y8lmVdLxt2fKSjVb",
+     "key_drive_id": "1u5_H5CWnPHKr9YU2At5eyZ499j32fCO-",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "49",
+     "type": "MCQ",
+     "question_drive_id": "1NCgchCvijM9WyXaTNLrFWQFep9fuiTby",
+     "key_drive_id": "1njWzL6Y24aFgujqa_L5IVPFk7NFdCQcX",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "48",
+     "type": "MCQ",
+     "question_drive_id": "1kkmXGUYm-EwL5B0-aGDkg-RMCrkW5j1p",
+     "key_drive_id": null,
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "ไม่มีไฟล์เฉลย"
+    },
+    {
+     "cohort": "47",
+     "type": "MCQ",
+     "question_drive_id": "14WzklLPHkjW0-IBpwetMJBQ-7HsAcc2F",
+     "key_drive_id": "1XfJw3FtjK0RoWeuktNtUeCDwVQyhiJhk",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "46",
+     "type": "MCQ",
+     "question_drive_id": "1sa-TrWsfivOcDHj1DETnucVlA1JYM98B",
+     "key_drive_id": "1Z7gVrTpxkv6Av7dlNQkoHr4fN38grJyd",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "45",
+     "type": "MCQ",
+     "question_drive_id": "1TTzd5OvlsxIlTM-yJTRQON86t1jyL8Ge",
+     "key_drive_id": "1Y5rgn43-IYZuhOVuHRvllKB5YK0QhPnI",
+     "key_made_by_cohort": "46",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 46 ต้องตรวจ"
+    },
+    {
+     "cohort": "44",
+     "type": "MCQ",
+     "question_drive_id": "1om7Exdq5z9cOQC1MP3m6nlsgojB2nnpT",
+     "key_drive_id": "1rWx0egI4aP2THrbt54qS-OAdD2hTAXx2",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "42",
+     "type": "MCQ",
+     "question_drive_id": "1Cy21JOhbgdJ5i3IzhzU1hminask2Fu1b",
+     "key_drive_id": "150ZIj_9jrp57F8PPsVGFf5oWJtJHlLYU",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "40",
+     "type": "MCQ",
+     "question_drive_id": "1J9ND6ejxwO2roragfN-xCCzx9uhyGoAa",
+     "key_drive_id": null,
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "ไม่มีไฟล์เฉลย"
+    }
+   ]
+  },
+  {
+   "year_group": 2,
+   "block": "08_Digestive system and nutrients",
+   "folder_drive_id": "1xjrXBRHF9VtqhGmodg860QZl4D-dWMHI",
+   "exam_folder_drive_id": "1_0DGZbV9jKlENmJ1EhTjAym3AaAG9AWv",
+   "mcq_folder_drive_id": "1zNxi0bGuLJQbrzhyD-gYlUXrNnW1xJ6r",
+   "exams": [
+    {
+     "cohort": "52",
+     "type": "MCQ",
+     "question_drive_id": "10WpJpwtJSd_ekRJSALhpPhRZP52Hd3b0",
+     "key_drive_id": "1nOOWui8iWjEd30AVOLx-WRL6r4UQTkC4",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "51",
+     "type": "MCQ",
+     "question_drive_id": "1pK46Px_UoWvOH-HrFJwbcK2jXQ_uwYi8",
+     "key_drive_id": "1zU5s7CFyYAI5uZ7akMLRJ_La2K1_DGeq",
+     "key_made_by_cohort": "52",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 52 ต้องตรวจ"
+    },
+    {
+     "cohort": "50",
+     "type": "MCQ",
+     "question_drive_id": "1D3nU24wKavzg-c1MhkRaWZIJ70sgMgT9",
+     "key_drive_id": "1YEeNfH791ZFenqxDgn4xm3Xypl-3NGj4",
+     "key_made_by_cohort": "52",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 52 ต้องตรวจ"
+    },
+    {
+     "cohort": "49",
+     "type": "MCQ",
+     "question_drive_id": "1d6Tv9AOVbZnsxzwxqpEMuwQYSdI44F2P",
+     "key_drive_id": "1ZklsUKazh4JS_-tzanWpZpqtyd6pZo7u",
+     "key_made_by_cohort": "52",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 52 ต้องตรวจ"
+    },
+    {
+     "cohort": "48",
+     "type": "MCQ",
+     "question_drive_id": "1qElw_2F5NmjxEVupxOPgxK7Uv4zlEwCh",
+     "key_drive_id": "1wDXDYAT36EkyW8D6ZqtoxmSvsJvf22Gv",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "47",
+     "type": "MCQ",
+     "question_drive_id": "1h3enzPFIF7pA6jv8BPF2xPgbEbI7bVqZ",
+     "key_drive_id": "19E1R83Kto8HrJpFEETEPwfD8UEX-DHN-",
+     "key_made_by_cohort": "52",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 52 ต้องตรวจ"
+    },
+    {
+     "cohort": "46",
+     "type": "MCQ",
+     "question_drive_id": "16gvZyHRNAw-xMae2rfnzVqbq0FP39o8L",
+     "key_drive_id": "1VY8kLNT-c3ViGYH_o0mGbRgWiqAylInY",
+     "key_made_by_cohort": "47",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 47 ต้องตรวจ"
+    },
+    {
+     "cohort": "45",
+     "type": "MCQ",
+     "question_drive_id": "1YdDwYi04p6Gc6YahFJHiUwlCVxfKDc5j",
+     "key_drive_id": "13gELFhB1mM4scf4y8y5Uc1vawaObko9D",
+     "key_made_by_cohort": "52",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 52 ต้องตรวจ"
+    },
+    {
+     "cohort": "44",
+     "type": "MCQ",
+     "question_drive_id": "11T8eZQDDU4yFklQqgjAgvPuMF5igTNCR",
+     "key_drive_id": "1h7by0AfvqyNFAQpzcPVWQ8XdB018UC5k",
+     "key_made_by_cohort": "45",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 45 ต้องตรวจ"
+    },
+    {
+     "cohort": "41-43",
+     "type": "MCQ",
+     "question_drive_id": "1NtFCorGChkW2JvICmUHeamRlUSF2r2kH",
+     "key_drive_id": "1TGiEhOKWyV8LkavvwEFv2kGvmw4Chvgg",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    }
+   ]
+  },
+  {
+   "year_group": 2,
+   "block": "09_Urinary and Reproductive Systems",
+   "folder_drive_id": "12enTCyj_hRosW3Pqk5i2ZfH3fi6yVq2n",
+   "exam_folder_drive_id": "1S-AtcJXJ29xzxR69TI9Bn2Y3lR4CwQ39",
+   "mcq_folder_drive_id": "1dWtHvOX9edr3QLUC4isbBO0844nWLlAa",
+   "exams": [
+    {
+     "cohort": "52",
+     "type": "MCQ",
+     "question_drive_id": "1rzWrVEreyQ9CQ6ijUcWpEOioI5k-A24b",
+     "key_drive_id": "12KnmxOvqd2TtaEeL8Awnvr3Vqwax5zfK",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "51",
+     "type": "MCQ",
+     "question_drive_id": "1J8nS5nh9dUdPFb16TsUQ_TfE5bfJANnS",
+     "key_drive_id": "1zPCZWDXNL3ONhCSSXwuvhz9rBYOT3FyS",
+     "key_made_by_cohort": "52",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 52 ต้องตรวจ"
+    },
+    {
+     "cohort": "50",
+     "type": "MCQ",
+     "question_drive_id": "1YdaSXlAHJMGn3BuWbgodn_1Gj_bwKR9j",
+     "key_drive_id": "1EO2ni8HrPFUfZGS57u_Hz2xk_mLnSkip",
+     "key_made_by_cohort": "52",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 52 ต้องตรวจ"
+    },
+    {
+     "cohort": "49",
+     "type": "MCQ",
+     "question_drive_id": "1Xqn62aYOnSyGm2f0-9XUS7xS7wn7CXgD",
+     "key_drive_id": "19fQPLxv9fo9v_ZaWAKi6doXqIoFCRSK_",
+     "key_made_by_cohort": "52",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 52 ต้องตรวจ"
+    },
+    {
+     "cohort": "48",
+     "type": "MCQ",
+     "question_drive_id": "15gnOTc5gfwBZbjq-FnhbqCaQRPoXPqTq",
+     "key_drive_id": null,
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "ไม่มีไฟล์เฉลย"
+    },
+    {
+     "cohort": "47",
+     "type": "MCQ",
+     "question_drive_id": "1D9ru943I6ECslRJD66lVKdSbzP4J14Sr",
+     "key_drive_id": null,
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "ไม่มีไฟล์เฉลย"
+    },
+    {
+     "cohort": "46",
+     "type": "MCQ",
+     "question_drive_id": "1NmsHCRGvpzke4qNw7QGSylC05W_t3tLv",
+     "key_drive_id": null,
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "ไม่มีไฟล์เฉลย"
+    },
+    {
+     "cohort": "45",
+     "type": "MCQ",
+     "question_drive_id": "1tqm2vPY0xybu0NBuS1prEsg_llCiYVAy",
+     "key_drive_id": null,
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "ไม่มีไฟล์เฉลย"
+    },
+    {
+     "cohort": "44",
+     "type": "MCQ",
+     "question_drive_id": "1M5UtFRExQBVl6qI0py-a7LUctCjg0rwu",
+     "key_drive_id": "109iD2E8_ETZ1MiDBZuhI8K-1XBE25ax4",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "42-43",
+     "type": "MCQ",
+     "question_drive_id": "1Wno07hBoaCUuwGaF93VBmpyOjQMYlzWm",
+     "key_drive_id": "1USoJRCPKQ1RTKq-fd8RiI1OsaoHfLL-I",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    }
+   ]
+  },
+  {
+   "year_group": 2,
+   "block": "12_Community Health Immersion I",
+   "folder_drive_id": "1ErxHaPuXkmAlOE2bTGI1swGGH07HQ0pk",
+   "exam_folder_drive_id": "1yB2iSV7R6OkjiIZYQBEKfLpMf2sLZBe7",
+   "mcq_folder_drive_id": null,
+   "note": "ไฟล์อยู่ในโฟลเดอร์ข้อสอบโดยตรง (ไม่มีโฟลเดอร์ MCQ) ข้ามไฟล์ KF",
+   "exams": [
+    {
+     "cohort": "52",
+     "type": "MCQ",
+     "question_drive_id": "1G5GwVCR-2a3P9o7RQMMq4y2xeS2WmUEV",
+     "key_drive_id": "1U2s2m4UvJzZnA99BPlXiOfnnNZ9RPjUG",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "49",
+     "type": "MCQ",
+     "question_drive_id": null,
+     "key_drive_id": "1Zah-QXGJh_1GzpMdDHNx3mZyYO2y9whX",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "ไม่มีไฟล์ข้อสอบ; มีเฉลย 2 ไฟล์ ต้องเทียบกัน",
+     "alt_keys": [
+      {
+       "drive_id": "13mB48QlZTq40yl-7eaIaVoXkypP3XZuy",
+       "made_by": "52"
+      }
+     ]
+    },
+    {
+     "cohort": "48",
+     "type": "MCQ",
+     "question_drive_id": "1Kmdw7FHYcl2TNw5h6kRy5n5Knk45FooP",
+     "key_drive_id": "1Zzvy5xixkzkZ8iwL34yArPjh_bVv4Pwf",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": "มีเฉลย 2 ไฟล์ ต้องเทียบกัน",
+     "alt_keys": [
+      {
+       "drive_id": "1SWfxrzz6bYvt-8DIXLur8eLGoT-nqfqL",
+       "made_by": "52"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "year_group": 2,
+   "block": "13_Fundamental of Health System Sciences",
+   "folder_drive_id": "1Mz-j7w4Ivg7s9ri-eIGICMp_LHgU2OqQ",
+   "exam_folder_drive_id": "1pB-qnywisIS9hL7_Kw85LIfTMjFVAqnK",
+   "mcq_folder_drive_id": null,
+   "note": "ไฟล์อยู่ในโฟลเดอร์ข้อสอบโดยตรง (ไม่มีโฟลเดอร์ MCQ) ข้ามไฟล์ KF",
+   "exams": [
+    {
+     "cohort": "52",
+     "type": "MCQ",
+     "question_drive_id": "1L6jzkUiad4NAD9SEy3gN1xnXXDRIhdna",
+     "key_drive_id": "1a__-rJE1TTvbgYkF_xyxdPRtPWc_xZb4",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    }
+   ]
+  },
+  {
+   "year_group": 2,
+   "block": "14_Community Health immersion II",
+   "folder_drive_id": "1EWPIGhBQrsdIN14I7LTr_dE4fAQ5bFl-",
+   "exam_folder_drive_id": "1oRRQgHsrYOnEeIrANGmE5pLcaL-XEJY8",
+   "mcq_folder_drive_id": null,
+   "note": "ไฟล์อยู่ในโฟลเดอร์ข้อสอบโดยตรง (ไม่มีโฟลเดอร์ MCQ) ข้ามไฟล์ KF",
+   "exams": [
+    {
+     "cohort": "52",
+     "type": "MCQ",
+     "question_drive_id": "14U8PEO1yoWEZ4WwR40PQZ9Ml6acw-fpn",
+     "key_drive_id": "1MUjlDxaQZllB1bAYX7cCnKY-Wyif2-Se",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    },
+    {
+     "cohort": "48",
+     "type": "MCQ",
+     "question_drive_id": "1ysfEMH1XfEosZJdkQSoIDDDrlbhJhXa7",
+     "key_drive_id": "1SsSA7yWEkTsuUwusjgph5bhjK-X3pZpT",
+     "key_made_by_cohort": "52",
+     "status": "raw",
+     "notes": "เฉลยทำโดยรุ่น 52 ต้องตรวจ"
+    }
+   ]
+  },
+  {
+   "year_group": 2,
+   "block": "15_Community Health Development",
+   "folder_drive_id": "1U0xha6zecCrR0BgI6toi40zuzwoBW1K9",
+   "exam_folder_drive_id": "1K9PTjf5TQYZ6OXpeDLrsKiAcQYao_DIf",
+   "mcq_folder_drive_id": null,
+   "note": "ไฟล์อยู่ในโฟลเดอร์ข้อสอบโดยตรง (ไม่มีโฟลเดอร์ MCQ) ข้ามไฟล์ KF",
+   "exams": [
+    {
+     "cohort": "52",
+     "type": "MCQ",
+     "question_drive_id": "1OACGezAjg-ejHNtk-s0oy3yX84sl4_Yb",
+     "key_drive_id": "1eXu07t-rtOWc84yTo3Y6OZHDzhsF1eHi",
+     "key_made_by_cohort": null,
+     "status": "raw",
+     "notes": ""
+    }
+   ]
+  }
+ ],
+ "not_mcq_blocks": {
+  "02_Critical English Listening and Reading": {
+   "folder": "16pOes0FFpxa7rZQaDXJZHcsGbHkR6lNJ",
+   "exam_folder": "1FrUAPn1I_shOM5cRsPIDucS8oXOqan4T",
+   "note": "ข้อสอบเป็นไฟล์ Unit (Unit 1-2, 3-4) ไม่ใช่โฟลเดอร์ MCQ ยังไม่สแกน"
+  },
+  "03_Fundamental of Medical Profession I": {
+   "folder": "15k-E5fjufynpL_1cloN6ykYxJgDodcUr",
+   "exam_folder": "1GFKtbYLnnbIaRRTEDd6M7FIC76fk-l0Q",
+   "note": "มีเฉพาะข้อสอบแบบ KF ไม่ใช่ MCQ ยังไม่สแกน"
+  },
+  "10_วิชาเลือก": {
+   "folder": "1ifrW-JM98Uj6EXp_LpJTS-iLLqNfSz9-",
+   "note": "ไม่มีโฟลเดอร์ข้อสอบ"
+  },
+  "11_Exercise for Holistic Health": {
+   "folder": "1YGIo6vMZ9r1lzM8z_ARmZjPfQ7O4mKsz",
+   "note": "ไม่มีโฟลเดอร์ข้อสอบ"
+  }
+ },
+ "other_exam_formats_note": "แต่ละบล็อกมีโฟลเดอร์ KF / OSPE / Formative แยกอยู่ ยังไม่ได้สแกน"
+}
